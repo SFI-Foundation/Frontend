@@ -6,237 +6,6 @@ permalink: /admin/
 search_exclude: true
 ---
 
-<style>
-.adm-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 36px 24px 60px;
-  font-family: 'Inter', sans-serif;
-  color: var(--sfi-text);
-}
-
-.adm-head { margin-bottom: 28px; }
-.adm-head .adm-eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--sfi-blue);
-  margin-bottom: 6px;
-}
-.adm-head h1 {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(2rem, 4vw, 2.6rem);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--sfi-text);
-  margin: 0 0 10px;
-}
-.adm-head h1 span { color: var(--sfi-blue); }
-.adm-head p { color: var(--sfi-muted); max-width: 720px; line-height: 1.6; }
-
-.adm-gate {
-  padding: 48px 32px;
-  border: 1px dashed var(--sfi-border-bright);
-  border-radius: 16px;
-  background: var(--sfi-surface2);
-  text-align: center;
-}
-.adm-gate h2 { font-family: 'Oswald', sans-serif; color: var(--sfi-text); margin: 0 0 10px; letter-spacing: 1px; }
-.adm-gate p { color: var(--sfi-muted); margin: 0 0 18px; }
-.adm-gate .adm-btn { display: inline-block; }
-
-.adm-tabs {
-  display: flex;
-  gap: 4px;
-  border-bottom: 1px solid var(--sfi-border);
-  margin: 18px 0 26px;
-  flex-wrap: wrap;
-}
-.adm-tab {
-  padding: 10px 18px;
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--sfi-muted);
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
-}
-.adm-tab:hover { color: var(--sfi-text); }
-.adm-tab.active { color: var(--sfi-blue); border-bottom-color: var(--sfi-blue); }
-.adm-tab .count {
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 0.7rem;
-  background: var(--sfi-surface2);
-  color: var(--sfi-blue);
-  padding: 1px 8px;
-  border-radius: 10px;
-  letter-spacing: 0.5px;
-}
-
-.adm-panel { display: none; }
-.adm-panel.active { display: block; }
-
-.adm-card {
-  background: var(--sfi-surface);
-  border: 1px solid var(--sfi-border);
-  border-radius: 14px;
-  padding: 20px 24px;
-  margin-bottom: 16px;
-}
-.adm-card h3 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--sfi-blue);
-  margin: 0 0 12px;
-}
-
-.adm-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88rem;
-}
-.adm-table th, .adm-table td {
-  padding: 10px 12px;
-  text-align: left;
-  border-bottom: 1px solid var(--sfi-border);
-}
-.adm-table th {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--sfi-muted);
-  font-weight: 500;
-}
-.adm-table tr:last-child td { border-bottom: none; }
-.adm-table td .chip-stack { display: flex; flex-wrap: wrap; gap: 4px; }
-
-.adm-chip {
-  display: inline-block;
-  padding: 2px 8px;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 3px;
-  border: 1px solid var(--sfi-border);
-  color: var(--sfi-muted);
-  background: var(--sfi-surface2);
-}
-.adm-chip.admin { color: var(--sfi-blue); border-color: var(--sfi-border-bright); background: var(--sfi-surface2); }
-.adm-chip.ok { color: var(--sfi-green); border-color: rgba(63,185,80,0.35); background: rgba(63,185,80,0.08); }
-.adm-chip.warn { color: var(--sfi-blue); border-color: var(--sfi-border-bright); background: var(--sfi-surface2); }
-.adm-chip.bad { color: var(--sfi-red); border-color: rgba(248,81,73,0.35); background: rgba(248,81,73,0.08); }
-
-.adm-btn {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--sfi-border);
-  background: transparent;
-  color: var(--sfi-text);
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
-}
-.adm-btn:hover { border-color: var(--sfi-blue); color: var(--sfi-blue); }
-.adm-btn:active { transform: translateY(1px); }
-.adm-btn.approve { color: var(--sfi-green); border-color: rgba(63,185,80,0.35); background: rgba(63,185,80,0.06); }
-.adm-btn.approve:hover { background: rgba(63,185,80,0.15); border-color: var(--sfi-green); }
-.adm-btn.reject { color: var(--sfi-red); border-color: rgba(248,81,73,0.35); background: rgba(248,81,73,0.06); }
-.adm-btn.reject:hover { background: rgba(248,81,73,0.15); border-color: var(--sfi-red); }
-.adm-btn.primary {
-  background: var(--sfi-blue);
-  color: var(--sfi-white);
-  border-color: transparent;
-}
-.adm-btn.primary:hover { background: var(--sfi-blue-dark); transform: translateY(-1px); color: var(--sfi-white); }
-.adm-btn.danger { color: var(--sfi-red); border-color: rgba(248,81,73,0.35); }
-.adm-btn.small { font-size: 0.72rem; padding: 5px 10px; }
-
-.adm-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.adm-input {
-  flex: 1;
-  min-width: 160px;
-  padding: 9px 12px;
-  border: 1px solid var(--sfi-border);
-  background: var(--sfi-surface2);
-  color: var(--sfi-text);
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-}
-.adm-input:focus { outline: none; border-color: var(--sfi-blue); }
-
-.adm-group-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
-.adm-group-card {
-  background: var(--sfi-surface2);
-  border: 1px solid var(--sfi-border);
-  border-radius: 12px;
-  padding: 16px 18px;
-}
-.adm-group-card h4 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--sfi-text);
-  margin: 0 0 4px;
-}
-.adm-group-card .meta { font-size: 0.78rem; color: var(--sfi-muted); margin-bottom: 10px; }
-.adm-perm-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-.adm-perm { padding: 3px 8px; font-size: 0.68rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 3px; border: 1px solid var(--sfi-border); color: var(--sfi-muted); }
-.adm-perm.on { color: var(--sfi-blue); border-color: var(--sfi-border-bright); background: var(--sfi-surface2); }
-
-.adm-members { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
-.adm-member-chip {
-  font-size: 0.72rem;
-  padding: 3px 8px;
-  border-radius: 20px;
-  border: 1px solid var(--sfi-border);
-  background: var(--sfi-surface);
-  color: var(--sfi-text);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.adm-member-chip button {
-  background: none;
-  border: none;
-  color: var(--sfi-muted);
-  cursor: pointer;
-  font-size: 0.95rem;
-  line-height: 1;
-  padding: 0 0 0 2px;
-}
-.adm-member-chip button:hover { color: var(--sfi-red); }
-
-.adm-empty {
-  padding: 22px;
-  color: var(--sfi-muted);
-  font-style: italic;
-  text-align: center;
-  border: 1px dashed var(--sfi-border);
-  border-radius: 10px;
-}
-
-.adm-loading { color: var(--sfi-muted); font-style: italic; }
-.adm-msg { font-size: 0.8rem; padding: 6px 10px; border-radius: 6px; display: none; }
-.adm-msg.success { display: inline-block; background: rgba(63,185,80,0.1); color: var(--sfi-green); }
-.adm-msg.error { display: inline-block; background: rgba(248,81,73,0.1); color: var(--sfi-red); }
-</style>
-
 <div class="adm-wrap">
   <div class="adm-head">
     <div class="adm-eyebrow">SFI Foundation</div>
@@ -244,22 +13,27 @@ search_exclude: true
     <p>Manage users, permission groups, and moderate gear submitted by members. Administrators see the centralized gear database and can approve or reject records from lower groups.</p>
   </div>
 
-  <div id="admGate" class="adm-gate" style="display:none;">
+  <div id="admGate" class="adm-gate adm-hidden">
     <h2>Administrators only</h2>
     <p id="admGateMsg">Sign in with an account that belongs to the <code>administrators</code> group to continue.</p>
     <a href="/login/" class="adm-btn primary">Sign In</a>
   </div>
 
-  <div id="admMain" style="display:none;">
-    <div class="adm-tabs" role="tablist">
-      <button type="button" class="adm-tab active" data-panel="panel-pending">Pending Gear <span class="count" id="cntPending">0</span></button>
-      <button type="button" class="adm-tab" data-panel="panel-gear">All Gear <span class="count" id="cntGear">0</span></button>
-      <button type="button" class="adm-tab" data-panel="panel-users">Users <span class="count" id="cntUsers">0</span></button>
-      <button type="button" class="adm-tab" data-panel="panel-groups">Groups <span class="count" id="cntGroups">0</span></button>
+  <div id="admMain" class="adm-hidden">
+    <dl class="adm-summary" aria-label="Dashboard summary" aria-live="polite">
+      <div class="adm-stat"><dt>Total users</dt><dd id="statUsers">—</dd></div>
+      <div class="adm-stat"><dt>Total groups</dt><dd id="statGroups">—</dd></div>
+      <div class="adm-stat"><dt>Pending gear reviews</dt><dd id="statPending">—</dd></div>
+    </dl>
+    <div class="adm-tabs" role="tablist" aria-label="Admin dashboard sections">
+      <button type="button" class="adm-tab active" id="tab-pending" role="tab" aria-controls="panel-pending" aria-selected="true" tabindex="0" data-panel="panel-pending">Pending Gear <span class="count" id="cntPending">0</span></button>
+      <button type="button" class="adm-tab" id="tab-gear" role="tab" aria-controls="panel-gear" aria-selected="false" tabindex="-1" data-panel="panel-gear">All Gear <span class="count" id="cntGear">0</span></button>
+      <button type="button" class="adm-tab" id="tab-users" role="tab" aria-controls="panel-users" aria-selected="false" tabindex="-1" data-panel="panel-users">Users <span class="count" id="cntUsers">0</span></button>
+      <button type="button" class="adm-tab" id="tab-groups" role="tab" aria-controls="panel-groups" aria-selected="false" tabindex="-1" data-panel="panel-groups">Groups <span class="count" id="cntGroups">0</span></button>
     </div>
 
     <!-- ── Pending Gear ───────────────────────────── -->
-    <section id="panel-pending" class="adm-panel active">
+    <section role="tabpanel" aria-labelledby="tab-pending" id="panel-pending" class="adm-panel active">
       <div class="adm-card">
         <h3>Awaiting Review</h3>
         <div id="pendingBody" class="adm-loading">Loading pending submissions…</div>
@@ -267,7 +41,7 @@ search_exclude: true
     </section>
 
     <!-- ── All Gear ────────────────────────────────── -->
-    <section id="panel-gear" class="adm-panel">
+    <section role="tabpanel" aria-labelledby="tab-gear" id="panel-gear" class="adm-panel">
       <div class="adm-card">
         <h3>Centralized Gear Database</h3>
         <div id="gearBody" class="adm-loading">Loading gear…</div>
@@ -275,7 +49,7 @@ search_exclude: true
     </section>
 
     <!-- ── Users ───────────────────────────────────── -->
-    <section id="panel-users" class="adm-panel">
+    <section role="tabpanel" aria-labelledby="tab-users" id="panel-users" class="adm-panel">
       <div class="adm-card">
         <h3>Users</h3>
         <div id="usersBody" class="adm-loading">Loading users…</div>
@@ -283,18 +57,18 @@ search_exclude: true
     </section>
 
     <!-- ── Groups ─────────────────────────────────── -->
-    <section id="panel-groups" class="adm-panel">
+    <section role="tabpanel" aria-labelledby="tab-groups" id="panel-groups" class="adm-panel">
       <div class="adm-card">
         <h3>Create a new group</h3>
-        <div class="adm-row" style="margin-bottom:10px;">
-          <input class="adm-input" id="newGroupName" placeholder="Group name (e.g. inspectors)">
-          <input class="adm-input" id="newGroupDesc" placeholder="Description (optional)">
+        <div class="adm-row adm-form-fields">
+          <input class="adm-input" id="newGroupName" aria-label="Group name" placeholder="Group name (e.g. inspectors)">
+          <input class="adm-input" id="newGroupDesc" aria-label="Group description" placeholder="Description (optional)">
         </div>
-        <div class="adm-row" style="gap:16px;">
-          <label class="adm-row" style="font-size:0.78rem;gap:6px;"><input type="checkbox" id="newPermApprove"> Approve gear</label>
-          <label class="adm-row" style="font-size:0.78rem;gap:6px;"><input type="checkbox" id="newPermView"> View all gear</label>
-          <label class="adm-row" style="font-size:0.78rem;gap:6px;"><input type="checkbox" id="newPermGroups"> Manage groups</label>
-          <label class="adm-row" style="font-size:0.78rem;gap:6px;"><input type="checkbox" id="newPermUsers"> Manage users</label>
+        <div class="adm-row adm-permissions">
+          <label class="adm-row adm-permission-label"><input type="checkbox" id="newPermApprove"> Approve gear</label>
+          <label class="adm-row adm-permission-label"><input type="checkbox" id="newPermView"> View all gear</label>
+          <label class="adm-row adm-permission-label"><input type="checkbox" id="newPermGroups"> Manage groups</label>
+          <label class="adm-row adm-permission-label"><input type="checkbox" id="newPermUsers"> Manage users</label>
           <button class="adm-btn primary" id="createGroupBtn">Create Group</button>
           <span class="adm-msg" id="newGroupMsg"></span>
         </div>
@@ -345,36 +119,79 @@ search_exclude: true
       showGate('Your account is not in the administrators group. Ask an existing administrator to add you.');
       return;
     }
-    main.style.display = 'block';
+    main.classList.remove('adm-hidden');
     wireTabs();
     await Promise.all([loadPending(), loadAllGear(), loadUsers(), loadGroups()]);
   }
 
   function showGate(message) {
-    gate.style.display = 'block';
+    gate.classList.remove('adm-hidden');
     if (message) gateMsg.textContent = message;
   }
 
   function wireTabs() {
-    document.querySelectorAll('.adm-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.panel;
-        document.querySelectorAll('.adm-tab').forEach(t => t.classList.toggle('active', t === btn));
-        document.querySelectorAll('.adm-panel').forEach(p => p.classList.toggle('active', p.id === target));
+    const tabs = Array.from(document.querySelectorAll('.adm-tab'));
+    function activate(btn) {
+      tabs.forEach(t => {
+        const selected = t === btn;
+        t.classList.toggle('active', selected);
+        t.setAttribute('aria-selected', String(selected));
+        t.tabIndex = selected ? 0 : -1;
+      });
+      document.querySelectorAll('.adm-panel').forEach(p => p.classList.toggle('active', p.id === btn.dataset.panel));
+    }
+    tabs.forEach((btn, index) => {
+      btn.addEventListener('click', () => activate(btn));
+      btn.addEventListener('keydown', event => {
+        let next;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        activate(tabs[next]);
+        tabs[next].focus();
       });
     });
     document.getElementById('createGroupBtn').addEventListener('click', createGroup);
   }
 
+  function updateCount(section, count) {
+    document.getElementById('cnt' + section).textContent = String(count);
+    const stat = document.getElementById('stat' + section);
+    if (stat) stat.textContent = String(count);
+  }
+
+  function showLoadError(section, bodyId) {
+    updateCount(section, '—');
+    const body = document.getElementById(bodyId);
+    body.className = '';
+    body.textContent = '';
+    const message = makeEmpty('Unable to load this section. Check the backend connection and try again.');
+    message.setAttribute('role', 'alert');
+    body.appendChild(message);
+  }
+
+  function tableRegion(table, label) {
+    const region = document.createElement('div');
+    region.className = 'adm-table-scroll';
+    region.tabIndex = 0;
+    region.setAttribute('role', 'region');
+    region.setAttribute('aria-label', label + ' table. Scroll horizontally to see all columns.');
+    region.appendChild(table);
+    return region;
+  }
+
   // ── Pending Gear ────────────────────────────────────
   async function loadPending() {
     try { state.pending = await api('/api/sfi/gear/pending'); }
-    catch { state.pending = []; }
+    catch { showLoadError('Pending', 'pendingBody'); return; }
     renderPending();
   }
 
   function renderPending() {
-    document.getElementById('cntPending').textContent = String(state.pending.length);
+    updateCount('Pending', state.pending.length);
     const body = document.getElementById('pendingBody');
     body.className = '';
     body.textContent = '';
@@ -383,7 +200,7 @@ search_exclude: true
       return;
     }
     const table = makeGearTable(state.pending, true);
-    body.appendChild(table);
+    body.appendChild(tableRegion(table, body.id === 'usersBody' ? 'Users' : 'Pending gear reviews'));
   }
 
   function makeGearTable(items, showActions) {
@@ -428,8 +245,7 @@ search_exclude: true
       approveBtn.addEventListener('click', () => reviewGear(g.id, 'approved', ''));
       const rejectBtn = document.createElement('button');
       rejectBtn.className = 'adm-btn reject small';
-      rejectBtn.style.marginLeft = '6px';
-      rejectBtn.textContent = 'Reject';
+            rejectBtn.textContent = 'Reject';
       rejectBtn.addEventListener('click', () => {
         const note = prompt('Reason for rejecting this submission? (optional)') || '';
         reviewGear(g.id, 'rejected', note);
@@ -458,12 +274,12 @@ search_exclude: true
   // ── All Gear ────────────────────────────────────────
   async function loadAllGear() {
     try { state.allGear = await api('/api/sfi/gear/all'); }
-    catch { state.allGear = []; }
+    catch { showLoadError('Gear', 'gearBody'); return; }
     renderAllGear();
   }
 
   function renderAllGear() {
-    document.getElementById('cntGear').textContent = String(state.allGear.length);
+    updateCount('Gear', state.allGear.length);
     const body = document.getElementById('gearBody');
     body.className = '';
     body.textContent = '';
@@ -471,18 +287,18 @@ search_exclude: true
       body.appendChild(makeEmpty('No gear recorded yet.'));
       return;
     }
-    body.appendChild(makeGearTable(state.allGear, false));
+    body.appendChild(tableRegion(makeGearTable(state.allGear, false), 'All gear'));
   }
 
   // ── Users ───────────────────────────────────────────
   async function loadUsers() {
     try { state.users = await api('/api/sfi/users'); }
-    catch { state.users = []; }
+    catch { showLoadError('Users', 'usersBody'); return; }
     renderUsers();
   }
 
   function renderUsers() {
-    document.getElementById('cntUsers').textContent = String(state.users.length);
+    updateCount('Users', state.users.length);
     const body = document.getElementById('usersBody');
     body.className = '';
     body.textContent = '';
@@ -515,13 +331,13 @@ search_exclude: true
       tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    body.appendChild(table);
+    body.appendChild(tableRegion(table, body.id === 'usersBody' ? 'Users' : 'Pending gear reviews'));
   }
 
   // ── Groups ──────────────────────────────────────────
   async function loadGroups() {
     try { state.groups = await api('/api/sfi/groups'); }
-    catch { state.groups = []; }
+    catch { showLoadError('Groups', 'groupsBody'); return; }
     const detailed = await Promise.all(
       state.groups.map(g => api('/api/sfi/groups/' + g.id).catch(() => g))
     );
@@ -530,7 +346,7 @@ search_exclude: true
   }
 
   function renderGroups() {
-    document.getElementById('cntGroups').textContent = String(state.groups.length);
+    updateCount('Groups', state.groups.length);
     const body = document.getElementById('groupsBody');
     body.className = '';
     body.textContent = '';
@@ -703,3 +519,4 @@ search_exclude: true
   boot();
 })();
 </script>
+
