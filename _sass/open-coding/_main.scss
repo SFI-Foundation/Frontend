@@ -1,9 +1,10 @@
-@import 'root-color-map.scss';
+@import "theme/legacy/root-color-map";
 @import "mixins/variables";
-@import "base/typography";
+@import "base/code";
 @import "bathroom";
 @import "blogs";
-@import "calendar";
+@import "projects/all";  // Auto-generated project imports
+@import "announcement-calendar";
 @import "chatbot";
 @import "forms/code-runner";
 @import "forms/ui-runner";
@@ -15,6 +16,7 @@
 @import "forms/game-builder";
 @import "forms/game-dialogue-system";
 @import "forms/home-gamified";
+@import "forms/mario-open-house";
 @import "hacks";
 @import "hacks_lxd";
 @import "hallpass";
@@ -24,9 +26,12 @@
 @import "platformer-game";
 @import "quiz";
 @import "rps_lesson";
+@import "csa-unit2-interactive";
+@import "dm-chat";
+@import "dm-bell";
 @import "search";
 @import "stack-clicker";
-@import "user-preferences";
+@import "theme/user-preferences";
 // aesthetihawk stuff
 @import "materials/main.scss";
 @import "elements/main.scss";
@@ -35,6 +40,8 @@
 @import "lesson-player";
 @import "documentation";
 @import "api-documentation";
+@import "migration-runbook";
+@import "submissions";
 @import "open-coding/pixel-submit-widget";
 @import "open-coding/grading_modules";
 
@@ -46,3 +53,4 @@ textarea,
 select {
     background-color: $background;
 }
+@import "profile-gist-connection";
