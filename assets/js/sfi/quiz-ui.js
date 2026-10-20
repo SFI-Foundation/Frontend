@@ -17,39 +17,39 @@ const QuizUI = (() => {
       const q = specInput.value.trim().toLowerCase();
       selectedSpecData = null;
       const allSpecs = QuizData.getSpecs();
-      if (q.length < 1 || !allSpecs.length) { acList.className = 'gear-autocomplete'; return; }
+      if (q.length < 1 || !allSpecs.length) { acList.hidden = true; return; }
 
       const matches = allSpecs.filter(s =>
         s.spec_number.toLowerCase().includes(q) ||
         s.product_name.toLowerCase().includes(q)
       ).slice(0, 8);
 
-      if (!matches.length) { acList.className = 'gear-autocomplete'; return; }
+      if (!matches.length) { acList.hidden = true; return; }
 
       acList.innerHTML = matches.map((s, i) => `
-        <div class="gear-ac-item" data-idx="${i}">
+        <li data-idx="${i}">
           <strong>SFI ${s.spec_number}</strong> &mdash; ${s.product_name}
           <br><small>${s.category}</small>
-        </div>
+        </li>
       `).join('');
 
-      acList.querySelectorAll('.gear-ac-item').forEach((el, i) => {
+      acList.querySelectorAll('li').forEach((el, i) => {
         el.addEventListener('click', () => {
           const s = matches[i];
           specInput.value = s.spec_number;
           selectedSpecData = s;
-          acList.className = 'gear-autocomplete';
+          acList.hidden = true;
           if (!document.getElementById('gearName').value.trim()) {
             document.getElementById('gearName').value = s.product_name;
           }
         });
       });
 
-      acList.className = 'gear-autocomplete open';
+      acList.hidden = false;
     });
 
     document.addEventListener('click', e => {
-      if (!e.target.closest('.gear-spec-wrap')) acList.className = 'gear-autocomplete';
+      if (!e.target.closest('#gearSpec, #gearAC')) acList.hidden = true;
     });
   }
 
@@ -61,12 +61,12 @@ const QuizUI = (() => {
     if (!banner) return;
     banner.textContent = '';
     if (remote) {
-      banner.className = 'gear-auth-banner remote';
+      banner.classList.remove('alert-yellow');
       banner.appendChild(document.createTextNode(
         'Signed in — your gear is tracked in the central database. Administrators review new submissions.'
       ));
     } else {
-      banner.className = 'gear-auth-banner local';
+      banner.classList.add('alert-yellow');
       const strong = document.createElement('strong');
       strong.textContent = 'Not signed in.';
       banner.appendChild(strong);
@@ -97,14 +97,7 @@ const QuizUI = (() => {
 
   function renderScoreRing(score, count) {
     const ring = document.getElementById('scoreRing');
-    const circumference = 2 * Math.PI * 68;
-    const offset = circumference - (score / 100) * circumference;
-    ring.style.strokeDashoffset = count ? offset : circumference;
-
-    let ringColor = 'var(--sfi-green)';
-    if (score < 50) ringColor = 'var(--sfi-red)';
-    else if (score < 75) ringColor = 'var(--sfi-gold)';
-    ring.style.stroke = ringColor;
+    ring.value = count ? score : 0;
 
     document.getElementById('scoreNum').textContent = count ? score + '%' : '--';
   }
@@ -114,10 +107,10 @@ const QuizUI = (() => {
     if (!count) { badges.innerHTML = ''; return; }
 
     let html = '';
-    if (current) html += `<span class="gear-badge good">${current} Current</span>`;
-    if (expiring) html += `<span class="gear-badge warn">${expiring} Expiring</span>`;
-    if (expired) html += `<span class="gear-badge bad">${expired} Expired</span>`;
-    if (noDate) html += `<span class="gear-badge warn">${noDate} No Date</span>`;
+    if (current) html += `<span class="ocs__status-pill ocs__status-pill--good">${current} Current</span>`;
+    if (expiring) html += `<span class="ocs__status-pill ocs__status-pill--warn">${expiring} Expiring</span>`;
+    if (expired) html += `<span class="ocs__status-pill ocs__status-pill--bad">${expired} Expired</span>`;
+    if (noDate) html += `<span class="ocs__status-pill ocs__status-pill--warn">${noDate} No Date</span>`;
     badges.innerHTML = html;
   }
 
@@ -125,9 +118,8 @@ const QuizUI = (() => {
     const list = document.getElementById('gearList');
     if (!sorted.length) {
       list.innerHTML = `
-        <div class="gear-empty">
-          <div class="gear-empty-icon">&#128737;&#65039;</div>
-          Add your racing safety equipment above to start tracking certifications.<br>
+        <div class="ocs__callout">
+          &#128737;&#65039; Add your racing safety equipment above to start tracking certifications.<br>
           Type an SFI spec number to auto-fill from the database.
         </div>`;
       return;
@@ -145,20 +137,15 @@ const QuizUI = (() => {
         else daysText = `${(s.days / 365).toFixed(1)} years left`;
       }
 
-      const cardStatusClass =
-        s.status === 'pending' ? 'pending'
-        : s.status === 'rejected' ? 'rejected'
-        : s.color === 'expired' ? 'expired'
+      const tagClass =
+        s.status === 'pending' ? 'neutral'
+        : s.status === 'rejected' ? 'bad'
+        : s.color === 'expired' ? 'bad'
         : s.color === 'warn' ? 'warn'
         : 'good';
 
-      const tagClass =
-        s.status === 'pending' ? 'pending'
-        : s.status === 'rejected' ? 'rejected'
-        : s.color;
-
       const reviewNote = (s.status === 'rejected' && g.reviewNote)
-        ? `<div class="gear-review-note">Reviewer: ${g.reviewNote}</div>`
+        ? `<p class="ocs__text">Reviewer: ${g.reviewNote}</p>`
         : '';
 
       const sourceTag = g.source === 'ai-detection'
@@ -166,23 +153,16 @@ const QuizUI = (() => {
         : '';
 
       return `
-        <div class="gear-item status-${cardStatusClass}">
-          <div class="gear-item-icon">${icon}</div>
-          <div class="gear-item-info">
-            <div class="gear-item-name">${g.name}</div>
-            <div class="gear-item-spec">SFI ${g.spec}</div>
-            <div class="gear-item-meta">
-              ${g.category ? `<span>${g.category}</span>` : ''}
-              ${g.certDate ? `<span>Cert: ${g.certDate}</span>` : '<span>No cert date</span>'}
-              ${sourceTag}
-            </div>
-            ${reviewNote}
+        <div class="ocs__card">
+          <h3>${icon} ${g.name} <span class="ocs__status-pill ocs__status-pill--${tagClass}">${s.label}</span></h3>
+          <p class="ocs__text">SFI ${g.spec}${daysText ? ` &middot; ${daysText}` : ''}</p>
+          <div class="ocs__links">
+            ${g.category ? `<span>${g.category}</span>` : ''}
+            ${g.certDate ? `<span>Cert: ${g.certDate}</span>` : '<span>No cert date</span>'}
+            ${sourceTag}
           </div>
-          <div class="gear-item-status">
-            <div class="gear-status-tag ${tagClass}">${s.label}</div>
-            ${daysText ? `<div class="gear-days-left">${daysText}</div>` : ''}
-          </div>
-          <button class="gear-item-del" onclick="removeGear(${g.id})" title="Remove">&times;</button>
+          ${reviewNote}
+          <button class="ocs__btn small alert-red" onclick="removeGear(${g.id})" title="Remove">&times; Remove</button>
         </div>`;
     }).join('');
   }

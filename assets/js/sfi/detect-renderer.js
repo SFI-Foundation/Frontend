@@ -60,14 +60,14 @@ const DetectRenderer = (() => {
   }
 
   function injectSaveButtons() {
-    const cards = document.querySelectorAll('#detectResults .detect-result-card');
+    const cards = document.querySelectorAll('#detectResults .ocs__card');
     cards.forEach((card, idx) => {
-      if (card.querySelector('.detect-save-btn')) return;
+      if (card.querySelector('.ocs__btn')) return;
       const rightCol = card.lastElementChild;
       if (!rightCol) return;
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'detect-save-btn';
+      btn.className = 'ocs__btn small accent fill';
       btn.dataset.resultIdx = String(idx);
       btn.textContent = '+ Save to My Gear';
       btn.title = 'Save this detection to My Gear';
@@ -101,11 +101,12 @@ const DetectRenderer = (() => {
   // srcW x srcH) onto `canvas`, scaling to the canvas's CURRENT width/height.
   // The CALLER is responsible for sizing the canvas before calling.
   // Reused by both the still-result canvas and the live camera overlay.
-  function drawBoxesOnCanvas(canvas, srcW, srcH, regions, sfiResults) {
+  function drawBoxesOnCanvas(canvas, srcW, srcH, regions, sfiResults, base) {
     if (!canvas || !srcW || !srcH) return;
 
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (base) ctx.drawImage(base, 0, 0, canvas.width, canvas.height);
 
     const scaleX = canvas.width / srcW;
     const scaleY = canvas.height / srcH;
@@ -172,9 +173,8 @@ const DetectRenderer = (() => {
 
     canvas.width = displayWidth;
     canvas.height = displayHeight;
-    canvas.style.height = displayHeight + 'px';
 
-    drawBoxesOnCanvas(canvas, imgEl.naturalWidth, imgEl.naturalHeight, regions, sfiResults);
+    drawBoxesOnCanvas(canvas, imgEl.naturalWidth, imgEl.naturalHeight, regions, sfiResults, imgEl);
   }
 
   function displayResults(sfiResults, globalMnet, cocoResults) {
@@ -186,61 +186,50 @@ const DetectRenderer = (() => {
     const summaryText = n > 0
       ? `Detected ${n} categor${n === 1 ? 'y' : 'ies'}`
       : 'No equipment detected';
-    const summaryHtml = `<div class="detect-results-summary" role="status" aria-live="polite">${summaryText}</div>`;
+    const summaryHtml = `<p class="ocs__text" role="status" aria-live="polite">${summaryText}</p>`;
 
     if (n === 0) {
       div.innerHTML = `
         ${summaryHtml}
-        <div class="no-results">
-          <p style="font-size:1.5rem;margin-bottom:8px;">&#128269;</p>
-          <p>No SFI equipment detected in this image.</p>
-          <p style="font-size:0.8rem;opacity:0.6;margin-top:4px;">
+        <div class="ocs__callout">
+          <p>&#128269; No SFI equipment detected in this image.</p>
+          <p class="ocs__text">
             Try an image of motorsport safety equipment &mdash; helmets, harnesses, roll cages, wheels, etc.
           </p>
         </div>`;
       return;
     }
 
-    let html = summaryHtml + '<div class="detect-results-title">Detected SFI Equipment Categories</div>';
+    let html = summaryHtml + '<h3>Detected SFI Equipment Categories</h3>';
 
     sfiResults.forEach(result => {
       const rawConf = result.confidence;
       const conf = rawConf;
       const barWidth = Math.max(0, Math.min(100, rawConf));
-      const confColor = conf >= 60 ? 'var(--sfi-green)' : conf >= 30 ? 'var(--sfi-gold)' : 'var(--sfi-muted)';
+      const confTone = conf >= 60 ? 'good' : conf >= 30 ? 'warn' : 'neutral';
       html += `
-        <div class="detect-result-card" role="listitem">
-          <div class="detect-result-color" style="background:${result.cat.color}"></div>
-          <div class="detect-result-info">
-            <div class="detect-result-name">${result.cat.name}</div>
-            <div class="detect-result-items">${result.cat.items.slice(0, 3).join(' &bull; ')}${result.cat.items.length > 3 ? ' &bull; +' + (result.cat.items.length - 3) + ' more' : ''}</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="detect-result-conf" style="color:${confColor}">${conf}%</div>
-            <div class="detect-result-conf-label">confidence</div>
-            <div class="detect-conf-bar"><div class="detect-conf-bar-fill" style="width:${barWidth}%"></div></div>
-          </div>
+        <div class="ocs__card" role="listitem">
+          <h3><span style="color:${result.cat.color}">&#9632;</span> ${result.cat.name}
+            <span class="ocs__status-pill ocs__status-pill--${confTone}">${conf}% confidence</span></h3>
+          <p class="ocs__text">${result.cat.items.slice(0, 3).join(' &bull; ')}${result.cat.items.length > 3 ? ' &bull; +' + (result.cat.items.length - 3) + ' more' : ''}</p>
+          <progress value="${barWidth}" max="100"></progress>
         </div>`;
     });
 
     html += `
-      <p class="detect-disclaimer">AI estimate &mdash; verify against the official SFI spec.</p>`;
+      <p class="ocs__text">AI estimate &mdash; verify against the official SFI spec.</p>`;
 
     // Small helper panel asking the user to save any / all detected gear.
     html += `
-      <div class="detect-save-hint">
-        <span>Seen your gear? Save it to <a href="/quiz/">My Gear</a> — administrators review submissions and keep one clean record.</span>
-      </div>`;
+      <p class="ocs__callout">Seen your gear? Save it to <a href="/quiz/">My Gear</a> — administrators review submissions and keep one clean record.</p>`;
 
     html += `
-      <details style="margin-top:20px;">
-        <summary style="font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--sfi-muted);cursor:pointer;padding:8px 0;">
-          Show raw model output
-        </summary>
-        <div style="background:var(--sfi-surface);border:1px solid var(--sfi-border);border-radius:8px;padding:16px;margin-top:8px;font-family:monospace;font-size:0.75rem;color:var(--sfi-muted);line-height:1.8;">
-          <strong style="color:var(--sfi-text);">COCO-SSD Detections:</strong><br>
+      <details>
+        <summary>Show raw model output</summary>
+        <div class="ocs__callout">
+          <strong>COCO-SSD Detections:</strong><br>
           ${cocoResults.length === 0 ? 'None' : cocoResults.map(d => `${d.class} (${Math.round(d.score * 100)}%)`).join(', ')}<br><br>
-          <strong style="color:var(--sfi-text);">MobileNet Classifications:</strong><br>
+          <strong>MobileNet Classifications:</strong><br>
           ${globalMnet.slice(0, 5).map(p => `${p.className} (${Math.round(p.probability * 100)}%)`).join('<br>')}
         </div>
       </details>`;
@@ -252,12 +241,9 @@ const DetectRenderer = (() => {
   function buildCatRef() {
     const grid = document.getElementById('catRefGrid');
     grid.innerHTML = SFI_CATEGORIES.map(cat => `
-      <div class="cat-ref-item">
-        <div class="cat-ref-name">
-          <span class="cat-ref-dot" style="background:${cat.color}"></span>
-          ${cat.name}
-        </div>
-        <div class="cat-ref-specs">${cat.items.join('<br>')}</div>
+      <div class="ocs__hub-card">
+        <div class="ocs__hub-card-title"><span style="color:${cat.color}">&#9632;</span> ${cat.name}</div>
+        <p>${cat.items.join('<br>')}</p>
       </div>
     `).join('');
   }
