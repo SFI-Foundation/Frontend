@@ -26,6 +26,9 @@ permalink: /login/
   margin: 0 0 6px;
   letter-spacing: 0.02em;
 }
+#loginFields h2 {
+  color: #000;
+}
 .auth-card .auth-sub {
   color: var(--sfi-muted);
   font-size: 0.88rem;
@@ -218,7 +221,7 @@ permalink: /login/
 
     <!-- Login Fields -->
     <div id="loginFields">
-      <h2>Welcome back</h2>
+      <h2>Welcome to SFI</h2>
       <p class="auth-sub">Sign in to your SFI Foundation account.</p>
       <div class="auth-field">
         <label>Username</label>
