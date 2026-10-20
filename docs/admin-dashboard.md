@@ -1,12 +1,12 @@
 # Admin dashboard layout
 
-Implements Frontend #2. `/admin/` uses `layout: opencs` and the shared `ocs__*` Sass grammar (`ocs__stats`, `ocs__table`, `ocs__hub-card`, `ocs__status-pill`); the page carries no CSS of its own.
+Implements Frontend #2. `/admin/` uses `_layouts/sfi.html` for the shared navigation, footer, and `_includes/sfi/styles.html`. All dashboard styles now live in that shared stylesheet.
 
 An authenticated administrator sees summary cards for total users, total groups, and pending gear reviews. Pending Gear, All Gear, Users, and Groups remain separate panels, preserving the existing gear-review workflow. Only the selected panel is visible. Arrow keys, Home, and End switch tabs; ARIA tab states follow the selection.
 
 ```mermaid
 flowchart TD
-    L["opencs layout and ocs__ grammar"] --> D["Admin dashboard"]
+    L["Shared SFI layout and styles"] --> D["Admin dashboard"]
     D --> A{"Admin access check"}
     A -->|Denied or unavailable| G["Sign-in or access message"]
     A -->|Allowed| S["Users, groups, pending-review summary"]

@@ -1,0 +1,337 @@
+<!-- SFI Chatbot Widget — included site-wide via sfi layout -->
+<style>
+.sfi-chat-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 10000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F0A500 0%, #d49400 100%);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(240,165,0,0.4), 0 0 0 0 rgba(240,165,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+  animation: chatFabPulse 3s ease-in-out infinite;
+}
+.sfi-chat-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(240,165,0,0.5);
+}
+.sfi-chat-fab svg { width: 28px; height: 28px; fill: #0d1117; }
+.sfi-chat-fab.open svg.icon-chat { display: none; }
+.sfi-chat-fab:not(.open) svg.icon-close { display: none; }
+
+@keyframes chatFabPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(240,165,0,0.4), 0 0 0 0 rgba(240,165,0,0.3); }
+  50% { box-shadow: 0 4px 20px rgba(240,165,0,0.4), 0 0 0 10px rgba(240,165,0,0); }
+}
+
+.sfi-chat-window {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  z-index: 9999;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  height: 520px;
+  max-height: calc(100vh - 140px);
+  background: #12161f;
+  border: 1px solid rgba(240,165,0,0.2);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(240,165,0,0.08);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.sfi-chat-window.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.sfi-chat-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #161b27 0%, #1a1025 100%);
+  border-bottom: 1px solid rgba(240,165,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.sfi-chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #F0A500, #d49400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.sfi-chat-header-text h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.sfi-chat-header-text span {
+  font-size: 0.72rem;
+  color: #3fb950;
+  font-weight: 500;
+}
+
+.sfi-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(240,165,0,0.2) transparent;
+}
+.sfi-chat-messages::-webkit-scrollbar { width: 5px; }
+.sfi-chat-messages::-webkit-scrollbar-thumb { background: rgba(240,165,0,0.2); border-radius: 4px; }
+
+.sfi-chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #e6edf3;
+  word-wrap: break-word;
+}
+.sfi-chat-msg.bot {
+  align-self: flex-start;
+  background: #1e2535;
+  border: 1px solid rgba(240,165,0,0.1);
+  border-bottom-left-radius: 4px;
+}
+.sfi-chat-msg.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, rgba(240,165,0,0.18), rgba(240,165,0,0.08));
+  border: 1px solid rgba(240,165,0,0.2);
+  border-bottom-right-radius: 4px;
+}
+.sfi-chat-msg.bot b { color: #F0A500; }
+.sfi-chat-msg .chat-code {
+  background: rgba(240,165,0,0.1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.82em;
+  color: #F0A500;
+}
+
+.sfi-chat-typing {
+  display: none;
+  align-self: flex-start;
+  padding: 10px 16px;
+  background: #1e2535;
+  border: 1px solid rgba(240,165,0,0.1);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  gap: 5px;
+  align-items: center;
+  margin: 0 16px 4px;
+}
+.sfi-chat-typing.active { display: flex; }
+.sfi-chat-typing span {
+  width: 7px;
+  height: 7px;
+  background: rgba(240,165,0,0.5);
+  border-radius: 50%;
+  animation: chatTyping 1.4s ease-in-out infinite;
+}
+.sfi-chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.sfi-chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes chatTyping {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+.sfi-chat-input-row {
+  padding: 12px 16px;
+  background: #161b27;
+  border-top: 1px solid rgba(240,165,0,0.12);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.sfi-chat-input-row input {
+  flex: 1;
+  background: #1e2535;
+  border: 1px solid rgba(240,165,0,0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e6edf3;
+  font-size: 0.85rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.sfi-chat-input-row input::placeholder { color: #555d6e; }
+.sfi-chat-input-row input:focus { border-color: rgba(240,165,0,0.4); }
+.sfi-chat-send {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #F0A500, #d49400);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, opacity 0.15s;
+  flex-shrink: 0;
+}
+.sfi-chat-send:hover { transform: scale(1.08); }
+.sfi-chat-send:disabled { opacity: 0.4; cursor: default; transform: none; }
+.sfi-chat-send svg { width: 18px; height: 18px; fill: #0d1117; }
+
+@media (max-width: 480px) {
+  .sfi-chat-window {
+    right: 8px;
+    bottom: 80px;
+    width: calc(100vw - 16px);
+    height: calc(100vh - 100px);
+    border-radius: 14px;
+  }
+  .sfi-chat-fab { bottom: 16px; right: 16px; width: 54px; height: 54px; }
+}
+</style>
+
+<button class="sfi-chat-fab" id="chatFab" aria-label="Open chat assistant">
+  <svg class="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><path d="M7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z"/></svg>
+  <svg class="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+</button>
+
+<div class="sfi-chat-window" id="chatWindow">
+  <div class="sfi-chat-header">
+    <div class="sfi-chat-avatar">SFI</div>
+    <div class="sfi-chat-header-text">
+      <h4>SFI Specs Assistant</h4>
+      <span>Online specification help</span>
+    </div>
+  </div>
+  <div class="sfi-chat-messages" id="chatMessages">
+    <div class="sfi-chat-msg bot">
+      Ask about motorsport safety certifications, spec numbers, or which parts need SFI certification.
+    </div>
+  </div>
+  <div class="sfi-chat-typing" id="chatTyping">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="sfi-chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask about SFI specs..." autocomplete="off">
+    <button class="sfi-chat-send" id="chatSend" aria-label="Send message">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var CHAT_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8423/api/sfi/chat'
+    : 'https://greppers-be.opencodingsociety.com/api/sfi/chat';
+
+  var fab = document.getElementById('chatFab');
+  var win = document.getElementById('chatWindow');
+  var msgs = document.getElementById('chatMessages');
+  var typingEl = document.getElementById('chatTyping');
+  var input = document.getElementById('chatInput');
+  var sendBtn = document.getElementById('chatSend');
+  var history = [];
+  var busy = false;
+
+  fab.addEventListener('click', function() {
+    var isOpen = win.classList.toggle('open');
+    fab.classList.toggle('open', isOpen);
+    if (isOpen) input.focus();
+  });
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.textContent;
+  }
+
+  function formatReply(text) {
+    // escapeHtml first neutralises all markup, then we apply safe formatting
+    var safe = escapeHtml(text);
+    safe = safe.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+    safe = safe.replace(/`([^`]+)`/g, '<span class="chat-code">$1</span>');
+    safe = safe.replace(/\n/g, '<br>');
+    return safe;
+  }
+
+  function addMsg(text, role) {
+    var div = document.createElement('div');
+    div.className = 'sfi-chat-msg ' + role;
+    if (role === 'bot') {
+      // Safe: text is escaped before formatting is applied
+      div.innerHTML = formatReply(text);
+    } else {
+      div.textContent = text;
+    }
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function send() {
+    var text = input.value.trim();
+    if (!text || busy) return;
+
+    addMsg(text, 'user');
+    history.push({ role: 'user', text: text });
+    input.value = '';
+    busy = true;
+    sendBtn.disabled = true;
+    typingEl.classList.add('active');
+    msgs.scrollTop = msgs.scrollHeight;
+
+    fetch(CHAT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, history: history.slice(0, -1) })
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.reply) {
+        addMsg(data.reply, 'bot');
+        history.push({ role: 'assistant', text: data.reply });
+      } else {
+        addMsg("Sorry, I couldn't get a response. Please try again.", 'bot');
+      }
+    })
+    .catch(function() {
+      addMsg("Connection error \u2014 is the backend running?", 'bot');
+    })
+    .finally(function() {
+      busy = false;
+      sendBtn.disabled = false;
+      typingEl.classList.remove('active');
+    });
+  }
+
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+})();
+</script>

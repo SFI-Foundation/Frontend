@@ -1,30 +1,32 @@
 ---
-layout: opencs
+layout: sfi
 title: About SFI Foundation
 description: A non-profit organization established to issue and administer standards for motorsports safety equipment.
 permalink: /about/
 ---
 
-<div class="ocs__container">
-
-<h1>About SFI Foundation</h1>
-<p class="ocs__description">
+<div class="sfi-page-header">
+  <div class="sfi-page-header-content">
+    <h1>About <span class="gold">SFI Foundation</span></h1>
+    <p>
       A non-profit organization established in 1978 to issue and administer standards
       for the quality assurance of specialty performance and racing equipment.
     </p>
+  </div>
+</div>
 
-<section>
-  <span class="ocs__badge">Who We Are</span>
-  <h2 class="ocs__section-title">Our Mission</h2>
-  <p class="ocs__description">
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Who We Are</div>
+  <div class="sfi-sect-title">Our Mission</div>
+  <div class="sfi-sect-desc">
     The SFI Foundation, Inc. (SFI) is a non-profit organization that has served the automotive
     aftermarket and the motorsports industry since 1978. Our service to the industry is a system
     of developing and administering various standards, certifications, and testing criteria
     for use in motorsports.
-  </p>
+  </div>
 
-  <div class="ocs__grid ocs__grid--standard cols-2">
-    <div class="ocs__grid-cell">
+  <div class="sfi-info-grid">
+    <div class="sfi-info-card">
       <h3>What is SFI?</h3>
       <p>
         The SFI Foundation, Inc. is a non-profit organization established to issue and administer
@@ -36,7 +38,7 @@ permalink: /about/
         manufacturers participating in more than 85 specification programs.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>How It Works</h3>
       <p>
         Equipment manufacturers test and self-certify their products to SFI standards, which
@@ -48,7 +50,7 @@ permalink: /about/
         contractual and licensing agreements with inspection provisions.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>Who Uses SFI?</h3>
       <p>
         Equipment manufacturers are the primary users of SFI standards. These standards are
@@ -60,7 +62,7 @@ permalink: /about/
         across the motorsports industry.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>Open Process</h3>
       <p>
         SFI's programs are open to all interested parties, use technical committees with
@@ -75,15 +77,13 @@ permalink: /about/
   </div>
 </section>
 
-<section>
-  <div class="ocs__callout">
+<div class="sfi-divider"><hr></div>
+
+<section class="sfi-sect">
+  <div class="sfi-cta-banner">
     <h2>EXPLORE OUR SPECIFICATIONS</h2>
     <p>Browse all SFI specifications or use our ML-powered search to find what you need.</p>
-    <div class="ocs__links">
-      <a href="/sfi-specs/" class="ocs__btn accent fill">Spec Search &rarr;</a>
-      <a href="/history/" class="ocs__btn accent">Our History</a>
-    </div>
+    <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
+    <a href="/history/" class="sfi-btn sfi-btn-secondary">Our History</a>
   </div>
 </section>
-
-</div>

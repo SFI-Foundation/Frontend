@@ -45,12 +45,10 @@ Square button for icon-only content.
 Primary action button with inverted colors.
 
 ```scss
-.ocs__btn.utility.run {
+.runBtn {
   @include emphasized-icon-button;
 }
 ```
-
-For runner behavior wiring, prefer markup hooks such as `data-hook="run"` in HTML instead of JS-specific classes.
 
 **Provides:**
 - Accent color background

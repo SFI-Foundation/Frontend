@@ -37,7 +37,7 @@ const DetectInput = (() => {
     zone.addEventListener('dragenter', (e) => {
       e.preventDefault();
       _dragDepth++;
-      zone.classList.add('ocs__callout');
+      zone.classList.add('dragover');
     });
     // dragover must preventDefault so the drop event fires.
     zone.addEventListener('dragover', (e) => {
@@ -45,12 +45,12 @@ const DetectInput = (() => {
     });
     zone.addEventListener('dragleave', () => {
       _dragDepth = Math.max(0, _dragDepth - 1);
-      if (_dragDepth === 0) zone.classList.remove('ocs__callout');
+      if (_dragDepth === 0) zone.classList.remove('dragover');
     });
     zone.addEventListener('drop', (e) => {
       e.preventDefault();
       _dragDepth = 0;
-      zone.classList.remove('ocs__callout');
+      zone.classList.remove('dragover');
       if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
     });
 
@@ -94,13 +94,10 @@ const DetectInput = (() => {
 
   function switchTab(tab) {
     document.querySelectorAll('.detect-tab').forEach((t, i) => {
-      const on = (tab === 'upload' && i === 0) || (tab === 'camera' && i === 1);
-      t.classList.toggle('accent', on);
-      t.classList.toggle('fill', on);
-      t.setAttribute('aria-selected', String(on));
+      t.classList.toggle('active', (tab === 'upload' && i === 0) || (tab === 'camera' && i === 1));
     });
-    document.getElementById('uploadPanel').hidden = tab !== 'upload';
-    document.getElementById('cameraPanel').hidden = tab !== 'camera';
+    document.getElementById('uploadPanel').style.display = tab === 'upload' ? 'block' : 'none';
+    document.getElementById('cameraPanel').style.display = tab === 'camera' ? 'block' : 'none';
     // Any switch away from camera tears down the stream + live loop.
     if (tab !== 'camera' && cameraStream) stopCamera();
   }
@@ -127,17 +124,17 @@ const DetectInput = (() => {
   function startLiveLoop() {
     const video = document.getElementById('cameraVideo');
     const overlay = document.getElementById('cameraOverlay');
-    // The video element stays hidden: each frame is drawn into the overlay
-    // canvas together with the last detected boxes, so the two always align.
-    let liveRegions = [];
+    // contain keeps boxes aligned without cover-crop math (brief item 2).
+    video.style.objectFit = 'contain';
+
+    if (video.clientWidth && video.clientHeight) {
+      overlay.width = video.clientWidth;
+      overlay.height = video.clientHeight;
+    }
 
     const tick = async (ts) => {
       _rafHandle = requestAnimationFrame(tick);
       if (!cameraStream) return;
-      if (!video.videoWidth) return;
-      overlay.width = Math.min(overlay.parentElement.clientWidth, video.videoWidth);
-      overlay.height = overlay.width * video.videoHeight / video.videoWidth;
-      DetectRenderer.drawBoxesOnCanvas(overlay, video.videoWidth, video.videoHeight, liveRegions, [], video);
       if (_isInferring) return;
       if (ts - _lastInferTs < LIVE_INTERVAL_MS) return;
       if (!video.videoWidth) return;
@@ -146,8 +143,11 @@ const DetectInput = (() => {
       _isInferring = true;
       try {
         const regions = await DetectEngine.detectFrame(video);
-        if (cameraStream) {
-          liveRegions = regions.map(r => ({ bbox: r.bbox, cocoClass: r.class, cocoScore: r.score, mnetClasses: [] }));
+        if (cameraStream && video.clientWidth && video.clientHeight) {
+          overlay.width = video.clientWidth;
+          overlay.height = video.clientHeight;
+          const drawRegions = regions.map(r => ({ bbox: r.bbox, cocoClass: r.class, cocoScore: r.score, mnetClasses: [] }));
+          DetectRenderer.drawBoxesOnCanvas(overlay, video.videoWidth, video.videoHeight, drawRegions, []);
         }
       } catch (e) {
         console.error('Live detect error:', e);
@@ -177,6 +177,7 @@ const DetectInput = (() => {
     }
     const video = document.getElementById('cameraVideo');
     video.srcObject = null;
+    video.style.objectFit = '';
     setCameraButtons(false);
 
     const overlay = document.getElementById('cameraOverlay');

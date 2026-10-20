@@ -9,8 +9,8 @@ admin: true
 
 # Foundation Admin
 
-Use the **Admin** button at the top of the page to open the submissions
-dialog. You must be signed in as an administrator.
+Use the floating **Admin Panel** button (top-right) to open the submissions
+table. You must be signed in as an administrator.
 
 For any **PDF** submission you can:
 

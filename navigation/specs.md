@@ -1,67 +1,78 @@
 ---
-layout: opencs
+layout: sfi
 title: Specification Categories
 description: Browse SFI specifications across drag racing, auto racing, boat racing, and more.
 permalink: /specs/
 ---
 
-<div class="ocs__container">
-
-<h1>Specification Categories</h1>
-<p class="ocs__description">
+<div class="sfi-page-header">
+  <div class="sfi-page-header-content">
+    <h1>Specification <span class="gold">Categories</span></h1>
+    <p>
       SFI specifications cover safety equipment used across all forms of motorsport.
       Click a category to jump to the full spec search.
     </p>
+  </div>
+</div>
 
-<section>
-  <span class="ocs__badge">Browse</span>
-  <h2 class="ocs__section-title">All Categories</h2>
-  <p class="ocs__description">
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Browse</div>
+  <div class="sfi-sect-title">All Categories</div>
+  <div class="sfi-sect-desc">
     Each specification number corresponds to a specific type of racing equipment &mdash;
     from driver suits and helmets to roll cages, fuel cells, and turbochargers.
-  </p>
+  </div>
 
-  <div class="ocs__hub-grid">
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Personal Protective Gear, Restraints & Nets')">
-      <div class="ocs__hub-card-title">&#128737;&#65039; Protective Gear, Restraints & Nets</div>
-      <p>Driver suits, helmets, harnesses, arm restraints, window nets</p>
+  <div class="sfi-cat-browse">
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Personal Protective Gear, Restraints & Nets')">
+      <span class="sfi-cat-tile-icon">&#128737;&#65039;</span>
+      <div class="sfi-cat-tile-name">Protective Gear, Restraints & Nets</div>
+      <div class="sfi-cat-tile-count">Driver suits, helmets, harnesses, arm restraints, window nets</div>
     </a>
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Auto Racing')">
-      <div class="ocs__hub-card-title">&#127950;&#65039; Auto Racing</div>
-      <p>Roll cages, racing seats, fuel cells, fire systems</p>
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Auto Racing')">
+      <span class="sfi-cat-tile-icon">&#127950;&#65039;</span>
+      <div class="sfi-cat-tile-name">Auto Racing</div>
+      <div class="sfi-cat-tile-count">Roll cages, racing seats, fuel cells, fire systems</div>
     </a>
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Drag Racing')">
-      <div class="ocs__hub-card-title">&#127937; Drag Racing</div>
-      <p>Supercharger restraints, clutches, turbos, bellhousings</p>
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Drag Racing')">
+      <span class="sfi-cat-tile-icon">&#127937;</span>
+      <div class="sfi-cat-tile-name">Drag Racing</div>
+      <div class="sfi-cat-tile-count">Supercharger restraints, clutches, turbos, bellhousings</div>
     </a>
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Chassis')">
-      <div class="ocs__hub-card-title">&#128295; Drag Racing Chassis</div>
-      <p>Chassis specifications for various drag racing classes</p>
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Chassis')">
+      <span class="sfi-cat-tile-icon">&#128295;</span>
+      <div class="sfi-cat-tile-name">Drag Racing Chassis</div>
+      <div class="sfi-cat-tile-count">Chassis specifications for various drag racing classes</div>
     </a>
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Fuel Related')">
-      <div class="ocs__hub-card-title">&#9981; Fuel Related</div>
-      <p>Fuel systems, fuel cells, tanks, and lines</p>
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Fuel Related')">
+      <span class="sfi-cat-tile-icon">&#9981;</span>
+      <div class="sfi-cat-tile-name">Fuel Related</div>
+      <div class="sfi-cat-tile-count">Fuel systems, fuel cells, tanks, and lines</div>
     </a>
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Boat Racing')">
-      <div class="ocs__hub-card-title">&#128676; Boat Racing</div>
-      <p>Marine motorsport safety equipment</p>
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Boat Racing')">
+      <span class="sfi-cat-tile-icon">&#128676;</span>
+      <div class="sfi-cat-tile-name">Boat Racing</div>
+      <div class="sfi-cat-tile-count">Marine motorsport safety equipment</div>
     </a>
-    <a class="ocs__hub-card" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Tractor Pulling')">
-      <div class="ocs__hub-card-title">&#128668; Tractor Pulling & Chassis</div>
-      <p>Pulling sled and chassis specifications</p>
+    <a class="sfi-cat-tile" href="/sfi-specs/" onclick="localStorage.setItem('sfiCat','Tractor Pulling')">
+      <span class="sfi-cat-tile-icon">&#128668;</span>
+      <div class="sfi-cat-tile-name">Tractor Pulling & Chassis</div>
+      <div class="sfi-cat-tile-count">Pulling sled and chassis specifications</div>
     </a>
   </div>
 </section>
 
-<section>
-  <span class="ocs__badge">How It Works</span>
-  <h2 class="ocs__section-title">The Specs Program</h2>
-  <p class="ocs__description">
-    The quality performance specifications program is the heart of SFI Foundation.
-  </p>
+<div class="sfi-divider"><hr></div>
 
-  <div class="ocs__grid ocs__grid--standard cols-2">
-    <div class="ocs__grid-cell">
+<section class="sfi-sect">
+  <div class="sfi-sect-label">How It Works</div>
+  <div class="sfi-sect-title">The Specs Program</div>
+  <div class="sfi-sect-desc">
+    The quality performance specifications program is the heart of SFI Foundation.
+  </div>
+
+  <div class="sfi-info-grid">
+    <div class="sfi-info-card">
       <h3>Purpose</h3>
       <p>
         SFI specifications promote quality and reliability in the design and manufacturing
@@ -69,7 +80,7 @@ permalink: /specs/
         information for purchasing decisions, and offer officials references for evaluating products.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>Process</h3>
       <p>
         Specifications are developed through an open process using technical committees with
@@ -80,15 +91,13 @@ permalink: /specs/
   </div>
 </section>
 
-<section>
-  <div class="ocs__callout">
+<div class="sfi-divider"><hr></div>
+
+<section class="sfi-sect">
+  <div class="sfi-cta-banner">
     <h2>SEARCH ALL SPECIFICATIONS</h2>
     <p>Use our full database search or ML-powered classifier to find exactly what you need.</p>
-    <div class="ocs__links">
-      <a href="/sfi-specs/" class="ocs__btn accent fill">Open Spec Search &rarr;</a>
-      <a href="/sfi-specs/#classify" class="ocs__btn accent">ML Classifier</a>
-    </div>
+    <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Open Spec Search &rarr;</a>
+    <a href="/sfi-specs/#classify" class="sfi-btn sfi-btn-secondary">ML Classifier</a>
   </div>
 </section>
-
-</div>

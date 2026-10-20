@@ -12,19 +12,9 @@
 // Capstone Infograph Styles (centralized)
 // All individual capstone infograph SCSS has been unified into one file to provide a consistent B/W theme.
 @import "capstone/infograph";
-// Capstone document primitives override generic infograph suffix selectors.
-@import "open-coding/elements/capstone/main";
-@import "open-coding/elements/capstone/checklists";
-@import "open-coding/elements/capstone/status-pills";
 
-// Games directory search + topic filter
-@import "open-coding/elements/games-directory-search";
-
-// Jarvis Camera Setup & Object Detection capstone project styles
-@import "capstone/jarvis";
-
-// Classroom Presence System capstone pages
-@import "capstone/presence";
+// Greppers SFI infograph color overrides (amber/warm theme)
+@import "capstone/greppers-infograph";
 
 // RPN Calculator Lesson Interactives
 @import "nighthawk/rpn-interactive";

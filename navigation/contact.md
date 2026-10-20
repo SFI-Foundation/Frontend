@@ -1,52 +1,60 @@
 ---
-layout: opencs
+layout: sfi
 title: Contact
 description: Get in touch with SFI Foundation for technical questions, specification info, or product certification.
 permalink: /contact/
 ---
 
-<div class="ocs__container">
-
-<h1>Contact SFI Foundation</h1>
-<p class="ocs__description">
+<div class="sfi-page-header">
+  <div class="sfi-page-header-content">
+    <h1>Contact <span class="gold">SFI Foundation</span></h1>
+    <p>
       Have technical questions, need specification information, or want to learn about
       product certification? We are committed to prompt, respectful responses.
     </p>
+  </div>
+</div>
 
-<section>
-  <span class="ocs__badge">Reach Out</span>
-  <h2 class="ocs__section-title">Get in Touch</h2>
-  <p class="ocs__description">
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Reach Out</div>
+  <div class="sfi-sect-title">Get in Touch</div>
+  <div class="sfi-sect-desc">
     We welcome inquiries about specifications, testing, certification, and all
     aspects of motorsports safety.
-  </p>
+  </div>
 
-  <div class="ocs__hub-grid">
-    <div class="ocs__hub-card">
-      <div class="ocs__hub-card-title">&#128205; Address</div>
-      <p>15708 Pomerado Road<br>Suite N208, Poway, CA 92064</p>
+  <div class="sfi-contact-grid">
+    <div class="sfi-contact-item">
+      <div class="sfi-contact-item-icon">&#128205;</div>
+      <div class="sfi-contact-item-label">Address</div>
+      <div class="sfi-contact-item-val">15708 Pomerado Road<br>Suite N208, Poway, CA 92064</div>
     </div>
-    <div class="ocs__hub-card">
-      <div class="ocs__hub-card-title">&#128222; Phone</div>
-      <p><a href="tel:8584518868">(858) 451-8868</a></p>
+    <div class="sfi-contact-item">
+      <div class="sfi-contact-item-icon">&#128222;</div>
+      <div class="sfi-contact-item-label">Phone</div>
+      <div class="sfi-contact-item-val"><a href="tel:8584518868">(858) 451-8868</a></div>
     </div>
-    <div class="ocs__hub-card">
-      <div class="ocs__hub-card-title">&#128231; Email</div>
-      <p><a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a></p>
+    <div class="sfi-contact-item">
+      <div class="sfi-contact-item-icon">&#128231;</div>
+      <div class="sfi-contact-item-label">Email</div>
+      <div class="sfi-contact-item-val"><a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a></div>
     </div>
-    <div class="ocs__hub-card">
-      <div class="ocs__hub-card-title">&#128224; Fax</div>
-      <p>(858) 451-9268</p>
+    <div class="sfi-contact-item">
+      <div class="sfi-contact-item-icon">&#128224;</div>
+      <div class="sfi-contact-item-label">Fax</div>
+      <div class="sfi-contact-item-val">(858) 451-9268</div>
     </div>
   </div>
 </section>
 
-<section>
-  <span class="ocs__badge">Common Inquiries</span>
-  <h2 class="ocs__section-title">How Can We Help?</h2>
+<div class="sfi-divider"><hr></div>
 
-  <div class="ocs__grid ocs__grid--standard cols-2">
-    <div class="ocs__grid-cell">
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Common Inquiries</div>
+  <div class="sfi-sect-title">How Can We Help?</div>
+
+  <div class="sfi-info-grid">
+    <div class="sfi-info-card">
       <h3>Manufacturers</h3>
       <p>
         Interested in certifying your products to SFI specifications? Contact us to learn
@@ -54,7 +62,7 @@ permalink: /contact/
         specification programs.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>Sanctioning Bodies</h3>
       <p>
         Want to adopt SFI standards into your rulebook or become a member sanctioning body?
@@ -62,14 +70,14 @@ permalink: /contact/
         can support your organization.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>Racers & Teams</h3>
       <p>
         Have questions about which SFI specification applies to your equipment? Use our
         <a href="/sfi-specs/">Spec Search</a> tool or contact us directly for guidance.
       </p>
     </div>
-    <div class="ocs__grid-cell">
+    <div class="sfi-info-card">
       <h3>Counterfeit Reports</h3>
       <p>
         Suspect counterfeit SFI labels or non-compliant products? Report them to us
@@ -80,15 +88,13 @@ permalink: /contact/
   </div>
 </section>
 
-<section>
-  <div class="ocs__callout">
+<div class="sfi-divider"><hr></div>
+
+<section class="sfi-sect">
+  <div class="sfi-cta-banner">
     <h2>FIND A SPECIFICATION</h2>
     <p>Search our complete database of SFI specifications.</p>
-    <div class="ocs__links">
-      <a href="/sfi-specs/" class="ocs__btn accent fill">Spec Search &rarr;</a>
-      <a href="/about/" class="ocs__btn accent">About SFI</a>
-    </div>
+    <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
+    <a href="/about/" class="sfi-btn sfi-btn-secondary">About SFI</a>
   </div>
 </section>
-
-</div>

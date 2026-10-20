@@ -16,12 +16,16 @@
     }
 
     &:before {
-        background: linear-gradient(
-        45deg,
-        color-mix(in srgb, var(--pref-accent-color, $lightBlue1) 65%, #ff4d6d),
-        var(--pref-accent-color, $lightBlue1),
-        color-mix(in srgb, var(--pref-accent-color, $lightBlue1) 65%, #7c3aed)
-        );
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        background-size: 400%;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        top: -2px;
+        left: -2px;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        animation: glowing 20s linear infinite;
     }
 
     &:hover:before {
@@ -29,14 +33,17 @@
     }
 
     &:after {
-        background: var(--panel, $gray6);
+        background: #1e1e1e;
     }
 }
 
 .glowOnHover {
-  @extend .glow;
-  color: var(--pref-text-color, $white1);
-  background: var(--panel, $gray6);
+    @extend .glow;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #1e1e1e;
+    border-radius: $border-size;
 }
 
 // animation key frames

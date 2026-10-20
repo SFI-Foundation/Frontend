@@ -4,5 +4,5 @@
 
 .tintedGlass {
     @extend .glass;
-    background: var(--glass-tint);
+    background: rgba(50, 50, 50, 0.5);
 }

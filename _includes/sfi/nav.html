@@ -1,0 +1,75 @@
+<nav class="sfi-nav">
+  <div class="sfi-nav-inner">
+    <a href="/" class="sfi-nav-brand"><span>SFI</span> Foundation</a>
+    <button class="sfi-nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <ul class="sfi-nav-links" id="navLinks">
+      <li><a href="/about/"{% if page.permalink == '/about/' %} class="active"{% endif %}>About</a></li>
+      <li><a href="/history/"{% if page.permalink == '/history/' %} class="active"{% endif %}>History</a></li>
+      <li><a href="/specs/"{% if page.permalink == '/specs/' %} class="active"{% endif %}>Specs</a></li>
+      <li><a href="/services/"{% if page.permalink == '/services/' %} class="active"{% endif %}>Services</a></li>
+      <li><a href="/contact/"{% if page.permalink == '/contact/' %} class="active"{% endif %}>Contact</a></li>
+      <li><a href="/quiz/" class="sfi-nav-highlight{% if page.permalink == '/quiz/' %} active{% endif %}">My Gear</a></li>
+      <li><a href="/detect/" class="sfi-nav-highlight{% if page.permalink == '/detect/' %} active{% endif %}">Detect</a></li>
+      <li><a href="/sfi-specs/" class="sfi-nav-cta"{% if page.permalink == '/sfi-specs/' %} style="box-shadow:0 0 12px rgba(240,165,0,0.4)"{% endif %}>Spec Search</a></li>
+      <li id="navAuth"><a href="/login/" class="sfi-nav-auth-link">Sign In</a></li>
+    </ul>
+  </div>
+</nav>
+<style>
+  .sfi-nav-auth-link {
+    font-weight: 600 !important;
+    color: var(--sfi-gold) !important;
+  }
+  .sfi-nav-auth-avatar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px !important;
+    border: 1px solid rgba(240,165,0,0.25);
+    border-radius: 20px !important;
+    color: var(--sfi-gold) !important;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .sfi-nav-auth-avatar:hover { background: rgba(240,165,0,0.08) !important; }
+  .sfi-nav-auth-dot {
+    width: 8px; height: 8px;
+    background: var(--sfi-green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>
+<script>
+(function() {
+  var AUTH_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8423' : 'https://greppers-be.opencodingsociety.com';
+  var navAuth = document.getElementById('navAuth');
+
+  function setNavUser(user) {
+    while (navAuth.firstChild) navAuth.removeChild(navAuth.firstChild);
+    var a = document.createElement('a');
+    a.href = '/login/';
+    if (user) {
+      a.className = 'sfi-nav-auth-avatar';
+      var dot = document.createElement('span');
+      dot.className = 'sfi-nav-auth-dot';
+      a.appendChild(dot);
+      var initial = (user.name || user.uid || '?')[0].toUpperCase();
+      a.appendChild(document.createTextNode(initial));
+    } else {
+      a.className = 'sfi-nav-auth-link';
+      a.textContent = 'Sign In';
+    }
+    navAuth.appendChild(a);
+  }
+
+  fetch(AUTH_API + '/api/id', { credentials: 'include' })
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function(data) { setNavUser(data); })
+    .catch(function() { setNavUser(null); });
+
+  window.addEventListener('sfi-auth', function(e) { setNavUser(e.detail); });
+})();
+</script>
