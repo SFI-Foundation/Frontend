@@ -80,14 +80,11 @@ permalink: /login/
     document.getElementById('profileName').textContent = user.name || user.uid;
     document.getElementById('profileUid').textContent = '@' + user.uid;
     document.getElementById('profileRole').textContent = user.role || 'User';
-    // Broadcast login state for nav
-    window.dispatchEvent(new CustomEvent('sfi-auth', { detail: user }));
   }
 
   function showForm() {
     document.getElementById('authForm').hidden = false;
     document.getElementById('profileCard').hidden = true;
-    window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
   }
 
   // Check if already logged in

@@ -96,4 +96,6 @@ permalink: /
   </div>
 </section>
 
+{% include ocs-chat.html %}
+
 </div>

@@ -12,12 +12,8 @@ Important frontend files and directories:
 
 | Path | Purpose |
 | --- | --- |
-| `_layouts/sfi.html` | SFI-specific page shell used by the redesigned pages. Includes shared nav, footer, styles, and chatbot. |
-| `_includes/sfi/nav.html` | SFI navigation bar and sign-in state display. |
-| `_includes/sfi/chatbot.html` | Floating chatbot widget connected to the Flask backend. |
-| `_includes/sfi/styles.html` | Shared SFI visual system and layout styles. |
-| `_includes/sfi/footer.html` | Shared SFI footer. |
-| `navigation/*.md` | Main SFI frontend pages and other site pages. |
+| `_includes/ocs-chat.html` | Chat assistant (button + `<dialog>`) connected to the Flask backend; built from `ocs__*` classes. |
+| `navigation/*.md` | Main SFI frontend pages and other site pages. SFI pages use `layout: opencs` and the shared `ocs__*` Sass grammar. |
 | `assets/js/sfi/*` | JavaScript modules for gear tracking, detector, and SFI page behavior. |
 | `_data/sfi_specs.json` | Extracted SFI specification data used by search/classifier imports. |
 | `scripts/extract_sfi_specs.py` | Extracts structured spec data from the archived SFI pages. |
