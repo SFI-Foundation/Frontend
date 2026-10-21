@@ -41,16 +41,15 @@
     flex-shrink: 0;
   }
 </style>
-<script>
+<script type="module">
+import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | relative_url }}';
 (function() {
-  var AUTH_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:8423' : 'https://greppers-be.opencodingsociety.com';
   var navAuth = document.getElementById('navAuth');
 
   function setNavUser(user) {
     while (navAuth.firstChild) navAuth.removeChild(navAuth.firstChild);
     var a = document.createElement('a');
-    a.href = '/login/';
+    a.href = baseurl + (user ? '/sfi-profile/' : '/login/');
     if (user) {
       a.className = 'sfi-nav-auth-avatar';
       var dot = document.createElement('span');
@@ -65,7 +64,7 @@
     navAuth.appendChild(a);
   }
 
-  fetch(AUTH_API + '/api/id', { credentials: 'include' })
+  fetch(AUTH_API + '/api/id', { credentials: 'include', cache: 'no-store' })
     .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
     .then(function(data) { setNavUser(data); })
     .catch(function() { setNavUser(null); });

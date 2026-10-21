@@ -224,11 +224,11 @@ permalink: /login/
       <h2>Welcome to SFI</h2>
       <p class="auth-sub">Sign in to your SFI Foundation account.</p>
       <div class="auth-field">
-        <label>Username</label>
+        <label for="loginUid">Username</label>
         <input type="text" id="loginUid" placeholder="Your username" autocomplete="username">
       </div>
       <div class="auth-field">
-        <label>Password</label>
+        <label for="loginPass">Password</label>
         <input type="password" id="loginPass" placeholder="Your password" autocomplete="current-password">
       </div>
       <button class="auth-submit" id="loginBtn" onclick="doLogin()">Sign In</button>
@@ -239,16 +239,16 @@ permalink: /login/
       <h2>Get started</h2>
       <p class="auth-sub">Create your SFI Foundation account.</p>
       <div class="auth-field">
-        <label>Display Name</label>
+        <label for="regName">Display Name</label>
         <input type="text" id="regName" placeholder="Your name" autocomplete="name">
       </div>
       <div class="auth-field">
-        <label>Username</label>
+        <label for="regUid">Username</label>
         <input type="text" id="regUid" placeholder="Choose a username" autocomplete="username">
       </div>
       <div class="auth-field">
-        <label>Password</label>
-        <input type="password" id="regPass" placeholder="Min 6 characters" autocomplete="new-password">
+        <label for="regPass">Password</label>
+        <input type="password" id="regPass" placeholder="Min 8 characters" autocomplete="new-password">
       </div>
       <button class="auth-submit" id="regBtn" onclick="doRegister()">Create Account</button>
     </div>
@@ -260,15 +260,15 @@ permalink: /login/
     <h3 id="profileName"></h3>
     <p class="auth-profile-uid" id="profileUid"></p>
     <div class="auth-profile-role" id="profileRole"></div>
+    <p><a href="{{ '/sfi-profile/' | relative_url }}">View profile and optional interest quiz</a></p>
+    <p id="logoutMessage" role="status"></p>
     <button class="auth-logout" onclick="doLogout()">Sign Out</button>
   </div>
 </div>
 
-<script>
+<script type="module">
+import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_url }}';
 (function() {
-  var API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:8423'
-    : 'https://greppers-be.opencodingsociety.com';
 
   var msgBox = document.getElementById('msgBox');
 
@@ -303,9 +303,16 @@ permalink: /login/
     window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
   }
 
+  function authenticatedProfile() {
+    return fetch(API_BASE + '/api/id', { credentials: 'include', cache: 'no-store' })
+      .then(function(r) {
+        if (!r.ok) throw new Error('Sign-in could not be verified. Please allow cookies and try again.');
+        return r.json();
+      });
+  }
+
   // Check if already logged in
-  fetch(API_BASE + '/api/id', { credentials: 'include' })
-    .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+  authenticatedProfile()
     .then(function(data) { showProfile(data); })
     .catch(function() { showForm(); });
 
@@ -326,13 +333,15 @@ permalink: /login/
     .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
     .then(function(res) {
       if (res.ok) {
-        showMsg('Signed in!', 'success');
-        setTimeout(function() { showProfile(res.data.user || { uid: uid, name: uid }); }, 500);
+        return authenticatedProfile().then(function(user) {
+          document.getElementById('loginPass').value = '';
+          showProfile(user);
+        });
       } else {
         showMsg(res.data.message || 'Invalid credentials.', 'error');
       }
     })
-    .catch(function() { showMsg('Could not connect to server.', 'error'); })
+    .catch(function(error) { showMsg(error.message || 'Could not connect to server.', 'error'); })
     .finally(function() { document.getElementById('loginBtn').disabled = false; });
   };
 
@@ -342,7 +351,7 @@ permalink: /login/
     var uid = document.getElementById('regUid').value.trim();
     var pass = document.getElementById('regPass').value;
     if (!name || !uid || !pass) { showMsg('Please fill in all fields.', 'error'); return; }
-    if (pass.length < 6) { showMsg('Password must be at least 6 characters.', 'error'); return; }
+    if (pass.length < 8) { showMsg('Password must be at least 8 characters.', 'error'); return; }
     if (uid.length < 2) { showMsg('Username must be at least 2 characters.', 'error'); return; }
 
     document.getElementById('regBtn').disabled = true;
@@ -364,15 +373,21 @@ permalink: /login/
           credentials: 'include',
           body: JSON.stringify({ uid: uid, password: pass })
         })
-        .then(function(r2) { return r2.json(); })
-        .then(function(d2) {
-          setTimeout(function() { showProfile(d2.user || { uid: uid, name: name }); }, 600);
+        .then(function(r2) {
+          return r2.json().then(function(data) {
+            if (!r2.ok) throw new Error(data.message || 'Account created. Please sign in.');
+            return authenticatedProfile();
+          });
+        })
+        .then(function(user) {
+          document.getElementById('regPass').value = '';
+          showProfile(user);
         });
       } else {
         showMsg(res.data.message || 'Registration failed.', 'error');
       }
     })
-    .catch(function() { showMsg('Could not connect to server.', 'error'); })
+    .catch(function(error) { showMsg(error.message || 'Could not connect to server.', 'error'); })
     .finally(function() { document.getElementById('regBtn').disabled = false; });
   };
 
@@ -381,8 +396,11 @@ permalink: /login/
       method: 'DELETE',
       credentials: 'include'
     })
-    .then(function() { showForm(); })
-    .catch(function() { showForm(); });
+    .then(function(response) {
+      if (!response.ok && response.status !== 401) throw new Error('Sign out failed. Please try again.');
+      showForm();
+    })
+    .catch(function(error) { document.getElementById('logoutMessage').textContent = error.message || 'Could not connect to server.'; });
   };
 
   // Enter key submits
