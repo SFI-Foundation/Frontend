@@ -1,0 +1,54 @@
+.sfi__card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-5;
+
+  p { margin: 0 0 $space-3; line-height: 1.7; color: $text-soft; font-size: 0.92rem; }
+  p:last-child { margin-bottom: 0; }
+}
+
+.sfi__notice {
+  padding: $space-3 $space-4;
+  border: 1px solid $border;
+  border-left-width: 3px;
+  border-radius: $radius-sm;
+  background: $surface;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: $text-soft;
+
+  a { color: $blue; font-weight: 600; text-decoration: none; &:hover { text-decoration: underline; } }
+
+  &.good { border-left-color: $good; background: $good-tint; }
+  &.warn { border-left-color: $warn; background: $warn-tint; }
+  &.bad  { border-left-color: $bad;  background: $bad-tint; }
+}
+
+.sfi__empty {
+  padding: $space-7 $space-4;
+  text-align: center;
+  color: $text-muted;
+  font-size: 0.92rem;
+}
+
+.sfi__stats {
+  display: grid;
+  gap: $space-3;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-bottom: $space-5;
+}
+.sfi__stat {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-4;
+}
+.sfi__stat-value {
+  font-family: $font-heading;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: $blue;
+}
+.sfi__stat-label { @include caption; margin-top: $space-1; }

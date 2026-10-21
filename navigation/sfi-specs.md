@@ -5,544 +5,48 @@ description: Search and classify SFI motorsports safety specifications using mac
 permalink: /sfi-specs/
 ---
 
-<style>
-/* ── Page-specific styles for Spec Search ──────── */
+<header class="sfi-page-header">
+  <div class="sfi-page-header-content">
+    <h1>SFI <span class="gold">Part Detection</span></h1>
+    <p>Identify racing safety specifications using machine learning, or search more than 100 SFI specs across drag racing, auto racing, boat racing and more.</p>
+  </div>
+</header>
 
-/* Hero override for this page */
-.specs-hero {
-  background: linear-gradient(135deg, var(--sfi-bg) 0%, #1a1025 40%, var(--sfi-bg) 100%);
-  padding: 120px 20px 60px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.specs-hero::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(ellipse at 30% 50%, rgba(240,165,0,0.06) 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 50%, rgba(0,212,255,0.04) 0%, transparent 60%);
-  animation: specsPulse 8s ease-in-out infinite alternate;
-}
-@keyframes specsPulse {
-  0% { transform: scale(1) rotate(0deg); }
-  100% { transform: scale(1.05) rotate(2deg); }
-}
-.specs-hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-.specs-hero h1 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 8px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.specs-hero h1 span { color: var(--sfi-gold); }
-.specs-hero-tag {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.15rem;
-  color: var(--sfi-muted);
-  margin-bottom: 32px;
-  line-height: 1.6;
-}
-.specs-hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+<div class="sfi__container">
 
-/* Stats Bar */
-.sfi-stats-bar {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  max-width: 900px;
-  margin: -30px auto 40px;
-  padding: 0 20px;
-  position: relative;
-  z-index: 2;
-}
-.sfi-stat-card {
-  background: rgba(13,18,32,0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--sfi-border);
-  border-radius: 14px;
-  padding: 20px 16px;
-  text-align: center;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.sfi-stat-card:hover { transform: translateY(-3px); border-color: var(--sfi-gold); }
-.sfi-stat-val {
-  font-family: 'Oswald', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--sfi-gold);
-}
-.sfi-stat-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  color: var(--sfi-muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-top: 4px;
-}
-
-/* Section Containers */
-.sfi-section {
-  max-width: 1000px;
-  margin: 0 auto 48px;
-  padding: 0 20px;
-}
-.sfi-section-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--sfi-gold);
-  margin-bottom: 20px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid rgba(240,165,0,0.2);
-}
-
-/* ML Classifier */
-.sfi-classify-wrap {
-  background: rgba(13,18,32,0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--sfi-border);
-  border-radius: var(--sfi-radius);
-  padding: 32px;
-}
-.sfi-classify-input-row { display: flex; gap: 12px; margin-bottom: 20px; }
-.sfi-classify-input {
-  flex: 1;
-  padding: 16px 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.05rem;
-  border: 2px solid rgba(240,165,0,0.2);
-  border-radius: 12px;
-  background: var(--sfi-bg);
-  color: var(--sfi-text);
-  transition: border-color 0.2s;
-}
-.sfi-classify-input:focus { outline: none; border-color: var(--sfi-gold); }
-.sfi-classify-input::placeholder { color: #555; }
-.sfi-classify-btn {
-  padding: 16px 28px;
-  background: linear-gradient(135deg, var(--sfi-gold), var(--sfi-gold-dim));
-  color: #000;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  white-space: nowrap;
-}
-.sfi-classify-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240,165,0,0.3); }
-.sfi-classify-hint {
-  color: var(--sfi-muted);
-  font-size: 0.85rem;
-  margin-bottom: 16px;
-  font-family: 'Inter', sans-serif;
-}
-.sfi-result-count {
-  color: var(--sfi-muted);
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
-}
-
-/* Result Cards */
-.sfi-result-card {
-  background: var(--sfi-surface);
-  border: 1px solid rgba(240,165,0,0.1);
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-bottom: 10px;
-  transition: border-color 0.2s;
-}
-.sfi-result-card:hover { border-color: var(--sfi-gold); }
-.sfi-result-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.sfi-result-title {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  color: var(--sfi-gold);
-  font-size: 1rem;
-}
-.sfi-result-conf {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
-  color: var(--sfi-cyan);
-  font-weight: 600;
-}
-.sfi-result-name {
-  font-family: 'Inter', sans-serif;
-  color: var(--sfi-text);
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-}
-.sfi-result-meta {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.sfi-cat-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  background: rgba(0,212,255,0.1);
-  color: var(--sfi-cyan);
-  border: 1px solid rgba(0,212,255,0.2);
-}
-.sfi-pdf-link {
-  color: var(--sfi-cyan);
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
-}
-.sfi-pdf-link:hover { text-decoration: underline; }
-.sfi-conf-bar {
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(240,165,0,0.15);
-  margin-top: 8px;
-  overflow: hidden;
-}
-.sfi-conf-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--sfi-gold), var(--sfi-cyan));
-  transition: width 0.5s ease;
-}
-
-/* Spec Search */
-.sfi-search-box {
-  width: 100%;
-  padding: 14px 18px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  border: 2px solid rgba(240,165,0,0.2);
-  border-radius: 12px;
-  background: var(--sfi-bg);
-  color: var(--sfi-text);
-  margin-bottom: 12px;
-  box-sizing: border-box;
-}
-.sfi-search-box:focus { outline: none; border-color: var(--sfi-gold); }
-.sfi-filter-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-.sfi-filter-btn {
-  padding: 6px 16px;
-  border: 1px solid rgba(240,165,0,0.2);
-  border-radius: 20px;
-  background: transparent;
-  color: var(--sfi-muted);
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-.sfi-filter-btn:hover { border-color: var(--sfi-gold); color: var(--sfi-text); }
-.sfi-filter-btn.active { background: var(--sfi-gold); color: #000; border-color: var(--sfi-gold); }
-.sfi-count {
-  color: var(--sfi-muted);
-  font-size: 0.85rem;
-  margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
-}
-.sfi-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-}
-.sfi-table th {
-  text-align: left;
-  padding: 12px 10px;
-  border-bottom: 2px solid var(--sfi-gold);
-  color: var(--sfi-gold);
-  position: sticky;
-  top: 64px;
-  background: var(--sfi-bg);
-  font-weight: 600;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 5;
-}
-.sfi-table td {
-  padding: 10px;
-  border-bottom: 1px solid rgba(240,165,0,0.08);
-  color: var(--sfi-text);
-}
-.sfi-table tr:hover td { background: rgba(240,165,0,0.04); }
-.sfi-spec-num { font-weight: 700; color: var(--sfi-gold); white-space: nowrap; }
-.sfi-no-results {
-  text-align: center;
-  color: var(--sfi-muted);
-  padding: 40px;
-  font-size: 1rem;
-  font-family: 'Inter', sans-serif;
-}
-
-/* Categories Grid */
-.sfi-cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
-}
-.sfi-cat-card {
-  background: rgba(13,18,32,0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--sfi-border);
-  border-radius: 12px;
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.25s;
-  text-align: center;
-}
-.sfi-cat-card:hover {
-  border-color: var(--sfi-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-.sfi-cat-icon { font-size: 2rem; margin-bottom: 8px; }
-.sfi-cat-name {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  color: var(--sfi-text);
-  font-size: 0.9rem;
-  margin-bottom: 4px;
-}
-.sfi-cat-count {
-  font-family: 'Inter', sans-serif;
-  color: var(--sfi-muted);
-  font-size: 0.75rem;
-}
-
-/* About Card */
-.sfi-about-card {
-  background: rgba(13,18,32,0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--sfi-border);
-  border-radius: var(--sfi-radius);
-  padding: 32px;
-}
-.sfi-about-card p {
-  font-family: 'Inter', sans-serif;
-  color: var(--sfi-muted);
-  line-height: 1.7;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-}
-.sfi-about-card a { color: var(--sfi-cyan); text-decoration: none; }
-.sfi-about-card a:hover { text-decoration: underline; }
-
-/* Admin Accordion */
-.sfi-admin-toggle {
-  width: 100%;
-  padding: 14px 20px;
-  background: var(--sfi-surface);
-  border: 1px solid var(--sfi-border);
-  border-radius: 12px;
-  color: var(--sfi-gold);
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.sfi-admin-toggle:hover { background: var(--sfi-surface2); }
-.sfi-admin-body { display: none; margin-top: 16px; }
-.sfi-admin-body.open { display: block; }
-.admin-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  margin-bottom: 24px;
-}
-.admin-stat {
-  background: var(--sfi-surface);
-  border: 1px solid var(--sfi-border);
-  border-radius: 10px;
-  padding: 16px;
-  text-align: center;
-}
-.admin-stat-val { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--sfi-gold); }
-.admin-stat-label { color: var(--sfi-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-family: 'Inter', sans-serif; }
-.admin-form {
-  background: var(--sfi-surface);
-  border: 1px solid var(--sfi-border);
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.admin-form h3 { color: var(--sfi-gold); margin: 0 0 16px; font-size: 1.1rem; font-family: 'Inter', sans-serif; }
-.admin-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-.admin-field {
-  padding: 10px 12px;
-  border: 1px solid rgba(240,165,0,0.15);
-  border-radius: 8px;
-  background: var(--sfi-bg);
-  color: var(--sfi-text);
-  font-size: 0.9rem;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
-.admin-field:focus { outline: none; border-color: var(--sfi-gold); }
-.admin-field::placeholder { color: #555; }
-.admin-actions { display: flex; gap: 8px; margin-top: 12px; }
-.admin-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background: var(--sfi-gold);
-  color: #000;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-family: 'Inter', sans-serif;
-  transition: background 0.2s;
-}
-.admin-btn:hover { background: #d49400; }
-.admin-btn-danger {
-  padding: 8px 16px;
-  border: 1px solid var(--sfi-red);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--sfi-red);
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
-  transition: all 0.2s;
-}
-.admin-btn-danger:hover { background: var(--sfi-red); color: #fff; }
-.admin-msg {
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 0.9rem;
-  display: none;
-  font-family: 'Inter', sans-serif;
-}
-.admin-msg.success { display: block; background: rgba(63,185,80,0.12); color: var(--sfi-green); border: 1px solid rgba(63,185,80,0.25); }
-.admin-msg.error { display: block; background: rgba(248,81,73,0.12); color: var(--sfi-red); border: 1px solid rgba(248,81,73,0.25); }
-
-/* Loading Spinner */
-.sfi-spinner {
-  display: inline-block;
-  width: 20px; height: 20px;
-  border: 3px solid rgba(240,165,0,0.2);
-  border-top-color: var(--sfi-gold);
-  border-radius: 50%;
-  animation: sfiSpin 0.6s linear infinite;
-}
-@keyframes sfiSpin { to { transform: rotate(360deg); } }
-
-/* Fuzzy search hint */
-.sfi-fuzzy-hint {
-  display: none;
-  padding: 10px 16px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  background: rgba(0,212,255,0.06);
-  border: 1px solid rgba(0,212,255,0.15);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  color: var(--sfi-muted);
-}
-.sfi-fuzzy-hint.visible { display: block; }
-.sfi-fuzzy-hint strong {
-  color: var(--sfi-cyan);
-  cursor: pointer;
-}
-.sfi-fuzzy-hint strong:hover { text-decoration: underline; }
-
-/* Responsive */
-@media (max-width: 600px) {
-  .specs-hero h1 { font-size: 2.2rem; }
-  .sfi-classify-input-row { flex-direction: column; }
-  .sfi-stats-bar { grid-template-columns: repeat(2, 1fr); }
-  .admin-row { grid-template-columns: 1fr; }
-}
-</style>
-
-<!-- ═══════════════ HERO ═══════════════ -->
-<div class="specs-hero">
-  <div class="specs-hero-content">
-    <h1>SFI <span>Part Detection</span></h1>
-    <p class="specs-hero-tag">
-      Identify racing safety specifications instantly using machine learning.<br>
-      Search 100+ SFI specs across drag racing, auto racing, boat racing, and more.
-    </p>
-    <div class="specs-hero-btns">
-      <a href="#classify" class="sfi-btn sfi-btn-primary">Classify a Part</a>
-      <a href="#search" class="sfi-btn sfi-btn-secondary">Browse All Specs</a>
+  <section class="sfi__section">
+    <div class="sfi__stats" id="statsBar">
+      <div class="sfi__stat"><div class="sfi__stat-value" id="statSpecs">&mdash;</div><div class="sfi__stat-label">Total specs</div></div>
+      <div class="sfi__stat"><div class="sfi__stat-value" id="statCats">&mdash;</div><div class="sfi__stat-label">Categories</div></div>
+      <div class="sfi__stat"><div class="sfi__stat-value" id="statSubs">&mdash;</div><div class="sfi__stat-label">Subcategories</div></div>
+      <div class="sfi__stat"><div class="sfi__stat-value" id="statModel">&mdash;</div><div class="sfi__stat-label">ML accuracy</div></div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ═══════════════ STATS BAR ═══════════════ -->
-<div class="sfi-stats-bar" id="statsBar">
-  <div class="sfi-stat-card">
-    <div class="sfi-stat-val" id="statSpecs">&mdash;</div>
-    <div class="sfi-stat-label">Total Specs</div>
-  </div>
-  <div class="sfi-stat-card">
-    <div class="sfi-stat-val" id="statCats">&mdash;</div>
-    <div class="sfi-stat-label">Categories</div>
-  </div>
-  <div class="sfi-stat-card">
-    <div class="sfi-stat-val" id="statSubs">&mdash;</div>
-    <div class="sfi-stat-label">Subcategories</div>
-  </div>
-  <div class="sfi-stat-card">
-    <div class="sfi-stat-val" id="statModel">&mdash;</div>
-    <div class="sfi-stat-label">ML Accuracy</div>
-  </div>
-</div>
+  <section class="sfi__section" id="safety-showcase">
+    <h2 class="sfi__title">Interactive safety showcase</h2>
+    <p class="sfi__lead">Hover the highlighted zones on the car to see the SFI specs that protect drivers. Click a zone to pin its details.</p>
 
-<!-- ═══════════════ SAFETY SHOWCASE ═══════════════ -->
-<div class="sfi-section" id="safety-showcase">
-  <h2 class="sfi-section-title">Interactive Safety Showcase</h2>
-  <p style="color:var(--sfi-muted);font-family:'Inter',sans-serif;font-size:0.95rem;margin:0 0 24px;line-height:1.6;">Hover over the highlighted zones on the car to explore the SFI specs that protect drivers — click to pin details</p>
-
-  <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;margin-top:24px;">
-    <div style="position:relative;background:#0e1117;border-radius:10px;border:1px solid rgba(255,255,255,0.08);overflow:hidden;cursor:crosshair;">
-      <canvas id="safetyCanvas" width="850" height="320" style="width:100%;height:auto;display:block;"></canvas>
-      <div style="position:absolute;bottom:9px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:rgba(255,255,255,0.4);font-size:0.68rem;padding:3px 11px;border-radius:20px;white-space:nowrap;pointer-events:none;font-family:'Inter',sans-serif;letter-spacing:0.5px;">Hover zones · Click to pin</div>
-    </div>
-    <div id="showcasePanel" style="background:#161b27;border-radius:10px;border:1px solid rgba(255,255,255,0.07);padding:20px;min-height:260px;display:flex;flex-direction:column;">
-      <div id="showcaseEmpty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;">
-        <div style="font-size:2.5rem;opacity:0.25;">🏎️</div>
-        <p style="color:#8b949e;font-size:0.84rem;line-height:1.5;font-family:'Inter',sans-serif;max-width:200px;margin:0;">Hover a zone on the car to explore SFI specs</p>
+    <div class="sfi__showcase">
+      <div class="sfi__showcase-stage">
+        <canvas id="safetyCanvas" width="850" height="320"></canvas>
+        <div class="sfi__showcase-hint">Hover zones &middot; click to pin</div>
       </div>
-      <div id="showcaseContent" style="display:none;flex-direction:column;flex:1;">
-        <div id="spCat" style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;font-family:'Inter',sans-serif;"></div>
-        <h3 id="spTitle" style="font-family:'Oswald',sans-serif;font-size:1.35rem;font-weight:700;margin:0 0 9px;text-transform:uppercase;color:#e2e8f0;"></h3>
-        <p id="spDesc" style="font-size:0.8rem;color:#8b949e;line-height:1.6;margin-bottom:13px;font-family:'Inter',sans-serif;"></p>
-        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8b949e;margin-bottom:6px;font-family:'Inter',sans-serif;">SFI Specifications</div>
-        <div id="spSpecs"></div>
-        <a href="#search" style="display:inline-flex;align-items:center;justify-content:center;margin-top:14px;padding:8px 14px;background:rgba(58,123,213,0.1);border:1px solid rgba(58,123,213,0.25);border-radius:8px;color:#6fa3e8;font-family:'Inter',sans-serif;font-weight:600;font-size:0.8rem;text-decoration:none;">Search Full Database →</a>
+      <div class="sfi__showcase-panel" id="showcasePanel">
+        <div class="sfi__showcase-placeholder" id="showcaseEmpty">Hover a zone on the car to explore SFI specs.</div>
+        <div class="sfi__hidden" id="showcaseContent">
+          <div class="sfi__showcase-category" id="spCat"></div>
+          <h3 class="sfi__showcase-name" id="spTitle"></h3>
+          <p class="sfi__showcase-desc" id="spDesc"></p>
+          <div class="sfi__subtitle">SFI specifications</div>
+          <div id="spSpecs"></div>
+          <a href="#search" class="sfi__link">Search the full database &rarr;</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="showcasePills" style="display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;justify-content:center;"></div>
-</div>
+    <div class="sfi__showcase-pills" id="showcasePills"></div>
+  </section>
 
 <script>
 (function(){
@@ -587,29 +91,24 @@ permalink: /sfi-specs/
   }
 
   function showPanel(part){
-    document.getElementById('showcaseEmpty').style.display='none';
-    var c=document.getElementById('showcaseContent');c.style.display='flex';
-    var cat=document.getElementById('spCat');cat.textContent=part.category;cat.style.color=part.color;
-    var t=document.getElementById('spTitle');t.textContent=part.label;t.style.color=part.color;
+    document.getElementById('showcasePanel').style.setProperty('--accent',part.color);
+    document.getElementById('showcaseEmpty').classList.add('sfi__hidden');
+    document.getElementById('showcaseContent').classList.remove('sfi__hidden');
+    document.getElementById('spCat').textContent=part.category;
+    document.getElementById('spTitle').textContent=part.label;
     document.getElementById('spDesc').textContent=part.desc;
     document.getElementById('spSpecs').innerHTML=part.specs.map(function(s){
-      var pdfLink=s.pdf?'<a href="'+PDF_BASE+s.pdf+'" target="_blank" style="margin-left:auto;font-size:0.68rem;color:'+part.color+';opacity:0.8;text-decoration:none;border:1px solid '+part.color+'44;padding:2px 7px;border-radius:10px;white-space:nowrap;">PDF ↗</a>':'';
-      return '<div style="display:flex;align-items:center;gap:9px;padding:6px 9px;background:rgba(255,255,255,0.04);border-radius:7px;margin-bottom:5px;border:1px solid rgba(255,255,255,0.05);"><span style="font-family:Oswald,sans-serif;font-weight:700;font-size:0.9rem;min-width:50px;color:'+part.color+'">SFI '+s.num+'</span><span style="font-size:0.76rem;color:#c9d1d9;font-family:Inter,sans-serif;line-height:1.3;flex:1;">'+s.name+'</span>'+pdfLink+'</div>';
+      var pdfLink=s.pdf?'<a class="sfi__link" href="'+PDF_BASE+s.pdf+'" target="_blank" rel="noopener">PDF</a>':'';
+      return '<div class="sfi__spec-line"><span class="num">SFI '+s.num+'</span><span class="name">'+s.name+'</span>'+pdfLink+'</div>';
     }).join('');
-    document.querySelectorAll('.sc-pill').forEach(function(el){
-      var isThis=el.dataset.id===part.id;
-      el.style.background=isThis?part.color+'28':'transparent';
-      var pp=PARTS.find(function(x){return x.id===el.dataset.id;});
-      if(pp){el.style.borderColor=isThis?pp.color:pp.color+'55';el.style.color=isThis?pp.color:pp.color+'99';}
+    document.querySelectorAll('.sfi__showcase-pills .sfi__chip').forEach(function(el){
+      el.classList.toggle('active',el.dataset.id===part.id);
     });
   }
   function hidePanel(){
-    document.getElementById('showcaseEmpty').style.display='flex';
-    document.getElementById('showcaseContent').style.display='none';
-    document.querySelectorAll('.sc-pill').forEach(function(el){
-      var pp=PARTS.find(function(x){return x.id===el.dataset.id;});
-      if(pp){el.style.background='transparent';el.style.borderColor=pp.color+'55';el.style.color=pp.color+'99';}
-    });
+    document.getElementById('showcaseEmpty').classList.remove('sfi__hidden');
+    document.getElementById('showcaseContent').classList.add('sfi__hidden');
+    document.querySelectorAll('.sfi__showcase-pills .sfi__chip').forEach(function(el){el.classList.remove('active');});
   }
 
   function draw(){
@@ -729,8 +228,8 @@ permalink: /sfi-specs/
   var pillsEl=document.getElementById('showcasePills');
   if(pillsEl){PARTS.forEach(function(p){
     var btn=document.createElement('button');
-    btn.className='sc-pill';btn.dataset.id=p.id;btn.textContent=p.icon+' '+p.label;
-    btn.style.cssText='padding:5px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;font-family:Inter,sans-serif;cursor:pointer;border:1px solid '+p.color+'55;color:'+p.color+'99;background:transparent;transition:all 0.18s;';
+    btn.type='button';btn.className='sfi__chip';btn.dataset.id=p.id;btn.textContent=p.label;
+    btn.style.setProperty('--accent',p.color);
     btn.addEventListener('click',function(){activeId=activeId===p.id?null:p.id;if(activeId)showPanel(p);else hidePanel();});
     pillsEl.appendChild(btn);
   });}
@@ -738,131 +237,93 @@ permalink: /sfi-specs/
   loop();
 })();
 </script>
-<!-- ═══════════════ ML CLASSIFIER ═══════════════ -->
-<div class="sfi-section" id="classify">
-  <h2 class="sfi-section-title">ML Part Classifier</h2>
-  <div class="sfi-classify-wrap">
-    <p class="sfi-classify-hint">
-      Describe a racing part and our ML model will identify the matching SFI specifications with confidence scores.
-    </p>
-    <div class="sfi-classify-input-row">
-      <input type="text" class="sfi-classify-input" id="classifyInput"
-             placeholder="e.g. fire resistant racing helmet, turbocharger, fuel cell, roll cage...">
-      <button class="sfi-classify-btn" id="classifyBtn">Classify</button>
+
+  <section class="sfi__section" id="classify">
+    <h2 class="sfi__title">ML part classifier</h2>
+    <p class="sfi__lead">Describe a racing part and the model returns matching SFI specifications with confidence scores.</p>
+    <div class="sfi__form-row">
+      <input type="text" class="sfi__field" id="classifyInput" aria-label="Part description"
+             placeholder="e.g. fire resistant racing helmet, turbocharger, fuel cell, roll cage">
+      <button type="button" class="sfi__btn primary" id="classifyBtn">Classify</button>
     </div>
-    <div class="sfi-result-count" id="classifyCount"></div>
+    <div class="sfi__count" id="classifyCount"></div>
     <div id="classifyResults"></div>
-  </div>
-</div>
+  </section>
 
-<!-- ═══════════════ SPEC SEARCH ═══════════════ -->
-<div class="sfi-section" id="search">
-  <h2 class="sfi-section-title">Specification Database</h2>
+  <section class="sfi__section" id="search">
+    <h2 class="sfi__title">Specification database</h2>
+    <input type="search" class="sfi__field" id="sfiSearch" aria-label="Search specifications"
+           placeholder="Search specs (e.g. helmet, 1.1, drag racing, clutch)">
+    <div id="sfiFuzzyHint" class="sfi__hint"></div>
+    <div class="sfi__filters" id="sfiFilters">
+      <button type="button" class="sfi__chip active" data-category="all">All</button>
+    </div>
+    <div class="sfi__count" id="sfiCount"></div>
 
-  <input type="text" class="sfi-search-box" id="sfiSearch"
-         placeholder="Search specs... (e.g. helmet, 1.1, drag racing, clutch)">
+    <div class="sfi__table-scroll">
+      <table class="sfi__table">
+        <thead>
+          <tr><th>Spec #</th><th>Product</th><th>Category</th><th>Date</th><th>PDF</th></tr>
+        </thead>
+        <tbody id="sfiBody"></tbody>
+      </table>
+    </div>
+    <div class="sfi__empty sfi__hidden" id="sfiNoResults">No specs match your search.</div>
+  </section>
 
-  <div id="sfiFuzzyHint" class="sfi-fuzzy-hint"></div>
+  <section class="sfi__section" id="categories">
+    <h2 class="sfi__title">Browse by category</h2>
+    <div class="sfi__grid" id="catGrid"></div>
+  </section>
 
-  <div class="sfi-filter-row" id="sfiFilters">
-    <button class="sfi-filter-btn active" data-category="all">All</button>
-  </div>
+  <section class="sfi__section">
+    <h2 class="sfi__title">About SFI Foundation</h2>
+    <div class="sfi__card">
+      <p>The <strong>SFI Foundation</strong> (originally the SEMA Foundation, Inc.) was established in 1978 as a nonprofit organization to develop and administer quality assurance programs for the motorsports aftermarket. SFI specifications cover safety equipment used across drag racing, auto racing, boat racing, tractor pulling and more.</p>
+      <p>Each specification number corresponds to a type of racing equipment, from driver suits and helmets to roll cages, fuel cells, supercharger restraints and turbochargers. The classifier can identify the right specification from a plain-text description of a part.</p>
+      <p>Learn more at <a class="sfi__link" href="/about/">About SFI Foundation</a>.</p>
+    </div>
+  </section>
 
-  <div class="sfi-count" id="sfiCount"></div>
+  <section class="sfi__section">
+    <button type="button" class="sfi__disclosure" id="adminToggle" aria-expanded="false" aria-controls="adminBody">
+      Admin panel <span id="adminArrow" aria-hidden="true">+</span>
+    </button>
+    <div class="sfi__disclosure-body" id="adminBody">
+      <div id="adminMsg" class="sfi__message"></div>
+      <div class="sfi__stats" id="adminStats"></div>
 
-  <table class="sfi-table">
-    <thead>
-      <tr>
-        <th>Spec #</th>
-        <th>Product</th>
-        <th>Category</th>
-        <th>Date</th>
-        <th>PDF</th>
-      </tr>
-    </thead>
-    <tbody id="sfiBody"></tbody>
-  </table>
-
-  <div class="sfi-no-results" id="sfiNoResults" style="display:none;">
-    No specs match your search.
-  </div>
-</div>
-
-<!-- ═══════════════ CATEGORIES ═══════════════ -->
-<div class="sfi-section" id="categories">
-  <h2 class="sfi-section-title">Browse by Category</h2>
-  <div class="sfi-cat-grid" id="catGrid"></div>
-</div>
-
-<!-- ═══════════════ ABOUT ═══════════════ -->
-<div class="sfi-section">
-  <h2 class="sfi-section-title">About SFI Foundation</h2>
-  <div class="sfi-about-card">
-    <p>
-      The <strong>SFI Foundation</strong> (originally the SEMA Foundation, Inc.) was established in 1978 as a
-      nonprofit organization to develop and administer quality assurance programs for the motorsports
-      aftermarket. SFI specifications cover safety equipment used across drag racing, auto racing,
-      boat racing, tractor pulling, and more.
-    </p>
-    <p>
-      Each specification number corresponds to a specific type of racing equipment &mdash; from driver suits
-      and helmets to roll cages, fuel cells, supercharger restraints, and turbochargers. Our ML model
-      can identify the correct specification from a plain-text description of any part.
-    </p>
-    <p>
-      Learn more at <a href="/about/">About SFI Foundation</a>
-    </p>
-  </div>
-</div>
-
-<!-- ═══════════════ ADMIN PANEL ═══════════════ -->
-<div class="sfi-section">
-  <button class="sfi-admin-toggle" id="adminToggle">
-    Admin Panel <span id="adminArrow">&#9654;</span>
-  </button>
-  <div class="sfi-admin-body" id="adminBody">
-    <div id="adminMsg" class="admin-msg"></div>
-    <div class="admin-stats" id="adminStats"></div>
-
-    <div class="admin-form">
-      <h3 id="formTitle">Add New Specification</h3>
-      <input type="hidden" id="editId">
-      <div class="admin-row">
-        <input class="admin-field" id="fProduct" placeholder="Product name *">
-        <input class="admin-field" id="fSpecNum" placeholder="Spec number (e.g. 3.3) *">
+      <div class="sfi__form-panel">
+        <h3 id="formTitle">Add new specification</h3>
+        <input type="hidden" id="editId">
+        <div class="sfi__form-grid">
+          <input class="sfi__field" id="fProduct" placeholder="Product name *" aria-label="Product name">
+          <input class="sfi__field" id="fSpecNum" placeholder="Spec number (e.g. 3.3) *" aria-label="Spec number">
+          <input class="sfi__field" id="fCategory" placeholder="Category *" aria-label="Category">
+          <input class="sfi__field" id="fSubcategory" placeholder="Subcategory" aria-label="Subcategory">
+          <input class="sfi__field" id="fEffDate" placeholder="Effective date" aria-label="Effective date">
+          <input class="sfi__field" id="fSpecPdf" placeholder="Spec PDF filename" aria-label="Spec PDF filename">
+          <input class="sfi__field" id="fMfrPdf" placeholder="Manufacturer PDF" aria-label="Manufacturer PDF">
+          <input class="sfi__field" id="fProdPdf" placeholder="Products PDF" aria-label="Products PDF">
+        </div>
+        <div class="sfi__row">
+          <button type="button" class="sfi__btn primary" id="saveBtn">Save spec</button>
+          <button type="button" class="sfi__btn sfi__hidden" id="cancelBtn">Cancel</button>
+        </div>
       </div>
-      <div class="admin-row">
-        <input class="admin-field" id="fCategory" placeholder="Category *">
-        <input class="admin-field" id="fSubcategory" placeholder="Subcategory">
-      </div>
-      <div class="admin-row">
-        <input class="admin-field" id="fEffDate" placeholder="Effective date">
-        <input class="admin-field" id="fSpecPdf" placeholder="Spec PDF filename">
-      </div>
-      <div class="admin-row">
-        <input class="admin-field" id="fMfrPdf" placeholder="Manufacturer PDF">
-        <input class="admin-field" id="fProdPdf" placeholder="Products PDF">
-      </div>
-      <div class="admin-actions">
-        <button class="admin-btn" id="saveBtn">Save Spec</button>
-        <button class="admin-btn-danger" id="cancelBtn" style="display:none;">Cancel</button>
+
+      <h3 class="sfi__subtitle">All specifications</h3>
+      <div class="sfi__table-scroll">
+        <table class="sfi__table" id="adminTable">
+          <thead>
+            <tr><th>ID</th><th>Spec #</th><th>Product</th><th>Category</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
       </div>
     </div>
+  </section>
 
-    <h3 style="color:var(--sfi-gold); margin-bottom:12px; font-family:'Inter',sans-serif;">All Specifications</h3>
-    <table class="sfi-table" id="adminTable">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Spec #</th>
-          <th>Product</th>
-          <th>Category</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="adminTableBody"></tbody>
-    </table>
-  </div>
 </div>
 
 <script>
@@ -871,16 +332,6 @@ const API_BASE = (location.hostname === "localhost" || location.hostname === "12
   ? "http://localhost:8423"
   : "https://greppers-be.opencodingsociety.com";
 const API = API_BASE + "/api/sfi";
-
-const CATEGORY_ICONS = {
-  "Auto Racing": "\u{1F3CE}\u{FE0F}",
-  "Drag Racing": "\u{1F3C1}",
-  "Boat Racing": "\u{1F6A4}",
-  "Personal Protective Gear, Restraints & Nets": "\u{1F6E1}\u{FE0F}",
-  "Chassis": "\u{1F527}",
-  "Fuel Related": "\u26FD",
-  "Tractor Pulling": "\u{1F69C}",
-};
 
 // ═══════════════ STATS BAR ═══════════════
 async function loadStats() {
@@ -910,7 +361,7 @@ async function classifyPart() {
   if (!input) return;
   const countEl = document.getElementById('classifyCount');
   const resultsEl = document.getElementById('classifyResults');
-  countEl.innerHTML = '<span class="sfi-spinner"></span> Classifying...';
+  countEl.innerHTML = '<span class="sfi__spinner"></span> Classifying...';
   resultsEl.innerHTML = '';
   try {
     const res = await fetch(`${API}/classify`, {
@@ -921,28 +372,28 @@ async function classifyPart() {
     const data = await res.json();
     countEl.textContent = `Found ${data.count} match(es) \u2014 Predicted category: ${data.predicted_category} (${(data.category_confidence * 100).toFixed(0)}% confidence)`;
     if (!data.predictions || !data.predictions.length) {
-      resultsEl.innerHTML = '<div class="sfi-no-results">No matching specs found.</div>';
+      resultsEl.innerHTML = '<div class="sfi__empty">No matching specs found.</div>';
       return;
     }
     resultsEl.innerHTML = data.predictions.map(p => {
       const confPct = (p.confidence * 100).toFixed(1);
       const pdfs = [];
-      if (p.spec_pdf) pdfs.push(`<a class="sfi-pdf-link" href="https://www.sfifoundation.com/wp-content/pdfs/${p.spec_pdf}" target="_blank">Spec PDF</a>`);
-      if (p.manufacturer_pdf) pdfs.push(`<a class="sfi-pdf-link" href="https://www.sfifoundation.com/wp-content/pdfs/${p.manufacturer_pdf}" target="_blank">Manufacturers</a>`);
+      if (p.spec_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${p.spec_pdf}" target="_blank">Spec PDF</a>`);
+      if (p.manufacturer_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${p.manufacturer_pdf}" target="_blank">Manufacturers</a>`);
       return `
-        <div class="sfi-result-card">
-          <div class="sfi-result-header">
-            <span class="sfi-result-title">SFI ${p.spec_number}</span>
-            <span class="sfi-result-conf">${confPct}%</span>
+        <div class="sfi__result">
+          <div class="sfi__result-body">
+            <div class="sfi__result-title">SFI ${p.spec_number}</div>
+            <div class="sfi__result-sub">${p.product_name}</div>
+            <div class="sfi__result-meta">
+              <span class="sfi__badge info">${p.category}</span>
+              ${p.subcategory ? `<span class="sfi__badge">${p.subcategory}</span>` : ''}
+              ${pdfs.join(' \u2022 ')}
+            </div>
           </div>
-          <div class="sfi-result-name">${p.product_name}</div>
-          <div class="sfi-result-meta">
-            <span class="sfi-cat-badge">${p.category}</span>
-            ${p.subcategory ? `<span class="sfi-cat-badge">${p.subcategory}</span>` : ''}
-            ${pdfs.join(' \u2022 ')}
-          </div>
-          <div class="sfi-conf-bar">
-            <div class="sfi-conf-fill" style="width:${confPct}%"></div>
+          <div class="sfi__result-side">
+            <div class="sfi__result-score">${confPct}%</div>
+            <div class="sfi__meter"><div class="sfi__meter-fill" style="width:${confPct}%"></div></div>
           </div>
         </div>`;
     }).join('');
@@ -1068,7 +519,7 @@ async function loadSpecs() {
     }
     renderSearch();
   } catch (e) {
-    document.getElementById('sfiNoResults').style.display = 'block';
+    document.getElementById('sfiNoResults').classList.remove('sfi__hidden');
     document.getElementById('sfiNoResults').textContent = 'Could not connect to API \u2014 is the backend running?';
   }
 }
@@ -1076,10 +527,10 @@ async function loadSpecs() {
 function buildFilters() {
   const cats = [...new Set(specs.map(s => s.category))].sort();
   const row = document.getElementById('sfiFilters');
-  row.innerHTML = '<button class="sfi-filter-btn active" data-category="all">All</button>';
+  row.innerHTML = '<button type="button" class="sfi__chip active" data-category="all">All</button>';
   cats.forEach(cat => {
     const btn = document.createElement('button');
-    btn.className = 'sfi-filter-btn';
+    btn.className = 'sfi__chip';
     btn.dataset.category = cat;
     btn.textContent = cat;
     row.appendChild(btn);
@@ -1091,17 +542,16 @@ function buildCategoryGrid() {
   specs.forEach(s => { cats[s.category] = (cats[s.category] || 0) + 1; });
   const grid = document.getElementById('catGrid');
   grid.innerHTML = Object.entries(cats).sort((a,b) => b[1] - a[1]).map(([cat, count]) => `
-    <div class="sfi-cat-card" onclick="filterByCategory('${cat.replace(/'/g, "\\'")}')">
-      <div class="sfi-cat-icon">${CATEGORY_ICONS[cat] || '\u{1F4CB}'}</div>
-      <div class="sfi-cat-name">${cat}</div>
-      <div class="sfi-cat-count">${count} spec${count !== 1 ? 's' : ''}</div>
+    <div class="sfi__category" onclick="filterByCategory('${cat.replace(/'/g, "\\'")}')">
+      <div class="sfi__category-name">${cat}</div>
+      <div class="sfi__category-count">${count} spec${count !== 1 ? 's' : ''}</div>
     </div>
   `).join('');
 }
 
 function filterByCategory(cat) {
   activeCategory = cat;
-  document.querySelectorAll('.sfi-filter-btn').forEach(b => {
+  document.querySelectorAll('#sfiFilters .sfi__chip').forEach(b => {
     b.classList.toggle('active', b.dataset.category === cat);
   });
   renderSearch();
@@ -1120,10 +570,10 @@ function renderSearch() {
 
   if (!q) {
     // No query — show all in category
-    hintEl.className = 'sfi-fuzzy-hint';
+    hintEl.className = 'sfi__hint';
     countEl.textContent = `Showing ${pool.length} of ${specs.length} specs`;
-    if (!pool.length) { tbody.innerHTML = ''; noRes.style.display = 'block'; return; }
-    noRes.style.display = 'none';
+    if (!pool.length) { tbody.innerHTML = ''; noRes.classList.remove('sfi__hidden'); return; }
+    noRes.classList.add('sfi__hidden');
     tbody.innerHTML = pool.map(s => specRow(s)).join('');
     return;
   }
@@ -1137,14 +587,14 @@ function renderSearch() {
   const suggestion = getSuggestion(q);
   if (suggestion && scored.length < 5) {
     hintEl.innerHTML = `Did you mean: <strong onclick="applySuggestion('${suggestion.replace(/'/g, "\\'")}')">${suggestion}</strong>?`;
-    hintEl.className = 'sfi-fuzzy-hint visible';
+    hintEl.className = 'sfi__hint visible';
   } else {
-    hintEl.className = 'sfi-fuzzy-hint';
+    hintEl.className = 'sfi__hint';
   }
 
   countEl.textContent = `Showing ${scored.length} of ${specs.length} specs`;
-  if (!scored.length) { tbody.innerHTML = ''; noRes.style.display = 'block'; return; }
-  noRes.style.display = 'none';
+  if (!scored.length) { tbody.innerHTML = ''; noRes.classList.remove('sfi__hidden'); return; }
+  noRes.classList.add('sfi__hidden');
   tbody.innerHTML = scored.map(x => specRow(x.spec)).join('');
 }
 
@@ -1155,12 +605,12 @@ function applySuggestion(text) {
 
 function specRow(s) {
   const pdfs = [];
-  if (s.spec_pdf) pdfs.push(`<a class="sfi-pdf-link" href="https://www.sfifoundation.com/wp-content/pdfs/${s.spec_pdf}" target="_blank">Spec</a>`);
-  if (s.manufacturer_pdf) pdfs.push(`<a class="sfi-pdf-link" href="https://www.sfifoundation.com/wp-content/pdfs/${s.manufacturer_pdf}" target="_blank">Mfrs</a>`);
+  if (s.spec_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${s.spec_pdf}" target="_blank">Spec</a>`);
+  if (s.manufacturer_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${s.manufacturer_pdf}" target="_blank">Mfrs</a>`);
   return `<tr>
-    <td class="sfi-spec-num">SFI ${s.spec_number}</td>
+    <td class="num">SFI ${s.spec_number}</td>
     <td>${s.product_name}</td>
-    <td><span class="sfi-cat-badge">${s.category}</span></td>
+    <td><span class="sfi__badge info">${s.category}</span></td>
     <td>${s.effective_date || '\u2014'}</td>
     <td>${pdfs.join(' \u2022 ') || '\u2014'}</td>
   </tr>`;
@@ -1168,8 +618,8 @@ function specRow(s) {
 
 document.getElementById('sfiSearch').addEventListener('input', renderSearch);
 document.getElementById('sfiFilters').addEventListener('click', e => {
-  if (!e.target.classList.contains('sfi-filter-btn')) return;
-  document.querySelectorAll('.sfi-filter-btn').forEach(b => b.classList.remove('active'));
+  if (!e.target.classList.contains('sfi__chip')) return;
+  document.querySelectorAll('#sfiFilters .sfi__chip').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   activeCategory = e.target.dataset.category;
   renderSearch();
@@ -1179,16 +629,17 @@ document.getElementById('sfiFilters').addEventListener('click', e => {
 document.getElementById('adminToggle').addEventListener('click', () => {
   const body = document.getElementById('adminBody');
   const arrow = document.getElementById('adminArrow');
-  body.classList.toggle('open');
-  arrow.innerHTML = body.classList.contains('open') ? '&#9660;' : '&#9654;';
-  if (body.classList.contains('open')) { loadAdminStats(); loadAdminTable(); }
+  const open = body.classList.toggle('open');
+  document.getElementById('adminToggle').setAttribute('aria-expanded', String(open));
+  arrow.textContent = open ? '\u2212' : '+';
+  if (open) { loadAdminStats(); loadAdminTable(); }
 });
 
 function showMsg(text, type) {
   const el = document.getElementById('adminMsg');
   el.textContent = text;
-  el.className = `admin-msg ${type}`;
-  setTimeout(() => { el.className = 'admin-msg'; }, 4000);
+  el.className = `sfi__message ${type}`;
+  setTimeout(() => { el.className = 'sfi__message'; }, 4000);
 }
 
 async function loadAdminStats() {
@@ -1196,9 +647,9 @@ async function loadAdminStats() {
     const res = await fetch(`${API}/stats`);
     const d = await res.json();
     document.getElementById('adminStats').innerHTML = `
-      <div class="admin-stat"><div class="admin-stat-val">${d.total_specs}</div><div class="admin-stat-label">Total Specs</div></div>
-      <div class="admin-stat"><div class="admin-stat-val">${d.total_categories}</div><div class="admin-stat-label">Categories</div></div>
-      <div class="admin-stat"><div class="admin-stat-val">${d.total_subcategories}</div><div class="admin-stat-label">Subcategories</div></div>`;
+      <div class="sfi__stat"><div class="sfi__stat-value">${d.total_specs}</div><div class="sfi__stat-label">Total specs</div></div>
+      <div class="sfi__stat"><div class="sfi__stat-value">${d.total_categories}</div><div class="sfi__stat-label">Categories</div></div>
+      <div class="sfi__stat"><div class="sfi__stat-value">${d.total_subcategories}</div><div class="sfi__stat-label">Subcategories</div></div>`;
   } catch (e) {}
 }
 
@@ -1209,12 +660,12 @@ async function loadAdminTable() {
     document.getElementById('adminTableBody').innerHTML = data.map(s => `
       <tr>
         <td>${s.id}</td>
-        <td class="sfi-spec-num">SFI ${s.spec_number}</td>
+        <td class="num">SFI ${s.spec_number}</td>
         <td>${s.product_name}</td>
-        <td><span class="sfi-cat-badge">${s.category}</span></td>
+        <td><span class="sfi__badge info">${s.category}</span></td>
         <td>
-          <button class="admin-btn" style="padding:4px 10px;font-size:.75rem;" onclick="editSpec(${s.id})">Edit</button>
-          <button class="admin-btn-danger" style="padding:4px 10px;font-size:.75rem;" onclick="deleteSpec(${s.id})">Del</button>
+          <button type="button" class="sfi__btn small" onclick="editSpec(${s.id})">Edit</button>
+          <button type="button" class="sfi__btn small danger" onclick="deleteSpec(${s.id})">Delete</button>
         </td>
       </tr>`).join('');
   } catch (e) {}
@@ -1224,7 +675,7 @@ function clearForm() {
   ['editId','fProduct','fSpecNum','fCategory','fSubcategory','fEffDate','fSpecPdf','fMfrPdf','fProdPdf']
     .forEach(id => document.getElementById(id).value = '');
   document.getElementById('formTitle').textContent = 'Add New Specification';
-  document.getElementById('cancelBtn').style.display = 'none';
+  document.getElementById('cancelBtn').classList.add('sfi__hidden');
 }
 
 async function editSpec(id) {
@@ -1241,7 +692,7 @@ async function editSpec(id) {
     document.getElementById('fMfrPdf').value = s.manufacturer_pdf || '';
     document.getElementById('fProdPdf').value = s.products_pdf || '';
     document.getElementById('formTitle').textContent = `Editing Spec #${s.id}`;
-    document.getElementById('cancelBtn').style.display = 'inline-block';
+    document.getElementById('cancelBtn').classList.remove('sfi__hidden');
   } catch (e) { showMsg('Failed to load spec', 'error'); }
 }
 

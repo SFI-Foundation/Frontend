@@ -1,0 +1,65 @@
+.sfi__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: 9px 18px;
+  border: 1px solid $border-strong;
+  border-radius: $radius-sm;
+  background: $surface;
+  color: $text;
+  font: 600 0.88rem/1.2 $font-body;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  @include focus-ring;
+
+  &:hover:not(:disabled) { border-color: $blue; color: $blue; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  &.primary {
+    background: $blue; border-color: $blue; color: #fff;
+    &:hover:not(:disabled) { background: $blue-dark; border-color: $blue-dark; color: #fff; }
+  }
+  &.danger { color: $bad; border-color: $bad;
+    &:hover:not(:disabled) { background: $bad; color: #fff; border-color: $bad; } }
+  &.small { padding: 5px 10px; font-size: 0.78rem; }
+  &.block { width: 100%; }
+}
+
+// Pill used for category filters.
+.sfi__chip {
+  padding: 5px 14px;
+  border: 1px solid $border;
+  border-radius: 999px;
+  background: $surface;
+  color: $text-soft;
+  font: 500 0.8rem/1.2 $font-body;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  @include focus-ring;
+
+  &:hover { border-color: $blue; color: $blue; }
+  &.active { background: $blue; border-color: $blue; color: #fff; }
+}
+
+.sfi__tabs {
+  display: flex;
+  gap: $space-1;
+  border-bottom: 1px solid $border;
+  margin-bottom: $space-5;
+}
+.sfi__tab {
+  padding: 10px 18px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  color: $text-muted;
+  font: 600 0.9rem/1.2 $font-body;
+  cursor: pointer;
+  @include focus-ring;
+
+  &:hover { color: $text; }
+  &.active { color: $blue; border-bottom-color: $blue; }
+}

@@ -1,0 +1,96 @@
+// My Gear tracker (/quiz/)
+
+.sfi__gear { max-width: 860px; margin: 0 auto; padding: $space-6 $space-5 $space-7; }
+
+.sfi__score {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+  margin-bottom: $space-6;
+  @include phone { flex-direction: column; text-align: center; }
+
+  &-ring {
+    position: relative;
+    width: 140px; height: 140px;
+    flex-shrink: 0;
+    svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .track { fill: none; stroke: $surface-alt; stroke-width: 10; }
+    .value { fill: none; stroke: $blue; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.8s, stroke 0.3s;
+      &.good { stroke: $good; } &.warn { stroke: $warn; } &.bad { stroke: $bad; } }
+  }
+  &-number {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: $font-heading; font-size: 2.4rem; font-weight: 600; line-height: 1; color: $text;
+    small { @include caption; font-family: $font-body; font-size: 0.65rem; margin-top: 4px; }
+  }
+  &-info { flex: 1; min-width: 0; }
+  &-badges { display: flex; flex-wrap: wrap; gap: $space-2; @include phone { justify-content: center; } }
+}
+
+.sfi__gear-form {
+  display: grid;
+  gap: $space-3;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  margin-bottom: $space-6;
+  @include tablet { grid-template-columns: 1fr 1fr; }
+  @include phone  { grid-template-columns: 1fr; }
+}
+
+.sfi__autocomplete {
+  position: relative;
+
+  &-list {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
+    max-height: 220px; overflow-y: auto;
+    border: 1px solid $border-strong; border-top: 0;
+    border-radius: 0 0 $radius-sm $radius-sm;
+    background: $surface;
+    &.open { display: block; }
+  }
+  &-item {
+    padding: 9px 12px;
+    font-size: 0.86rem;
+    border-bottom: 1px solid $surface-alt;
+    cursor: pointer;
+    small { color: $text-muted; }
+    &:hover { background: $blue-tint; }
+  }
+}
+
+.sfi__gear-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: $space-3;
+}
+
+.sfi__gear-item {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4 $space-4 $space-4 $space-5;
+  margin-bottom: $space-3;
+  border: 1px solid $border;
+  border-left: 4px solid $border-strong;
+  border-radius: $radius;
+  background: $surface;
+
+  &.is-good     { border-left-color: $good; }
+  &.is-warn     { border-left-color: $warn; }
+  &.is-expired  { border-left-color: $bad; }
+  &.is-pending  { border-left-color: $warn; background: $warn-tint; }
+  &.is-rejected { border-left-color: $bad;  background: $bad-tint; opacity: 0.85; }
+
+  &-info { flex: 1; min-width: 0; }
+  &-name { font-weight: 700; color: $text; font-size: 0.95rem; }
+  &-spec { font-size: 0.82rem; font-weight: 600; color: $blue; }
+  &-meta { display: flex; flex-wrap: wrap; gap: $space-3; margin-top: $space-1; font-size: 0.76rem; color: $text-muted; }
+  &-status { text-align: right; flex-shrink: 0; }
+  &-note { margin-top: $space-1; font-size: 0.76rem; font-style: italic; color: $text-muted; }
+  &-days { margin-top: $space-1; font-size: 0.76rem; color: $text-muted; }
+  &-remove {
+    border: 0; background: none; padding: 4px 8px;
+    color: $text-muted; font-size: 1.2rem; line-height: 1; cursor: pointer; border-radius: $radius-sm;
+    &:hover { color: $bad; background: $bad-tint; }
+  }
+}

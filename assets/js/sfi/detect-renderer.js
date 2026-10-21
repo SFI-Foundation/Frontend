@@ -60,14 +60,14 @@ const DetectRenderer = (() => {
   }
 
   function injectSaveButtons() {
-    const cards = document.querySelectorAll('#detectResults .detect-result-card');
+    const cards = document.querySelectorAll('#detectResults .sfi__result');
     cards.forEach((card, idx) => {
-      if (card.querySelector('.detect-save-btn')) return;
+      if (card.querySelector('.sfi__save-btn')) return;
       const rightCol = card.lastElementChild;
       if (!rightCol) return;
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'detect-save-btn';
+      btn.className = 'sfi__save-btn';
       btn.dataset.resultIdx = String(idx);
       btn.textContent = '+ Save to My Gear';
       btn.title = 'Save this detection to My Gear';
@@ -186,61 +186,47 @@ const DetectRenderer = (() => {
     const summaryText = n > 0
       ? `Detected ${n} categor${n === 1 ? 'y' : 'ies'}`
       : 'No equipment detected';
-    const summaryHtml = `<div class="detect-results-summary" role="status" aria-live="polite">${summaryText}</div>`;
+    const summaryHtml = `<div class="sfi__results-summary" role="status" aria-live="polite">${summaryText}</div>`;
 
     if (n === 0) {
       div.innerHTML = `
         ${summaryHtml}
-        <div class="no-results">
-          <p style="font-size:1.5rem;margin-bottom:8px;">&#128269;</p>
+        <div class="sfi__empty">
           <p>No SFI equipment detected in this image.</p>
-          <p style="font-size:0.8rem;opacity:0.6;margin-top:4px;">
-            Try an image of motorsport safety equipment &mdash; helmets, harnesses, roll cages, wheels, etc.
-          </p>
+          <p class="sfi__muted">Try an image of motorsport safety equipment: helmets, harnesses, roll cages, wheels and so on.</p>
         </div>`;
       return;
     }
 
-    let html = summaryHtml + '<div class="detect-results-title">Detected SFI Equipment Categories</div>';
+    let html = summaryHtml + '<h3 class="sfi__subtitle">Detected SFI equipment categories</h3>';
 
     sfiResults.forEach(result => {
-      const rawConf = result.confidence;
-      const conf = rawConf;
-      const barWidth = Math.max(0, Math.min(100, rawConf));
-      const confColor = conf >= 60 ? 'var(--sfi-green)' : conf >= 30 ? 'var(--sfi-gold)' : 'var(--sfi-muted)';
+      const conf = result.confidence;
+      const barWidth = Math.max(0, Math.min(100, conf));
+      const extra = result.cat.items.length > 3 ? ` &bull; +${result.cat.items.length - 3} more` : '';
       html += `
-        <div class="detect-result-card" role="listitem">
-          <div class="detect-result-color" style="background:${result.cat.color}"></div>
-          <div class="detect-result-info">
-            <div class="detect-result-name">${result.cat.name}</div>
-            <div class="detect-result-items">${result.cat.items.slice(0, 3).join(' &bull; ')}${result.cat.items.length > 3 ? ' &bull; +' + (result.cat.items.length - 3) + ' more' : ''}</div>
+        <div class="sfi__result" role="listitem" style="--accent:${result.cat.color}">
+          <div class="sfi__result-body">
+            <div class="sfi__result-title">${result.cat.name}</div>
+            <div class="sfi__result-sub">${result.cat.items.slice(0, 3).join(' &bull; ')}${extra}</div>
           </div>
-          <div style="text-align:right;">
-            <div class="detect-result-conf" style="color:${confColor}">${conf}%</div>
-            <div class="detect-result-conf-label">confidence</div>
-            <div class="detect-conf-bar"><div class="detect-conf-bar-fill" style="width:${barWidth}%"></div></div>
+          <div class="sfi__result-side">
+            <div class="sfi__result-score">${conf}%</div>
+            <div class="sfi__result-caption">confidence</div>
+            <div class="sfi__meter"><div class="sfi__meter-fill" style="width:${barWidth}%"></div></div>
           </div>
         </div>`;
     });
 
     html += `
-      <p class="detect-disclaimer">AI estimate &mdash; verify against the official SFI spec.</p>`;
-
-    // Small helper panel asking the user to save any / all detected gear.
-    html += `
-      <div class="detect-save-hint">
-        <span>Seen your gear? Save it to <a href="/quiz/">My Gear</a> — administrators review submissions and keep one clean record.</span>
-      </div>`;
-
-    html += `
-      <details style="margin-top:20px;">
-        <summary style="font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--sfi-muted);cursor:pointer;padding:8px 0;">
-          Show raw model output
-        </summary>
-        <div style="background:var(--sfi-surface);border:1px solid var(--sfi-border);border-radius:8px;padding:16px;margin-top:8px;font-family:monospace;font-size:0.75rem;color:var(--sfi-muted);line-height:1.8;">
-          <strong style="color:var(--sfi-text);">COCO-SSD Detections:</strong><br>
+      <p class="sfi__disclaimer">AI estimate. Verify against the official SFI spec.</p>
+      <div class="sfi__notice">Seen your gear? Save it to <a href="/quiz/">My Gear</a>. Administrators review submissions and keep one clean record.</div>
+      <details class="sfi__raw">
+        <summary>Show raw model output</summary>
+        <div>
+          <strong>COCO-SSD detections</strong><br>
           ${cocoResults.length === 0 ? 'None' : cocoResults.map(d => `${d.class} (${Math.round(d.score * 100)}%)`).join(', ')}<br><br>
-          <strong style="color:var(--sfi-text);">MobileNet Classifications:</strong><br>
+          <strong>MobileNet classifications</strong><br>
           ${globalMnet.slice(0, 5).map(p => `${p.className} (${Math.round(p.probability * 100)}%)`).join('<br>')}
         </div>
       </details>`;
@@ -252,12 +238,9 @@ const DetectRenderer = (() => {
   function buildCatRef() {
     const grid = document.getElementById('catRefGrid');
     grid.innerHTML = SFI_CATEGORIES.map(cat => `
-      <div class="cat-ref-item">
-        <div class="cat-ref-name">
-          <span class="cat-ref-dot" style="background:${cat.color}"></span>
-          ${cat.name}
-        </div>
-        <div class="cat-ref-specs">${cat.items.join('<br>')}</div>
+      <div class="sfi__ref-item" style="--accent:${cat.color}">
+        <div class="sfi__ref-item-name"><span class="sfi__ref-item-dot"></span>${cat.name}</div>
+        <div class="sfi__ref-item-specs">${cat.items.join('<br>')}</div>
       </div>
     `).join('');
   }

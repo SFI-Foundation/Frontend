@@ -1,0 +1,191 @@
+// Equipment detector (/detect/)
+
+.sfi__model-status {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 6px 14px;
+  border: 1px solid $border;
+  border-radius: 999px;
+  background: $surface;
+  font-size: 0.84rem;
+  color: $text-soft;
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: $warn;
+    animation: sfi-blink 1.4s ease-in-out infinite;
+  }
+  &.ready .dot { background: $good; animation: none; }
+  &.error .dot { background: $bad;  animation: none; }
+}
+@keyframes sfi-blink { 50% { opacity: 0.3; } }
+
+.sfi__model-progress { width: 220px; margin-top: $space-3; }
+
+.sfi__dropzone {
+  position: relative;
+  padding: $space-7 $space-5;
+  border: 2px dashed $border-strong;
+  border-radius: $radius;
+  background: $surface;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  @include focus-ring;
+
+  &:hover, &.dragover { border-color: $blue; background: $blue-tint; }
+  input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+}
+.sfi__dropzone-title { font-weight: 600; color: $text; margin-bottom: $space-1; }
+.sfi__dropzone-hint  { font-size: 0.82rem; color: $text-muted; }
+
+.sfi__camera {
+  padding: $space-5;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: $surface;
+  text-align: center;
+}
+.sfi__camera-view {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+}
+.sfi__camera-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $space-3;
+  margin-top: $space-4;
+
+  @include phone {
+    flex-direction: column;
+    .sfi__btn { width: 100%; }
+    #btnCapture { order: -1; padding: 14px; }
+  }
+}
+
+.sfi__preview {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto $space-5;
+  background: #000;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  img { display: block; width: 100%; }
+  canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+}
+.sfi__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  background: rgba(#000, 0.65);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  .sfi__spinner { width: 36px; height: 36px; border-color: rgba(#fff, 0.3); border-top-color: #fff; }
+}
+
+// Result list (shared by detector results and spec classifier)
+.sfi__results-title { @extend .sfi__subtitle; margin-top: $space-5; }
+.sfi__results-summary { font-size: 0.88rem; color: $text-muted; margin-bottom: $space-3; }
+.sfi__disclaimer { font-size: 0.8rem; color: $text-muted; margin: $space-3 0; }
+
+.sfi__result {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-3 $space-4;
+  margin-bottom: $space-2;
+  border: 1px solid $border;
+  border-left: 4px solid var(--accent, #{$border-strong});
+  border-radius: $radius-sm;
+  background: $surface;
+
+  &-body  { flex: 1; min-width: 0; }
+  &-title { font-weight: 700; color: $text; font-size: 0.95rem; }
+  &-sub   { font-size: 0.8rem; color: $text-muted; line-height: 1.45; margin-top: 2px; }
+  &-meta  { display: flex; flex-wrap: wrap; gap: $space-2; align-items: center; margin-top: $space-2; }
+  &-side  { text-align: right; min-width: 90px; }
+  &-score { font-family: $font-heading; font-size: 1.4rem; font-weight: 600; color: $text; line-height: 1; }
+  &-caption { @include caption; font-size: 0.65rem; margin-top: 2px; }
+
+  .sfi__meter { margin-top: $space-2; height: 4px; }
+
+  @include phone { flex-wrap: wrap; &-side { text-align: left; } }
+}
+
+.sfi__save-btn {
+  margin-top: $space-2;
+  padding: 5px 10px;
+  border: 1px solid $blue;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $blue;
+  font: 600 0.74rem/1.2 $font-body;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) { background: $blue-tint; }
+  &:disabled { cursor: default; }
+  &[data-state="saving"] { color: $text-muted; border-color: $border; }
+  &[data-state="saved"]  { color: $good; border-color: $good; background: $good-tint; }
+  &[data-state="auth"]   { color: $warn; border-color: $warn; }
+  &[data-state="error"]  { color: $bad;  border-color: $bad; }
+}
+
+.sfi__raw {
+  margin-top: $space-5;
+  summary { cursor: pointer; font-size: 0.82rem; color: $text-muted; padding: $space-2 0; }
+  pre, div {
+    margin: $space-2 0 0;
+    padding: $space-4;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    background: $surface;
+    font: 0.76rem/1.8 monospace;
+    color: $text-muted;
+  }
+  strong { color: $text; }
+}
+
+.sfi__ref-item {
+  padding: $space-3 $space-4;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  background: $surface;
+
+  &-name { font-size: 0.86rem; font-weight: 700; color: $text; margin-bottom: $space-1; }
+  &-dot { display: inline-block; width: 10px; height: 10px; margin-right: $space-2; border-radius: 50%; background: var(--accent, #{$border-strong}); }
+  &-specs { font-size: 0.76rem; line-height: 1.5; color: $text-muted; }
+}
+
+.sfi__cta {
+  padding: $space-6 $space-5;
+  border-radius: $radius;
+  background: $blue-dark;
+  color: #fff;
+  text-align: center;
+
+  h2 { font-family: $font-heading; font-size: 1.4rem; font-weight: 600; margin: 0 0 $space-2; }
+  p { margin: 0 0 $space-4; color: rgba(#fff, 0.8); }
+  .sfi__btn { background: #fff; border-color: #fff; color: $blue-dark; &:hover { background: $blue-tint; color: $blue-dark; } }
+}

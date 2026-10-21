@@ -1,0 +1,20 @@
+@mixin phone  { @media (max-width: $bp-phone)  { @content; } }
+@mixin tablet { @media (max-width: $bp-tablet) { @content; } }
+
+@mixin focus-ring {
+  &:focus-visible { outline: 2px solid $blue; outline-offset: 2px; }
+}
+
+// Small uppercase label used for table heads, stat captions, etc.
+@mixin caption {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+@mixin tint($fg, $bg) {
+  color: $fg;
+  background: $bg;
+}
