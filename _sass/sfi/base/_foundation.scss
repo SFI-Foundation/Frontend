@@ -1,0 +1,10 @@
+&, * { box-sizing: border-box; }
+
+& {
+  background: var(--sfi-bg);
+  color: var(--sfi-text);
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+

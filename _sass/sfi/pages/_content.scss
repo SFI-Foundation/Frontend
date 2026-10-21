@@ -1,0 +1,344 @@
+/* ── Homepage content cards ───────────────────── */
+.sfi-home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+.sfi-home-card {
+  background: var(--sfi-white);
+  border: 1px solid var(--sfi-border);
+  border-top: 3px solid var(--sfi-blue);
+  border-radius: var(--sfi-radius);
+  padding: 0;
+  text-decoration: none;
+  display: block;
+  transition: box-shadow 0.2s, border-top-color 0.2s;
+  box-shadow: var(--sfi-shadow);
+  overflow: hidden;
+}
+.sfi-home-card:hover {
+  box-shadow: var(--sfi-shadow-md);
+  border-top-color: var(--sfi-blue-accent);
+}
+.sfi-home-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  background: var(--sfi-surface2);
+}
+.sfi-home-card-img-placeholder {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #1a5fa8 0%, #3b9ede 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+.sfi-home-card-body {
+  padding: 18px 20px 20px;
+}
+.sfi-home-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sfi-blue);
+  margin: 0 0 8px;
+  letter-spacing: 0.3px;
+}
+.sfi-home-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.83rem;
+  color: var(--sfi-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Welcome section ──────────────────────────── */
+.sfi-welcome {
+  background: var(--sfi-white);
+  border-top: 1px solid var(--sfi-border);
+  border-bottom: 1px solid var(--sfi-border);
+  padding: 40px 24px;
+}
+.sfi-welcome-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sfi-welcome h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sfi-text);
+  margin: 0 0 12px;
+  letter-spacing: 0.5px;
+}
+.sfi-welcome p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  color: var(--sfi-text-secondary);
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0;
+}
+
+/* ── Feature Cards ────────────────────────────── */
+.sfi-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.sfi-feature-card {
+  background: var(--sfi-white);
+  border: 1px solid var(--sfi-border);
+  border-top: 3px solid var(--sfi-blue);
+  border-radius: var(--sfi-radius);
+  padding: 24px 22px;
+  transition: box-shadow 0.2s, border-top-color 0.2s;
+  box-shadow: var(--sfi-shadow);
+  text-decoration: none;
+  display: block;
+}
+.sfi-feature-card:hover {
+  box-shadow: var(--sfi-shadow-md);
+  border-top-color: var(--sfi-blue-accent);
+}
+.sfi-feature-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.sfi-feature-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sfi-blue);
+  margin: 0 0 8px;
+  letter-spacing: 0.3px;
+}
+.sfi-feature-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.83rem;
+  color: var(--sfi-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Category Tiles ───────────────────────────── */
+.sfi-cat-browse {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+.sfi-cat-tile {
+  background: var(--sfi-white);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  padding: 22px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  box-shadow: var(--sfi-shadow);
+}
+.sfi-cat-tile:hover {
+  border-color: var(--sfi-blue);
+  box-shadow: var(--sfi-shadow-md);
+  transform: translateY(-2px);
+}
+.sfi-cat-tile-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+.sfi-cat-tile-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--sfi-blue);
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+}
+.sfi-cat-tile-count {
+  font-family: 'Inter', sans-serif;
+  color: var(--sfi-muted);
+  font-size: 0.72rem;
+}
+
+/* ── Stats Strip ──────────────────────────────── */
+.sfi-stats-strip {
+  background: var(--sfi-blue-dark);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 100%;
+}
+.sfi-stat-item {
+  padding: 28px 16px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.sfi-stat-item:last-child { border-right: none; }
+.sfi-stat-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.sfi-stat-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+@media (max-width: 600px) {
+  .sfi-stats-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Info Grid ────────────────────────────────── */
+.sfi-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 768px) { .sfi-info-grid { grid-template-columns: 1fr; } }
+.sfi-info-card {
+  background: var(--sfi-white);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  padding: 24px;
+  box-shadow: var(--sfi-shadow);
+}
+.sfi-info-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--sfi-blue);
+  margin: 0 0 12px;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--sfi-border);
+  padding-bottom: 10px;
+}
+.sfi-info-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--sfi-text-secondary);
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+.sfi-info-card p:last-child { margin-bottom: 0; }
+.sfi-info-card a { color: var(--sfi-blue); text-decoration: none; }
+.sfi-info-card a:hover { text-decoration: underline; }
+
+/* ── Timeline ─────────────────────────────────── */
+.sfi-timeline {
+  position: relative;
+  padding-left: 36px;
+}
+.sfi-timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--sfi-blue);
+  opacity: 0.2;
+}
+.sfi-timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+.sfi-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -29px; top: 5px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--sfi-blue);
+  border: 2px solid var(--sfi-white);
+  box-shadow: 0 0 0 2px var(--sfi-blue);
+}
+.sfi-timeline-year {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sfi-blue);
+  margin-bottom: 4px;
+}
+.sfi-timeline-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--sfi-text-secondary);
+  line-height: 1.6;
+}
+
+/* ── CTA Banner ───────────────────────────────── */
+.sfi-cta-banner {
+  background: linear-gradient(105deg, #0d2e5c, #1a5fa8);
+  border-radius: var(--sfi-radius);
+  padding: 48px 40px;
+  text-align: center;
+}
+.sfi-cta-banner h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+  letter-spacing: 0.5px;
+}
+.sfi-cta-banner p {
+  font-family: 'Inter', sans-serif;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+.sfi-cta-banner .sfi-btn { margin: 0 6px; }
+
+/* ── Contact ──────────────────────────────────── */
+.sfi-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.sfi-contact-item {
+  background: var(--sfi-white);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  padding: 22px;
+  text-align: center;
+  box-shadow: var(--sfi-shadow);
+  transition: box-shadow 0.2s;
+}
+.sfi-contact-item:hover { box-shadow: var(--sfi-shadow-md); }
+.sfi-contact-item-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.sfi-contact-item-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--sfi-muted);
+  margin-bottom: 5px;
+}
+.sfi-contact-item-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--sfi-text);
+}
+.sfi-contact-item-val a { color: var(--sfi-blue); text-decoration: none; }
+.sfi-contact-item-val a:hover { text-decoration: underline; }
+
+/* ── Divider ──────────────────────────────────── */
+.sfi-divider {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.sfi-divider hr {
+  border: none;
+  height: 1px;
+  background: var(--sfi-border);
+}
+

@@ -1,4 +1,16 @@
+// Jekyll entry: assets/css/sfi.scss. SFI layout intentionally excludes the
+// Minima classroom bundle (minima/custom-styles -> open-coding/main).
 @import "tokens", "mixins";
-@import "base/page";
-@import "elements/card", "elements/button", "elements/form", "elements/table";
-@import "pages/detect", "pages/gear", "pages/specs";
+
+.sfi-site {
+  @import "base/properties", "base/foundation";
+  @import "components/header", "components/navigation";
+  @import "pages/hero", "components/buttons";
+  @import "base/layout", "pages/content", "components/footer", "components/data", "pages/admin";
+  @import "base/page";
+  @import "elements/card", "elements/button", "elements/form", "elements/table";
+  @import "pages/detect", "pages/gear", "pages/specs";
+  // These originally followed the shared styles in the rendered document.
+  @import "components/nav-account", "pages/auth", "pages/profile", "components/chatbot";
+  @import "base/accessibility";
+}

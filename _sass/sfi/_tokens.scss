@@ -1,5 +1,4 @@
-// SFI design tokens. Mirrors the palette in _includes/sfi/styles.html so the
-// page-level components match the header, nav and footer.
+// Shared SFI palette, taken from the existing public layout and components.
 
 $bg:            #f4f5f7;
 $surface:       #fff;
@@ -39,3 +38,7 @@ $space-7: 48px;
 $content-width: 1000px;
 $bp-phone:      600px;
 $bp-tablet:     800px;
+
+// Existing Spec Search and chat accents.
+$gold: #f0a500;
+$gold-dim: #d49400;

@@ -1,0 +1,53 @@
+/* ── Hero banner ──────────────────────────────── */
+.sfi-hero {
+  position: relative;
+  background: linear-gradient(105deg, #0d2e5c 0%, #1a5fa8 40%, #1e7bc4 70%, #0f3d6e 100%);
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+}
+.sfi-hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2018_NHRA_US_Nationals_%2844261143952%29.jpg/1280px-2018_NHRA_US_Nationals_%2844261143952%29.jpg')
+    center/cover no-repeat;
+  opacity: 0.18;
+}
+.sfi-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 32px;
+  width: 100%;
+}
+.sfi-hero h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: 1px;
+}
+.sfi-hero h1 em {
+  font-style: normal;
+  color: #7dd3fa;
+}
+.sfi-hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 28px;
+  max-width: 520px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.sfi-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+

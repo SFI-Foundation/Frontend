@@ -28,7 +28,8 @@ Important frontend files and directories:
 
 | Route | Description |
 | --- | --- |
-| `/sfifoundation/` | Prototype landing and review page for presenting the project. |
+| `/`, `/sfifoundation/` | Public SFI homepage; the legacy URL redirects to `/`. |
+| `/classroom/sfi-prototype/` | Preserved prototype landing and review page. |
 | `/about/`, `/history/`, `/services/`, `/contact/` | Redesigned informational SFI content pages. |
 | `/specs/` | Specification category browsing page. |
 | `/sfi-specs/` | Searchable specs database, ML text classifier, interactive safety showcase, and spec CRUD accordion. |
