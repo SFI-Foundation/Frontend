@@ -1,0 +1,42 @@
+// :is contributes attribute-level specificity so this last partial wins over
+// component outline:none rules, including .sfi__field:focus, without !important.
+:is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid $blue;
+  outline-offset: 3px;
+}
+.sfi-hero :focus-visible, .sfi-cta-banner :focus-visible, .sfi-nav :focus-visible { outline-color: $surface; }
+
+.sfi-skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  &:focus-visible {
+    position: fixed;
+    z-index: 11000;
+    top: 8px;
+    left: 8px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: $space-2 $space-3;
+    clip: auto;
+    color: $blue-dark;
+    background: $surface;
+    border: 2px solid $blue;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sfi-chat-fab, .sfi-chat-typing span { animation: none; }
+  .sfi-chat-window { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sfi-experience-card, .sfi-btn, .sfi-home-card, .sfi-cat-tile { transition: none; }
+}

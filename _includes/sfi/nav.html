@@ -1,46 +1,21 @@
 <nav class="sfi-nav">
   <div class="sfi-nav-inner">
-    <a href="/" class="sfi-nav-brand"><span>SFI</span> Foundation</a>
-    <button class="sfi-nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <a href="{{ '/' | relative_url }}" class="sfi-nav-brand"><span>SFI</span> Foundation</a>
+    <button class="sfi-nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navLinks" aria-expanded="false">&#9776;</button>
     <ul class="sfi-nav-links" id="navLinks">
-      <li><a href="/about/"{% if page.permalink == '/about/' %} class="active"{% endif %}>About</a></li>
-      <li><a href="/history/"{% if page.permalink == '/history/' %} class="active"{% endif %}>History</a></li>
-      <li><a href="/specs/"{% if page.permalink == '/specs/' %} class="active"{% endif %}>Specs</a></li>
-      <li><a href="/services/"{% if page.permalink == '/services/' %} class="active"{% endif %}>Services</a></li>
-      <li><a href="/contact/"{% if page.permalink == '/contact/' %} class="active"{% endif %}>Contact</a></li>
-      <li><a href="/quiz/" class="sfi-nav-highlight{% if page.permalink == '/quiz/' %} active{% endif %}">My Gear</a></li>
-      <li><a href="/detect/" class="sfi-nav-highlight{% if page.permalink == '/detect/' %} active{% endif %}">Detect</a></li>
-      <li><a href="/sfi-specs/" class="sfi-nav-cta"{% if page.permalink == '/sfi-specs/' %} style="box-shadow:0 0 12px rgba(240,165,0,0.4)"{% endif %}>Spec Search</a></li>
-      <li id="navAuth"><a href="/login/" class="sfi-nav-auth-link">Sign In</a></li>
+      <li><a href="{{ '/about/' | relative_url }}"{% if page.permalink == '/about/' %} class="active"{% endif %}>About</a></li>
+      <li><a href="{{ '/history/' | relative_url }}"{% if page.permalink == '/history/' %} class="active"{% endif %}>History</a></li>
+      <li><a href="{{ '/specs/' | relative_url }}"{% if page.permalink == '/specs/' %} class="active"{% endif %}>Specs</a></li>
+      <li><a href="{{ '/services/' | relative_url }}"{% if page.permalink == '/services/' %} class="active"{% endif %}>Services</a></li>
+      <li><a href="{{ '/contact/' | relative_url }}"{% if page.permalink == '/contact/' %} class="active"{% endif %}>Contact</a></li>
+      <li><a href="{{ '/quiz/' | relative_url }}" class="sfi-nav-highlight{% if page.permalink == '/quiz/' %} active{% endif %}">My Gear</a></li>
+      <li><a href="{{ '/detect/' | relative_url }}" class="sfi-nav-highlight{% if page.permalink == '/detect/' %} active{% endif %}">Detect</a></li>
+      <li><a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-nav-cta{% if page.permalink == '/sfi-specs/' %} active{% endif %}">Spec Search</a></li>
+      <li id="navAuth"><a href="{{ '/login/' | relative_url }}" class="sfi-nav-auth-link">Sign In</a></li>
     </ul>
   </div>
 </nav>
-<style>
-  .sfi-nav-auth-link {
-    font-weight: 600 !important;
-    color: var(--sfi-gold) !important;
-  }
-  .sfi-nav-auth-avatar {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px !important;
-    border: 1px solid rgba(240,165,0,0.25);
-    border-radius: 20px !important;
-    color: var(--sfi-gold) !important;
-    font-weight: 600 !important;
-    font-size: 0.82rem !important;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .sfi-nav-auth-avatar:hover { background: rgba(240,165,0,0.08) !important; }
-  .sfi-nav-auth-dot {
-    width: 8px; height: 8px;
-    background: var(--sfi-green);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-</style>
+
 <script type="module">
 import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | relative_url }}';
 (function() {

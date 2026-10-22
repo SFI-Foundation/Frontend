@@ -1,0 +1,204 @@
+.auth-container {
+  max-width: 440px;
+  margin: 120px auto 60px;
+  padding: 0 20px;
+}
+.auth-card {
+  background: var(--sfi-surface);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  padding: 40px 36px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+.auth-card h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--sfi-text);
+  margin: 0 0 6px;
+  letter-spacing: 0.02em;
+}
+#loginFields h2 {
+  color: #000;
+}
+.auth-card .auth-sub {
+  color: var(--sfi-muted);
+  font-size: 0.88rem;
+  margin: 0 0 28px;
+}
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--sfi-bg);
+  border-radius: var(--sfi-radius-sm);
+  padding: 4px;
+  margin-bottom: 28px;
+}
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sfi-muted);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.auth-tab.active {
+  background: var(--sfi-surface2);
+  color: var(--sfi-blue);
+}
+.auth-tab:hover:not(.active) { color: var(--sfi-text); }
+
+/* Form fields */
+.auth-field {
+  margin-bottom: 18px;
+}
+.auth-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--sfi-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.auth-field input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--sfi-bg);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius-sm);
+  color: var(--sfi-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.auth-field input:focus {
+  border-color: var(--sfi-blue);
+  box-shadow: 0 0 0 3px rgba(240,165,0,0.1);
+}
+.auth-field input::placeholder { color: #3d4555; }
+
+/* Submit button */
+.auth-submit {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--sfi-gold), var(--sfi-gold-dim));
+  border: none;
+  border-radius: var(--sfi-radius-sm);
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.auth-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(240,165,0,0.35);
+}
+.auth-submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Messages */
+.auth-msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  margin-bottom: 18px;
+  display: none;
+  line-height: 1.4;
+}
+.auth-msg.error {
+  display: block;
+  background: rgba(248,81,73,0.1);
+  border: 1px solid rgba(248,81,73,0.25);
+  color: var(--sfi-red);
+}
+.auth-msg.success {
+  display: block;
+  background: rgba(63,185,80,0.1);
+  border: 1px solid rgba(63,185,80,0.25);
+  color: var(--sfi-green);
+}
+
+/* Logged-in profile card */
+.auth-profile {
+  text-align: center;
+}
+.auth-profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sfi-gold), var(--sfi-gold-dim));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0 auto 16px;
+}
+.auth-profile h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  color: var(--sfi-text);
+  margin: 0 0 4px;
+}
+.auth-profile .auth-profile-uid {
+  color: var(--sfi-blue);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.auth-profile .auth-profile-role {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+  background: rgba(240,165,0,0.12);
+  color: var(--sfi-blue);
+  border: 1px solid rgba(240,165,0,0.2);
+}
+.auth-logout {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid rgba(248,81,73,0.3);
+  border-radius: var(--sfi-radius-sm);
+  color: var(--sfi-red);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.auth-logout:hover {
+  background: rgba(248,81,73,0.08);
+}
+
+@media (max-width: 480px) {
+  .auth-container { margin-top: 90px; }
+  .auth-card { padding: 28px 22px; }
+}
+
+// Initial visibility; runtime authentication state overrides display when ready.
+.auth-initially-hidden { display: none; }

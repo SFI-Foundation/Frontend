@@ -1,0 +1,79 @@
+/* ── Hero banner ──────────────────────────────── */
+.sfi-hero {
+  position: relative;
+  background: linear-gradient(105deg, $hero-start 0%, $blue 40%, $hero-accent 70%, $hero-end 100%);
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+}
+.sfi-hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2018_NHRA_US_Nationals_%2844261143952%29.jpg/1280px-2018_NHRA_US_Nationals_%2844261143952%29.jpg')
+    center/cover no-repeat;
+  opacity: 0.18;
+}
+.sfi-hero-content {
+  position: relative;
+  z-index: 1;
+  @include site-container;
+  padding-block: $space-7;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 320px);
+  align-items: center;
+  gap: $space-7;
+  @include tablet {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-6;
+  }
+}
+.sfi-hero h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: 1px;
+}
+.sfi-hero h1 em {
+  font-style: normal;
+  color: #7dd3fa;
+}
+.sfi-hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 28px;
+  max-width: 520px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.sfi-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+
+// The official image stays intact; a white surface protects the logo contrast.
+.sfi-hero-copy { min-width: 0; }
+.sfi-hero-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: $space-5;
+  background: $surface;
+  border-radius: $radius;
+  @include tablet { width: min(100%, 260px); }
+}
+.sfi-hero-sub { color: $surface; line-height: 1.75; }
+.sfi-hero-actions .sfi-btn-secondary {
+  background: $surface;
+  color: $blue-dark;
+  border-color: $surface;
+  &:hover { background: $blue-tint; border-color: $blue-tint; }
+}
