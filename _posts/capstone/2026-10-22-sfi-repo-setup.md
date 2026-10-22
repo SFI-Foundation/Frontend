@@ -7,10 +7,12 @@ permalink: /capstone/sfi-repo-setup/
 
 ## Team and ownership
 
-Ruhaan (@ruhaanb622), Ishan J (@Jupiterian), Arya (@aRYA622-y),
-Deyar (@DrDeyar), Ishan K (@Grazer01LA), and Vayun Shekhar (@Droidsector23)
-contribute development. Two Scrum Master assignments await team confirmation.
-Ruhaan is accountable for this setup issue (Medium priority).
+**Scrum Masters:** Ruhaan Bansal (@ruhaanb622), Ishan Jha (@Jupiterian).
+
+**Developers:** Arya Taghavi Zargar (@aRYA622-y), Ishan Khandelwal (@Grazer01LA),
+Deyar Raissadat (@DrDeyar), Vayun Shekhar (@Droidsector23).
+
+Ruhaan Bansal is accountable for this setup issue (Medium priority).
 
 [Frontend repository](https://github.com/SFI-Foundation/Frontend) ·
 [Backend repository](https://github.com/SFI-Foundation/Backend) ·
@@ -25,7 +27,7 @@ The diagram describes Backend main `31ad1151c2140aa77d2a45d7c6561920ef360317`;
 
 ```mermaid
 flowchart TD
-    DEV["Teammate: clone sibling Frontend and Backend repositories"] --> FE["Frontend: bundle install; Jekyll preview localhost:4500 at /"]
+    DEV["Teammate: clone sibling Frontend and Backend repositories"] --> FE["Frontend: bundle install; Jekyll preview localhost:4500 at /; isolated _site_preview/4500"]
     DEV --> BE["Backend: venv; pip install; db_init.py; main.py on localhost:8423"]
     JSON["Frontend/_data/sfi_specs.json"] --> ALIAS["Temporary sibling greppers symlink to Frontend"]
     ALIAS --> IMPORT["Backend spec importer and classifier: hardcoded legacy path"]

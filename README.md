@@ -69,11 +69,12 @@ Important frontend files and directories:
 
 ## 2026–27 team
 
-The current six-person team is Ruhaan (@ruhaanb622), Ishan J (@Jupiterian),
-Arya (@aRYA622-y), Deyar (@DrDeyar), Ishan K (@Grazer01LA), and
-Vayun Shekhar (@Droidsector23). All contribute development work. The project
-calls for two Scrum Masters; individual Scrum Master assignments still need
-team confirmation. Issue #7's accountable owner is Ruhaan; priority is Medium.
+| Role | Team members |
+| --- | --- |
+| Scrum Masters | Ruhaan Bansal (@ruhaanb622), Ishan Jha (@Jupiterian) |
+| Developers | Arya Taghavi Zargar (@aRYA622-y), Ishan Khandelwal (@Grazer01LA), Deyar Raissadat (@DrDeyar), Vayun Shekhar (@Droidsector23) |
+
+Issue #7's accountable owner is Ruhaan Bansal; priority is Medium.
 
 - [Current capstone setup and system diagram](https://sfi-foundation.github.io/Frontend/capstone/sfi-repo-setup/)
 - [SFI KanBan](https://github.com/orgs/SFI-Foundation/projects/1)
@@ -97,7 +98,7 @@ bundle install
 Start the frontend in this terminal (no notebook conversion needed for the SFI pages):
 
 ```bash
-bundle exec jekyll serve --host localhost --port 4500 --baseurl ""
+make jekyll-serve
 ```
 
 Open <http://localhost:4500/>. `make` also starts the preview at `/`, but runs
@@ -183,7 +184,11 @@ python3 scripts/test-sfi-paths.py /tmp/sfi-local
 
 Production `_config.yml` uses `/Frontend` for the verified GitHub Pages project
 URL <https://sfi-foundation.github.io/Frontend/>. Local `make` overrides it with
-an empty base URL; `make BASEURL=/Frontend` previews the project path.
+an empty base URL and serves isolated `_site_preview/4500/` output;
+`make BASEURL=/Frontend` previews the project path. Preview startup runs Jekyll
+clean only on its generated output/cache, then regenerates it. Production builds
+write `_site/`, so they cannot overwrite the running local preview. Do not use
+`make clean` to fix styling: that target also removes converted content.
 `.github/workflows/jekyll-gh-pages.yml` builds and deploys on pushes to main
 or manual dispatch. A feature PR does not deploy automatically. Review and
 acceptance precede merging; production delivery remains pending until deployed.
