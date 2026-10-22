@@ -15,7 +15,7 @@ abort "FAIL: Sass entry must have Jekyll front matter" if source == entry.read
 # dependencies were consumed by the compiler, rather than just named in a file.
 result = Sass.compile_string(source, url: "file://#{entry}", load_paths: [root.join("_sass").to_s])
 loaded = result.loaded_urls.map { |url| Pathname.new(URI::DEFAULT_PARSER.unescape(URI(url).path)).realpath }
-partials = root.glob("_sass/sfi/**/*.scss").map(&:realpath).sort
+partials = root.glob("_sass/sfi/**/*.scss").reject { |file| file.to_s.include?("/legacy/") }.map(&:realpath).sort
 missing = partials - loaded
 abort "FAIL: Unused SFI partials: #{missing.join(', ')}" unless missing.empty?
 unexpected = loaded - partials - [entry]
@@ -28,6 +28,21 @@ abort "FAIL: Built CSS differs from the Sass entry" unless normalize.call(genera
 if ARGV[1]
   abort "FAIL: Approved CSS baseline changed" unless generated == Pathname.new(ARGV[1]).read
 end
+
+# The archived prototype has global dark rules and must compile separately.
+legacy_entry = root.join("assets/css/sfi-prototype.scss")
+legacy_source = legacy_entry.read.sub(/\A---\s*\n.*?\n---\s*\n/m, "")
+legacy = Sass.compile_string(legacy_source, url: "file://#{legacy_entry}", load_paths: [root.join("_sass").to_s])
+legacy_loaded = legacy.loaded_urls.map { |url| Pathname.new(URI::DEFAULT_PARSER.unescape(URI(url).path)).realpath }
+legacy_partials = root.glob("_sass/sfi/legacy/**/*.scss").map(&:realpath)
+abort "FAIL: Unused legacy partial" unless (legacy_partials - legacy_loaded).empty?
+abort "FAIL: Legacy styles leaked into public imports" unless (legacy_loaded & loaded).empty?
+abort "FAIL: Legacy compiled output mismatch" unless normalize.call(site.join("assets/css/sfi-prototype.css").read) == normalize.call(legacy.css)
+legacy_html = site.join("classroom/sfi-prototype/index.html").read
+legacy_content = legacy_html.split('itemprop="articleBody"', 2).last.split("</article>", 2).first.gsub(/<!--.*?-->/m, "")
+abort "FAIL: Legacy inline presentation remains" if legacy_content.match?(/<style\b|\bstyle=["']/i)
+abort "FAIL: Legacy stylesheet missing" unless legacy_html.include?("/assets/css/sfi-prototype.css")
+puts "PASS: isolated legacy prototype Sass entry, imports, rendered link and no inline presentation"
 
 # Every expanded rule must remain scoped. At-rules and keyframe steps are
 # exempt; selector lines within media queries retain the .sfi-site prefix.
@@ -49,10 +64,9 @@ pages.each do |file|
   end
   abort "FAIL: Inline stylesheet in #{file}" if html.match?(/<style\b/i)
   html.scan(/\bstyle=["']([^"']*)["']/i).flatten.each do |style|
-    # Initial auth visibility is controlled by the existing JS state machine.
-    auth_state = style.match?(/\Adisplay:\s*none;?\z/)
+    # Only runtime confidence data remains inline in public markup.
     confidence_data = file.relative_path_from(site).to_s == "sfi-specs/index.html" && style == 'width:${confPct}%'
-    abort "FAIL: Inline appearance declaration in #{file}: #{style}" unless auth_state || confidence_data
+    abort "FAIL: Inline appearance declaration in #{file}: #{style}" unless confidence_data
   end
 end
 

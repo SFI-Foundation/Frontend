@@ -199,3 +199,6 @@
   .auth-container { margin-top: 90px; }
   .auth-card { padding: 28px 22px; }
 }
+
+// Initial visibility; runtime authentication state overrides display when ready.
+.auth-initially-hidden { display: none; }

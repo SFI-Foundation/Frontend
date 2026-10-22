@@ -127,7 +127,7 @@ const DetectInput = (() => {
     const video = document.getElementById('cameraVideo');
     const overlay = document.getElementById('cameraOverlay');
     // contain keeps boxes aligned without cover-crop math (brief item 2).
-    video.style.objectFit = 'contain';
+    video.classList.add('sfi-camera-live');
 
     if (video.clientWidth && video.clientHeight) {
       overlay.width = video.clientWidth;
@@ -179,7 +179,7 @@ const DetectInput = (() => {
     }
     const video = document.getElementById('cameraVideo');
     video.srcObject = null;
-    video.style.objectFit = '';
+    video.classList.remove('sfi-camera-live');
     setCameraButtons(false);
 
     const overlay = document.getElementById('cameraOverlay');

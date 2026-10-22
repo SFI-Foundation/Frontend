@@ -33,7 +33,7 @@ permalink: /login/
     </div>
 
     <!-- Register Fields -->
-    <div id="registerFields" style="display:none;">
+    <div id="registerFields" class="auth-initially-hidden">
       <h2>Get started</h2>
       <p class="auth-sub">Create your SFI Foundation account.</p>
       <div class="auth-field">
@@ -53,7 +53,7 @@ permalink: /login/
   </div>
 
   <!-- Profile Card (shown when logged in) -->
-  <div class="auth-card auth-profile" id="profileCard" style="display:none;">
+  <div class="auth-card auth-profile auth-initially-hidden" id="profileCard">
     <div class="auth-profile-avatar" id="profileAvatar"></div>
     <h3 id="profileName"></h3>
     <p class="auth-profile-uid" id="profileUid"></p>
