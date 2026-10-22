@@ -14,6 +14,12 @@ permalink: /sfi-specs/
 
 <div class="sfi__container">
 
+<div id="publicView">
+
+  <div class="sfi__row sfi__hidden" id="backToAdminBar">
+    <button type="button" class="sfi__btn primary" id="backToAdminBtn">&larr; Back to admin view</button>
+  </div>
+
   <section class="sfi__section">
     <div class="sfi__stats" id="statsBar">
       <div class="sfi__stat"><div class="sfi__stat-value" id="statSpecs">&mdash;</div><div class="sfi__stat-label">Total specs</div></div>
@@ -276,7 +282,7 @@ permalink: /sfi-specs/
     <div class="sfi__grid" id="catGrid"></div>
   </section>
 
-  <section class="sfi__section">
+  <section class="sfi__section" id="about">
     <h2 class="sfi__title">About SFI Foundation</h2>
     <div class="sfi__card">
       <p>The <strong>SFI Foundation</strong> (originally the SEMA Foundation, Inc.) was established in 1978 as a nonprofit organization to develop and administer quality assurance programs for the motorsports aftermarket. SFI specifications cover safety equipment used across drag racing, auto racing, boat racing, tractor pulling and more.</p>
@@ -285,12 +291,22 @@ permalink: /sfi-specs/
     </div>
   </section>
 
-  <section class="sfi__section sfi__hidden" id="adminSection">
-    <button type="button" class="sfi__disclosure" id="adminToggle" aria-expanded="false" aria-controls="adminBody">
-      Admin panel <span id="adminArrow" aria-hidden="true">+</span>
-    </button>
-    <div class="sfi__disclosure-body" id="adminBody">
-      <div id="adminMsg" class="sfi__message"></div>
+</div><!-- /publicView -->
+
+  <section class="sfi__section sfi__hidden" id="adminView">
+    <div class="sfi__row" style="justify-content:space-between;align-items:center;">
+      <h2 class="sfi__title">Manage SFI specifications</h2>
+      <button type="button" class="sfi__btn" id="viewPublicBtn">View as public</button>
+    </div>
+
+    <div class="sfi__filters" id="adminTabs" role="tablist" aria-label="Admin sections">
+      <button type="button" class="sfi__chip active" role="tab" id="tabBtn-manage" aria-controls="panel-manage" aria-selected="true" data-tab="manage">Manage</button>
+      <button type="button" class="sfi__chip" role="tab" id="tabBtn-classifier" aria-controls="panel-classifier" aria-selected="false" data-tab="classifier">Classifier</button>
+      <button type="button" class="sfi__chip" role="tab" id="tabBtn-explore" aria-controls="panel-explore" aria-selected="false" data-tab="explore">Explore</button>
+    </div>
+    <div id="adminMsg" class="sfi__message"></div>
+
+    <div id="panel-manage" role="tabpanel" aria-labelledby="tabBtn-manage">
       <div class="sfi__stats" id="adminStats"></div>
 
       <div class="sfi__form-panel">
@@ -313,18 +329,51 @@ permalink: /sfi-specs/
       </div>
 
       <h3 class="sfi__subtitle">All specifications</h3>
+      <input type="search" class="sfi__field" id="adminFilter" placeholder="Search specs (typos are OK)" aria-label="Search specifications">
+      <div id="adminHint" class="sfi__hint"></div>
+      <div class="sfi__filters" id="adminChips"></div>
+      <div class="sfi__count" id="adminCount"></div>
       <div class="sfi__table-scroll">
         <table class="sfi__table" id="adminTable">
           <thead>
-            <tr><th>ID</th><th>Spec #</th><th>Product</th><th>Category</th><th>Actions</th></tr>
+            <tr>
+              <th>ID</th>
+              <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="spec_number">Spec #</button></th>
+              <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="product_name">Product</button></th>
+              <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="category">Category</button></th>
+              <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="effective_date">Date</button></th>
+              <th>PDF</th>
+              <th>Actions</th>
+            </tr>
           </thead>
           <tbody id="adminTableBody"></tbody>
         </table>
       </div>
     </div>
+
+    <div id="panel-classifier" class="sfi__hidden" role="tabpanel" aria-labelledby="tabBtn-classifier">
+      <div id="classifierSlot"></div>
+      <h3 class="sfi__subtitle">Model status</h3>
+      <div class="sfi__stats" id="modelStats"></div>
+      <div class="sfi__row">
+        <button type="button" class="sfi__btn primary" id="retrainBtn">Retrain model</button>
+      </div>
+      <p class="sfi__hint visible" style="margin-top:.5rem;">Retraining uses the specs currently in the database, so spec edits made here take effect in the classifier.</p>
+    </div>
+
+    <div id="panel-explore" class="sfi__hidden" role="tabpanel" aria-labelledby="tabBtn-explore">
+      <div id="exploreSlot"></div>
+    </div>
   </section>
 
 </div>
+
+<style>
+.sfi__sort { background: none; border: 0; padding: 0; color: inherit; font: inherit; font-weight: inherit; cursor: pointer; }
+.sfi__sort::after { content: ' \2195'; opacity: .4; }
+th[aria-sort="ascending"] .sfi__sort::after { content: ' \25B2'; opacity: 1; }
+th[aria-sort="descending"] .sfi__sort::after { content: ' \25BC'; opacity: 1; }
+</style>
 
 <script>
 // ── API Configuration ────────────────────────────
@@ -383,11 +432,11 @@ async function classifyPart() {
       return `
         <div class="sfi__result">
           <div class="sfi__result-body">
-            <div class="sfi__result-title">SFI ${p.spec_number}</div>
-            <div class="sfi__result-sub">${p.product_name}</div>
+            <div class="sfi__result-title">SFI ${esc(p.spec_number)}</div>
+            <div class="sfi__result-sub">${esc(p.product_name)}</div>
             <div class="sfi__result-meta">
-              <span class="sfi__badge info">${p.category}</span>
-              ${p.subcategory ? `<span class="sfi__badge">${p.subcategory}</span>` : ''}
+              <span class="sfi__badge info">${esc(p.category)}</span>
+              ${p.subcategory ? `<span class="sfi__badge">${esc(p.subcategory)}</span>` : ''}
               ${pdfs.join(' \u2022 ')}
             </div>
           </div>
@@ -550,6 +599,13 @@ function buildCategoryGrid() {
 }
 
 function filterByCategory(cat) {
+  if (!document.getElementById('adminView').classList.contains('sfi__hidden')) {
+    adminCategory = cat;
+    setAdminTab('manage');
+    renderAdminTable();
+    document.getElementById('adminTable').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
   activeCategory = cat;
   document.querySelectorAll('#sfiFilters .sfi__chip').forEach(b => {
     b.classList.toggle('active', b.dataset.category === cat);
@@ -626,13 +682,71 @@ document.getElementById('sfiFilters').addEventListener('click', e => {
 });
 
 // ═══════════════ ADMIN PANEL ═══════════════
-document.getElementById('adminToggle').addEventListener('click', () => {
-  const body = document.getElementById('adminBody');
-  const arrow = document.getElementById('adminArrow');
-  const open = body.classList.toggle('open');
-  document.getElementById('adminToggle').setAttribute('aria-expanded', String(open));
-  arrow.textContent = open ? '\u2212' : '+';
-  if (open) { loadAdminStats(); loadAdminTable(); }
+function esc(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+let adminSpecs = [];
+let isAdminUser = false;
+let adminCategory = 'all';
+let adminSort = { key: null, dir: 1 };
+
+// Public sections that the admin view shows inside its tabs. They are moved
+// (not cloned) so their element IDs and event handlers keep working.
+const SECTION_SLOTS = { classify: 'classifierSlot', 'safety-showcase': 'exploreSlot', categories: 'exploreSlot', about: 'exploreSlot' };
+const sectionMarkers = {};
+
+function moveSections(toAdmin) {
+  Object.keys(SECTION_SLOTS).forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (toAdmin) {
+      if (!sectionMarkers[id]) {
+        sectionMarkers[id] = document.createComment(id);
+        el.parentNode.insertBefore(sectionMarkers[id], el);
+      }
+      document.getElementById(SECTION_SLOTS[id]).appendChild(el);
+    } else if (sectionMarkers[id] && sectionMarkers[id].parentNode) {
+      sectionMarkers[id].parentNode.insertBefore(el, sectionMarkers[id].nextSibling);
+    }
+  });
+}
+
+function setAdminTab(name) {
+  if (!['manage', 'classifier', 'explore'].includes(name)) name = 'manage';
+  ['manage', 'classifier', 'explore'].forEach(t => {
+    document.getElementById(`panel-${t}`).classList.toggle('sfi__hidden', t !== name);
+    const btn = document.getElementById(`tabBtn-${t}`);
+    btn.classList.toggle('active', t === name);
+    btn.setAttribute('aria-selected', String(t === name));
+  });
+  try { sessionStorage.setItem('sfiAdminTab', name); } catch (e) {}
+}
+
+function setView(view) {
+  const admin = view === 'admin';
+  moveSections(admin);
+  document.getElementById('adminView').classList.toggle('sfi__hidden', !admin);
+  document.getElementById('publicView').classList.toggle('sfi__hidden', admin);
+  document.getElementById('backToAdminBar').classList.toggle('sfi__hidden', admin || !isAdminUser);
+  if (admin) {
+    let tab = 'manage';
+    try { tab = sessionStorage.getItem('sfiAdminTab') || 'manage'; } catch (e) {}
+    setAdminTab(tab);
+  }
+  try { sessionStorage.setItem('sfiSpecsView', view); } catch (e) {}
+}
+
+document.getElementById('viewPublicBtn').addEventListener('click', () => setView('public'));
+document.getElementById('backToAdminBtn').addEventListener('click', () => setView('admin'));
+document.getElementById('adminTabs').addEventListener('click', e => {
+  const btn = e.target.closest('[data-tab]');
+  if (btn) setAdminTab(btn.dataset.tab);
+});
+// "Search the full database" link in the showcase points at the public search
+document.getElementById('exploreSlot').addEventListener('click', e => {
+  const link = e.target.closest('a[href="#search"]');
+  if (link) { e.preventDefault(); setAdminTab('manage'); }
 });
 
 function showMsg(text, type) {
@@ -644,32 +758,144 @@ function showMsg(text, type) {
 
 async function loadAdminStats() {
   try {
-    const res = await fetch(`${API}/stats`);
-    const d = await res.json();
+    const [statsRes, modelRes] = await Promise.all([fetch(`${API}/stats`), fetch(`${API}/classifier/status`)]);
+    const d = await statsRes.json();
+    const model = await modelRes.json();
+    const acc = model.trained ? (model.accuracy * 100).toFixed(0) + '%' : 'Offline';
     document.getElementById('adminStats').innerHTML = `
       <div class="sfi__stat"><div class="sfi__stat-value">${d.total_specs}</div><div class="sfi__stat-label">Total specs</div></div>
       <div class="sfi__stat"><div class="sfi__stat-value">${d.total_categories}</div><div class="sfi__stat-label">Categories</div></div>
-      <div class="sfi__stat"><div class="sfi__stat-value">${d.total_subcategories}</div><div class="sfi__stat-label">Subcategories</div></div>`;
+      <div class="sfi__stat"><div class="sfi__stat-value">${d.total_subcategories}</div><div class="sfi__stat-label">Subcategories</div></div>
+      <div class="sfi__stat"><div class="sfi__stat-value">${acc}</div><div class="sfi__stat-label">ML accuracy</div></div>`;
+    renderModelStats(model);
   } catch (e) {}
+}
+
+function renderModelStats(model) {
+  const tile = (v, l) => `<div class="sfi__stat"><div class="sfi__stat-value">${esc(v)}</div><div class="sfi__stat-label">${l}</div></div>`;
+  document.getElementById('modelStats').innerHTML = model.trained
+    ? tile((model.accuracy * 100).toFixed(1) + '%', 'Training accuracy') + tile(model.training_samples, 'Training samples') +
+      tile(model.spec_classes, 'Spec classes') + tile(model.category_classes, 'Category classes')
+    : tile('Offline', 'Model not trained');
+}
+
+document.getElementById('retrainBtn').addEventListener('click', async () => {
+  if (!confirm('Retrain the classifier on the current specs? This can take a few seconds.')) return;
+  const btn = document.getElementById('retrainBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="sfi__spinner"></span> Retraining...';
+  try {
+    const res = await fetch(`${API}/classifier/retrain`, { method: 'POST', credentials: 'include' });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) {
+      showMsg('Model retrained', 'success');
+      renderModelStats(data);
+      loadAdminStats();
+      loadStats();
+    } else {
+      showMsg(data.error || data.message || `Retrain failed (${res.status})`, 'error');
+    }
+  } catch (e) { showMsg('Error connecting to API', 'error'); }
+  btn.disabled = false;
+  btn.textContent = 'Retrain model';
+});
+
+function adminPdfLinks(s) {
+  const pdfs = [];
+  if (s.spec_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${encodeURI(s.spec_pdf)}" target="_blank" rel="noopener">Spec</a>`);
+  if (s.manufacturer_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${encodeURI(s.manufacturer_pdf)}" target="_blank" rel="noopener">Mfrs</a>`);
+  return pdfs.join(' \u2022 ') || '\u2014';
+}
+
+function adminSortValue(s, key) {
+  if (key === 'effective_date') return Date.parse(s.effective_date) || 0;
+  return String(s[key] || '');
+}
+
+function renderAdminChips() {
+  const cats = [...new Set(adminSpecs.map(s => s.category))].sort();
+  if (adminCategory !== 'all' && !cats.includes(adminCategory)) adminCategory = 'all';
+  document.getElementById('adminChips').innerHTML = ['all', ...cats].map(c =>
+    `<button type="button" class="sfi__chip${c === adminCategory ? ' active' : ''}" data-category="${esc(c)}">${c === 'all' ? 'All' : esc(c)}</button>`).join('');
+}
+
+function renderAdminTable() {
+  const q = document.getElementById('adminFilter').value.trim();
+  const hintEl = document.getElementById('adminHint');
+  let rows = adminCategory === 'all' ? adminSpecs : adminSpecs.filter(s => s.category === adminCategory);
+
+  let relevance = false;
+  if (q) {
+    rows = rows.map(s => ({ s, score: fuzzyMatch(q, s) })).filter(x => x.score >= 0.55)
+      .sort((a, b) => b.score - a.score).map(x => x.s);
+    relevance = true;
+    const suggestion = getSuggestion(q);
+    if (suggestion && rows.length < 5) {
+      hintEl.innerHTML = `Did you mean: <strong style="cursor:pointer" data-suggest="${esc(suggestion)}">${esc(suggestion)}</strong>?`;
+      hintEl.className = 'sfi__hint visible';
+    } else { hintEl.className = 'sfi__hint'; }
+  } else { hintEl.className = 'sfi__hint'; }
+
+  if (adminSort.key) {
+    const k = adminSort.key;
+    rows = [...rows].sort((a, b) => {
+      const x = adminSortValue(a, k), y = adminSortValue(b, k);
+      const c = typeof x === 'number' ? x - y : x.localeCompare(y, undefined, { numeric: true, sensitivity: 'base' });
+      return c * adminSort.dir;
+    });
+  }
+  document.querySelectorAll('#adminTable th[aria-sort]').forEach(th => {
+    const key = th.querySelector('[data-sort]').dataset.sort;
+    th.setAttribute('aria-sort', adminSort.key === key ? (adminSort.dir === 1 ? 'ascending' : 'descending') : 'none');
+  });
+
+  document.getElementById('adminChips').querySelectorAll('.sfi__chip').forEach(b =>
+    b.classList.toggle('active', b.dataset.category === adminCategory));
+  document.getElementById('adminCount').textContent = `Showing ${rows.length} of ${adminSpecs.length} specs`;
+  document.getElementById('adminTableBody').innerHTML = rows.length ? rows.map(s => `
+      <tr>
+        <td>${s.id}</td>
+        <td class="num">SFI ${esc(s.spec_number)}</td>
+        <td>${esc(s.product_name)}</td>
+        <td><span class="sfi__badge info">${esc(s.category)}</span></td>
+        <td>${esc(s.effective_date) || '\u2014'}</td>
+        <td>${adminPdfLinks(s)}</td>
+        <td>
+          <button type="button" class="sfi__btn small" onclick="editSpec(${s.id})">Edit</button>
+          <button type="button" class="sfi__btn small danger" onclick="deleteSpec(${s.id})">Delete</button>
+        </td>
+      </tr>`).join('') : '<tr><td colspan="7">No specs match.</td></tr>';
 }
 
 async function loadAdminTable() {
   try {
     const res = await fetch(`${API}/specs`);
-    const data = await res.json();
-    document.getElementById('adminTableBody').innerHTML = data.map(s => `
-      <tr>
-        <td>${s.id}</td>
-        <td class="num">SFI ${s.spec_number}</td>
-        <td>${s.product_name}</td>
-        <td><span class="sfi__badge info">${s.category}</span></td>
-        <td>
-          <button type="button" class="sfi__btn small" onclick="editSpec(${s.id})">Edit</button>
-          <button type="button" class="sfi__btn small danger" onclick="deleteSpec(${s.id})">Delete</button>
-        </td>
-      </tr>`).join('');
+    adminSpecs = await res.json();
+    renderAdminChips();
+    renderAdminTable();
   } catch (e) {}
 }
+
+document.getElementById('adminFilter').addEventListener('input', renderAdminTable);
+document.getElementById('adminChips').addEventListener('click', e => {
+  const chip = e.target.closest('.sfi__chip');
+  if (!chip) return;
+  adminCategory = chip.dataset.category;
+  renderAdminTable();
+});
+document.getElementById('adminHint').addEventListener('click', e => {
+  const sug = e.target.closest('[data-suggest]');
+  if (!sug) return;
+  document.getElementById('adminFilter').value = sug.dataset.suggest;
+  renderAdminTable();
+});
+document.querySelector('#adminTable thead').addEventListener('click', e => {
+  const btn = e.target.closest('[data-sort]');
+  if (!btn) return;
+  const key = btn.dataset.sort;
+  adminSort = adminSort.key === key ? { key, dir: -adminSort.dir } : { key, dir: 1 };
+  renderAdminTable();
+});
 
 function clearForm() {
   ['editId','fProduct','fSpecNum','fCategory','fSubcategory','fEffDate','fSpecPdf','fMfrPdf','fProdPdf']
@@ -697,7 +923,9 @@ async function editSpec(id) {
 }
 
 async function deleteSpec(id) {
-  if (!confirm('Delete this spec?')) return;
+  const spec = adminSpecs.find(x => x.id === id);
+  const label = spec ? `SFI ${spec.spec_number} \u2013 ${spec.product_name}` : 'this spec';
+  if (!confirm(`Delete ${label}? This cannot be undone.`)) return;
   try {
     const res = await fetch(`${API}/specs/${id}`, { method: 'DELETE', credentials: 'include' });
     if (res.ok) { showMsg('Spec deleted', 'success'); loadAdminTable(); loadAdminStats(); loadSpecs(); }
@@ -735,7 +963,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
 
 document.getElementById('cancelBtn').addEventListener('click', clearForm);
 
-// Only admins see the CRUD panel. The backend enforces this too (401/403);
+// Only admins get the manage view. The backend enforces this too (401/403);
 // hiding is just UX.
 async function revealAdminPanel() {
   try {
@@ -743,7 +971,12 @@ async function revealAdminPanel() {
     if (!res.ok) return;
     const me = await res.json();
     if (me.isAdmin || me.role === 'Admin') {
-      document.getElementById('adminSection').classList.remove('sfi__hidden');
+      isAdminUser = true;
+      let view = 'admin';
+      try { view = sessionStorage.getItem('sfiSpecsView') || 'admin'; } catch (e) {}
+      loadAdminStats();
+      loadAdminTable();
+      setView(view === 'public' ? 'public' : 'admin');
     }
   } catch (e) {}
 }
