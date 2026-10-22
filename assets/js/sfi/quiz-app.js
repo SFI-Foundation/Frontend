@@ -15,6 +15,8 @@ const QuizApp = (() => {
     QuizUI.updateAuthBanner(QuizData.isRemote(), QuizData.isAuthed());
     render();
 
+    document.getElementById('gearAddBtn').addEventListener('click', addGearAction);
+    document.getElementById('gearSortBtn').addEventListener('click', toggleSort);
     document.getElementById('gearName').addEventListener('keydown', e => { if (e.key === 'Enter') addGearAction(); });
     document.getElementById('gearDate').addEventListener('keydown', e => { if (e.key === 'Enter') addGearAction(); });
   }

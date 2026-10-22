@@ -8,12 +8,15 @@ permalink: /
 <section class="sfi-hero">
   <div class="sfi-hero-bg-overlay"></div>
   <div class="sfi-hero-content">
+    <div class="sfi-hero-copy">
     <h1>Welcome to <em>SFI Foundation</em></h1>
     <p class="sfi-hero-sub">Administering standards for the quality assurance of specialty performance and racing equipment since 1978.</p>
     <div class="sfi-hero-actions">
       <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Search Specifications</a>
       <a href="/about/" class="sfi-btn sfi-btn-secondary">Learn More</a>
     </div>
+    </div>
+    <img class="sfi-hero-logo" src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="SFI Foundation" width="360">
   </div>
 </section>
 
@@ -23,6 +26,38 @@ permalink: /
     <p>The SFI Foundation, Inc. (SFI) is a non-profit organization established to issue and administer standards for the quality assurance of specialty performance and racing equipment. The SFI Foundation has served the automotive aftermarket and the motorsports industry since 1978. Our service to the industry is a system of developing and administering various standards, certifications and testing criteria for use in motorsports.</p>
   </div>
 </div>
+
+<section class="sfi-sect" aria-labelledby="core-experience">
+  <div class="sfi-sect-label">Discover · Understand · Inspect · Save</div>
+  <h2 class="sfi-sect-title" id="core-experience">Core Experience</h2>
+  <p class="sfi-sect-desc">Find a standard, explore equipment, and return to your saved gear.</p>
+  <div class="sfi-experience-grid">
+    <a class="sfi-experience-card" href="{{ '/sfi-specs/#search' | relative_url }}">
+      <span class="sfi-experience-number" aria-hidden="true">01</span>
+      <h3>Search Standards</h3>
+      <p>Search specification records or browse categories to find relevant safety standards.</p>
+      <span class="sfi-experience-action">Search standards <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="sfi-experience-card" href="{{ '/sfi-specs/#classify' | relative_url }}">
+      <span class="sfi-experience-number" aria-hidden="true">02</span>
+      <h3>Describe a Part</h3>
+      <p>Describe your equipment to get suggested specification matches from the existing classifier.</p>
+      <span class="sfi-experience-action">Describe your part <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="sfi-experience-card" href="{{ '/detect/' | relative_url }}">
+      <span class="sfi-experience-number" aria-hidden="true">03</span>
+      <h3>Inspect Equipment</h3>
+      <p>Explore image and camera tools to help identify equipment and related specifications.</p>
+      <span class="sfi-experience-action">Open equipment detection <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="sfi-experience-card" href="{{ '/quiz/' | relative_url }}">
+      <span class="sfi-experience-number" aria-hidden="true">04</span>
+      <h3>Track and Revisit</h3>
+      <p>Organize personal gear and revisit its certification information in My Gear.</p>
+      <span class="sfi-experience-action">View My Gear <span aria-hidden="true">&rarr;</span></span>
+    </a>
+  </div>
+</section>
 
 <div class="sfi-stats-strip">
   <div class="sfi-stat-item">

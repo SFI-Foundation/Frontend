@@ -1,9 +1,7 @@
 ---
-layout: profile
-title: Your Profile
-permalink: /profile
-active_tab: profile
+layout: sfi-redirect
+title: My Profile
+permalink: /profile/
+sfi_redirect: "/sfi-profile/"
+search_exclude: true
 ---
-
-<!-- page formatting is fetched from the layout -->
-<!-- this is the new profile page -->

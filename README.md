@@ -15,7 +15,7 @@ Important frontend files and directories:
 | `_layouts/sfi.html` | SFI-specific page shell used by the redesigned pages. Includes shared nav, footer, styles, and chatbot. |
 | `_includes/sfi/nav.html` | SFI navigation bar and sign-in state display. |
 | `_includes/sfi/chatbot.html` | Floating chatbot widget connected to the Flask backend. |
-| `_includes/sfi/styles.html` | Shared SFI visual system and layout styles. |
+| `assets/css/sfi.scss`, `_sass/sfi/` | Single compiled public SFI theme, organized as reusable Sass partials. |
 | `_includes/sfi/footer.html` | Shared SFI footer. |
 | `navigation/*.md` | Main SFI frontend pages and other site pages. |
 | `assets/js/sfi/*` | JavaScript modules for gear tracking, detector, and SFI page behavior. |
@@ -28,7 +28,8 @@ Important frontend files and directories:
 
 | Route | Description |
 | --- | --- |
-| `/sfifoundation/` | Prototype landing and review page for presenting the project. |
+| `/`, `/sfifoundation/` | Public SFI homepage; the legacy URL redirects to `/`. |
+| `/classroom/sfi-prototype/` | Preserved prototype landing and review page. |
 | `/about/`, `/history/`, `/services/`, `/contact/` | Redesigned informational SFI content pages. |
 | `/specs/` | Specification category browsing page. |
 | `/sfi-specs/` | Searchable specs database, ML text classifier, interactive safety showcase, and spec CRUD accordion. |
@@ -50,7 +51,7 @@ Important frontend files and directories:
 - `/admin/` calls endpoints such as `/api/sfi/me`, `/api/sfi/users`, `/api/sfi/groups`, `/api/sfi/gear/pending`, and `/api/sfi/gear/all`, but those endpoints are not currently implemented in the Flask repo.
 - The `/sfi-specs/` admin accordion can create, edit, and delete specs, but it is not protected by a real admin permission check.
 - Gear review states exist in frontend expectations, but the backend gear model currently stores only basic per-user gear data.
-- UI polish is still needed, especially consistency, responsive behavior, spacing, and admin dashboard layout.
+- Public pages use the original SFI blue-and-white design through the unified Sass entry point. See `docs/sfi-theme-refactor.md` for its architecture and verification notes.
 - The chatbot only receives a compact spec database summary. It does not yet read full website content or PDF contents.
 - PDF summarization is planned but not implemented. Must be secure and not take summarize too much and lose details.
 - The detector is browser-side image classification. It can suggest likely equipment categories, but it does not verify official SFI labels, certification status, or compliance.
@@ -61,7 +62,7 @@ Important frontend files and directories:
 - Add PDF summaries beside search results.
 - Give the chatbot access to indexed site pages and extracted PDF text.
 - Finish admin dashboard backend endpoints and permission checks.
-- Improve responsive UI polish across mobile and desktop.
+- Continue usability testing with camera hardware, live models and production APIs.
 - Add smoke tests for the main routes and API-connected workflows.
 - "My Gear" tracking page with certification dates, expiration scoring, local fallback, and backend sync when authenticated.
 - Site-wide chatbot widget connected to `POST /api/sfi/chat`.
@@ -124,3 +125,13 @@ Before continuing development:
 - Test `/quiz/` while signed out and signed in.
 - Test the chatbot with and without `GEMINI_API_KEY` configured on the backend.
 - Treat `/admin/` as unfinished until the backend admin/group/gear-review endpoints are added.
+
+## Public visual theme
+
+The public SFI layout retains its white header, official logo, blue navigation, Inter/Oswald typography, white content panels, and Spec Search gold accent. Edit the shared tokens and scoped partials under `_sass/sfi/`; Jekyll compiles `assets/css/sfi.scss` into `/assets/css/sfi.css`. Classroom and vendor styles remain separate.
+
+
+SFI Sass architecture and approved-baseline verification:
+[implementation report](docs/sfi-sass-architecture.md).
+Run `bundle exec ruby scripts/test-sfi-sass.rb <built-site> [baseline.css]` to
+verify the actual entry, all imported partials, scoped output and loaded stylesheet.

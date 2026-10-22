@@ -71,7 +71,7 @@ show_reading_time: false
             })
             .then(data => {
                 console.log("Login successful!", data);
-                window.location.href = '{{site.baseurl}}/profile';
+                window.location.href = '{{site.baseurl}}/classroom/profile/';
                 // Fetch database after login success using fetchOptions
                 return fetch(databaseURL, fetchOptions);
             })

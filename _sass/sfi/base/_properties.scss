@@ -1,0 +1,25 @@
+/* ── Variables ─────────────────────────────────── */
+& {
+  --sfi-gold: #{$gold};
+  --sfi-gold-dim: #{$gold-dim};
+  --sfi-bg: #{$bg};
+  --sfi-white: #{$surface};
+  --sfi-surface: #{$surface};
+  --sfi-surface2: #{$surface-alt};
+  --sfi-surface3: #e8ebef;
+  --sfi-border: #{$border};
+  --sfi-border-bright: #{$border-strong};
+  --sfi-blue: #{$blue};
+  --sfi-blue-dark: #{$blue-dark};
+  --sfi-blue-light: #2e7fd4;
+  --sfi-blue-accent: #3b9ede;
+  --sfi-text: #{$text};
+  --sfi-text-secondary: #{$text-soft};
+  --sfi-muted: #{$text-muted};
+  --sfi-red: #c0392b;
+  --sfi-green: #27ae60;
+  --sfi-radius: #{$radius};
+  --sfi-radius-sm: #{$radius-sm};
+  --sfi-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  --sfi-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+}

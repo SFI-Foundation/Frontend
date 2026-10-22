@@ -291,7 +291,7 @@ show_reading_time: false
         })
         .then(data => {
             console.log("Login successful!", data);
-            window.location.href = '{{site.baseurl}}/profile';
+            window.location.href = '{{site.baseurl}}/classroom/profile/';
             // Fetch database after login success using fetchOptions
             return fetch(databaseURL, fetchOptions);
         })
@@ -367,7 +367,7 @@ show_reading_time: false
                 return response.json();
             })
             .then(data => {
-                window.location.href = '{{site.baseurl}}/profile';
+                window.location.href = '{{site.baseurl}}/classroom/profile/';
             })
             .catch(error => {
                 document.getElementById("message").textContent = `Error: ${error.message}`;
