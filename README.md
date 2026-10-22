@@ -71,8 +71,8 @@ Important frontend files and directories:
 
 | Role | Team members |
 | --- | --- |
-| Scrum Masters | Ruhaan Bansal (@ruhaanb622), Ishan Jha (@Jupiterian) |
-| Developers | Arya Taghavi Zargar (@aRYA622-y), Ishan Khandelwal (@Grazer01LA), Deyar Raissadat (@DrDeyar), Vayun Shekhar (@Droidsector23) |
+| Scrum Masters | Ruhaan Bansal ([@ruhaanb622](https://github.com/ruhaanb622)), Ishan Jha ([@Jupiterian](https://github.com/Jupiterian)) |
+| Developers | Arya Taghavi Zargar ([@aRYA622-y](https://github.com/aRYA622-y)), Ishan Khandelwal ([@Grazer01LA](https://github.com/Grazer01LA)), Deyar Raissadat ([@DrDeyar](https://github.com/DrDeyar)), Vayun Shekhar ([@Droidsector23](https://github.com/Droidsector23)) |
 
 Issue #7's accountable owner is Ruhaan Bansal; priority is Medium.
 
