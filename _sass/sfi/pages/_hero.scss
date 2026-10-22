@@ -1,7 +1,7 @@
 /* ── Hero banner ──────────────────────────────── */
 .sfi-hero {
   position: relative;
-  background: linear-gradient(105deg, #0d2e5c 0%, #1a5fa8 40%, #1e7bc4 70%, #0f3d6e 100%);
+  background: linear-gradient(105deg, $hero-start 0%, $blue 40%, $hero-accent 70%, $hero-end 100%);
   overflow: hidden;
   min-height: 340px;
   display: flex;
@@ -18,10 +18,16 @@
 .sfi-hero-content {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 64px 32px;
-  width: 100%;
+  @include site-container;
+  padding-block: $space-7;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 320px);
+  align-items: center;
+  gap: $space-7;
+  @include tablet {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-6;
+  }
 }
 .sfi-hero h1 {
   font-family: 'Oswald', sans-serif;
@@ -51,3 +57,23 @@
   flex-wrap: wrap;
 }
 
+
+
+// The official image stays intact; a white surface protects the logo contrast.
+.sfi-hero-copy { min-width: 0; }
+.sfi-hero-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: $space-5;
+  background: $surface;
+  border-radius: $radius;
+  @include tablet { width: min(100%, 260px); }
+}
+.sfi-hero-sub { color: $surface; line-height: 1.75; }
+.sfi-hero-actions .sfi-btn-secondary {
+  background: $surface;
+  color: $blue-dark;
+  border-color: $surface;
+  &:hover { background: $blue-tint; border-color: $blue-tint; }
+}

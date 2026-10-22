@@ -1,8 +1,46 @@
 # SFI public theme refactor
 
-Status: implementation and functional checks available for review; visual and
-production-theme verification remain blocked by the environment. No commit,
-push, PR, merge, or deployment was performed.
+Latest implementation and verification: [SFI styling polish](sfi-style-polish.md).
+The dated sections below retain the earlier refactor history.
+
+The current public theme preserves SFI's original blue-and-white appearance. OCS/Jekyll conventions inform the Sass organization only; no OCS classroom visual styling is used on public SFI pages.
+
+## Current visual restoration verification (2026-10-21)
+
+The uncommitted capstone visual overrides were removed from the shared Sass
+partials. The committed SFI tokens and component rules remain the visual source
+of truth: white header, official logo, blue navigation and hero, Inter/Oswald
+typography, white/light-gray panels, and the yellow Spec Search action.
+The homepage is restored to its branch-baseline content. SFI project write-ups
+use a small shared document layout styled with the same blue-and-white tokens.
+
+Verification on `sfi-unified-sass-theme`:
+
+- Full production-config Jekyll build: **PASS**, exit code 0, 441.897 seconds,
+  with the configured remote Minima theme. Existing Jekyll post URL and duplicate
+  destination warnings remain in unrelated repository content.
+- Sass standalone compilation: **PASS**, 72,887-byte stylesheet; generated
+  output includes the SFI token set and all scoped partials. Existing Dart Sass
+  `@import` deprecation warnings remain.
+- Generated output: **PASS**, 20 SFI pages, 113 local asset references, 285
+  internal destinations, account aliases, classroom routes, and SFI color/font,
+  responsive, focus, navigation, and stylesheet checks.
+- Frontend account routes: **PASS**, 10 tests. Isolated Flask profile/authorization
+  tests: **PASS**, 13 tests. Frontend-to-Flask integration: **PASS**, 7 tests.
+- Browser visual checks: **PASS**, 17 routes at 1440px and 390px, including
+  white header/blue navigation computed styles, keyboard focus, responsive
+  navigation, no horizontal overflow, and no uncaught JavaScript errors.
+  Screenshots are in `/tmp/sfi-ocs/visual-blue-final/`. The original blue-and-white
+  screenshot mentioned in the request was not attached or present in the local
+  screenshot set, so a direct screenshot-to-screenshot comparison is unavailable;
+  the restoration was checked against the committed Sass baseline and rendered
+  computed styles instead.
+- Authenticated browser/API flows are being rechecked after the visual change.
+  No backend source, production database, secrets, or API configuration changed.
+
+The report below records the earlier Sass migration and its verification state at
+that time. Its historical build/browser status does not supersede the fresh
+results above. No commit, push, merge, PR, or deployment was performed.
 
 ## Architecture
 

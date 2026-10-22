@@ -14,13 +14,20 @@ for (const selector of ['.sfi-header', '.sfi-nav', '.auth-card', '.sfi-profile',
 }
 assert.match(css, /--sfi-blue:\s*#1a5fa8/i);
 assert.match(css, /--sfi-bg:\s*#f4f5f7/i);
+assert.match(css, /--sfi-white:\s*#fff/i);
+assert.match(css, /--sfi-gold:\s*#f0a500/i);
+assert.match(css, /["']?Inter["']?/);
+assert.match(css, /["']?Oswald["']?/);
 assert.match(css, /:focus-visible/);
+assert.doesNotMatch(css, /color-scheme:\s*dark/i);
+assert.match(css, /#e8a020/i, 'Spec Search retains its yellow navigation accent');
 assert.match(css, /max-width: 600px/);
 assert.match(css, /max-width: 900px/);
-const pages = ['', 'about', 'history', 'specs', 'services', 'contact', 'quiz', 'detect', 'sfi-specs', 'login', 'sfi-profile', 'admin', 'signup', 'profile', 'logout', 'sfifoundation'];
+const pages = ['', 'about', 'history', 'specs', 'services', 'contact', 'quiz', 'detect', 'sfi-specs', 'login', 'sfi-profile', 'admin', 'signup', 'profile', 'logout', 'sfifoundation', '404.html', 'sfi-ml.html', 'sfi-database.html', 'capstone/sfi-ml-blog'];
 let references = 0;
+let destinations = 0;
 for (const name of pages) {
-  const html = readFileSync(path.join(site, name, 'index.html'), 'utf8');
+  const html = readFileSync(path.join(site, ...(name.endsWith('.html') ? [name] : [name, 'index.html'])), 'utf8');
   assert.match(html, /<body class="sfi-site">/);
   for (const branding of ['Open Coding Society', 'School Email Verification', '/images/logo.png']) {
     assert.ok(!html.includes(branding), `${name}: classroom branding must stay out of SFI`);
@@ -38,10 +45,23 @@ for (const name of pages) {
     assert.ok(existsSync(path.join(site, asset)), `${name}: missing ${url}`);
     references++;
   }
-  const labels = [...html.matchAll(/<li[^>]*><a[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
+  for (const match of html.matchAll(/<a\b[^>]+href="([^"]+)"/g)) {
+    const url = match[1];
+    if (url.startsWith('#')) {
+      const id = decodeURIComponent(url.slice(1));
+      if (id) assert.ok(html.includes(`id="${id}"`) || html.includes(`id='${id}'`), `${name}: missing anchor ${url}`);
+    } else if (url.startsWith('/') && !url.startsWith('//')) {
+      const relative = url.split(/[?#]/)[0].replace(/^\//, '');
+      assert.ok([relative, `${relative}.html`, path.join(relative, 'index.html')].some(file => existsSync(path.join(site, file))), `${name}: missing destination ${url}`);
+      destinations++;
+    }
+  }
+  const navigation = html.match(/<ul class="sfi-nav-links"[^>]*>([\s\S]*?)<\/ul>/)?.[1];
+  assert.ok(navigation, `${name}: shared navigation exists`);
+  const labels = [...navigation.matchAll(/<li[^>]*><a[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
   assert.deepEqual(labels, ['About', 'History', 'Specs', 'Services', 'Contact', 'My Gear', 'Detect', 'Spec Search', 'Sign In']);
 }
-console.log(`PASS: ${pages.length} SFI pages, ${references} asset references, scoped CSS, tokens, navigation and responsive/focus rules`);
+console.log(`PASS: ${pages.length} SFI pages, ${references} asset references, ${destinations} internal destinations, scoped blue-and-white CSS, tokens, navigation and responsive/focus rules`);
 
 for (const [name, target] of [['signup/index.html', '/login/#register'], ['profile/index.html', '/sfi-profile/'], ['login.html', '/login/'], ['sfifoundation/index.html', '/']]) {
   const html = readFileSync(path.join(site, name), 'utf8');

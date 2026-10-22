@@ -26,11 +26,11 @@
 }
 .sfi-breadcrumb {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.6);
+  color: #fff;
   margin-bottom: 10px;
   font-family: 'Inter', sans-serif;
 }
-.sfi-breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; }
+.sfi-breadcrumb a { color: #fff; text-decoration: none; }
 .sfi-breadcrumb a:hover { color: #fff; }
 .sfi-breadcrumb span { margin: 0 6px; }
 
@@ -53,7 +53,7 @@
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--sfi-blue-accent);
+  color: $blue;
   margin-bottom: 8px;
 }
 .sfi-sect-title {

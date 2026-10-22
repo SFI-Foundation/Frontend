@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/sfi.css' | relative_url }}">
   </head>
   <body class="sfi-site">
+    <a class="sfi-skip-link" href="#sfi-main">Skip to content</a>
     <header class="sfi-header">
       <a href="{{ '/' | relative_url }}" class="sfi-header-logo">
         <img src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="SFI Foundation" class="sfi-logo-img">
@@ -22,7 +23,7 @@
       <div class="sfi-header-tagline">Setting the Standard for<br>Motorsports Safety Since 1978.</div>
     </header>
     {% include sfi/nav.html %}
-    <main>
+    <main id="sfi-main" tabindex="-1">
       {{ content }}
     </main>
     {% include sfi/footer.html %}

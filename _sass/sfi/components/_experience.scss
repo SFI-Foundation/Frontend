@@ -1,0 +1,44 @@
+// Four real entry points into the SFI application.
+.sfi-experience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-5;
+  @include tablet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include phone { grid-template-columns: minmax(0, 1fr); }
+}
+.sfi-experience-card {
+  @include surface-card;
+  @include focus-ring;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: $space-5;
+  border-top: 3px solid $blue;
+  color: $text;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  &:hover, &:focus-visible {
+    border-color: $blue;
+    box-shadow: 0 4px 16px rgba($blue, 0.16);
+  }
+  h3 {
+    font: 600 1.25rem/1.35 $font-heading;
+    color: $blue-dark;
+    margin: $space-4 0 $space-3;
+  }
+  p { margin: 0 0 $space-5; color: $text-soft; line-height: 1.7; }
+}
+.sfi-experience-number {
+  align-self: flex-start;
+  padding: $space-2 $space-3;
+  background: $blue-tint;
+  color: $blue-dark;
+  border-radius: $radius-sm;
+  font-weight: 700;
+}
+.sfi-experience-action {
+  margin-top: auto;
+  color: $blue;
+  font-size: 0.875rem;
+  font-weight: 700;
+}

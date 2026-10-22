@@ -4,10 +4,10 @@
 
 .sfi-site {
   @import "base/properties", "base/foundation";
-  @import "components/header", "components/navigation";
+  @import "components/header", "components/navigation", "components/experience";
   @import "pages/hero", "components/buttons";
   @import "base/layout", "pages/content", "components/footer", "components/data", "pages/admin";
-  @import "base/page";
+  @import "base/page", "pages/document";
   @import "elements/card", "elements/button", "elements/form", "elements/table";
   @import "pages/detect", "pages/gear", "pages/specs";
   // These originally followed the shared styles in the rendered document.

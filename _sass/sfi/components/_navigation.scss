@@ -102,7 +102,8 @@
     padding: 8px 0;
     border-bottom: 2px solid var(--sfi-blue-accent);
   }
-  .sfi-nav-links.open { display: flex; }
+  .sfi-nav-links.open { display: flex; max-height: calc(100dvh - 49px); overflow-y: auto; }
+  .sfi-nav-links a.sfi-nav-cta { margin: 4px 16px; width: calc(100% - 32px); }
   .sfi-nav-links li { width: 100%; height: auto; }
   .sfi-nav-links a {
     width: 100%;

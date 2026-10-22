@@ -38,13 +38,13 @@
   max-width: calc(100vw - 32px);
   height: 520px;
   max-height: calc(100vh - 140px);
-  background: #12161f;
-  border: 1px solid rgba(240,165,0,0.2);
+  background: $surface;
+  border: 1px solid $border;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(240,165,0,0.08);
+  box-shadow: 0 12px 48px rgba($blue-dark, 0.2);
   opacity: 0;
   transform: translateY(20px) scale(0.95);
   pointer-events: none;
@@ -59,7 +59,7 @@
 
 .sfi-chat-header {
   padding: 16px 20px;
-  background: linear-gradient(135deg, #161b27 0%, #1a1025 100%);
+  background: linear-gradient(105deg, $hero-start, $blue);
   border-bottom: 1px solid rgba(240,165,0,0.15);
   display: flex;
   align-items: center;
@@ -86,7 +86,7 @@
 }
 .sfi-chat-header-text span {
   font-size: 0.72rem;
-  color: #3fb950;
+  color: $surface;
   font-weight: 500;
 }
 
@@ -109,37 +109,37 @@
   border-radius: 14px;
   font-size: 0.85rem;
   line-height: 1.55;
-  color: #e6edf3;
+  color: $text;
   word-wrap: break-word;
 }
 .sfi-chat-msg.bot {
   align-self: flex-start;
-  background: #1e2535;
-  border: 1px solid rgba(240,165,0,0.1);
+  background: $blue-tint;
+  border: 1px solid $border;
   border-bottom-left-radius: 4px;
 }
 .sfi-chat-msg.user {
   align-self: flex-end;
-  background: linear-gradient(135deg, rgba(240,165,0,0.18), rgba(240,165,0,0.08));
-  border: 1px solid rgba(240,165,0,0.2);
+  background: $surface-alt;
+  border: 1px solid $border;
   border-bottom-right-radius: 4px;
 }
-.sfi-chat-msg.bot b { color: #F0A500; }
+.sfi-chat-msg.bot b { color: $blue-dark; }
 .sfi-chat-msg .chat-code {
   background: rgba(240,165,0,0.1);
   padding: 1px 5px;
   border-radius: 4px;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.82em;
-  color: #F0A500;
+  color: $blue-dark;
 }
 
 .sfi-chat-typing {
   display: none;
   align-self: flex-start;
   padding: 10px 16px;
-  background: #1e2535;
-  border: 1px solid rgba(240,165,0,0.1);
+  background: $blue-tint;
+  border: 1px solid $border;
   border-radius: 14px;
   border-bottom-left-radius: 4px;
   gap: 5px;
@@ -163,8 +163,8 @@
 
 .sfi-chat-input-row {
   padding: 12px 16px;
-  background: #161b27;
-  border-top: 1px solid rgba(240,165,0,0.12);
+  background: $surface-alt;
+  border-top: 1px solid $border;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -172,18 +172,19 @@
 }
 .sfi-chat-input-row input {
   flex: 1;
-  background: #1e2535;
-  border: 1px solid rgba(240,165,0,0.15);
+  min-width: 0;
+  background: $surface;
+  border: 1px solid $border-strong;
   border-radius: 10px;
   padding: 10px 14px;
-  color: #e6edf3;
+  color: $text;
   font-size: 0.85rem;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s;
 }
-.sfi-chat-input-row input::placeholder { color: #555d6e; }
-.sfi-chat-input-row input:focus { border-color: rgba(240,165,0,0.4); }
+.sfi-chat-input-row input::placeholder { color: $text-muted; }
+.sfi-chat-input-row input:focus { border-color: $blue; }
 .sfi-chat-send {
   width: 38px;
   height: 38px;
