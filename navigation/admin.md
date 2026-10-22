@@ -16,7 +16,7 @@ search_exclude: true
   <div id="admGate" class="adm-gate adm-hidden">
     <h2>Administrators only</h2>
     <p id="admGateMsg">Sign in with an account that belongs to the <code>administrators</code> group to continue.</p>
-    <a href="/login/" class="adm-btn primary">Sign In</a>
+    <a href="{{ '/login/' | relative_url }}" class="adm-btn primary">Sign In</a>
   </div>
 
   <div id="admMain" class="adm-hidden">

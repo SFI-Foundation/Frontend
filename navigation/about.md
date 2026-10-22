@@ -83,7 +83,7 @@ permalink: /about/
   <div class="sfi-cta-banner">
     <h2>EXPLORE OUR SPECIFICATIONS</h2>
     <p>Browse all SFI specifications or use our ML-powered search to find what you need.</p>
-    <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
-    <a href="/history/" class="sfi-btn sfi-btn-secondary">Our History</a>
+    <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
+    <a href="{{ '/history/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Our History</a>
   </div>
 </section>

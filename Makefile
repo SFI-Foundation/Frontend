@@ -1,5 +1,7 @@
 HOST ?= localhost
 PORT ?= 4500
+# Local preview stays at /; production uses _config.yml /Frontend.
+BASEURL ?=
 LOG_FILE = /tmp/jekyll$(PORT).log
 PYTHON := venv/bin/python3
 
@@ -341,7 +343,7 @@ bundle-install:
 # Start Jekyll server (incremental for development, production is GitHub Actions)
 jekyll-serve: bundle-install
 	@touch /tmp/.notebook_watch_marker
-	@bundle exec jekyll serve -H $(HOST) -P $(PORT) --incremental > $(LOG_FILE) 2>&1 & \
+	@bundle exec jekyll serve -H $(HOST) -P $(PORT) --baseurl "$(BASEURL)" --incremental > $(LOG_FILE) 2>&1 & \
 		echo "Server PID: $$!"
 	@make wait-for-server
 

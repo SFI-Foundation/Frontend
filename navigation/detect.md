@@ -81,7 +81,7 @@ permalink: /detect/
     <div class="sfi__cta">
       <h2>Need the full spec database?</h2>
       <p>Search every SFI specification by number, name or category.</p>
-      <a href="/sfi-specs/" class="sfi__btn">Open spec search</a>
+      <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi__btn">Open spec search</a>
     </div>
   </section>
 
