@@ -285,7 +285,7 @@ permalink: /sfi-specs/
     </div>
   </section>
 
-  <section class="sfi__section">
+  <section class="sfi__section sfi__hidden" id="adminSection">
     <button type="button" class="sfi__disclosure" id="adminToggle" aria-expanded="false" aria-controls="adminBody">
       Admin panel <span id="adminArrow" aria-hidden="true">+</span>
     </button>
@@ -699,7 +699,7 @@ async function editSpec(id) {
 async function deleteSpec(id) {
   if (!confirm('Delete this spec?')) return;
   try {
-    const res = await fetch(`${API}/specs/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API}/specs/${id}`, { method: 'DELETE', credentials: 'include' });
     if (res.ok) { showMsg('Spec deleted', 'success'); loadAdminTable(); loadAdminStats(); loadSpecs(); }
     else { showMsg('Delete failed', 'error'); }
   } catch (e) { showMsg('Error connecting to API', 'error'); }
@@ -724,9 +724,9 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   try {
     let res;
     if (editId) {
-      res = await fetch(`${API}/specs/${editId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      res = await fetch(`${API}/specs/${editId}`, { method: 'PUT', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     } else {
-      res = await fetch(`${API}/specs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      res = await fetch(`${API}/specs`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     }
     if (res.ok) { showMsg(editId ? 'Spec updated' : 'Spec created', 'success'); clearForm(); loadAdminTable(); loadAdminStats(); loadSpecs(); }
     else { const err = await res.json(); showMsg(err.error || 'Save failed', 'error'); }
@@ -735,7 +735,21 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
 
 document.getElementById('cancelBtn').addEventListener('click', clearForm);
 
+// Only admins see the CRUD panel. The backend enforces this too (401/403);
+// hiding is just UX.
+async function revealAdminPanel() {
+  try {
+    const res = await fetch(`${API}/me`, { credentials: 'include' });
+    if (!res.ok) return;
+    const me = await res.json();
+    if (me.isAdmin || me.role === 'Admin') {
+      document.getElementById('adminSection').classList.remove('sfi__hidden');
+    }
+  } catch (e) {}
+}
+
 // ═══════════════ INIT ═══════════════
+revealAdminPanel();
 loadStats();
 loadSpecs();
 </script>
