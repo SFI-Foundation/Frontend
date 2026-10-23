@@ -220,7 +220,7 @@ const DetectRenderer = (() => {
 
     html += `
       <p class="sfi__disclaimer">AI estimate. Verify against the official SFI spec.</p>
-      <div class="sfi__notice">Seen your gear? Save it to <a href="/quiz/">My Gear</a>. Administrators review submissions and keep one clean record.</div>
+      <div class="sfi__notice">Seen your gear? Save it to <a href="../quiz/">My Gear</a>. Administrators review submissions and keep one clean record.</div>
       <details class="sfi__raw">
         <summary>Show raw model output</summary>
         <div>

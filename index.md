@@ -12,8 +12,8 @@ permalink: /
     <h1>Welcome to <em>SFI Foundation</em></h1>
     <p class="sfi-hero-sub">Administering standards for the quality assurance of specialty performance and racing equipment since 1978.</p>
     <div class="sfi-hero-actions">
-      <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Search Specifications</a>
-      <a href="/about/" class="sfi-btn sfi-btn-secondary">Learn More</a>
+      <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Search Specifications</a>
+      <a href="{{ '/about/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Learn More</a>
     </div>
     </div>
     <img class="sfi-hero-logo" src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="SFI Foundation" width="360">
@@ -79,28 +79,28 @@ permalink: /
 </div>
 
 <div class="sfi-home-grid">
-  <a href="/about/" class="sfi-home-card">
+  <a href="{{ '/about/' | relative_url }}" class="sfi-home-card">
     <div class="sfi-home-card-img-placeholder">&#9881;&#65039;</div>
     <div class="sfi-home-card-body">
       <h3>About SFI</h3>
       <p>Learn about our mission, history, and the standards we set for motorsports safety worldwide.</p>
     </div>
   </a>
-  <a href="/specs/" class="sfi-home-card">
+  <a href="{{ '/specs/' | relative_url }}" class="sfi-home-card">
     <div class="sfi-home-card-img-placeholder">&#128209;</div>
     <div class="sfi-home-card-body">
       <h3>Specifications</h3>
       <p>Browse SFI quality assurance specifications covering all categories of racing safety equipment.</p>
     </div>
   </a>
-  <a href="/services/" class="sfi-home-card">
+  <a href="{{ '/services/' | relative_url }}" class="sfi-home-card">
     <div class="sfi-home-card-img-placeholder">&#128295;</div>
     <div class="sfi-home-card-body">
       <h3>Manufacturers</h3>
       <p>Find certified manufacturers and licensed products that meet SFI specification requirements.</p>
     </div>
   </a>
-  <a href="/sfi-specs/" class="sfi-home-card">
+  <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-home-card">
     <div class="sfi-home-card-img-placeholder">&#129302;</div>
     <div class="sfi-home-card-body">
       <h3>AI Spec Search</h3>
@@ -119,37 +119,37 @@ permalink: /
   </div>
 
   <div class="sfi-cat-browse">
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#128737;&#65039;</span>
       <div class="sfi-cat-tile-name">Protective Gear & Restraints</div>
       <div class="sfi-cat-tile-count">Suits, helmets, harnesses</div>
     </a>
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#127950;&#65039;</span>
       <div class="sfi-cat-tile-name">Auto Racing</div>
       <div class="sfi-cat-tile-count">Roll cages, seats, fuel cells</div>
     </a>
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#127937;</span>
       <div class="sfi-cat-tile-name">Drag Racing</div>
       <div class="sfi-cat-tile-count">Superchargers, clutches, turbos</div>
     </a>
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#128295;</span>
       <div class="sfi-cat-tile-name">Chassis</div>
       <div class="sfi-cat-tile-count">Drag racing chassis specs</div>
     </a>
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#9981;</span>
       <div class="sfi-cat-tile-name">Fuel Related</div>
       <div class="sfi-cat-tile-count">Fuel systems, tanks, lines</div>
     </a>
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#128676;</span>
       <div class="sfi-cat-tile-name">Boat Racing</div>
       <div class="sfi-cat-tile-count">Marine safety equipment</div>
     </a>
-    <a class="sfi-cat-tile" href="/specs/">
+    <a class="sfi-cat-tile" href="{{ '/specs/' | relative_url }}">
       <span class="sfi-cat-tile-icon">&#128668;</span>
       <div class="sfi-cat-tile-name">Tractor Pulling</div>
       <div class="sfi-cat-tile-count">Pulling chassis & components</div>
@@ -163,7 +163,7 @@ permalink: /
   <div class="sfi-cta-banner">
     <h2>Ready to Search Specifications?</h2>
     <p>Use our ML-powered search to find any SFI specification instantly.</p>
-    <a href="/sfi-specs/" class="sfi-btn sfi-btn-secondary">Search Specs &rarr;</a>
-    <a href="/about/" class="sfi-btn sfi-btn-secondary">Learn More</a>
+    <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Search Specs &rarr;</a>
+    <a href="{{ '/about/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Learn More</a>
   </div>
 </section>

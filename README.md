@@ -1,6 +1,6 @@
 # SFI Foundation Prototype Frontend
 
-This repository contains the frontend for the Greppers SFI Foundation capstone prototype. The goal is to show how the original `sfifoundation.com` experience could be modernized while preserving the value of SFI's standards, specification PDFs, and safety information.
+This repository contains the frontend for the SFI Foundation capstone prototype. The goal is to show how the original `sfifoundation.com` experience could be modernized while preserving the value of SFI's standards, specification PDFs, and safety information.
 
 The original site contains important motorsports safety resources, but the information is difficult to search, navigate, personalize, and update. This prototype explores a more usable SFI-run system with searchable standards, role-aware pages, gear tracking, AI assistance, image-based equipment detection, and staff/admin workflows.
 
@@ -67,53 +67,134 @@ Important frontend files and directories:
 - "My Gear" tracking page with certification dates, expiration scoring, local fallback, and backend sync when authenticated.
 - Site-wide chatbot widget connected to `POST /api/sfi/chat`.
 
-## Backend Dependency
+## 2026–27 team
 
-Most dynamic SFI features depend on the companion Flask backend:
+| Role | Team members |
+| --- | --- |
+| Scrum Masters | Ruhaan Bansal ([@ruhaanb622](https://github.com/ruhaanb622)), Ishan Jha ([@Jupiterian](https://github.com/Jupiterian)) |
+| Developers | Arya Taghavi Zargar ([@aRYA622-y](https://github.com/aRYA622-y)), Ishan Khandelwal ([@Grazer01LA](https://github.com/Grazer01LA)), Deyar Raissadat ([@DrDeyar](https://github.com/DrDeyar)), Vayun Shekhar ([@Droidsector23](https://github.com/Droidsector23)) |
 
-- Local backend: `http://localhost:8423`
-- Deployed backend used by the current frontend code: `https://greppers-be.opencodingsociety.com`
-- Backend repo: `../flask` locally, remote `https://github.com/TheGreppers/flask`
+Issue #7's accountable owner is Ruhaan Bansal; priority is Medium.
 
-The frontend uses this local-vs-production switch in several SFI files:
+- [Current capstone setup and system diagram](https://sfi-foundation.github.io/Frontend/capstone/sfi-repo-setup/)
+- [SFI KanBan](https://github.com/orgs/SFI-Foundation/projects/1)
+- [Frontend](https://github.com/SFI-Foundation/Frontend) · [Backend](https://github.com/SFI-Foundation/Backend)
 
-```js
-const API_BASE = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "http://localhost:8423"
-  : "https://greppers-be.opencodingsociety.com";
-```
+## Quick start: clone → install → run
 
-Run the Flask backend before testing API-connected pages like `/sfi-specs/`, `/quiz/`, `/login/`, and the chatbot.
-
-## Local Development
-
-Install Ruby dependencies once:
+Prerequisites: Git, Ruby 3.4 with Bundler (matching Pages CI), Python 3 with
+`venv` and pip, and `make`. Dependency downloads and machine setup can exceed
+ten minutes; a fresh-clone walkthrough has not yet been accepted by a teammate.
 
 ```bash
+mkdir sfi-foundation
+cd sfi-foundation
+git clone https://github.com/SFI-Foundation/Frontend.git Frontend
+git clone https://github.com/SFI-Foundation/Backend.git Backend
+cd Frontend
 bundle install
 ```
 
-Start the Jekyll/GitHub Pages preview server:
+Start the frontend in this terminal (no notebook conversion needed for the SFI pages):
 
 ```bash
-make
+make jekyll-serve
 ```
 
-The local URL is printed by the Makefile, usually similar to:
+Open <http://localhost:4500/>. `make` also starts the preview at `/`, but runs
+registered-project builds and notebook/document conversions first, requiring
+`python3 -m venv venv` and `venv/bin/pip install -r requirements.txt`.
+`make stop` stops that Makefile-managed preview.
+
+In a second terminal, from the shared parent directory:
+
+```bash
+cd Backend
+python3 -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+# Temporary compatibility alias required by current backend main (see below).
+# Run only when ../greppers does not already exist.
+ln -s Frontend ../greppers
+python scripts/db_init.py
+python main.py
+```
+
+The database initializer can drop existing tables: use it only for a disposable
+local database and read its confirmation prompt. The default local SQLite data
+is under `Backend/instance/volumes/`. `main.py` serves
+<http://localhost:8423/> by default (`FLASK_PORT` is implemented).
+`GEMINI_API_KEY` is needed for chatbot generation; it is not required for static
+frontend preview. Do not commit secrets. Use the backend's current README for
+feature-specific dependencies; no `.env.example` exists on the inspected main.
+
+Check API-connected setup without changing data:
+
+```bash
+curl -i http://localhost:8423/api/sfi/specs
+curl -i http://localhost:8423/api/sfi/classifier/status
+curl -i -H 'Origin: http://localhost:4500' http://localhost:8423/api/sfi/specs
+```
+
+Expect successful JSON responses and a matching local CORS origin. These are
+verification instructions, not a claim that the backend checks passed.
+
+## Folder layout and spec-data configuration
+
+Inspected Backend main `31ad1151c2140aa77d2a45d7c6561920ef360317` and
+[Backend #8](https://github.com/SFI-Foundation/Backend/issues/8):
 
 ```text
-http://0.0.0.0:4500/greppers/
+sfi-foundation/
+├── Frontend/                  # this Jekyll repository
+│   └── _data/sfi_specs.json    # extracted specification source
+├── Backend/                   # Flask repository
+│   ├── main.py
+│   ├── scripts/db_init.py
+│   ├── model/sfi_spec.py
+│   ├── model/sfi_classifier.py
+│   └── instance/volumes/      # local SQLite storage
+└── greppers -> Frontend       # temporary alias; not another clone
 ```
 
-Useful commands:
+Both backend model files still resolve `../greppers/_data/sfi_specs.json`
+relative to the backend repository. The importer warns and skips if missing;
+the classifier also uses this source. Neither `SFI_SPECS_PATH` nor
+`SFI_SPECS_JSON_PATH` is implemented there. Backend #8 proposes configuration;
+its issue diagram and suggested variable names are not a working contract.
+Remove the compatibility alias only after that fix is implemented and verified.
+The frontend's `scripts/sfi_db_init.py` is not the Flask database initializer.
+
+The current frontend switches between `http://localhost:8423` and the legacy
+configured host `https://greppers-be.opencodingsociety.com`. That hostname is
+retained as an operational dependency pending Backend #8, not endorsed as a
+verified SFI deployment. No replacement backend URL has been confirmed.
+Backend main adds local CORS headers for localhost/127.0.0.1 ports; production
+CORS is handled by nginx and must be verified with the deployment owner.
+
+## Build and deployment paths
 
 ```bash
-make stop
-make clean
-make convert
+bundle exec jekyll build --disable-disk-cache
+python3 scripts/test-sfi-paths.py _site /Frontend
+# Optional root-path preview build, separate output:
+bundle exec jekyll build --baseurl "" --destination /tmp/sfi-local --disable-disk-cache
+python3 scripts/test-sfi-paths.py /tmp/sfi-local
 ```
 
-If SFI notebook or Markdown content is changed, save the file and wait for Jekyll regeneration before refreshing the browser.
+Production `_config.yml` uses `/Frontend` for the verified GitHub Pages project
+URL <https://sfi-foundation.github.io/Frontend/>. Local `make` overrides it with
+an empty base URL and serves isolated `_site_preview/4500/` output;
+`make BASEURL=/Frontend` previews the project path. Preview startup runs Jekyll
+clean only on its generated output/cache, then regenerates it. Production builds
+write `_site/`, so they cannot overwrite the running local preview. Do not use
+`make clean` to fix styling: that target also removes converted content.
+`.github/workflows/jekyll-gh-pages.yml` builds and deploys on pushes to main
+or manual dispatch. A feature PR does not deploy automatically. Review and
+acceptance precede merging; production delivery remains pending until deployed.
+
+Historical Greppers capstone URLs, filenames, authorship, and upstream merge
+audit records are preserved intentionally. Current repo links use SFI-Foundation.
 
 ## Handoff Checklist
 
