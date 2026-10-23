@@ -113,9 +113,8 @@ cd Backend
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
-# Temporary compatibility alias required by current backend main (see below).
-# Run only when ../greppers does not already exist.
-ln -s Frontend ../greppers
+cp .env.example .env
+# Replace placeholder secrets and passwords before initialization.
 python scripts/db_init.py
 python main.py
 ```
@@ -126,7 +125,7 @@ is under `Backend/instance/volumes/`. `main.py` serves
 <http://localhost:8423/> by default (`FLASK_PORT` is implemented).
 `GEMINI_API_KEY` is needed for chatbot generation; it is not required for static
 frontend preview. Do not commit secrets. Use the backend's current README for
-feature-specific dependencies; no `.env.example` exists on the inspected main.
+feature-specific dependencies and its placeholder-only `.env.example`.
 
 Check API-connected setup without changing data:
 
@@ -141,7 +140,7 @@ verification instructions, not a claim that the backend checks passed.
 
 ## Folder layout and spec-data configuration
 
-Inspected Backend main `31ad1151c2140aa77d2a45d7c6561920ef360317` and
+Configuration contract implemented in the companion branch for
 [Backend #8](https://github.com/SFI-Foundation/Backend/issues/8):
 
 ```text
@@ -154,23 +153,27 @@ sfi-foundation/
 │   ├── model/sfi_spec.py
 │   ├── model/sfi_classifier.py
 │   └── instance/volumes/      # local SQLite storage
-└── greppers -> Frontend       # temporary alias; not another clone
 ```
 
-Both backend model files still resolve `../greppers/_data/sfi_specs.json`
-relative to the backend repository. The importer warns and skips if missing;
-the classifier also uses this source. Neither `SFI_SPECS_PATH` nor
-`SFI_SPECS_JSON_PATH` is implemented there. Backend #8 proposes configuration;
-its issue diagram and suggested variable names are not a working contract.
-Remove the compatibility alias only after that fix is implemented and verified.
-The frontend's `scripts/sfi_db_init.py` is not the Flask database initializer.
+With the Backend #8 companion branch, both importer and classifier JSON fallback
+use `SFI_SPECS_PATH`, defaulting to sibling `Frontend/_data/sfi_specs.json`.
+Relative overrides start at Backend's root regardless of cwd. For differently
+named clones, set it in Backend's `.env`; no symlink is required. Missing/invalid
+sources produce a clear error before import replaces data. The frontend's
+`scripts/sfi_db_init.py` is not the Flask initializer.
 
-The current frontend switches between `http://localhost:8423` and the legacy
-configured host `https://greppers-be.opencodingsociety.com`. That hostname is
-retained as an operational dependency pending Backend #8, not endorsed as a
-verified SFI deployment. No replacement backend URL has been confirmed.
-Backend main adds local CORS headers for localhost/127.0.0.1 ports; production
-CORS is handled by nginx and must be verified with the deployment owner.
+API addresses are shared through `assets/js/sfi/api-base.js` by SFI specs, quiz,
+detector, chatbot and auth configuration. Set `sfi_api_base` in `_config.yml`
+(or a local Jekyll override config) to a confirmed backend base URL, without
+`/api`. Rebuild after changing it. Blank preserves `http://localhost:8423`
+locally and `https://greppers-be.opencodingsociety.com` elsewhere. No replacement
+production URL has been confirmed; production verification remains pending.
+
+Flask owns credentialed CORS for exact local origins and
+`https://sfi-foundation.github.io` (no `/Frontend` path); nginx forwards OPTIONS
+without duplicate headers. Deploy the companion backend before relying on this
+policy. Existing production auth cookies target `.opencodingsociety.com`; a
+new backend domain requires cookie and browser verification by the deployer.
 
 ## Build and deployment paths
 

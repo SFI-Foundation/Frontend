@@ -22,29 +22,37 @@ Ruhaan Bansal is accountable for this setup issue (Medium priority).
 ## Teammate setup and system flow
 
 Follow the [README quick start](https://github.com/SFI-Foundation/Frontend#quick-start-clone--install--run).
-The diagram describes Backend main `31ad1151c2140aa77d2a45d7c6561920ef360317`;
-[Backend #8](https://github.com/SFI-Foundation/Backend/issues/8) is still open.
+The updated diagram describes the Backend #8 companion feature branches;
+review and deployment are pending. Frontend PR #16 was verified merged on
+2026-10-23. Backend #8 is owned by @ruhaanb622 at High priority.
 
 ```mermaid
-flowchart TD
-    DEV["Teammate: clone sibling Frontend and Backend repositories"] --> FE["Frontend: bundle install; Jekyll preview localhost:4500 at /; isolated _site_preview/4500"]
-    DEV --> BE["Backend: venv; pip install; db_init.py; main.py on localhost:8423"]
-    JSON["Frontend/_data/sfi_specs.json"] --> ALIAS["Temporary sibling greppers symlink to Frontend"]
-    ALIAS --> IMPORT["Backend spec importer and classifier: hardcoded legacy path"]
-    IMPORT --> DB[("Backend/instance/volumes SQLite")]
-    BE --> DB
-    FE -->|"Local API requests; Flask adds local CORS headers"| BE
-    FE --> BUILD["Jekyll production build: baseurl /Frontend"]
-    BUILD --> PR["Feature branch PR; review and acceptance pending"]
-    PR -->|"After approved merge; main workflow"| PAGES["GitHub Pages /Frontend/"]
-    PAGES --> LEGACY["Legacy API host still configured; replacement and production CORS pending Backend 8"]
+flowchart LR
+    ENV["Backend .env / SFI_SPECS_PATH"] --> PATH["Resolve relative to Backend root"]
+    JSON["Default sibling Frontend/_data/sfi_specs.json"] --> LOAD["Shared loader: validate JSON and entries"]
+    PATH --> LOAD
+    LOAD --> IMPORT["Importer: validate before replacing rows"]
+    IMPORT --> DB[("SQLite")]
+    DB --> CLASS["Classifier: prefer current DB rows"]
+    LOAD -->|"JSON fallback"| CLASS
+    CFG["Frontend sfi_api_base or existing service default"] --> JS["Shared api-base.js: SFI pages and auth"]
+    JS --> LOCAL["Local preview: localhost:4500"]
+    JS --> PAGES["Origin: https://sfi-foundation.github.io"]
+    LOCAL --> APP["Flask exact origin allowlist + credentials + OPTIONS"]
+    PAGES --> NGINX["nginx forwards OPTIONS; no duplicate CORS"] --> APP
+    APP --> DB
+    APP --> CLASS
+    APP --> DENY["Unapproved Origin: 403; no allow-origin header"]
 ```
 
-The backend reads the frontend JSON, then stores specs in SQLite. It does not
-serve the JSON directly from Jekyll. No spec-path environment variable is
-implemented in the inspected backend. The temporary alias is needed until #8
-lands; do not create it over an existing directory. Database initialization is
-for a disposable local database because it can drop existing tables.
+The disposable sibling-clone check imported 140 specs without a compatibility
+symlink. The importer validates the source before replacing rows; classifier
+retraining prefers current DB rows. Backend `.env` is repository-relative;
+`SFI_SPECS_PATH` overrides the default, with relative paths anchored at Backend.
+Database initialization is only for disposable data; existing databases need
+no migration for this feature. Frontend `sfi_api_base` makes a confirmed future
+service configurable while retaining the current default. Production API/CORS
+and credential-cookie verification remain pending.
 
 ## Delivery and review
 

@@ -30,11 +30,10 @@
   </div>
 </div>
 
+<script src="{{ '/assets/js/sfi/api-base.js' | relative_url }}"></script>
 <script>
 (function() {
-  var CHAT_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:8423/api/sfi/chat'
-    : 'https://greppers-be.opencodingsociety.com/api/sfi/chat';
+  var CHAT_API = window.SFI_API_BASE + '/api/sfi/chat';
 
   var fab = document.getElementById('chatFab');
   var win = document.getElementById('chatWindow');

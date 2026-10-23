@@ -6,9 +6,7 @@
 
 const DetectRenderer = (() => {
 
-  const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? 'http://localhost:8423'
-    : 'https://greppers-be.opencodingsociety.com';
+  const API_BASE = window.SFI_API_BASE;
 
   let _lastResults = [];
 

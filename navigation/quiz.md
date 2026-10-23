@@ -59,6 +59,7 @@ permalink: /quiz/
 </div>
 
 <!-- ── Scripts: each file has a single responsibility ── -->
+<script src="{{ '/assets/js/sfi/api-base.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/sfi/quiz-data.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/sfi/quiz-ui.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/sfi/quiz-app.js' | relative_url }}"></script>

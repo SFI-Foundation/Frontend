@@ -134,3 +134,8 @@ minima:
     - navigation/sfifoundation.md
     - navigation/sfi-specs.md
     - navigation/search.md
+
+# Backend base URL override (scheme + host + optional port, no trailing /api).
+# Blank retains localhost:8423 locally and the current service on Pages.
+# A replacement production backend URL is not yet confirmed.
+sfi_api_base: ""
