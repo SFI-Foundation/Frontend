@@ -88,6 +88,7 @@ permalink: /detect/
 </div>
 
 <!-- ── Scripts: each file has a single responsibility ── -->
+<script src="{{ '/assets/js/sfi/api-base.js' | relative_url }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
