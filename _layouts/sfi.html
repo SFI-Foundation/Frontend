@@ -24,12 +24,29 @@
     {% include sfi/footer.html %}
     {% include sfi/chatbot.html %}
     <script>
-      // Mobile nav toggle
-      document.getElementById('navToggle').addEventListener('click', () => {
-        document.getElementById('navLinks').classList.toggle('open');
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      function setNavOpen(open) {
+        navLinks.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      }
+
+      navToggle.addEventListener('click', () => {
+        setNavOpen(navToggle.getAttribute('aria-expanded') !== 'true');
       });
-      document.querySelectorAll('.sfi-nav-links a').forEach(a => {
-        a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setNavOpen(false));
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+          setNavOpen(false);
+          navToggle.focus();
+        }
+      });
+      window.addEventListener('resize', () => {
+        if (window.matchMedia('(min-width: 901px)').matches) setNavOpen(false);
       });
     </script>
   </body>
