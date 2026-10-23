@@ -1,0 +1,84 @@
+---
+layout: sfi
+title: My Profile
+description: Your SFI Foundation profile and optional nonprofit interests.
+permalink: /sfi-profile/
+---
+
+
+
+<section class="sfi-profile">
+  <div class="sfi-profile-card">
+    <h1>My SFI Profile</h1>
+    <p id="profileStatus" role="status" aria-live="polite">Loading your profile…</p>
+    <p id="profileSignIn" hidden><a href="{{ '/login/' | relative_url }}">Sign in to view your profile</a></p>
+    <button id="profileRetry" type="button" hidden>Try again</button>
+    <div id="profileContent" hidden>
+      <dl>
+        <dt>Name</dt><dd id="sfiProfileName"></dd>
+        <dt>Username</dt><dd id="sfiProfileUid"></dd>
+        <dt>Role</dt><dd id="sfiProfileRole"></dd>
+        <dt>Nonprofit causes</dt><dd id="sfiProfileCauses"></dd>
+        <dt>Participation preferences</dt><dd id="sfiProfileParticipation"></dd>
+        <dt>Skills and experience</dt><dd id="sfiProfileSkills"></dd>
+        <dt>Volunteering opportunities</dt><dd id="sfiProfileVolunteering"></dd>
+        <dt>Availability</dt><dd id="sfiProfileAvailability"></dd>
+      </dl>
+      <form id="profileNameForm">
+        <label for="profileNameInput">Display name</label>
+        <input id="profileNameInput" type="text" minlength="2" maxlength="255" autocomplete="name" required>
+        <p id="profileNameStatus" role="status" aria-live="polite"></p>
+        <button id="profileNameSave" type="submit">Save name</button>
+      </form>
+      <p><a href="{{ '/login/' | relative_url }}">Account and sign out</a></p>
+      <details id="interestQuiz">
+        <summary>Review or update my optional interest quiz</summary>
+        <h2>Your interests</h2>
+        <p>Every question is optional. You can return here to change or clear your answers. Please do not include private or sensitive information.</p>
+        <form id="interestForm">
+          <fieldset>
+            <legend>1. What nonprofit causes interest you?</legend>
+            <label><input type="checkbox" name="causes" value="Motorsports safety"> Motorsports safety</label>
+            <label><input type="checkbox" name="causes" value="Youth education"> Youth education</label>
+            <label><input type="checkbox" name="causes" value="Community support"> Community support</label>
+            <label><input type="checkbox" name="causes" value="Accessibility"> Accessibility</label>
+            <label><input type="checkbox" name="causes" value="Environment"> Environment</label>
+          </fieldset>
+          <fieldset>
+            <legend>2. How would you like to participate?</legend>
+            <label><input type="checkbox" name="participation" value="Volunteer"> Volunteer</label>
+            <label><input type="checkbox" name="participation" value="Donate"> Donate</label>
+            <label><input type="checkbox" name="participation" value="Attend events"> Attend events</label>
+            <label><input type="checkbox" name="participation" value="Share expertise"> Share expertise</label>
+            <label><input type="checkbox" name="participation" value="Stay informed"> Stay informed</label>
+          </fieldset>
+          <label for="interestSkills">3. What relevant skills or experience would you like to share?</label>
+          <textarea id="interestSkills" rows="3" maxlength="500" placeholder="Optional, up to 500 characters"></textarea>
+          <label for="interestVolunteering">4. Would you like volunteering opportunities?</label>
+          <select id="interestVolunteering">
+            <option value="">Prefer not to answer</option><option value="yes">Yes</option><option value="no">No</option>
+          </select>
+          <label for="interestAvailability">How often might you be available? (optional)</label>
+          <select id="interestAvailability">
+            <option value="">Prefer not to answer</option><option>Occasionally</option><option>Monthly</option><option>Weekly</option>
+          </select>
+          <p id="interestStatus" role="status" aria-live="polite"></p>
+          <button id="interestSave" type="submit">Save answers</button>
+          <button id="interestClear" type="button">Clear saved answers</button>
+        </form>
+      </details>
+      <details id="roleManagement" hidden>
+        <summary>Manage user roles (administrators)</summary>
+        <p>Member, Volunteer, and Donor have ordinary member access. Admin can manage users and permissions. Existing User and Teacher roles remain supported.</p>
+        <button id="rolesLoad" type="button">Load users</button>
+        <form id="roleForm" hidden>
+          <label for="roleUser">User</label><select id="roleUser"></select>
+          <label for="roleValue">Role</label><select id="roleValue"></select>
+          <button id="roleSave" type="submit">Save role</button>
+        </form>
+        <p id="roleStatus" role="status" aria-live="polite"></p>
+      </details>
+    </div>
+  </div>
+</section>
+<script type="module" src="{{ '/assets/js/sfi/profile.js' | relative_url }}"></script>

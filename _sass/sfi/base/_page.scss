@@ -1,0 +1,57 @@
+.sfi__container {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 0 $space-5;
+}
+
+.sfi__section {
+  padding: $space-6 0;
+  & + & { padding-top: 0; }
+}
+
+.sfi__title {
+  font-family: $font-heading;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: $text;
+  margin: 0 0 $space-2;
+}
+
+.sfi__lead {
+  max-width: 62ch;
+  margin: 0 0 $space-5;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: $text-muted;
+}
+
+.sfi__subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+  margin: 0 0 $space-3;
+}
+
+.sfi__muted { color: $text-muted; }
+
+.sfi__link {
+  color: $blue;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.sfi__hidden { display: none !important; }
+
+.sfi__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+  align-items: center;
+}
+
+.sfi__grid {
+  display: grid;
+  gap: $space-4;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}

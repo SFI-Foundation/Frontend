@@ -1,0 +1,91 @@
+/* ── Top utility bar ──────────────────────────── */
+.sfi-topbar {
+  background: var(--sfi-blue-dark);
+  color: rgba(255,255,255,0.75);
+  font-size: 0.75rem;
+  padding: 5px 32px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  font-family: 'Inter', sans-serif;
+}
+.sfi-topbar a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.sfi-topbar a:hover { color: #fff; }
+
+/* ── Header (logo + tagline) ──────────────────── */
+.sfi-header {
+  background: var(--sfi-white);
+  border-bottom: 1px solid var(--sfi-border);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sfi-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.sfi-logo-img {
+  height: 54px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 600px) {
+  .sfi-logo-img { height: 42px; }
+  .sfi-header { padding: 10px 16px; }
+  .sfi-header-tagline { font-size: 0.72rem; }
+}
+.sfi-logo-emblem {
+  width: 72px;
+  height: 52px;
+  background: #1a1a1a;
+  border: 3px solid #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.sfi-logo-emblem-inner {
+  background: #fff;
+  border-radius: 50%;
+  width: 52px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.sfi-logo-emblem-sfi {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.sfi-logo-emblem-text {
+  font-size: 0.35rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+.sfi-header-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--sfi-muted);
+  text-align: right;
+  line-height: 1.5;
+}
+

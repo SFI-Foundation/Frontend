@@ -23,7 +23,7 @@ const DetectApp = (() => {
 
       if (percent >= 100) {
         statusEl.classList.add('ready');
-        document.getElementById('modelProgress').style.display = 'none';
+        document.getElementById('modelProgress').classList.add('sfi__hidden');
         if (typeof DetectEngine.isDegraded === 'function' && DetectEngine.isDegraded()) {
           document.getElementById('modelStatusText').textContent =
             'Models ready (limited mode — classification unavailable)';
@@ -39,8 +39,8 @@ const DetectApp = (() => {
     const resultsDiv = document.getElementById('detectResults');
 
     resultImg.src = imgEl.src;
-    area.style.display = 'block';
-    overlay.style.display = 'flex';
+    area.classList.remove('sfi__hidden');
+    overlay.classList.remove('sfi__hidden');
     resultsDiv.innerHTML = '';
 
     area.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -55,10 +55,10 @@ const DetectApp = (() => {
       DetectRenderer.displayResults(sfiResults, mnetResults, cocoResults);
     } catch (err) {
       console.error('Analysis error:', err);
-      resultsDiv.innerHTML = '<div class="detect-error-card"><strong>Analysis failed</strong><p>We couldn\'t process that image. Try a clearer, well-lit photo of a single piece of equipment, or a different file.</p></div>';
+      resultsDiv.innerHTML = '<div class="sfi__notice bad"><strong>Analysis failed.</strong> We couldn\'t process that image. Try a clearer, well-lit photo of a single piece of equipment, or a different file.</div>';
     }
 
-    overlay.style.display = 'none';
+    overlay.classList.add('sfi__hidden');
   }
 
   return { init, analyzeImage };

@@ -17,39 +17,39 @@ const QuizUI = (() => {
       const q = specInput.value.trim().toLowerCase();
       selectedSpecData = null;
       const allSpecs = QuizData.getSpecs();
-      if (q.length < 1 || !allSpecs.length) { acList.className = 'gear-autocomplete'; return; }
+      if (q.length < 1 || !allSpecs.length) { acList.className = 'sfi__autocomplete-list'; return; }
 
       const matches = allSpecs.filter(s =>
         s.spec_number.toLowerCase().includes(q) ||
         s.product_name.toLowerCase().includes(q)
       ).slice(0, 8);
 
-      if (!matches.length) { acList.className = 'gear-autocomplete'; return; }
+      if (!matches.length) { acList.className = 'sfi__autocomplete-list'; return; }
 
       acList.innerHTML = matches.map((s, i) => `
-        <div class="gear-ac-item" data-idx="${i}">
+        <div class="sfi__autocomplete-item" data-idx="${i}">
           <strong>SFI ${s.spec_number}</strong> &mdash; ${s.product_name}
           <br><small>${s.category}</small>
         </div>
       `).join('');
 
-      acList.querySelectorAll('.gear-ac-item').forEach((el, i) => {
+      acList.querySelectorAll('.sfi__autocomplete-item').forEach((el, i) => {
         el.addEventListener('click', () => {
           const s = matches[i];
           specInput.value = s.spec_number;
           selectedSpecData = s;
-          acList.className = 'gear-autocomplete';
+          acList.className = 'sfi__autocomplete-list';
           if (!document.getElementById('gearName').value.trim()) {
             document.getElementById('gearName').value = s.product_name;
           }
         });
       });
 
-      acList.className = 'gear-autocomplete open';
+      acList.className = 'sfi__autocomplete-list open';
     });
 
     document.addEventListener('click', e => {
-      if (!e.target.closest('.gear-spec-wrap')) acList.className = 'gear-autocomplete';
+      if (!e.target.closest('.sfi__autocomplete')) acList.className = 'sfi__autocomplete-list';
     });
   }
 
@@ -61,12 +61,12 @@ const QuizUI = (() => {
     if (!banner) return;
     banner.textContent = '';
     if (remote) {
-      banner.className = 'gear-auth-banner remote';
+      banner.className = 'sfi__notice good';
       banner.appendChild(document.createTextNode(
         'Signed in — your gear is tracked in the central database. Administrators review new submissions.'
       ));
     } else {
-      banner.className = 'gear-auth-banner local';
+      banner.className = 'sfi__notice warn';
       const strong = document.createElement('strong');
       strong.textContent = 'Not signed in.';
       banner.appendChild(strong);
@@ -101,10 +101,8 @@ const QuizUI = (() => {
     const offset = circumference - (score / 100) * circumference;
     ring.style.strokeDashoffset = count ? offset : circumference;
 
-    let ringColor = 'var(--sfi-green)';
-    if (score < 50) ringColor = 'var(--sfi-red)';
-    else if (score < 75) ringColor = 'var(--sfi-gold)';
-    ring.style.stroke = ringColor;
+    const tone = score < 50 ? 'bad' : score < 75 ? 'warn' : 'good';
+    ring.setAttribute('class', `value ${tone}`);
 
     document.getElementById('scoreNum').textContent = count ? score + '%' : '--';
   }
@@ -114,10 +112,10 @@ const QuizUI = (() => {
     if (!count) { badges.innerHTML = ''; return; }
 
     let html = '';
-    if (current) html += `<span class="gear-badge good">${current} Current</span>`;
-    if (expiring) html += `<span class="gear-badge warn">${expiring} Expiring</span>`;
-    if (expired) html += `<span class="gear-badge bad">${expired} Expired</span>`;
-    if (noDate) html += `<span class="gear-badge warn">${noDate} No Date</span>`;
+    if (current) html += `<span class="sfi__badge good">${current} Current</span>`;
+    if (expiring) html += `<span class="sfi__badge warn">${expiring} Expiring</span>`;
+    if (expired) html += `<span class="sfi__badge bad">${expired} Expired</span>`;
+    if (noDate) html += `<span class="sfi__badge warn">${noDate} No Date</span>`;
     badges.innerHTML = html;
   }
 
@@ -125,8 +123,7 @@ const QuizUI = (() => {
     const list = document.getElementById('gearList');
     if (!sorted.length) {
       list.innerHTML = `
-        <div class="gear-empty">
-          <div class="gear-empty-icon">&#128737;&#65039;</div>
+        <div class="sfi__empty">
           Add your racing safety equipment above to start tracking certifications.<br>
           Type an SFI spec number to auto-fill from the database.
         </div>`;
@@ -135,7 +132,6 @@ const QuizUI = (() => {
 
     list.innerHTML = sorted.map(g => {
       const s = QuizData.getStatus(g);
-      const icon = QuizData.getCategoryIcon(g.category);
       let daysText = '';
       if (s.days !== null) {
         if (s.days < 0) daysText = `Expired ${Math.abs(s.days)} days ago`;
@@ -152,13 +148,11 @@ const QuizUI = (() => {
         : s.color === 'warn' ? 'warn'
         : 'good';
 
-      const tagClass =
-        s.status === 'pending' ? 'pending'
-        : s.status === 'rejected' ? 'rejected'
-        : s.color;
+      const tagTone = { pending: 'warn', rejected: 'bad' }[s.status]
+        || (s.color === 'expired' ? 'bad' : s.color);
 
       const reviewNote = (s.status === 'rejected' && g.reviewNote)
-        ? `<div class="gear-review-note">Reviewer: ${g.reviewNote}</div>`
+        ? `<div class="sfi__gear-item-note">Reviewer: ${g.reviewNote}</div>`
         : '';
 
       const sourceTag = g.source === 'ai-detection'
@@ -166,23 +160,22 @@ const QuizUI = (() => {
         : '';
 
       return `
-        <div class="gear-item status-${cardStatusClass}">
-          <div class="gear-item-icon">${icon}</div>
-          <div class="gear-item-info">
-            <div class="gear-item-name">${g.name}</div>
-            <div class="gear-item-spec">SFI ${g.spec}</div>
-            <div class="gear-item-meta">
+        <div class="sfi__gear-item is-${cardStatusClass}">
+          <div class="sfi__gear-item-info">
+            <div class="sfi__gear-item-name">${g.name}</div>
+            <div class="sfi__gear-item-spec">SFI ${g.spec}</div>
+            <div class="sfi__gear-item-meta">
               ${g.category ? `<span>${g.category}</span>` : ''}
               ${g.certDate ? `<span>Cert: ${g.certDate}</span>` : '<span>No cert date</span>'}
               ${sourceTag}
             </div>
             ${reviewNote}
           </div>
-          <div class="gear-item-status">
-            <div class="gear-status-tag ${tagClass}">${s.label}</div>
-            ${daysText ? `<div class="gear-days-left">${daysText}</div>` : ''}
+          <div class="sfi__gear-item-status">
+            <span class="sfi__badge ${tagTone}">${s.label}</span>
+            ${daysText ? `<div class="sfi__gear-item-days">${daysText}</div>` : ''}
           </div>
-          <button class="gear-item-del" onclick="removeGear(${g.id})" title="Remove">&times;</button>
+          <button class="sfi__gear-item-remove" onclick="removeGear(${g.id})" title="Remove">&times;</button>
         </div>`;
     }).join('');
   }

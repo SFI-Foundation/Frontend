@@ -1,0 +1,73 @@
+/* Homepage tablet/desktop sizing; keep the existing mobile rules intact. */
+@media (min-width: 768px) {
+  &.sfi-home {
+    --sfi-content-width: 1440px;
+    --sfi-page-gutter: 32px;
+  }
+  &.sfi-home .sfi-nav-inner,
+  &.sfi-home .sfi-hero-content,
+  &.sfi-home &.sfi-home-grid,
+  &.sfi-home .sfi-sect,
+  &.sfi-home .sfi-divider {
+    max-width: var(--sfi-content-width);
+    padding-left: var(--sfi-page-gutter);
+    padding-right: var(--sfi-page-gutter);
+  }
+  &.sfi-home .sfi-header,
+  &.sfi-home .sfi-welcome,
+  &.sfi-home .sfi-footer {
+    padding-left: max(var(--sfi-page-gutter), calc((100% - var(--sfi-content-width)) / 2 + var(--sfi-page-gutter)));
+    padding-right: max(var(--sfi-page-gutter), calc((100% - var(--sfi-content-width)) / 2 + var(--sfi-page-gutter)));
+  }
+  &.sfi-home .sfi-welcome-inner,
+  &.sfi-home .sfi-footer-inner { max-width: none; }
+  &.sfi-home .sfi-stats-strip {
+    padding-inline: max(var(--sfi-page-gutter), calc((100% - var(--sfi-content-width)) / 2 + var(--sfi-page-gutter)));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  &.sfi-home &.sfi-home-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-top: 32px;
+  }
+  &.sfi-home .sfi-cat-browse {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* Fit the existing full navigation on smaller tablets without overflow. */
+@media (min-width: 901px) and (max-width: 1199px) {
+  &.sfi-home .sfi-nav-links a { padding-inline: 10px; }
+  &.sfi-home .sfi-nav-links a.sfi-nav-cta { margin-left: 6px; }
+}
+@media (min-width: 1200px) {
+  &.sfi-home .sfi-nav-inner { height: 56px; }
+  &.sfi-home .sfi-nav-brand { font-size: 1.125rem; }
+  &.sfi-home .sfi-nav-links a { font-size: 1rem; padding-inline: 12px; }
+  &.sfi-home .sfi-header-tagline { font-size: 1rem; }
+  &.sfi-home .sfi-hero-content { padding-block: 72px; }
+  &.sfi-home .sfi-hero h1 { font-size: clamp(2.8rem, 3.5vw, 3.5rem); }
+  &.sfi-home .sfi-hero-sub {
+    max-width: 720px;
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+  &.sfi-home .sfi-btn { font-size: 1rem; }
+  &.sfi-home .sfi-welcome h2,
+  &.sfi-home .sfi-sect-title { font-size: 2rem; }
+  &.sfi-home .sfi-welcome p { max-width: 1100px; font-size: 1.0625rem; }
+  &.sfi-home .sfi-sect-desc { max-width: 760px; font-size: 1.0625rem; }
+  &.sfi-home .sfi-sect-label { font-size: 0.875rem; }
+  &.sfi-home .sfi-stat-num { font-size: 2.5rem; }
+  &.sfi-home .sfi-stat-desc { font-size: 0.875rem; }
+  &.sfi-home &.sfi-home-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  &.sfi-home &.sfi-home-card-body { padding: 24px; }
+  &.sfi-home &.sfi-home-card h3 { font-size: 1.25rem; }
+  &.sfi-home &.sfi-home-card p { font-size: 1rem; }
+  &.sfi-home .sfi-cat-browse { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  &.sfi-home .sfi-cat-tile-name { font-size: 1rem; }
+  &.sfi-home .sfi-cat-tile-count { font-size: 0.875rem; }
+  &.sfi-home .sfi-cta-banner h2 { font-size: 2rem; }
+  &.sfi-home .sfi-cta-banner p { font-size: 1.0625rem; }
+  &.sfi-home .sfi-footer-brand { font-size: 1.25rem; }
+  &.sfi-home .sfi-footer p,
+  &.sfi-home .sfi-footer-links { font-size: 0.9375rem; }
+}

@@ -74,7 +74,7 @@ permalink: /contact/
       <h3>Racers & Teams</h3>
       <p>
         Have questions about which SFI specification applies to your equipment? Use our
-        <a href="/sfi-specs/">Spec Search</a> tool or contact us directly for guidance.
+        <a href="{{ '/sfi-specs/' | relative_url }}">Spec Search</a> tool or contact us directly for guidance.
       </p>
     </div>
     <div class="sfi-info-card">
@@ -94,7 +94,7 @@ permalink: /contact/
   <div class="sfi-cta-banner">
     <h2>FIND A SPECIFICATION</h2>
     <p>Search our complete database of SFI specifications.</p>
-    <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
-    <a href="/about/" class="sfi-btn sfi-btn-secondary">About SFI</a>
+    <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
+    <a href="{{ '/about/' | relative_url }}" class="sfi-btn sfi-btn-secondary">About SFI</a>
   </div>
 </section>

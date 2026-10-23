@@ -15,12 +15,13 @@
 #   in _config.yml. It will appear in your document head meta (for Google search
 #   results) and in your feed.xml site description.
 
-title: Open Coding 
-description: "Class of 2026"
-owner_name: Open Coding Society 
-github_username: open-coding-society 
-github_repo: "pages" 
-baseurl: "" 
+title: SFI Foundation
+description: "SFI Foundation capstone · 2026–27"
+owner_name: SFI Foundation
+github_username: SFI-Foundation
+github_repo: "Frontend"
+url: "https://sfi-foundation.github.io"
+baseurl: "/Frontend"
 future: true
 
 # Exclude from Jekyll watch - these are processed by our conversion scripts
@@ -62,7 +63,8 @@ exclude:
 # sass:
 #   quiet_deps: true
 #   silence_deprecations: [import]
-incremental: true
+# Production builds regenerate all pages; Makefile preview enables incremental mode.
+incremental: false
 
 remote_theme: jekyll/minima
 plugins:
@@ -123,9 +125,9 @@ plugins:
 minima:
   skin: dark
   social_links:
-    - { platform: github, user_url: "https://github.com/open-coding-society" }
+    - { platform: github, user_url: "https://github.com/SFI-Foundation" }
     - { platform: x, user_url: "https://x.com/Open_Coding" }
-    - { platform: youtube, user_url: "https://www.youtube.com/@OpenCodingSociety" } 
+    - { platform: youtube, user_url: "https://www.youtube.com/@OpenCodingSociety" }
   nav_pages:
     - navigation/blog.md
     - navigation/courses.md
@@ -133,4 +135,7 @@ minima:
     - navigation/sfi-specs.md
     - navigation/search.md
 
-gemini_api_key: AIzaSyBWEz5qHeWx5buC4I4dZ2fllaMk3z8k_-w
+# Backend base URL override (scheme + host + optional port, no trailing /api).
+# Blank retains localhost:8423 locally and the current service on Pages.
+# A replacement production backend URL is not yet confirmed.
+sfi_api_base: ""

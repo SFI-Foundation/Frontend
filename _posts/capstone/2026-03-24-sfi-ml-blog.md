@@ -1,6 +1,6 @@
 ---
 toc: false
-layout: post
+layout: sfi-document
 title: How We Will Use ML in the SFI Foundation Project
 description: A simple overview of how machine learning will support faster spec lookup, certification checks, and a safer digital experience for the SFI Foundation project.
 permalink: /capstone/sfi-ml-blog/

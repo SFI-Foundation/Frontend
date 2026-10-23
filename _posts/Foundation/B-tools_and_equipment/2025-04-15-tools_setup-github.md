@@ -164,11 +164,11 @@ Ready to practice? Work through these interactive merge conflict scenarios:
         <div class="conflict-editor">
             <textarea id="editor-1" spellcheck="false"># Project Title
 
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 This project is a web application for managing tasks and todos.
-=======
+&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 This project is a task management system with collaboration features.
->>>>>>> feature-branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch
 
 ## Features
 - Task creation
@@ -198,15 +198,15 @@ This project is a task management system with collaboration features.
         
         <div class="conflict-editor">
             <textarea id="editor-2" spellcheck="false">function calculateTotal(items) {
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     let total = 0;
     for (let i = 0; i < items.length; i++) {
         total += items[i].price;
     }
     return total;
-=======
+&#61;&#61;&#61;&#61;&#61;&#61;&#61;
     return items.reduce((sum, item) => sum + item.price, 0);
->>>>>>> feature-branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch
 }</textarea>
         </div>
         
@@ -232,18 +232,18 @@ This project is a task management system with collaboration features.
         
         <div class="conflict-editor">
             <textarea id="editor-3" spellcheck="false">.button {
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
     border: none;
-=======
+&#61;&#61;&#61;&#61;&#61;&#61;&#61;
     background: linear-gradient(to right, #0066cc, #0099ff);
     color: #ffffff;
     padding: 12px 24px;
     border: 1px solid #0066cc;
     border-radius: 4px;
->>>>>>> feature-branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch
     cursor: pointer;
 }</textarea>
         </div>
@@ -265,20 +265,20 @@ This project is a task management system with collaboration features.
         
         <div class="conflict-editor">
             <textarea id="editor-4" spellcheck="false">const config = {
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     apiUrl: 'http://localhost:3000/api',
-=======
+&#61;&#61;&#61;&#61;&#61;&#61;&#61;
     apiUrl: 'https://api.example.com',
->>>>>>> feature-branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch
     timeout: 5000,
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     retries: 3,
     logLevel: 'debug'
-=======
+&#61;&#61;&#61;&#61;&#61;&#61;&#61;
     retries: 5,
     logLevel: 'info',
     cacheEnabled: true
->>>>>>> feature-branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch
 };</textarea>
         </div>
         
@@ -301,13 +301,13 @@ This project is a task management system with collaboration features.
             <textarea id="editor-5" spellcheck="false">{
   "dependencies": {
     "express": "^4.18.0",
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     "mongoose": "^6.0.0",
     "dotenv": "^16.0.0"
-=======
+&#61;&#61;&#61;&#61;&#61;&#61;&#61;
     "axios": "^1.0.0",
     "lodash": "^4.17.21"
->>>>>>> feature-branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch
   }
 }</textarea>
         </div>

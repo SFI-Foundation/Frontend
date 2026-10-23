@@ -1,6 +1,6 @@
 ---
 toc: true
-layout: post
+layout: sfi-document
 title: Designing the SFI Foundation Database Schema
 description: How we moved from a flat JSON file to a normalized SQLite database supporting QR lookups, spec search, and manufacturer self-service for the SFI Foundation web modernization.
 permalink: /sfi-database

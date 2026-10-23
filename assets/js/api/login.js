@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                            <hr style="margin: 4px 0;">`
                             : ''
                         }
-                                <a href="${baseurl}/profile">Profile</a>
-                                <a href="${baseurl}/logout">Logout</a>
+                                <a href="${baseurl}/classroom/profile/">Profile</a>
+                                <a href="${baseurl}/classroom/logout/">Logout</a>
                             </div>
                         </div>
                     `;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 } else {
                     // User is not authenticated, then "Login" link is shown
-                    loginArea.innerHTML = `<a href="${baseurl}/login">Login</a>`;
+                    loginArea.innerHTML = `<a href="${baseurl}/classroom/login/">Login</a>`;
                     waitForElement('.trigger', 20, 100).then(() => {
                         updateNavigation(false); // User is not logged in
                     });
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error("Error fetching credentials: ", err);
                 // Show login link on error
                 if (loginArea) {
-                    loginArea.innerHTML = `<a href="${baseurl}/login">Login</a>`;
+                    loginArea.innerHTML = `<a href="${baseurl}/classroom/login/">Login</a>`;
                 }
                 waitForElement('.trigger', 20, 100).then(() => {
                     updateNavigation(false); // Also update nav on error

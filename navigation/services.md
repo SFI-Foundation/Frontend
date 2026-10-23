@@ -108,7 +108,7 @@ permalink: /services/
   <div class="sfi-cta-banner">
     <h2>QUESTIONS ABOUT OUR SERVICES?</h2>
     <p>We welcome technical questions and requests for specification information.</p>
-    <a href="/contact/" class="sfi-btn sfi-btn-primary">Contact Us &rarr;</a>
-    <a href="/specs/" class="sfi-btn sfi-btn-secondary">Browse Specs</a>
+    <a href="{{ '/contact/' | relative_url }}" class="sfi-btn sfi-btn-primary">Contact Us &rarr;</a>
+    <a href="{{ '/specs/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Browse Specs</a>
   </div>
 </section>

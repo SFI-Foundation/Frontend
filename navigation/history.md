@@ -88,7 +88,7 @@ permalink: /history/
   <div class="sfi-cta-banner">
     <h2>SEE OUR WORK IN ACTION</h2>
     <p>Explore the specifications and services that carry forward our legacy.</p>
-    <a href="/specs/" class="sfi-btn sfi-btn-primary">Browse Specs &rarr;</a>
-    <a href="/services/" class="sfi-btn sfi-btn-secondary">Our Services</a>
+    <a href="{{ '/specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Browse Specs &rarr;</a>
+    <a href="{{ '/services/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Our Services</a>
   </div>
 </section>

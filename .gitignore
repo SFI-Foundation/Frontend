@@ -1,4 +1,5 @@
 _site
+_site_preview/
 *.pyc
 __pycache__/
 _posts/**/*_IPYNB_2_.md
@@ -73,3 +74,4 @@ _notebooks/**/*_content.md
 
 # Extensions
 .codex
+.codexA
