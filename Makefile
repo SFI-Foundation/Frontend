@@ -360,7 +360,7 @@ wait-for-server:
 			grep "Server address:" $(LOG_FILE); \
 			break; \
 		fi; \
-		if [ $$COUNTER -eq 300 ]; then \
+		if [ $$COUNTER -eq 600 ]; then \
 			echo "Server timed out after $$COUNTER seconds."; \
 			echo "Review errors from $(LOG_FILE)."; \
 			cat $(LOG_FILE); \

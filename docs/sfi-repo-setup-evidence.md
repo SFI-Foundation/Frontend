@@ -178,3 +178,48 @@ The unrelated Makefile timeout edit remains local and is excluded from the
 follow-up commit. PR #16 remains unmerged; this tests a local production artifact,
 not a deployed feature. Presentation, stakeholder acceptance, fresh-clone
 walkthrough, production delivery, and live API/CORS integration remain pending.
+
+## Startup timeout inclusion follow-up
+
+The owner explicitly authorized including the previously local Makefile
+`300→600` startup timeout edit in PR #16. This supersedes earlier notes saying
+that the timeout was excluded. The latest remote feature branch was fetched and
+fast-forwarded to `7a1337c4d649a6e90812941ca98402e684492b6c`, preserving its
+README GitHub-link changes and the exact uncommitted timeout edit.
+
+The prior preview/watchers were identified by repository cwd and command and
+stopped before running the **default `make` workflow**, without `make clean` or
+source deletion. Registered project builds, conversion/splitting, and docs
+preparation completed; Jekyll cleaned `_site_preview/4500` and regenerated it.
+
+```bash
+make > /tmp/sfi-timeout/make.log 2>&1
+python3 scripts/test-sfi-paths.py _site_preview/4500
+LD_LIBRARY_PATH=/tmp/sfi-final/libs/extracted/usr/lib/x86_64-linux-gnu PLAYWRIGHT_MODULE=/tmp/sfi-final/browser/node_modules/playwright SFI_SMOKE_ORIGIN=http://localhost:4500 node scripts/test-sfi-setup-browser.mjs _site_preview/4500 "" /tmp/sfi-timeout/preview.png
+curl -sS -o /dev/null -w 'homepage %{http_code}\n' http://localhost:4500/
+curl -sS -o /dev/null -w 'CSS %{http_code}\n' http://localhost:4500/assets/css/sfi.css
+curl -sS -o /dev/null -w 'logo %{http_code}\n' http://localhost:4500/images/sfi/SFI-Logo.png
+git diff --check
+```
+
+All commands exited 0. Jekyll reported **235.723s** generation; Make printed
+**Server started in 240 seconds** and `http://localhost:4500/`. The static check
+passed **15 pages / 313 link and asset targets**. The HTTP browser check passed
+**13 pages**, About navigation, CSS/logo 200, correct blue navigation and white
+header, with zero missing local requests and zero page errors. All curls
+returned **200**. External services were blocked in the browser check, so this
+does not claim API acceptance. The tool's parent shell was kept alive after
+Make completed, preserving its background server and watchers for validation.
+
+Make warned that a generated notebook had a modification time 21 seconds in the
+future, followed by its clock-skew warning; existing Jekyll warnings also remain.
+The successful runtime and generated-page checks are reported alongside those
+warnings. Default Make introduced no additional tracked source changes.
+
+At inspection, GitHub reported the PR mergeable with clean merge status, no
+review threads or pending review requests, no required checks/reviews, and no
+branch protection/rules for main. This does not constitute reviewer or
+stakeholder acceptance. Requested PR linkage is now `Refs #7`; do not auto-close
+the issue, merge the PR, or mark Done. The broader fresh-clone walkthrough,
+Backend #8/production integration, deployment, presentation, and stakeholder
+acceptance gates remain pending.
