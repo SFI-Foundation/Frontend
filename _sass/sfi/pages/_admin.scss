@@ -2,7 +2,7 @@
 .adm-wrap {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 36px 24px 60px;
+  padding: $space-6 $space-5 $space-7;
   font-family: 'Inter', sans-serif;
   color: var(--sfi-text);
 }
@@ -232,7 +232,7 @@
 .adm-wrap, .adm-card, .adm-panel, .adm-group-card { min-width: 0; }
 .adm-head, .adm-group-card, .adm-member-chip, .adm-empty { overflow-wrap: anywhere; }
 .adm-hidden { display: none; }
-.adm-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+.adm-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: $space-4; margin-bottom: $space-5; }
 .adm-stat { background: var(--sfi-surface); border: 1px solid var(--sfi-border); border-top: 3px solid var(--sfi-blue); border-radius: var(--sfi-radius); padding: 18px; box-shadow: var(--sfi-shadow); }
 .adm-stat dt { color: var(--sfi-muted); font-size: 0.82rem; }
 .adm-stat dd { margin: 8px 0 0; font-size: 1.8rem; font-weight: 700; color: var(--sfi-blue); }
@@ -256,3 +256,14 @@
   .adm-tab { padding: 12px 10px; letter-spacing: 0.5px; }
   .adm-group-card { padding: 16px; }
 }
+
+/* Keep all interactive controls usable by touch, including dense table actions. */
+.adm-wrap [hidden] { display: none; }
+.adm-btn, .adm-tab, .adm-input, .adm-permission-label { min-height: 44px; }
+.adm-member-chip button { min-width: 44px; min-height: 44px; }
+.adm-panel:focus-visible { outline: 2px solid var(--sfi-blue); outline-offset: 3px; }
+.adm-review-toolbar { margin-bottom: $space-4; }
+.adm-review-toolbar .adm-input { flex: 0 1 240px; }
+.adm-card h3 .count { color: var(--sfi-muted); }
+.adm-empty .adm-btn { margin-top: $space-3; font-style: normal; }
+.adm-btn:disabled { cursor: wait; opacity: 0.65; }
