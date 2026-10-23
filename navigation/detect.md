@@ -204,26 +204,30 @@ permalink: /detect/
   border-radius: var(--sfi-radius);
   padding: 32px;
   text-align: center;
+  width: 100%;
+  min-width: 0;
 }
 .camera-preview {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
-  max-width: 640px;
+  max-width: 800px;
+  margin: 0 auto;
   background: #000;
   border-radius: var(--sfi-radius-sm);
   overflow: hidden;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4 / 3;
 }
 .camera-preview video {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: contain;
 }
 .camera-preview canvas {
   position: absolute;
   top: 0; left: 0;
+  display: block;
   width: 100%;
   height: 100%;
   pointer-events: none;
@@ -261,16 +265,17 @@ permalink: /detect/
 /* Results canvas container */
 .result-canvas-wrap {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
   max-width: 800px;
+  margin: 0 auto 24px;
   border-radius: var(--sfi-radius-sm);
   overflow: hidden;
   background: #000;
-  margin-bottom: 24px;
 }
 .result-canvas-wrap img {
   width: 100%;
+  height: auto;
   display: block;
 }
 .result-canvas-wrap canvas {
@@ -488,7 +493,7 @@ permalink: /detect/
 /* Responsive */
 @media (max-width: 600px) {
   .upload-zone { padding: 40px 20px; }
-  .camera-zone { padding: 16px; }
+  .camera-zone { padding: 12px; }
   .detect-tabs { flex-direction: column; align-items: stretch; }
   .detect-tab { border-radius: 8px !important; }
   .detect-result-card { flex-wrap: wrap; }
