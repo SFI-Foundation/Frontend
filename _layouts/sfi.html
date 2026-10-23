@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="{{ '/images/sfi/apple-touch-icon.png' | relative_url }}">
     {% include sfi/styles.html %}
   </head>
-  <body style="margin:0;padding:0;background:var(--sfi-bg,#f4f5f7);color:var(--sfi-text,#1a1d23);">
+  <body class="{{ page.body_class | escape }}" style="margin:0;padding:0;background:var(--sfi-bg,#f4f5f7);color:var(--sfi-text,#1a1d23);">
     <header class="sfi-header">
       <a href="/sfifoundation/" class="sfi-header-logo">
         <img src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="SFI Foundation" class="sfi-logo-img">
