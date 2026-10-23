@@ -1,29 +1,58 @@
 ---
-layout: page 
+layout: sfi
 title: Sign Up
-permalink: /signup
+permalink: /signup/
 search_exclude: true
 ---
 
-{% include nav/homejava.html %}
-
 <style>
-  .login-container {
+  #login-container {
+      width: min(100% - 32px, 440px);
+      margin: 40px auto;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap; /* allows the cards to wrap onto the next line if the screen is too small */
+      justify-content: center;
   }
 
   .signup-card {
-      margin: auto;
-      margin-top: 0; /* remove the top margin */
-      width: 45%;
+      width: 100%;
+      min-width: 0;
       border: 1px solid #ddd;
       border-radius: 5px;
-      padding: 20px;
+      padding: 24px;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
-      overflow-x: auto; /* Enable horizontal scrolling */
+      background: #fff;
+  }
+
+  #signupForm label {
+      display: block;
+      font-weight: 600;
+  }
+
+  #signupForm input:not([type="checkbox"]) {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      margin-top: 6px;
+      padding: 10px 12px;
+      border: 1px solid #9ca3af;
+      border-radius: 4px;
+      font: inherit;
+  }
+
+  #signupForm input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+  }
+
+  #signupForm button[type="submit"] {
+      min-height: 44px;
+      padding: 10px 20px;
+  }
+
+  @media (max-width: 480px) {
+      #login-container { width: calc(100% - 32px); margin: 24px auto; }
+      .signup-card { padding: 20px 16px; }
   }
 
   .signup-card h1 {

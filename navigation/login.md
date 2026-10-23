@@ -75,14 +75,16 @@ permalink: /login/
   text-transform: uppercase;
 }
 .auth-field input {
+  display: block;
   width: 100%;
+  min-height: 44px;
   padding: 12px 16px;
   background: var(--sfi-bg);
   border: 1px solid var(--sfi-border);
   border-radius: var(--sfi-radius-sm);
   color: var(--sfi-text);
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -95,6 +97,7 @@ permalink: /login/
 /* Submit button */
 .auth-submit {
   width: 100%;
+  min-height: 44px;
   padding: 13px;
   background: linear-gradient(135deg, var(--sfi-gold), var(--sfi-gold-dim));
   border: none;
@@ -185,6 +188,7 @@ permalink: /login/
 }
 .auth-logout {
   width: 100%;
+  min-height: 44px;
   padding: 12px;
   background: transparent;
   border: 1px solid rgba(248,81,73,0.3);
