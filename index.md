@@ -1,5 +1,6 @@
 ---
 layout: sfi
+body_class: sfi-home
 title: SFI Foundation
 description: Setting the Standard for Motorsports Safety Since 1978
 permalink: /

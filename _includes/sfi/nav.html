@@ -1,7 +1,11 @@
-<nav class="sfi-nav">
+<nav class="sfi-nav" aria-label="Primary navigation">
   <div class="sfi-nav-inner">
     <a href="{{ '/' | relative_url }}" class="sfi-nav-brand"><span>SFI</span> Foundation</a>
-    <button class="sfi-nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navLinks" aria-expanded="false">&#9776;</button>
+    <button class="sfi-nav-toggle" id="navToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation menu">
+      <span class="sfi-nav-toggle-line"></span>
+      <span class="sfi-nav-toggle-line"></span>
+      <span class="sfi-nav-toggle-line"></span>
+    </button>
     <ul class="sfi-nav-links" id="navLinks">
       <li><a href="{{ '/about/' | relative_url }}"{% if page.permalink == '/about/' %} class="active"{% endif %}>About</a></li>
       <li><a href="{{ '/history/' | relative_url }}"{% if page.permalink == '/history/' %} class="active"{% endif %}>History</a></li>
