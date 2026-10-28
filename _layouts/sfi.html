@@ -13,7 +13,6 @@
     <link rel="icon" href="{{ '/images/sfi/favicon-192x192.png' | relative_url }}" sizes="192x192">
     <link rel="apple-touch-icon" href="{{ '/images/sfi/apple-touch-icon.png' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/sfi.css' | relative_url }}">
-    {% if page.sfi_partner_microblog %}<link rel="stylesheet" href="{{ '/assets/css/sfi-partner-microblog.css' | relative_url }}">{% endif %}
   </head>
   <body class="sfi-site{% if page.body_class %} {{ page.body_class | escape }}{% endif %}">
     <a class="sfi-skip-link" href="#sfi-main">Skip to content</a>
@@ -27,16 +26,8 @@
     <main id="sfi-main" tabindex="-1">
       {{ content }}
     </main>
-    {% if page.sfi_partner_microblog %}{% include microblog_foundation.html %}{% endif %}
     {% include sfi/footer.html %}
     {% include sfi/chatbot.html %}
-    {% if page.sfi_partner_microblog %}
-    <script>
-      document.getElementById('sfi-open-partner-microblog')?.addEventListener('click', () => {
-        document.getElementById('microblog-toggle-btn')?.click();
-      });
-    </script>
-    {% endif %}
     <script>
       const navToggle = document.getElementById('navToggle');
       const navLinks = document.getElementById('navLinks');
