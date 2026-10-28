@@ -402,9 +402,10 @@ async function renderMicroblogTable() {
             const messageCell = message.map(f => {
               let value = post[f.key] ?? '';
               if (f.key === 'topicPath') {
-                value = (f.format ? f.format(value) : value) +
-                  ` <button class='edit-btn ml-2' data-id='${post.id}' title='Edit'>${editIcon}</button>` +
-                  ` <button class='reply-btn ml-2' data-id='${post.id}' title='Reply'>${replyIcon}</button>`;
+                value = (f.format ? f.format(value) : value) + (post.archived
+                  ? ' <span title="Repository-archived conversation; read-only">(archived)</span>'
+                  : ` <button class='edit-btn ml-2' data-id='${post.id}' title='Edit'>${editIcon}</button>` +
+                    ` <button class='reply-btn ml-2' data-id='${post.id}' title='Reply'>${replyIcon}</button>`);
               } else if (f.format) {
                 value = f.format(value);
               }
