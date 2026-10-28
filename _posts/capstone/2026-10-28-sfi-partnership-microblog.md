@@ -1,48 +1,56 @@
 ---
-layout: post
+layout: sfi
 title: SFI Foundation — Community Partnership
 description: CSP community partner, contacts, and OCS microblog history.
 permalink: /capstone/sfi-partnership/
-microblog: true
 sfi_partner_microblog: true
-toc: false
+body_class: sfi-partner-microblog
 ---
 
-# SFI Foundation · Community Partnership
-
-> **Del Norte High School CSP 2026–27 capstone** — Our partner is SFI Foundation, Inc., a nonprofit that has supported motorsports safety since 1978 by administering equipment specifications, testing criteria, and certification programs.
-
-<div class="ocs__grid ocs__grid--standard cols-2">
-  <div class="ocs__grid-cell ocs__grid-cell--header">Our client and who we serve</div>
-  <div class="ocs__grid-cell ocs__grid-cell--accent">
-    <strong>Who is SFI?</strong>
-    <p>SFI serves motorsports equipment manufacturers, sanctioning bodies, racers, and teams. Our capstone continues a student website prototype, exploring better access to safety specifications and equipment tools.</p>
-    <a class="ocs__btn alert-green fill" href="https://www.sfifoundation.com/">Official SFI website</a>
-  </div>
-  <div class="ocs__grid-cell">
-    <strong>Primary contact · Jennifer Faye</strong>
-    <p>President, SFI Foundation<br><a href="mailto:jfaye@sfifoundation.com">jfaye@sfifoundation.com</a></p>
-    <p><strong>SFI Foundation:</strong> <a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a> · (858) 451-8868<br>15708 Pomerado Rd., Ste. N208, Poway, CA 92064</p>
-  </div>
-  <div class="ocs__grid-cell">
-    <strong>School partnership contacts</strong>
-    <p>Katie Salo · PUSD · <a href="mailto:ksalo@powayusd.com">ksalo@powayusd.com</a><br>John Mortensen · Del Norte HS · <a href="mailto:jmortensen@powayusd.com">jmortensen@powayusd.com</a></p>
-  </div>
-  <div class="ocs__grid-cell ocs__grid-cell--accent">
-    <strong>Upcoming · November 2 Electives Fair</strong>
-    <p>6:00–7:30 p.m. · Del Norte HS, Room A101. Jennifer cannot attend; a colleague may attend, but this is not confirmed.</p>
-    <a class="ocs__btn alert-yellow fill" href="https://forms.gle/rU9gojMELnqBm4G17">RSVP / express interest</a>
+<div class="sfi-page-header">
+  <div class="sfi-page-header-content">
+    <h1>Community <span class="gold">Partnership</span></h1>
+    <p>Del Norte High School · CSP 2026–27 · SFI Foundation</p>
   </div>
 </div>
-
-## Conversation history — Open Coding Society microblog
-
-**Click the floating 💬 Microblog button** to see the dated October 22–28 correspondence in the regular OCS microblog table. The five archival entries cover outreach, invitation, client reply, RSVP follow-up, and capstone progress. You can search the table and use its normal posting controls for new messages.
-
-The entries are repository-backed historical summaries, clearly marked **archived** rather than represented as new backend posts. Jennifer confirmed interest in continuing the student project; scope, feature approvals, and representative attendance are still pending.
-
-**Team:** Ruhaan Bansal and Ishan Jha (Scrum Masters); Arya Taghavi Zargar, Deyar Raissadat, Ishan Khandelwal, and Vayun Shekhar (Developers).
-
-[Repository setup]({{ '/capstone/sfi-repo-setup/' | relative_url }}) · [Frontend](https://github.com/SFI-Foundation/Frontend) · [Backend](https://github.com/SFI-Foundation/Backend) · [Project board](https://github.com/orgs/SFI-Foundation/projects/1)
-
-> This is a student project, not an official SFI certification resource.
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Our community partner</div>
+  <h2 class="sfi-sect-title">Who we serve</h2>
+  <p class="sfi-sect-desc">SFI Foundation, Inc. is a nonprofit established in 1978 to administer standards, certification programs, and testing criteria for motorsports safety equipment. Its community includes manufacturers, racing sanctioning bodies, racers, and teams. Our capstone continues the previous semester's website prototype to make equipment safety information easier to find and understand.</p>
+  <div class="sfi-info-grid">
+    <div class="sfi-info-card">
+      <h3>SFI Foundation</h3>
+      <p><a href="https://www.sfifoundation.com/">Official organization website</a></p>
+      <p><a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a> · <a href="tel:+18584518868">(858) 451-8868</a></p>
+      <p>15708 Pomerado Rd., Suite N208<br>Poway, CA 92064</p>
+    </div>
+    <div class="sfi-info-card">
+      <h3>Primary partner contact</h3>
+      <p><strong>Jennifer Faye</strong> · SFI Foundation President</p>
+      <p><a href="mailto:jfaye@sfifoundation.com">jfaye@sfifoundation.com</a></p>
+      <h3>School liaisons</h3>
+      <p>Katie Salo · <a href="mailto:ksalo@powayusd.com">ksalo@powayusd.com</a></p>
+      <p>John Mortensen · <a href="mailto:jmortensen@powayusd.com">jmortensen@powayusd.com</a></p>
+    </div>
+  </div>
+</section>
+<div class="sfi-divider"><hr></div>
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Partnership progress</div>
+  <h2 class="sfi-sect-title">Communication microblog</h2>
+  <p class="sfi-sect-desc">Browse the five dated October 22–28 email summaries through the OCS-style microblog panel. These records document the initial invitation, SFI's positive response, RSVP coordination, and our capstone update. New discussions can be added through the existing microblog tools.</p>
+  <div class="sfi-cta-banner">
+    <h2>FOLLOW OUR PROJECT CONVERSATIONS</h2>
+    <p>View the dated correspondence, search posts, and follow project updates in the microblog.</p>
+    <button type="button" class="sfi-btn sfi-btn-primary" id="sfi-open-partner-microblog">Open Microblog &rarr;</button>
+  </div>
+  <p class="sfi-sect-desc"><strong>Next event:</strong> Del Norte Electives Fair, Monday November 2, 2026, 6:00–7:30 p.m., Room A101. Jennifer cannot attend; a colleague may attend, but attendance has not been confirmed. <a href="https://forms.gle/rU9gojMELnqBm4G17">RSVP information</a>.</p>
+</section>
+<div class="sfi-divider"><hr></div>
+<section class="sfi-sect">
+  <div class="sfi-sect-label">Team and resources</div>
+  <h2 class="sfi-sect-title">Student development team</h2>
+  <p class="sfi-sect-desc"><strong>Scrum Masters:</strong> Ruhaan Bansal and Ishan Jha. <strong>Developers:</strong> Arya Taghavi Zargar, Deyar Raissadat, Ishan Khandelwal, and Vayun Shekhar.</p>
+  <p><a href="{{ '/capstone/sfi-repo-setup/' | relative_url }}">Repository setup</a> · <a href="https://github.com/SFI-Foundation/Frontend">Frontend</a> · <a href="https://github.com/SFI-Foundation/Backend">Backend</a> · <a href="https://github.com/orgs/SFI-Foundation/projects/1">Project board</a></p>
+  <p><small>This student project does not replace official SFI certification guidance. Final features and production readiness remain subject to SFI review.</small></p>
+</section>
