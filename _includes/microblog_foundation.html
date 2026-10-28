@@ -332,7 +332,14 @@ async function renderMicroblogTable() {
           pageArg = window.location ? window.location.pathname : 'default';
         }
         // API call to Read former Posts
-        const data = await fetchPosts(pageArg);
+        let data;
+        try {
+          data = await fetchPosts(pageArg);
+        } catch (backendError) {
+          if (!{{ page.sfi_partner_microblog | default: false | jsonify }}) throw backendError;
+          // The historical log is readable even when the backend is offline.
+          data = { microblogs: [] };
+        }
         const isPartnerPage = {{ page.sfi_partner_microblog | default: false | jsonify }};
         if (isPartnerPage && pageArg !== undefined) {
           const historyPosts = partnerHistory.map((item, index) => ({
