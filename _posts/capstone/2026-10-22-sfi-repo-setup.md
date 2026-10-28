@@ -5,8 +5,6 @@ description: Repository ownership, local setup, spec import, and delivery eviden
 permalink: /capstone/sfi-repo-setup/
 ---
 
-**Community partner introduction, SFI contacts, and October 2026 conversation microblog:** [SFI Partnership Log]({{ '/capstone/sfi-partnership/' | relative_url }}).
-
 ## Team and ownership
 
 **Scrum Masters:** Ruhaan Bansal (@ruhaanb622), Ishan Jha (@Jupiterian).
