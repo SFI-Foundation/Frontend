@@ -15,7 +15,7 @@ search_exclude: true
 
   <div id="admGate" class="adm-gate adm-hidden">
     <h2>Administrators only</h2>
-    <p id="admGateMsg">Sign in with an account that belongs to the <code>administrators</code> group to continue.</p>
+    <p id="admGateMsg">Sign in with an Admin role or an account in the <code>administrators</code> group to continue.</p>
     <a href="{{ '/login/' | relative_url }}" class="adm-btn primary">Sign In</a>
   </div>
 
@@ -32,6 +32,7 @@ search_exclude: true
     </div>
 
     <section role="tabpanel" aria-labelledby="tab-review" id="panel-review" class="adm-panel" tabindex="0">
+      <p id="gearReviewMessage" class="adm-msg" role="status" aria-live="polite"></p>
       <div class="adm-row adm-review-toolbar">
         <label for="gearView">Gear view</label>
         <select id="gearView" class="adm-input">

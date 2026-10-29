@@ -6,10 +6,12 @@
   const main = document.getElementById('admMain');
 
   const state = { me: null, users: [], groups: [], pending: [], allGear: [] };
+  const reviewsInFlight = new Set();
 
   async function api(path, options = {}) {
     const res = await fetch(API_BASE + path, {
       credentials: 'include',
+      cache: 'no-store',
       headers: { 'Content-Type': 'application/json' },
       ...options,
     });
@@ -32,8 +34,8 @@
         : 'Unable to reach the admin API. Is the backend running?');
       return;
     }
-    if (!state.me.isAdmin) {
-      showGate('Your account is not in the administrators group. Ask an existing administrator to add you.');
+    if (!(state.me.isAdmin === true || state.me.role === 'Admin')) {
+      showGate('An Admin role or administrators-group membership is required.');
       return;
     }
     main.classList.remove('adm-hidden');
@@ -119,9 +121,13 @@
 
   // ── Pending Gear ────────────────────────────────────
   async function loadPending() {
-    try { state.pending = await api('/api/sfi/gear/pending'); }
-    catch { showLoadError('Pending', 'pendingBody'); return; }
+    try {
+      state.pending = await api('/api/sfi/gear/pending');
+      if (!Array.isArray(state.pending)) throw new Error('Invalid queue response');
+    }
+    catch { showLoadError('Pending', 'pendingBody'); return false; }
     renderPending();
+    return true;
   }
 
   function renderPending() {
@@ -155,6 +161,7 @@
 
   function makeGearRow(g, showActions) {
     const row = document.createElement('tr');
+    row.dataset.gearId = String(g.id);
     const owner = g.owner ? (g.owner.name + ' · ' + g.owner.uid) : '—';
     [
       owner,
@@ -169,47 +176,135 @@
     chip.className = 'adm-chip ' + (g.status === 'approved' ? 'ok' : g.status === 'rejected' ? 'bad' : 'warn');
     chip.textContent = g.status;
     statusTd.appendChild(chip);
+    const notes = g.reviewer_notes ?? g.reviewNote;
+    if (g.status === 'rejected' && notes) {
+      const note = document.createElement('p');
+      note.className = 'adm-review-note';
+      note.textContent = notes;
+      statusTd.appendChild(note);
+    }
     row.appendChild(statusTd);
 
     const lastTd = document.createElement('td');
     if (showActions) {
+      const actions = document.createElement('div');
+      actions.className = 'adm-review-actions';
       const approveBtn = document.createElement('button');
+      approveBtn.type = 'button';
       approveBtn.className = 'adm-btn approve small';
       approveBtn.textContent = 'Approve';
-      approveBtn.addEventListener('click', () => reviewGear(g.id, 'approved', ''));
+      approveBtn.setAttribute('aria-label', 'Approve ' + g.name);
       const rejectBtn = document.createElement('button');
+      rejectBtn.type = 'button';
       rejectBtn.className = 'adm-btn reject small';
-            rejectBtn.textContent = 'Reject';
-      rejectBtn.addEventListener('click', () => {
-        const note = prompt('Reason for rejecting this submission? (optional)') || '';
-        reviewGear(g.id, 'rejected', note);
+      rejectBtn.textContent = 'Reject';
+      rejectBtn.setAttribute('aria-label', 'Reject ' + g.name);
+      const form = document.createElement('form');
+      form.className = 'adm-review-form';
+      form.hidden = true;
+      const label = document.createElement('label');
+      label.htmlFor = 'review-notes-' + g.id;
+      label.textContent = 'Rejection reason for ' + g.name + ' (required)';
+      const input = document.createElement('textarea');
+      input.id = label.htmlFor;
+      input.className = 'adm-input';
+      input.required = true;
+      input.rows = 3;
+      input.setAttribute('aria-label', 'Rejection reason for ' + g.name);
+      const submit = document.createElement('button');
+      submit.type = 'submit';
+      submit.className = 'adm-btn reject small';
+      submit.textContent = 'Submit rejection';
+      const cancel = document.createElement('button');
+      cancel.type = 'button';
+      cancel.className = 'adm-btn small';
+      cancel.textContent = 'Cancel';
+      const message = document.createElement('p');
+      message.className = 'adm-review-message';
+      message.setAttribute('role', 'alert');
+      const controls = { buttons: [approveBtn, rejectBtn, submit, cancel], input, message };
+      input.addEventListener('input', () => {
+        if (input.value.trim()) message.textContent = '';
       });
-      lastTd.appendChild(approveBtn);
-      lastTd.appendChild(rejectBtn);
+      approveBtn.addEventListener('click', () => reviewGear(g.id, 'approved', '', controls));
+      rejectBtn.addEventListener('click', () => {
+        form.hidden = false;
+        input.focus();
+      });
+      cancel.addEventListener('click', () => {
+        form.hidden = true;
+        input.value = '';
+        message.textContent = '';
+        rejectBtn.focus();
+      });
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!input.value.trim()) {
+          message.textContent = 'Enter a rejection reason before submitting.';
+          input.focus();
+          return;
+        }
+        reviewGear(g.id, 'rejected', input.value.trim(), controls);
+      });
+      actions.append(approveBtn, rejectBtn);
+      form.append(label, input, submit, cancel);
+      lastTd.append(actions, form, message);
     } else {
-      lastTd.textContent = g.createdAt ? new Date(g.createdAt).toLocaleDateString() : '—';
+      const createdAt = g.created_at ?? g.createdAt;
+      lastTd.textContent = createdAt ? new Date(createdAt).toLocaleDateString() : '—';
     }
     row.appendChild(lastTd);
     return row;
   }
 
-  async function reviewGear(id, status, note) {
+  async function reviewGear(id, status, notes, controls) {
+    if (reviewsInFlight.has(id)) return;
+    reviewsInFlight.add(id);
+    controls.buttons.forEach(button => { button.disabled = true; });
+    controls.input.disabled = true;
+    controls.message.textContent = 'Saving review…';
+    const feedback = document.getElementById('gearReviewMessage');
+    feedback.className = 'adm-msg';
+    feedback.textContent = '';
     try {
-      await api('/api/sfi/gear/' + id + '/status', {
-        method: 'PATCH',
-        body: JSON.stringify({ status, note }),
+      await api('/api/sfi/gear/' + encodeURIComponent(id) + '/review', {
+        method: 'PUT',
+        body: JSON.stringify({ status, notes }),
       });
-      await Promise.all([loadPending(), loadAllGear()]);
+      const refreshed = await Promise.all([loadPending(), loadAllGear()]);
+      feedback.className = 'adm-msg success';
+      const decision = status === 'approved' ? 'Gear approved.' : 'Gear rejected with your notes.';
+      feedback.textContent = decision + (refreshed.every(Boolean) ? ' Lists refreshed.'
+        : ' Review saved; use Try again to reload any failed sections.');
     } catch (err) {
-      alert('Review failed: ' + (err.body || err.message));
+      controls.message.textContent = 'Review was not saved. Your notes are still here; try again.';
+      if (err.status === 400) {
+        try {
+          const detail = JSON.parse(err.body);
+          if (typeof detail.error === 'string') controls.message.textContent = 'Review was not saved: ' + detail.error;
+        } catch { /* Keep the useful retry message for non-JSON errors. */ }
+      }
+      if (err.status === 401 || err.status === 403) {
+        main.classList.add('adm-hidden');
+        showGate(err.status === 401 ? 'Your session expired. Sign in again to review gear.'
+          : 'Your account no longer has permission to review gear.');
+      }
+    } finally {
+      reviewsInFlight.delete(id);
+      controls.buttons.forEach(button => { button.disabled = false; });
+      controls.input.disabled = false;
     }
   }
 
   // ── All Gear ────────────────────────────────────────
   async function loadAllGear() {
-    try { state.allGear = await api('/api/sfi/gear/all'); }
-    catch { showLoadError('Gear', 'gearBody'); return; }
+    try {
+      state.allGear = await api('/api/sfi/gear/all');
+      if (!Array.isArray(state.allGear)) throw new Error('Invalid gear response');
+    }
+    catch { showLoadError('Gear', 'gearBody'); return false; }
     renderAllGear();
+    return true;
   }
 
   function renderAllGear() {

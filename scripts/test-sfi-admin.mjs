@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE || 'playwright');
 assert.ok(process.argv[2], 'Supply a built-site directory');
 const site = path.resolve(process.argv[2]);
+const base = (process.env.SFI_BASEURL || '').replace(/\/$/, '');
 const browser = await chromium.launch({ headless: true, ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}) });
 try {
   for (const width of [375, 768, 1440]) {
@@ -27,14 +28,15 @@ try {
             : url.pathname.endsWith('/groups/1') ? { id: 1, name: long, description: long, members: [user] }
             : [gear];
           return route.fulfill({ status: mode === 'error' && !me && !retryWorks ? 503 : 200,
-            json: body, headers: { 'access-control-allow-origin': 'http://sfi.test', 'access-control-allow-credentials': 'true', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'GET, POST, PATCH, DELETE, OPTIONS' } });
+            json: body, headers: { 'access-control-allow-origin': 'http://sfi.test', 'access-control-allow-credentials': 'true', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS' } });
         }
         if (url.hostname !== 'sfi.test') return route.abort();
-        const file = path.join(site, url.pathname.endsWith('/') ? url.pathname + 'index.html' : url.pathname);
+        const pathname = base && url.pathname.startsWith(base + '/') ? url.pathname.slice(base.length) : url.pathname;
+        const file = path.join(site, pathname.endsWith('/') ? pathname + 'index.html' : pathname);
         try { return route.fulfill({ body: await readFile(file), contentType: file.endsWith('.css') ? 'text/css' : file.endsWith('.js') ? 'text/javascript' : 'text/html' }); }
         catch { return route.fulfill({ status: 404, body: '' }); }
       });
-      await page.goto('http://sfi.test/admin/');
+      await page.goto('http://sfi.test' + base + '/admin/');
       if (mode === 'denied') {
         await page.locator('#admGate').waitFor({ state: 'visible' });
         assert.equal(await page.locator('#admMain').isVisible(), false);
