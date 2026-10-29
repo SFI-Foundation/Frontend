@@ -15,7 +15,7 @@ permalink: /quiz/
 
 <div class="sfi__gear">
 
-  <div id="gearAuthBanner" class="sfi__notice"></div>
+  <div id="gearAuthBanner" class="sfi__notice" role="status" data-login-url="{{ '/login/' | relative_url }}"></div>
 
   <div id="gearMain">
 
@@ -28,12 +28,12 @@ permalink: /quiz/
         </svg>
         <div class="sfi__score-number">
           <span id="scoreNum">--</span>
-          <small>Safety score</small>
+          <small>Reminder score</small>
         </div>
       </div>
       <div class="sfi__score-info">
         <h2 class="sfi__title">Gear tracker</h2>
-        <p class="sfi__lead">Log your equipment with SFI spec numbers and certification dates to see what is current, what is expiring soon and what needs replacing. SFI certifications typically expire after five years.</p>
+        <p class="sfi__lead">See staff review results alongside expiry reminders. Reminder dates use a five-year estimate from the certification date; confirm the actual expiry on the equipment label and relevant specification.</p>
         <div class="sfi__score-badges" id="scoreBadges"></div>
       </div>
     </section>
@@ -53,7 +53,7 @@ permalink: /quiz/
       <button type="button" class="sfi__btn small" id="gearSortBtn">Sort: <span id="sortLabel">Urgency</span></button>
     </div>
 
-    <div id="gearList"></div>
+    <div id="gearList" aria-live="polite"></div>
 
   </div>
 </div>
