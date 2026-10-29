@@ -1,0 +1,32 @@
+{
+  "news": [
+    {
+      "title": "SFI Releases 2026 Spec Review Meeting Schedule to be held at PRI Show",
+      "url": "https://sfifoundation.com/sfi-releases-2026-spec-review-meeting-schedule-to-be-held-at-pri-show/",
+      "published": "Fri, 25 Sep 2026 00:00:00 +0000"
+    },
+    {
+      "title": "SFI Welcomes NAPA Auto Parts Dragway as a New Member",
+      "url": "https://sfifoundation.com/sfi-welcomes-napa-auto-parts-dragway-as-a-new-member/",
+      "published": "Fri, 29 May 2026 00:00:00 +0000"
+    }
+  ],
+  "events": [
+    {
+      "title": "SFI Specification Review Meetings",
+      "start": "2026-12-10",
+      "date_label": "December 10, 2026",
+      "location": "PRI Show, Indiana Convention Center, Indianapolis, Room 204 (Eastern Time)",
+      "url": "https://sfifoundation.com/meeting-schedule/",
+      "source": "SFI Foundation"
+    },
+    {
+      "title": "SFI Specification Review Meetings",
+      "start": "2026-12-11",
+      "date_label": "December 11, 2026",
+      "location": "PRI Show, Indiana Convention Center, Indianapolis, Room 204 (Eastern Time)",
+      "url": "https://sfifoundation.com/meeting-schedule/",
+      "source": "SFI Foundation"
+    }
+  ]
+}

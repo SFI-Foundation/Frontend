@@ -21,6 +21,12 @@ permalink: /
   </div>
 </section>
 
+<section class="sfi-sect" aria-label="Capstone project notice">
+  <div class="sfi-sect-label">Student Capstone Project</div>
+  <h2 class="sfi-sect-title">Serving the SFI Foundation</h2>
+  <p class="sfi-sect-desc">We are serving the SFI Foundation as part of our capstone project, developing digital tools that help people explore motorsports safety information. <a href="{{ '/news-events/' | relative_url }}">See upcoming SFI and capstone events</a>.</p>
+</section>
+
 <div class="sfi-welcome">
   <div class="sfi-welcome-inner">
     <h2>Welcome to SFI Foundation</h2>
