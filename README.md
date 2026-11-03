@@ -79,6 +79,7 @@ Issue #7's accountable owner is Ruhaan Bansal; priority is Medium.
 - [Current capstone setup and system diagram](https://sfi-foundation.github.io/Frontend/capstone/sfi-repo-setup/)
 - [SFI KanBan](https://github.com/orgs/SFI-Foundation/projects/1)
 - [Frontend](https://github.com/SFI-Foundation/Frontend) · [Backend](https://github.com/SFI-Foundation/Backend)
+- [Sprint workflow, labels, diagrams, and manual setup checklist](docs/sprint-workflow.md)
 
 ## Quick start: clone → install → run
 
