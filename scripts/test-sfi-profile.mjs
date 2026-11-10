@@ -46,7 +46,7 @@ function execute(source, document, fetch) {
     const events = [];
     const window = { dispatchEvent: event => events.push(event) };
     vm.runInNewContext(source.replace(/^import .*;\s*$/m, ''), {
-        document, fetch, window, pythonURI: 'http://localhost:8423', API_BASE: 'http://localhost:8423',
+        document, fetch, window, pythonURI: 'http://localhost:8605', API_BASE: 'http://localhost:8605',
         CustomEvent: class { constructor(type, options) { this.type = type; this.detail = options.detail; } },
         console,
     });
@@ -61,7 +61,7 @@ function quizHarness() {
     const fetch = async (url, options) => {
         assert.equal(options.credentials, 'include');
         assert.equal(options.cache, 'no-store');
-        assert.ok(url.startsWith('http://localhost:8423/api/sfi/profile'));
+        assert.ok(url.startsWith('http://localhost:8605/api/sfi/profile'));
         if (failure) return { ok: false, status: failure, json: async () => ({ message: 'Unable to save answers' }) };
         if (options.method === 'PUT' && url.endsWith('/interests')) {
             assert.equal(options.headers['Content-Type'], 'application/json');
@@ -69,7 +69,7 @@ function quizHarness() {
             writes.push(answers);
             stored.interests = answers;
         } else if (options.method === 'PUT') {
-            assert.equal(url, 'http://localhost:8423/api/sfi/profile');
+            assert.equal(url, 'http://localhost:8605/api/sfi/profile');
             stored.name = JSON.parse(options.body).name;
         }
         return { ok: true, status: 200, json: async () => structuredClone(stored) };

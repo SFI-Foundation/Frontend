@@ -133,10 +133,10 @@ test('rendered SFI login/profile/quiz/role UI → real Flask authentication → 
         current.el('interestSkills').value = 'Updated mentoring';
         current.el('interestForm').events.submit({ preventDefault() {} });
         await until(() => current.el('sfiProfileSkills').textContent === 'Updated mentoring', 'Quiz update failed');
-        assert.equal((await fetch('http://localhost:8423/api/sfi/profile/roles/1', { credentials: 'include', method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role: 'Admin' }) })).status, 403);
+        assert.equal((await fetch('http://localhost:8605/api/sfi/profile/roles/1', { credentials: 'include', method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role: 'Admin' }) })).status, 403);
         login.window.doLogout();
         await until(() => loginDocument.getElementById('authForm').style.display === 'block', 'Logout failed');
-        assert.equal((await fetch('http://localhost:8423/api/sfi/profile', { credentials: 'include' })).status, 401);
+        assert.equal((await fetch('http://localhost:8605/api/sfi/profile', { credentials: 'include' })).status, 401);
         loginDocument.getElementById('loginUid').value = fixture.admin_uid;
         loginDocument.getElementById('loginPass').value = fixture.password;
         login.window.doLogin();
@@ -149,7 +149,7 @@ test('rendered SFI login/profile/quiz/role UI → real Flask authentication → 
         current.el('roleValue').value = 'Volunteer';
         current.el('roleForm').events.submit({ preventDefault() {} });
         await until(() => current.el('roleStatus').textContent.includes('Role saved'), 'Admin role assignment failed');
-        const result = await (await fetch('http://localhost:8423/api/sfi/profile/roles', { credentials: 'include' })).json();
+        const result = await (await fetch('http://localhost:8605/api/sfi/profile/roles', { credentials: 'include' })).json();
         assert.equal(result.users.find(user => user.uid === fixture.uid).role, 'Volunteer');
         await settle();
         assert.equal(pending.size, 0);

@@ -71,7 +71,7 @@ Important frontend files and directories:
 
 Most dynamic SFI features depend on the companion Flask backend:
 
-- Local backend: `http://localhost:8423`
+- Local backend: `http://localhost:8605`
 - Deployed backend used by the current frontend code: `https://greppers-be.opencodingsociety.com`
 - Backend repo: `../flask` locally, remote `https://github.com/TheGreppers/flask`
 
@@ -79,7 +79,7 @@ The frontend uses this local-vs-production switch in several SFI files:
 
 ```js
 const API_BASE = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "http://localhost:8423"
+  ? "http://localhost:8605"
   : "https://greppers-be.opencodingsociety.com";
 ```
 

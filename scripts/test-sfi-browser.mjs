@@ -46,7 +46,7 @@ try {
     await page.route('**/*', async route => {
       const req = route.request();
       const url = new URL(req.url());
-      if (url.hostname === 'localhost' && url.port === '8423') {
+      if (url.hostname === 'localhost' && url.port === '8605') {
         const headers = await req.allHeaders();
         // Send real browser cookies and CORS headers to the real HTTP server.
         const response = await new Promise((resolve, reject) => {
