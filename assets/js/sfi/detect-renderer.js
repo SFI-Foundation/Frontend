@@ -6,9 +6,7 @@
 
 const DetectRenderer = (() => {
 
-  const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? 'http://localhost:8605'
-    : 'https://greppers-be.opencodingsociety.com';
+  const API_BASE = window.SFI_API_BASE;
 
   let _lastResults = [];
 
@@ -220,7 +218,7 @@ const DetectRenderer = (() => {
 
     html += `
       <p class="sfi__disclaimer">AI estimate. Verify against the official SFI spec.</p>
-      <div class="sfi__notice">Seen your gear? Save it to <a href="/quiz/">My Gear</a>. Administrators review submissions and keep one clean record.</div>
+      <div class="sfi__notice">Seen your gear? Save it to <a href="../quiz/">My Gear</a>. Administrators review submissions and keep one clean record.</div>
       <details class="sfi__raw">
         <summary>Show raw model output</summary>
         <div>

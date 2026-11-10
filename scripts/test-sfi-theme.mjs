@@ -28,7 +28,7 @@ let references = 0;
 let destinations = 0;
 for (const name of pages) {
   const html = readFileSync(path.join(site, ...(name.endsWith('.html') ? [name] : [name, 'index.html'])), 'utf8');
-  assert.match(html, /<body class="sfi-site">/);
+  assert.match(html, /<body class="sfi-site(?: [^"<>]+)?">/);
   for (const branding of ['Open Coding Society', 'School Email Verification', '/images/logo.png']) {
     assert.ok(!html.includes(branding), `${name}: classroom branding must stay out of SFI`);
   }

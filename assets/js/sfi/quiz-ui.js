@@ -5,6 +5,8 @@
 // ════════════════════════════════════════════════════
 
 const QuizUI = (() => {
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
   // ── Autocomplete ──────────────────────────────────
   let selectedSpecData = null;
@@ -28,8 +30,8 @@ const QuizUI = (() => {
 
       acList.innerHTML = matches.map((s, i) => `
         <div class="sfi__autocomplete-item" data-idx="${i}">
-          <strong>SFI ${s.spec_number}</strong> &mdash; ${s.product_name}
-          <br><small>${s.category}</small>
+          <strong>SFI ${escapeHtml(s.spec_number)}</strong> &mdash; ${escapeHtml(s.product_name)}
+          <br><small>${escapeHtml(s.category)}</small>
         </div>
       `).join('');
 
@@ -56,11 +58,14 @@ const QuizUI = (() => {
   function getSelectedSpec() { return selectedSpecData; }
   function clearSelectedSpec() { selectedSpecData = null; }
 
-  function updateAuthBanner(remote, authed) {
+  function updateAuthBanner(remote, authed, syncError = '') {
     const banner = document.getElementById('gearAuthBanner');
     if (!banner) return;
     banner.textContent = '';
-    if (remote) {
+    if (syncError) {
+      banner.className = 'sfi__notice warn';
+      banner.textContent = syncError;
+    } else if (remote) {
       banner.className = 'sfi__notice good';
       banner.appendChild(document.createTextNode(
         'Signed in — your gear is tracked in the central database. Administrators review new submissions.'
@@ -74,7 +79,7 @@ const QuizUI = (() => {
         ' Items stay on this device only and are not visible to administrators. '
       ));
       const a = document.createElement('a');
-      a.href = '/login';
+      a.href = banner.dataset.loginUrl || '/login/';
       a.textContent = 'Sign in';
       banner.appendChild(a);
       banner.appendChild(document.createTextNode(' to sync your gear.'));
@@ -99,7 +104,7 @@ const QuizUI = (() => {
     const ring = document.getElementById('scoreRing');
     const circumference = 2 * Math.PI * 68;
     const offset = circumference - (score / 100) * circumference;
-    ring.style.strokeDashoffset = count ? offset : circumference;
+    ring.setAttribute('stroke-dashoffset', String(count ? offset : circumference));
 
     const tone = score < 50 ? 'bad' : score < 75 ? 'warn' : 'good';
     ring.setAttribute('class', `value ${tone}`);
@@ -132,6 +137,7 @@ const QuizUI = (() => {
 
     list.innerHTML = sorted.map(g => {
       const s = QuizData.getStatus(g);
+      const review = QuizData.getReviewStatus(g);
       let daysText = '';
       if (s.days !== null) {
         if (s.days < 0) daysText = `Expired ${Math.abs(s.days)} days ago`;
@@ -141,43 +147,47 @@ const QuizUI = (() => {
         else daysText = `${(s.days / 365).toFixed(1)} years left`;
       }
 
-      const cardStatusClass =
-        s.status === 'pending' ? 'pending'
-        : s.status === 'rejected' ? 'rejected'
-        : s.color === 'expired' ? 'expired'
-        : s.color === 'warn' ? 'warn'
-        : 'good';
+      const cardStatusClass = s.status === 'expired' ? 'expired'
+        : review?.status === 'rejected' ? 'rejected'
+        : s.color === 'warn' || review?.status === 'pending' ? 'warn' : 'good';
 
-      const tagTone = { pending: 'warn', rejected: 'bad' }[s.status]
-        || (s.color === 'expired' ? 'bad' : s.color);
+      const tagTone = s.color === 'expired' ? 'bad' : s.color;
 
-      const reviewNote = (s.status === 'rejected' && g.reviewNote)
-        ? `<div class="sfi__gear-item-note">Reviewer: ${g.reviewNote}</div>`
+      const reviewNote = (review?.status === 'rejected' && g.reviewNote)
+        ? `<div class="sfi__gear-item-note">Reviewer: ${escapeHtml(g.reviewNote)}</div>`
         : '';
 
-      const sourceTag = g.source === 'ai-detection'
+      const sourceTag = ['ai-detection', 'detector'].includes(g.source)
         ? '<span title="Saved from the AI Equipment Detector">AI detect</span>'
         : '';
 
       return `
         <div class="sfi__gear-item is-${cardStatusClass}">
           <div class="sfi__gear-item-info">
-            <div class="sfi__gear-item-name">${g.name}</div>
-            <div class="sfi__gear-item-spec">SFI ${g.spec}</div>
+            <div class="sfi__gear-item-name">${escapeHtml(g.name)}</div>
+            <div class="sfi__gear-item-spec">SFI ${escapeHtml(g.spec)}</div>
             <div class="sfi__gear-item-meta">
-              ${g.category ? `<span>${g.category}</span>` : ''}
-              ${g.certDate ? `<span>Cert: ${g.certDate}</span>` : '<span>No cert date</span>'}
+              ${g.category ? `<span>${escapeHtml(g.category)}</span>` : ''}
+              ${g.certDate ? `<span>Cert: ${escapeHtml(g.certDate)}</span>` : '<span>No cert date</span>'}
               ${sourceTag}
             </div>
             ${reviewNote}
           </div>
           <div class="sfi__gear-item-status">
-            <span class="sfi__badge ${tagTone}">${s.label}</span>
+            ${review ? `<span class="sfi__badge ${review.color}" data-gear-review>${review.label}</span>` : ''}
+            <span class="sfi__badge ${tagTone}" data-gear-expiry>${s.label}</span>
             ${daysText ? `<div class="sfi__gear-item-days">${daysText}</div>` : ''}
           </div>
-          <button class="sfi__gear-item-remove" onclick="removeGear(${g.id})" title="Remove">&times;</button>
+          <button type="button" class="sfi__gear-item-remove" aria-label="Remove ${escapeHtml(g.name)}" title="Remove">&times;</button>
         </div>`;
     }).join('');
+    list.querySelectorAll('.sfi__gear-item-remove').forEach((button, index) => {
+      button.addEventListener('click', async () => {
+        button.disabled = true;
+        try { await QuizApp.removeGear(sorted[index].id); }
+        finally { button.disabled = false; }
+      });
+    });
   }
 
   return { initAutocomplete, getSelectedSpec, clearSelectedSpec, renderGear, updateAuthBanner };

@@ -1,0 +1,12 @@
+{
+  "name": "sfi-frontend-checks",
+  "private": true,
+  "scripts": {
+    "test": "node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs",
+    "test:styles": "node scripts/test-sfi-gear-sass.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0",
+    "sass": "1.93.2"
+  }
+}

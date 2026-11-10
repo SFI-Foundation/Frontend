@@ -42,6 +42,8 @@
 .sfi__dropzone-hint  { font-size: 0.82rem; color: $text-muted; }
 
 .sfi__camera {
+  width: 100%;
+  min-width: 0;
   padding: $space-5;
   border: 1px solid $border;
   border-radius: $radius;
@@ -51,7 +53,7 @@
 .sfi__camera-view {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 800px;
   margin: 0 auto;
   aspect-ratio: 4 / 3;
   background: #000;
@@ -85,7 +87,7 @@
   border-radius: $radius-sm;
   overflow: hidden;
 
-  img { display: block; width: 100%; }
+  img { display: block; width: 100%; height: auto; }
   canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 }
 .sfi__overlay {

@@ -54,6 +54,7 @@ permalink: /sfi-specs/
     <div class="sfi__showcase-pills" id="showcasePills"></div>
   </section>
 
+<script src="{{ '/assets/js/sfi/api-base.js' | relative_url }}"></script>
 <script>
 (function(){
   var PARTS=[
@@ -287,7 +288,7 @@ permalink: /sfi-specs/
     <div class="sfi__card">
       <p>The <strong>SFI Foundation</strong> (originally the SEMA Foundation, Inc.) was established in 1978 as a nonprofit organization to develop and administer quality assurance programs for the motorsports aftermarket. SFI specifications cover safety equipment used across drag racing, auto racing, boat racing, tractor pulling and more.</p>
       <p>Each specification number corresponds to a type of racing equipment, from driver suits and helmets to roll cages, fuel cells, supercharger restraints and turbochargers. The classifier can identify the right specification from a plain-text description of a part.</p>
-      <p>Learn more at <a class="sfi__link" href="/about/">About SFI Foundation</a>.</p>
+      <p>Learn more at <a class="sfi__link" href="{{ '/about/' | relative_url }}">About SFI Foundation</a>.</p>
     </div>
   </section>
 
@@ -377,9 +378,7 @@ th[aria-sort="descending"] .sfi__sort::after { content: ' \25BC'; opacity: 1; }
 
 <script>
 // ── API Configuration ────────────────────────────
-const API_BASE = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "http://localhost:8605"
-  : "https://greppers-be.opencodingsociety.com";
+const API_BASE = window.SFI_API_BASE;
 const API = API_BASE + "/api/sfi";
 
 // ═══════════════ STATS BAR ═══════════════

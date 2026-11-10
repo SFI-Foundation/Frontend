@@ -6,13 +6,13 @@
 
 const QuizApp = (() => {
   let sortMode = 'urgency';
+  let adding = false;
 
   async function init() {
     QuizData.fetchSpecs();
     QuizUI.initAutocomplete();
 
     await QuizData.loadGear();
-    QuizUI.updateAuthBanner(QuizData.isRemote(), QuizData.isAuthed());
     render();
 
     document.getElementById('gearAddBtn').addEventListener('click', addGearAction);
@@ -22,6 +22,7 @@ const QuizApp = (() => {
   }
 
   async function addGearAction() {
+    if (adding) return;
     const nameEl = document.getElementById('gearName');
     const specEl = document.getElementById('gearSpec');
     const dateEl = document.getElementById('gearDate');
@@ -29,18 +30,23 @@ const QuizApp = (() => {
     const name = nameEl.value.trim();
     if (!name) { alert('Enter an equipment name.'); return; }
 
-    await QuizData.addItem(name, specEl.value.trim(), dateEl.value, QuizUI.getSelectedSpec());
-    render();
-
-    nameEl.value = '';
-    specEl.value = '';
-    dateEl.value = '';
-    QuizUI.clearSelectedSpec();
+    adding = true;
+    const button = document.getElementById('gearAddBtn');
+    button.disabled = true;
+    try {
+      await QuizData.addItem(name, specEl.value.trim(), dateEl.value, QuizUI.getSelectedSpec());
+      nameEl.value = '';
+      specEl.value = '';
+      dateEl.value = '';
+      QuizUI.clearSelectedSpec();
+    } catch (error) { alert(error.message || 'Unable to add gear. Please retry.'); }
+    finally { adding = false; button.disabled = false; render(); }
   }
 
   async function removeGearAction(id) {
-    await QuizData.removeItem(id);
-    render();
+    try { await QuizData.removeItem(id); }
+    catch (error) { alert(error.message || 'Unable to remove gear. Please retry.'); }
+    finally { render(); }
   }
 
   function toggleSort() {
@@ -52,6 +58,7 @@ const QuizApp = (() => {
   }
 
   function render() {
+    QuizUI.updateAuthBanner(QuizData.isRemote(), QuizData.isAuthed(), QuizData.getLoadError());
     QuizUI.renderGear(sortMode);
   }
 

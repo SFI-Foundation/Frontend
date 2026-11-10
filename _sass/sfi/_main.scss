@@ -12,5 +12,6 @@
   @import "pages/detect", "pages/gear", "pages/specs";
   // These originally followed the shared styles in the rendered document.
   @import "components/nav-account", "pages/auth", "pages/profile", "components/chatbot";
+  @import "pages/home-responsive";
   @import "base/accessibility";
 }
