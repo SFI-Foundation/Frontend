@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 import { JSDOM } from 'jsdom';
-const source = readFileSync(new URL('../assets/js/sfi/manufacturer-demo.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../_internal/manufacturer-demo.js', import.meta.url), 'utf8');
 const context = vm.createContext({ Intl, Date }); vm.runInContext(source, context);
 const { todayInZone, thresholdDate, evaluate, parseDate } = context.SFIManufacturerDemo;
 
@@ -41,7 +41,7 @@ test('threshold inclusive, expiration inclusive, overdue following day, disable 
 });
 
 test('demo uses synthetic records only, supports search and changes, never contacts services', () => {
-  const page = readFileSync(new URL('../navigation/sfi-manufacturer-demo.md', import.meta.url), 'utf8');
+  const page = readFileSync(new URL('../_internal/manufacturer-demo.md', import.meta.url), 'utf8');
   const dom = new JSDOM(page, { url: 'http://localhost:4000/Frontend/sfi-manufacturer-demo/', runScripts: 'outside-only' });
   dom.window.fetch = () => { throw new Error('Demo attempted a network request'); };
   dom.window.eval(source);
@@ -64,7 +64,7 @@ test('demo uses synthetic records only, supports search and changes, never conta
 });
 
 test('every reminder input has an individual label, feedback, and disabled state', () => {
-  const page = readFileSync(new URL('../navigation/sfi-manufacturer-demo.md', import.meta.url), 'utf8');
+  const page = readFileSync(new URL('../_internal/manufacturer-demo.md', import.meta.url), 'utf8');
   const dom = new JSDOM(page, { runScripts: 'outside-only' });
   dom.window.eval(source);
   const doc = dom.window.document;

@@ -4,7 +4,8 @@
   "scripts": {
     "test": "node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs",
     "test:styles": "node scripts/test-sfi-gear-sass.mjs",
-    "test:phase1": "node --test scripts/test-sfi-spec-search.mjs scripts/test-sfi-manufacturer-demo.mjs"
+    "test:phase1": "node --test scripts/test-sfi-spec-search.mjs scripts/test-sfi-manufacturer-demo.mjs scripts/test-sfi-public-cleanup.mjs",
+    "test:public-build": "node --test --test-isolation=none scripts/test-sfi-public-cleanup.mjs"
   },
   "devDependencies": {
     "jsdom": "26.1.0",

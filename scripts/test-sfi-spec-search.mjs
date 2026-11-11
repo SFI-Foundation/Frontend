@@ -123,3 +123,19 @@ test('all non-current document states expose clear text without actions', () => 
   }
   dom.window.close();
 });
+
+
+test('entire cleaned public page initializes without references to removed controls', async () => {
+  const dom = new JSDOM(page, { url: 'http://localhost:4000/sfi-specs/', runScripts: 'outside-only' });
+  dom.window.SFI_API_BASE = 'http://localhost:8605';
+  dom.window.fetch = async url => ({ ok: !url.endsWith('/api/id'), json: async () =>
+    url.includes('/categories') ? ['Auto Racing'] : url.includes('/stats') ?
+      { total_specs: 1, total_categories: 1, total_subcategories: 0, by_category: {} } :
+      { items: [item], total: 1, page: 1, limit: 20 } });
+  dom.window.eval(source);
+  for (const script of dom.window.document.querySelectorAll('script:not([src])')) dom.window.eval(script.textContent);
+  await settle();
+  assert.equal(dom.window.document.querySelectorAll('#sfiResults article').length, 1);
+  assert.equal(dom.window.document.getElementById('statSpecs').textContent, '1');
+  dom.window.close();
+});

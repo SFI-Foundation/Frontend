@@ -56,4 +56,4 @@ permalink: /sfi-manufacturer-demo/
 <h3>Upcoming and overdue samples</h3><ul id="demoUpcoming"></ul>
 <h3>Notification message previews</h3><ul id="demoMessages"></ul>
 </section></div>
-<script src="{{ '/assets/js/sfi/manufacturer-demo.js' | relative_url }}"></script>
+<script src="{{ '/_internal/manufacturer-demo.js' | relative_url }}"></script>
