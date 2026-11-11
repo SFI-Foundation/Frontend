@@ -5,8 +5,8 @@ The existing `/sfi-specs/` Jekyll page and scoped SFI Sass remain in use.
 routes. Search ranking, canonical identities, category membership and counts are
 owned by the backend. Cards show full specification numbers, product descriptions,
 revision labels, all associated categories, and product-specific recertification
-rules. Only verified current official URLs produce PDF actions. The existing
-showcase/classifier now direct visitors into canonical search for current links.
+rules. Only verified current official URLs produce PDF actions. The experimental
+showcase/classifier UI is retained in excluded `_internal/specification-research.md`.
 Legacy admin authorization remains server-enforced; the browser does not grant roles.
 
 Search has a labeled native search form, explicit Clear, pressed category buttons,
@@ -14,7 +14,8 @@ a live loading/count region, empty/error/retry states, race protection, and
 Previous/Next pagination. API-controlled text is escaped and PDF actions have a
 second client-side official-host/status check. Existing styles remain scoped.
 
-`/sfi-manufacturer-demo/` is an isolated, clearly fictional prototype with five
+`/sfi-manufacturer-demo/` is unavailable by default. The retained development-only
+prototype in `_internal/` contains five
 synthetic registrations, sample revisions, search/status filters, editable sample
 expiration dates, timezone/preview-instant controls, independently enabled
 calendar-month/day intervals, upcoming/overdue lists and notification previews.
@@ -22,7 +23,9 @@ Six months is a calendar interval with month-end clamping, not an assumed number
 of days or a universal recertification schedule. Expiration is inclusive in the
 selected timezone; overdue begins the next local day. The demo never reads
 accounts, fetches manufacturer records, saves data, schedules tasks, or sends
-messages. Refresh resets all sample changes.
+messages. Refresh resets all sample changes. Reminder previews start disabled.
+Only `JEKYLL_ENV=development` plus the explicit `_config.development.yml` overlay
+emits the page and dataset. Production opt-in fails; public requests cannot enable it.
 
 ## Run
 
@@ -40,11 +43,12 @@ bundle exec jekyll serve --host 127.0.0.1 --port 4000 --baseurl "" \
   --destination /tmp/sfi-phase1-preview
 ```
 
-Open `http://localhost:4000/sfi-specs/` or
-`http://localhost:4000/sfi-manufacturer-demo/`. The shared existing API config
+Open `http://localhost:4000/sfi-specs/`. The shared existing API config
 selects localhost:8605. Full-app classifier/profile functionality requires the
 normal backend with an isolated database; the focused catalog sandbox has no
-real accounts or classifier endpoint. No production API configuration was changed.
+real accounts or classifier endpoint unless synthetic QA accounts are explicitly requested.
+See [public cleanup verification](sfi-ui-cleanup-verification.md) for the current
+isolated review commands and development prototype URL.
 
 ## Verification
 
