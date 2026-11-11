@@ -83,3 +83,6 @@ SpecList.docx
 *.db
 *.sqlite*
 .phase1-local/
+
+# Local browser screenshots and QA reports
+/qa-evidence/

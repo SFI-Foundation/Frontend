@@ -305,7 +305,7 @@ permalink: /sfi-specs/
       <button type="button" class="sfi__chip" role="tab" id="tabBtn-classifier" aria-controls="panel-classifier" aria-selected="false" data-tab="classifier">Classifier</button>
       <button type="button" class="sfi__chip" role="tab" id="tabBtn-explore" aria-controls="panel-explore" aria-selected="false" data-tab="explore">Explore</button>
     </div>
-    <div id="adminMsg" class="sfi__message"></div>
+    <div id="adminMsg" class="sfi__message" role="status" aria-live="polite"></div>
 
     <div id="panel-manage" role="tabpanel" aria-labelledby="tabBtn-manage">
       <div class="sfi__stats" id="adminStats"></div>
@@ -318,7 +318,7 @@ permalink: /sfi-specs/
           <input class="sfi__field" id="fSpecNum" placeholder="Spec number (e.g. 3.3) *" aria-label="Spec number">
           <input class="sfi__field" id="fCategory" placeholder="Category *" aria-label="Category">
           <input class="sfi__field" id="fSubcategory" placeholder="Subcategory" aria-label="Subcategory">
-          <input class="sfi__field" id="fEffDate" placeholder="Effective date" aria-label="Effective date">
+          <input class="sfi__field" id="fEffDate" placeholder="Current revision date" aria-label="Current revision date">
           <input class="sfi__field" id="fSpecPdf" placeholder="Spec PDF filename" aria-label="Spec PDF filename">
           <input class="sfi__field" id="fMfrPdf" placeholder="Manufacturer PDF" aria-label="Manufacturer PDF">
           <input class="sfi__field" id="fProdPdf" placeholder="Products PDF" aria-label="Products PDF">
@@ -329,7 +329,9 @@ permalink: /sfi-specs/
         </div>
       </div>
 
-      <h3 class="sfi__subtitle">All specifications</h3>
+      <h3 class="sfi__subtitle">Canonical specifications</h3>
+      <p>Archive hides the complete canonical identity. Historical rows and related records are retained.</p>
+      <label><input type="checkbox" id="showArchived"> Show archived specifications</label>
       <input type="search" class="sfi__field" id="adminFilter" placeholder="Search specs (typos are OK)" aria-label="Search specifications">
       <div id="adminHint" class="sfi__hint"></div>
       <div class="sfi__filters" id="adminChips"></div>
@@ -342,7 +344,7 @@ permalink: /sfi-specs/
               <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="spec_number">Spec #</button></th>
               <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="product_name">Product</button></th>
               <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="category">Category</button></th>
-              <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="effective_date">Date</button></th>
+              <th aria-sort="none"><button type="button" class="sfi__sort" data-sort="revision_date">Current revision</button></th>
               <th>PDF</th>
               <th>Actions</th>
             </tr>
@@ -679,7 +681,7 @@ function adminPdfLinks(s) {
 }
 
 function adminSortValue(s, key) {
-  if (key === 'effective_date') return Date.parse(s.effective_date) || 0;
+  if (key === 'revision_date') return Date.parse(s.revision_date) || 0;
   return String(s[key] || '');
 }
 
@@ -729,24 +731,26 @@ function renderAdminTable() {
         <td class="num">SFI ${esc(s.spec_number)}</td>
         <td>${esc(s.product_name)}</td>
         <td><span class="sfi__badge info">${esc(s.category)}</span></td>
-        <td>${esc(s.effective_date) || '\u2014'}</td>
+        <td>${esc(s.revision_date) || '\u2014'}</td>
         <td>${adminPdfLinks(s)}</td>
         <td>
           <button type="button" class="sfi__btn small" onclick="editSpec(${s.id})">Edit</button>
-          <button type="button" class="sfi__btn small danger" onclick="deleteSpec(${s.id})">Delete</button>
+          <button type="button" class="sfi__btn small danger" onclick="deleteSpec(${s.id})">${s.archived ? 'Restore' : 'Archive'}</button>
         </td>
       </tr>`).join('') : '<tr><td colspan="7">No specs match.</td></tr>';
 }
 
 async function loadAdminTable() {
   try {
-    const res = await fetch(`${API}/specs`);
+    const archived = document.getElementById('showArchived').checked;
+    const res = await fetch(`${API}/specs${archived ? '/archived' : ''}`, { credentials: 'include' });
     adminSpecs = await res.json();
     renderAdminChips();
     renderAdminTable();
   } catch (e) {}
 }
 
+document.getElementById('showArchived').addEventListener('change', loadAdminTable);
 document.getElementById('adminFilter').addEventListener('input', renderAdminTable);
 document.getElementById('adminChips').addEventListener('click', e => {
   const chip = e.target.closest('.sfi__chip');
@@ -784,7 +788,7 @@ async function editSpec(id) {
     document.getElementById('fSpecNum').value = s.spec_number;
     document.getElementById('fCategory').value = s.category;
     document.getElementById('fSubcategory').value = s.subcategory || '';
-    document.getElementById('fEffDate').value = s.effective_date || '';
+    document.getElementById('fEffDate').value = s.revision_date || '';
     document.getElementById('fSpecPdf').value = s.spec_pdf || '';
     document.getElementById('fMfrPdf').value = s.manufacturer_pdf || '';
     document.getElementById('fProdPdf').value = s.products_pdf || '';
@@ -796,11 +800,12 @@ async function editSpec(id) {
 async function deleteSpec(id) {
   const spec = adminSpecs.find(x => x.id === id);
   const label = spec ? `SFI ${spec.spec_number} \u2013 ${spec.product_name}` : 'this spec';
-  if (!confirm(`Delete ${label}? This cannot be undone.`)) return;
+  const restoring = !!spec?.archived;
+  if (!confirm(`${restoring ? 'Restore' : 'Archive'} canonical ${label}? This affects all ${spec?.legacy_ids?.length || 1} associated rows; history and related records are retained.`)) return;
   try {
-    const res = await fetch(`${API}/specs/${id}`, { method: 'DELETE', credentials: 'include' });
-    if (res.ok) { showMsg('Spec deleted', 'success'); loadAdminTable(); loadAdminStats(); loadSpecs(); }
-    else { showMsg('Delete failed', 'error'); }
+    const res = await fetch(`${API}/specs/${id}${restoring ? '/restore' : ''}`, { method: restoring ? 'POST' : 'DELETE', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ confirm_canonical_id: spec.canonical_id }) });
+    if (res.ok) { showMsg(restoring ? 'Canonical specification restored' : 'Canonical specification archived', 'success'); loadAdminTable(); loadAdminStats(); loadSpecs(); }
+    else { showMsg('Canonical operation failed; reload and retry', 'error'); }
   } catch (e) { showMsg('Error connecting to API', 'error'); }
 }
 
@@ -810,7 +815,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
     spec_number: document.getElementById('fSpecNum').value.trim(),
     category: document.getElementById('fCategory').value.trim(),
     subcategory: document.getElementById('fSubcategory').value.trim(),
-    effective_date: document.getElementById('fEffDate').value.trim(),
+    revision_date: document.getElementById('fEffDate').value.trim(),
     spec_pdf: document.getElementById('fSpecPdf').value.trim(),
     manufacturer_pdf: document.getElementById('fMfrPdf').value.trim(),
     products_pdf: document.getElementById('fProdPdf').value.trim(),

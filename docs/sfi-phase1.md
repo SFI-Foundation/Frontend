@@ -50,9 +50,9 @@ real accounts or classifier endpoint. No production API configuration was change
 
 Executed: `npm test`, `npm run test:phase1`, `npm run test:styles -- /tmp/sfi-phase1-site`,
 Node syntax/inline-script checks, and a full Jekyll build. All passed. The two new
-DOM/date suites contain eight cases and were also run directly. Chromium against
+DOM/date suites contain twelve Phase 1 cases and were also run directly. Chromium against
 the real local API verified 16.1 search, public PDF action, clearing, canonical
-total 109, pagination, empty state, 390 px mobile widths, demo search and disabling
+total 111, pagination, empty state, 390 px mobile widths, demo search and disabling
 the six-month interval, with zero page JavaScript errors. The broader site emits
 pre-existing Jekyll duplicate-route/post-tag warnings.
 
@@ -77,3 +77,29 @@ credential review and test the target database before opening the coordinated
 PRs. Roll back application changes with normal revert commits after approval;
 never force-push or remove user data. The manufacturer prototype has no durable
 state or outbound notifications to roll back.
+
+## Independent-review repairs
+
+Slash-qualified 20.1/1 and 20.1/2 now search independently. Cards expose the five
+public PDF states and suppress every non-current action. Typing invalidates old
+requests immediately, including the debounce interval; category/submission changes
+cancel pending timers. Mobile search no longer inherits a 240px input height.
+
+The admin form edits the canonical current revision, preserves approval on
+normalized no-op/product-only saves, and archives/restores complete identities
+with explicit confirmation while preserving underlying rows. The archived toggle
+uses an authorized endpoint. The existing gear-review PUT client is supported by
+the backend's permission-checked compatibility route.
+
+Every reminder checkbox and number has a separate explicit label. Numeric controls
+have associated bounds/help/errors, aria-invalid feedback and visible keyboard
+focus; disabling an interval disables its number field. Dashboard selects also
+have explicit labels. Dashboard/reminder control alignment and mobile wrapping
+were reviewed in Chromium screenshots.
+
+Full final acceptance, commands, known release conditions and screenshot index:
+[sibling Backend repair report](../../Backend/docs/sfi-phase1-repairs.md).
+Screenshots remain ignored under `qa-evidence/`, also accessible from
+`../qa-evidence/`. No evidence images, private sources, databases or credentials
+are included in commits. The sandbox can prepare/start with `--demo-accounts`;
+open `http://localhost:8605/local-demo/` to select an authorized fictional role.

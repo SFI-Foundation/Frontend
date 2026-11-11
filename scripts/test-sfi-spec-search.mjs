@@ -87,3 +87,39 @@ test('unverified, unsafe and outdated links cannot become actions; content escap
   assert.match(html, /&lt;script&gt;/);
   dom.window.close();
 });
+
+test('typing invalidates an in-flight response during the debounce window', async () => {
+  const resolvers = [];
+  const { dom, app, doc } = setup(() => new Promise(resolve => resolvers.push(resolve)));
+  const old = app.load();
+  doc.getElementById('sfiSearch').value = '20.1/2';
+  doc.getElementById('sfiSearch').dispatchEvent(new dom.window.Event('input'));
+  resolvers[0](result([{ ...item, product_name: 'Stale input' }])); await old;
+  assert.doesNotMatch(doc.getElementById('sfiResults').textContent, /Stale input/);
+  assert.equal(doc.getElementById('sfiResults').getAttribute('aria-busy'), 'true');
+  assert.equal(doc.getElementById('sfiNext').disabled, true);
+  dom.window.close();
+});
+
+test('category and explicit loads cancel a pending debounce without duplicate requests', async () => {
+  const { dom, app, doc, calls } = setup(() => result());
+  await app.load();
+  doc.getElementById('sfiSearch').value = '20.1/1';
+  doc.getElementById('sfiSearch').dispatchEvent(new dom.window.Event('input'));
+  await app.setCategory('Drag Racing');
+  const count = calls.length;
+  await new Promise(resolve => setTimeout(resolve, 300));
+  assert.equal(calls.length, count);
+  assert.equal(calls.at(-1).searchParams.get('q'), '20.1/1');
+  dom.window.close();
+});
+
+test('all non-current document states expose clear text without actions', () => {
+  const { dom } = setup(() => result());
+  for (const [status, label] of Object.entries({ not_checked: 'Not checked', rejected: 'Rejected or mismatched', temporarily_unavailable: 'Temporarily unavailable', needs_review: 'Needs manual review' })) {
+    const html = dom.window.SFISpecSearch.card({ ...item, document_status: status });
+    assert.match(html, new RegExp(label));
+    assert.doesNotMatch(html, /<a /);
+  }
+  dom.window.close();
+});

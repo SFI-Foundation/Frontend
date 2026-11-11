@@ -62,3 +62,26 @@ test('demo uses synthetic records only, supports search and changes, never conta
   assert.doesNotMatch(source, /fetch\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|\/api\//);
   dom.window.close();
 });
+
+test('every reminder input has an individual label, feedback, and disabled state', () => {
+  const page = readFileSync(new URL('../navigation/sfi-manufacturer-demo.md', import.meta.url), 'utf8');
+  const dom = new JSDOM(page, { runScripts: 'outside-only' });
+  dom.window.eval(source);
+  const doc = dom.window.document;
+  for (const input of doc.querySelectorAll('#demoIntervals input')) {
+    assert.equal(input.labels.length, 1, input.id);
+    assert.equal(input.labels[0].htmlFor, input.id);
+  }
+  const input = doc.getElementById('value-six');
+  input.value = '0'; input.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  assert.equal(input.getAttribute('aria-invalid'), 'true');
+  assert.match(doc.getElementById('error-six').textContent, /1 to 24/);
+  assert.equal(doc.getElementById('demoMessages').children.length, 0);
+  input.value = '5'; input.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  assert.equal(input.getAttribute('aria-invalid'), 'false');
+  assert.equal(doc.getElementById('demoError').textContent, '');
+  doc.getElementById('interval-six').checked = false;
+  doc.getElementById('interval-six').dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  assert.equal(input.disabled, true);
+  dom.window.close();
+});

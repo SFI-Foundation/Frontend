@@ -13,13 +13,15 @@
   }
   function card(item) {
     const url = verifiedUrl(item);
+    const status = { not_checked: 'Not checked', verified_current: 'Verified current', rejected: 'Rejected or mismatched', temporarily_unavailable: 'Temporarily unavailable', needs_review: 'Needs manual review' }[item.document_status] || 'Needs manual review';
     const rules = (item.recertification_rules || []).map(r => `<li>${escape(r.product)}: ${escape(r.period || 'Not provided')}</li>`).join('');
     return `<article class="sfi__result sfi__spec-card" aria-label="SFI ${escape(item.spec_number)}">
       <div class="sfi__result-body"><h3 class="sfi__result-title">SFI ${escape(item.spec_number)} — ${escape(item.product_name)}</h3>
-      ${item.description ? `<p>${escape(item.description)}</p>` : ''}
+      ${item.description && item.description !== item.product_name ? `<p>${escape(item.description)}</p>` : ''}
       <p>${(item.categories || [item.category]).map(c => `<span class="sfi__badge info">${escape(c)}</span>`).join(' ')}</p>
       <p>Current revision: ${escape(item.revision_date || 'Not verified')}</p>
       ${rules ? `<details><summary>Product recertification information</summary><ul>${rules}</ul><p>Manufacturer retesting is a separate requirement. Confirm product-specific rules with the manufacturer.</p></details>` : '<p>Recertification information not provided.</p>'}
+      <p>PDF status: <strong>${escape(status)}</strong></p>
       ${url ? `<a class="sfi__link" href="${escape(url)}" target="_blank" rel="noopener noreferrer">View specification (PDF, opens in new tab)</a>` : `<p>Current PDF unavailable for review${item.local_document_available ? ' — a local document is retained privately' : ''}.</p>`}
       ${(item.warnings || []).length ? '<p>Source review pending. Consult the official specification before use.</p>' : ''}
       </div></article>`;
@@ -29,7 +31,7 @@
     let category = 'all', page = 1, total = 0, requestId = 0, timer;
     const limit = 20;
     function setCategory(next) {
-      category = next; page = 1;
+      clearTimeout(timer); category = next; page = 1;
       for (const b of el('sfiFilters').querySelectorAll('button')) {
         const active = b.dataset.category === category;
         b.classList.toggle('active', active); b.setAttribute('aria-pressed', String(active));
@@ -60,7 +62,9 @@
       } catch { /* Search request presents the actionable error. */ }
     }
     async function load() {
+      clearTimeout(timer);
       const id = ++requestId;
+      const requestedPage = page;
       const query = el('sfiSearch').value.trim().replace(/\s+/g, ' ');
       el('sfiCount').textContent = 'Loading specifications…'; el('sfiResults').setAttribute('aria-busy', 'true');
       el('sfiResults').replaceChildren(); el('sfiNoResults').hidden = true; el('sfiRetry').hidden = true;
@@ -74,7 +78,7 @@
         const items = [...new Map(data.items.map(item => [item.canonical_id || item.spec_number, item])).values()];
         total = data.total; onCatalog(items);
         el('sfiResults').innerHTML = items.map(card).join('');
-        el('sfiCount').textContent = total ? `Showing ${(page - 1) * limit + 1}–${(page - 1) * limit + items.length} of ${total} specifications` : '0 specifications';
+        el('sfiCount').textContent = total ? `Showing ${(requestedPage - 1) * limit + 1}–${(requestedPage - 1) * limit + items.length} of ${total} specifications` : '0 specifications';
         el('sfiNoResults').textContent = 'No specifications match. Try a number or product name, or select All.';
         el('sfiNoResults').hidden = !!items.length;
       } catch (error) {
@@ -89,7 +93,14 @@
       }
     }
     el('sfiSearchForm').addEventListener('submit', e => { e.preventDefault(); clearTimeout(timer); page = 1; load(); });
-    el('sfiSearch').addEventListener('input', () => { clearTimeout(timer); page = 1; timer = setTimeout(load, 250); });
+    el('sfiSearch').addEventListener('input', () => {
+      clearTimeout(timer); ++requestId; page = 1; total = 0;
+      el('sfiPrevious').disabled = true; el('sfiNext').disabled = true;
+      el('sfiResults').replaceChildren(); el('sfiResults').setAttribute('aria-busy', 'true');
+      el('sfiCount').textContent = 'Waiting for search…';
+      el('sfiNoResults').hidden = true; el('sfiRetry').hidden = true;
+      timer = setTimeout(load, 250);
+    });
     el('sfiClear').addEventListener('click', () => { clearTimeout(timer); el('sfiSearch').value = ''; page = 1; el('sfiSearch').focus(); load(); });
     el('sfiFilters').addEventListener('click', e => { const b = e.target.closest('[data-category]'); if (b) setCategory(b.dataset.category); });
     el('sfiRetry').addEventListener('click', () => { filters(); load(); });

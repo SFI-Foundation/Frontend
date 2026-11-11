@@ -60,11 +60,22 @@
     function render() {
       try {
         const today = todayInZone(el('demoInstant').value, el('demoZone').value);
+        let invalid = false;
         for (const i of intervals) {
           i.enabled = el('interval-' + i.id).checked;
-          const value = Number(el('value-' + i.id).value);
+          const input = el('value-' + i.id);
+          input.disabled = !i.enabled;
+          const value = Number(input.value);
+          const valid = !i.enabled || (input.value !== '' && input.checkValidity());
+          input.setAttribute('aria-invalid', String(!valid));
+          el('error-' + i.id).textContent = valid ? '' : `Enter a whole number from ${input.min} to ${input.max}.`;
+          invalid ||= !valid;
           if (i.months != null) i.months = value; else i.days = value;
-          if (i.enabled) thresholdDate(today, i);
+          if (i.enabled && valid) thresholdDate(today, i);
+        }
+        if (invalid) {
+          el('demoMessages').replaceChildren(); el('demoUpcoming').replaceChildren();
+          throw new Error('Correct the highlighted reminder intervals to update previews.');
         }
         const all = records.map(r => evaluate(r, today, intervals)).sort((a, b) => a.expires.localeCompare(b.expires) || a.id.localeCompare(b.id));
         const q = el('demoSearch').value.trim().toLowerCase(), status = el('demoStatus').value;
