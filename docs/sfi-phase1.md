@@ -1,0 +1,79 @@
+# Phase 1 frontend delivery
+
+The existing `/sfi-specs/` Jekyll page and scoped SFI Sass remain in use.
+`assets/js/sfi/spec-search.js` uses the existing Flask list/search/categories/stats
+routes. Search ranking, canonical identities, category membership and counts are
+owned by the backend. Cards show full specification numbers, product descriptions,
+revision labels, all associated categories, and product-specific recertification
+rules. Only verified current official URLs produce PDF actions. The existing
+showcase/classifier now direct visitors into canonical search for current links.
+Legacy admin authorization remains server-enforced; the browser does not grant roles.
+
+Search has a labeled native search form, explicit Clear, pressed category buttons,
+a live loading/count region, empty/error/retry states, race protection, and
+Previous/Next pagination. API-controlled text is escaped and PDF actions have a
+second client-side official-host/status check. Existing styles remain scoped.
+
+`/sfi-manufacturer-demo/` is an isolated, clearly fictional prototype with five
+synthetic registrations, sample revisions, search/status filters, editable sample
+expiration dates, timezone/preview-instant controls, independently enabled
+calendar-month/day intervals, upcoming/overdue lists and notification previews.
+Six months is a calendar interval with month-end clamping, not an assumed number
+of days or a universal recertification schedule. Expiration is inclusive in the
+selected timezone; overdue begins the next local day. The demo never reads
+accounts, fetches manufacturer records, saves data, schedules tasks, or sends
+messages. Refresh resets all sample changes.
+
+## Run
+
+Start the migrated/imported isolated catalog server from Backend using
+`python scripts/phase1_local.py --database sqlite:////tmp/sfi-phase1-local.db --port 8605`.
+See the sibling Backend's `docs/sfi-phase1.md` for preparation, migration, import,
+API/schema documentation, secure document options and rollback instructions.
+
+From Frontend:
+
+```bash
+npm ci
+bundle install
+bundle exec jekyll serve --host 127.0.0.1 --port 4000 --baseurl "" \
+  --destination /tmp/sfi-phase1-preview
+```
+
+Open `http://localhost:4000/sfi-specs/` or
+`http://localhost:4000/sfi-manufacturer-demo/`. The shared existing API config
+selects localhost:8605. Full-app classifier/profile functionality requires the
+normal backend with an isolated database; the focused catalog sandbox has no
+real accounts or classifier endpoint. No production API configuration was changed.
+
+## Verification
+
+Executed: `npm test`, `npm run test:phase1`, `npm run test:styles -- /tmp/sfi-phase1-site`,
+Node syntax/inline-script checks, and a full Jekyll build. All passed. The two new
+DOM/date suites contain eight cases and were also run directly. Chromium against
+the real local API verified 16.1 search, public PDF action, clearing, canonical
+total 109, pagination, empty state, 390 px mobile widths, demo search and disabling
+the six-month interval, with zero page JavaScript errors. The broader site emits
+pre-existing Jekyll duplicate-route/post-tag warnings.
+
+Manual checks: Tab and Enter through search/category/page controls; inspect
+3.2A rating rules; compare All/category counts; search harness and full spec
+numbers; test no-match/offline retry; open verified PDFs; narrow the viewport;
+change fictional expirations, timezone and preview instant; turn off every
+interval; test a month end/leap year and local midnight; refresh to reset demo.
+Do not treat demo records as real certifications.
+
+## Git and release
+
+Work is local on `feature/sfi-phase1-spec-search`, based on
+`3273784f303993d3a535d62b41debc69786cff12`, in an isolated worktree. No pushes,
+merges, deployment or production changes occurred. The existing tracked `.env`
+contains API-key/password variables; credential owners must review them. Existing
+mirrored PDFs, game ZIP and ~84 MB HTML asset were left unchanged. No private
+source documents, databases, credentials or caches were added.
+
+Review both repositories together, resolve/document source exceptions, finish
+credential review and test the target database before opening the coordinated
+PRs. Roll back application changes with normal revert commits after approval;
+never force-push or remove user data. The manufacturer prototype has no durable
+state or outbound notifications to roll back.
