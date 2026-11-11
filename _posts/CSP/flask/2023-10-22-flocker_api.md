@@ -50,7 +50,7 @@ To set up the workspace for your frontend project, follow these steps:
    - Create a `.env` file in the root directory of your project with the following content:
      ```plaintext
      ADMIN_USER='toby'
-     ADMIN_PASSWORD='123Toby!'
+     ADMIN_PASSWORD="replace-with-local-only-value"
      DEFAULT_USER='hop'
      DEFAULT_PASSWORD='123Hop!'
      ```
@@ -206,9 +206,9 @@ To authenticate different users, you need to send the appropriate JSON payload i
 
 Here are examples for different users:
 Payload in Body-Raw-JSON 
-    Toby: `{"uid": "toby", "password": "123Toby!"}`
+    Toby: `{"uid": "toby", "password": "replace-with-local-only-value"}`
     Hop: `http://127.0.0.1:8887/api/authenticate`
-    Niko: `{"uid": "niko", "password": "123niko"}`
+    Niko: `{"uid": "niko", "password": "replace-with-local-only-value"}`
 
 
 ### Flocker GET requests through Postman

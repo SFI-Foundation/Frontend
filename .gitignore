@@ -75,3 +75,23 @@ _notebooks/**/*_content.md
 # Extensions
 .codex
 .codexA
+# Private Phase 1 documents and runtime artifacts
+sfi-private-data/
+Specs.zip
+SpecList*.pdf
+SpecList.docx
+*.db
+*.sqlite*
+.phase1-local/
+
+# Local browser screenshots and QA reports
+/qa-evidence/
+
+# Local secrets and QA artifacts
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+/qa-evidence/

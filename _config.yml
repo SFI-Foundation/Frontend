@@ -27,6 +27,17 @@ future: true
 # Exclude from Jekyll watch - these are processed by our conversion scripts
 # This prevents double-regeneration when saving notebooks/docx files
 exclude:
+  - .env
+  - .env.*
+  - _internal
+  - qa-evidence
+  - docs
+  - scripts
+  - tests
+  - graphify-out
+  - README.md
+  - package.json
+  - package-lock.json
 # Jekyll defaults
   - vendor
 # Custom excludes
@@ -139,3 +150,6 @@ minima:
 # Blank retains localhost:8605 locally and the current service on Pages.
 # A replacement production backend URL is not yet confirmed.
 sfi_api_base: ""
+
+# Prototype output requires BOTH development mode and this explicit opt-in.
+sfi_manufacturer_demo: false

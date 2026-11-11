@@ -312,7 +312,7 @@ The student's response is: "${studentResponse}"
 Format your final output with a clear heading for the grade and the feedback. Do not use markdown heading tags (like # or ##) as it messes with the display.
                     `;
 
-                    const apiKey = "AIzaSyB3Ky_RSgPsdXBt5I32ZVWRZ09Ont5_xmQ";
+                    const apiKey = "";
                     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
                     const payload = {
                         contents: [{

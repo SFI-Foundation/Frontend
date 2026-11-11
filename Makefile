@@ -484,3 +484,12 @@ list-projects:
 	done || echo "  None found"
 
 .PHONY: list-projects build-registered-projects convert-registered-notebooks build-registered-docs watch-registered-projects clean-registered-projects
+# Focused SFI review; avoids legacy conversion/stop targets and unrelated servers.
+PUBLIC_REVIEW_DESTINATION ?= /tmp/sfi-public-cleanup-preview
+.PHONY: public-review-build public-review-serve public-review-test
+public-review-build:
+	JEKYLL_ENV=production bundle exec jekyll build --disable-disk-cache --destination "$(PUBLIC_REVIEW_DESTINATION)"
+public-review-serve:
+	JEKYLL_ENV=production bundle exec jekyll serve --host 127.0.0.1 --port 4000 --baseurl "" --destination "$(PUBLIC_REVIEW_DESTINATION)" --disable-disk-cache
+public-review-test: public-review-build
+	SFI_BUILT_SITE="$(PUBLIC_REVIEW_DESTINATION)" npm run test:public-build

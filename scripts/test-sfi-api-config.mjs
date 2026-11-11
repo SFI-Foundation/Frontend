@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import path from 'node:path';
 const site = process.argv[2];
+const base = process.env.SFI_BASEURL ?? '/Frontend';
 const source = await readFile(path.join(site, 'assets/js/sfi/api-base.js'), 'utf8');
 for (const [host, expected] of [['localhost', 'http://localhost:8605'], ['127.0.0.1', 'http://localhost:8605'], ['sfi-foundation.github.io', 'https://greppers-be.opencodingsociety.com']]) {
   const context = vm.createContext({ window: {}, location: { hostname: host } });
@@ -25,7 +26,7 @@ vm.runInContext(source.replace('const configured = "";', 'const configured = "ht
 assert.equal(override.window.SFI_API_BASE, 'https://configured.example');
 for (const route of ['quiz', 'detect', 'sfi-specs']) {
   const html = await readFile(path.join(site, route, 'index.html'), 'utf8');
-  assert.ok(html.includes('/Frontend/assets/js/sfi/api-base.js'));
+  assert.ok(html.includes(`${base}/assets/js/sfi/api-base.js`));
   assert.ok(!html.includes('greppers-be.opencodingsociety.com'));
 }
 console.log('PASS: local/loopback/Pages defaults, custom URL, auth credentials, quiz requests, and generated SFI script references');
