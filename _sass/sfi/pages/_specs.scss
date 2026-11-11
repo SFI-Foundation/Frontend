@@ -110,3 +110,20 @@
   background: $surface;
   h3 { margin: 0 0 $space-3; font-size: 1rem; }
 }
+
+.sfi__spec-card {
+  margin-bottom: $space-3;
+  overflow-wrap: anywhere;
+  h3 { margin: 0 0 $space-2; }
+  details { margin-bottom: $space-3; }
+  summary { cursor: pointer; }
+}
+#sfiSearchForm { flex-wrap: wrap; }
+#sfiSearchForm label { flex-basis: 100%; }
+#sfiSearchForm .sfi__field { min-width: 0; flex: 1 1 240px; }
+#sfiFilters button { white-space: normal; }
+#sfiResults[aria-busy="true"] { min-height: 80px; }
+#search [hidden] { display: none; }
+.sfi__demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: $space-3; }
+.sfi__demo-controls { display: flex; flex-wrap: wrap; align-items: center; gap: $space-3; margin-bottom: $space-3; }
+.sfi__demo-controls label { display: grid; gap: $space-1; }

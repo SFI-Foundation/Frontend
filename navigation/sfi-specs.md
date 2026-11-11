@@ -1,14 +1,14 @@
 ---
 layout: sfi
-title: SFI Part Detection
-description: Search and classify SFI motorsports safety specifications using machine learning.
+title: SFI Specification Search
+description: Search SFI specifications by number, product name and category.
 permalink: /sfi-specs/
 ---
 
 <header class="sfi-page-header">
   <div class="sfi-page-header-content">
-    <h1>SFI <span class="gold">Part Detection</span></h1>
-    <p>Identify racing safety specifications using machine learning, or search more than 100 SFI specs across drag racing, auto racing, boat racing and more.</p>
+    <h1>SFI <span class="gold">Specification Search</span></h1>
+    <p>Search specifications by number or product name, browse categories, and view verified current documents.</p>
   </div>
 </header>
 
@@ -79,7 +79,6 @@ permalink: /sfi-specs/
      desc:'Crash-resistant fuel cells prevent fuel spillage and fire after impact. Required in nearly all sanctioned racing classes.',
      specs:[{num:'28.1',name:'Polymer (Foam-Filled) Fuel Cells',pdf:'specs/Spec_28.1_082517.pdf'},{num:'28.2',name:'Crash Resistant Fuel Cells',pdf:'specs/Spec_28.2_071400.pdf'},{num:'32.1',name:'Stock Car Fuel Cell Bladder',pdf:'specs/Spec_32.1.pdf'}]}
   ];
-  var PDF_BASE='https://www.sfifoundation.com/wp-content/pdfs/';
 
   var canvas=document.getElementById('safetyCanvas');
   if(!canvas)return;
@@ -105,7 +104,7 @@ permalink: /sfi-specs/
     document.getElementById('spTitle').textContent=part.label;
     document.getElementById('spDesc').textContent=part.desc;
     document.getElementById('spSpecs').innerHTML=part.specs.map(function(s){
-      var pdfLink=s.pdf?'<a class="sfi__link" href="'+PDF_BASE+s.pdf+'" target="_blank" rel="noopener">PDF</a>':'';
+      var pdfLink='<a class="sfi__link" href="#search" onclick="document.getElementById(\'sfiSearch\').value=\''+s.num+'\';loadSpecs();">Find current specification</a>';
       return '<div class="sfi__spec-line"><span class="num">SFI '+s.num+'</span><span class="name">'+s.name+'</span>'+pdfLink+'</div>';
     }).join('');
     document.querySelectorAll('.sfi__showcase-pills .sfi__chip').forEach(function(el){
@@ -259,23 +258,23 @@ permalink: /sfi-specs/
 
   <section class="sfi__section" id="search">
     <h2 class="sfi__title">Specification database</h2>
-    <input type="search" class="sfi__field" id="sfiSearch" aria-label="Search specifications"
-           placeholder="Search specs (e.g. helmet, 1.1, drag racing, clutch)">
-    <div id="sfiFuzzyHint" class="sfi__hint"></div>
-    <div class="sfi__filters" id="sfiFilters">
-      <button type="button" class="sfi__chip active" data-category="all">All</button>
+    <form id="sfiSearchForm" class="sfi__form-row" role="search">
+      <label for="sfiSearch">Specification number or product name</label>
+      <input type="search" class="sfi__field" id="sfiSearch" maxlength="200" placeholder="e.g. 3.2A, 16.1, driver suit">
+      <button type="submit" class="sfi__btn primary">Search</button>
+      <button type="button" class="sfi__btn" id="sfiClear">Clear search</button>
+    </form>
+    <div class="sfi__filters" id="sfiFilters" role="group" aria-label="Specification category">
+      <button type="button" class="sfi__chip active" data-category="all" aria-pressed="true">All</button>
     </div>
-    <div class="sfi__count" id="sfiCount"></div>
-
-    <div class="sfi__table-scroll">
-      <table class="sfi__table">
-        <thead>
-          <tr><th>Spec #</th><th>Product</th><th>Category</th><th>Date</th><th>PDF</th></tr>
-        </thead>
-        <tbody id="sfiBody"></tbody>
-      </table>
-    </div>
-    <div class="sfi__empty sfi__hidden" id="sfiNoResults">No specs match your search.</div>
+    <p class="sfi__count" id="sfiCount" role="status" aria-live="polite"></p>
+    <div id="sfiResults" aria-busy="false"></div>
+    <p class="sfi__empty" id="sfiNoResults" hidden></p>
+    <button type="button" class="sfi__btn" id="sfiRetry" hidden>Retry loading specifications</button>
+    <nav class="sfi__row" aria-label="Specification result pages">
+      <button type="button" class="sfi__btn" id="sfiPrevious" disabled>Previous page</button>
+      <button type="button" class="sfi__btn" id="sfiNext" disabled>Next page</button>
+    </nav>
   </section>
 
   <section class="sfi__section" id="categories">
@@ -285,6 +284,7 @@ permalink: /sfi-specs/
 
   <section class="sfi__section" id="about">
     <h2 class="sfi__title">About SFI Foundation</h2>
+    <p><a class="sfi__link" href="{{ '/sfi-manufacturer-demo/' | relative_url }}">Explore the manufacturer management prototype (fictional sample data)</a></p>
     <div class="sfi__card">
       <p>The <strong>SFI Foundation</strong> (originally the SEMA Foundation, Inc.) was established in 1978 as a nonprofit organization to develop and administer quality assurance programs for the motorsports aftermarket. SFI specifications cover safety equipment used across drag racing, auto racing, boat racing, tractor pulling and more.</p>
       <p>Each specification number corresponds to a type of racing equipment, from driver suits and helmets to roll cages, fuel cells, supercharger restraints and turbochargers. The classifier can identify the right specification from a plain-text description of a part.</p>
@@ -376,6 +376,7 @@ th[aria-sort="ascending"] .sfi__sort::after { content: ' \25B2'; opacity: 1; }
 th[aria-sort="descending"] .sfi__sort::after { content: ' \25BC'; opacity: 1; }
 </style>
 
+<script src="{{ '/assets/js/sfi/spec-search.js' | relative_url }}"></script>
 <script>
 // ── API Configuration ────────────────────────────
 const API_BASE = window.SFI_API_BASE;
@@ -425,9 +426,7 @@ async function classifyPart() {
     }
     resultsEl.innerHTML = data.predictions.map(p => {
       const confPct = (p.confidence * 100).toFixed(1);
-      const pdfs = [];
-      if (p.spec_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${p.spec_pdf}" target="_blank">Spec PDF</a>`);
-      if (p.manufacturer_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${p.manufacturer_pdf}" target="_blank">Manufacturers</a>`);
+      const pdfs = [`<a class="sfi__link" href="#search" data-spec-search="${esc(p.spec_number)}">Find current specification</a>`];
       return `
         <div class="sfi__result">
           <div class="sfi__result-body">
@@ -551,134 +550,9 @@ function getSuggestion(query) {
 
 // ═══════════════ SPEC SEARCH ═══════════════
 let specs = [];
-let activeCategory = 'all';
-
-async function loadSpecs() {
-  try {
-    const res = await fetch(`${API}/specs`);
-    specs = await res.json();
-    buildVocabulary();
-    buildFilters();
-    buildCategoryGrid();
-    const savedCat = localStorage.getItem('sfiCat');
-    if (savedCat) {
-      localStorage.removeItem('sfiCat');
-      activeCategory = savedCat;
-    }
-    renderSearch();
-  } catch (e) {
-    document.getElementById('sfiNoResults').classList.remove('sfi__hidden');
-    document.getElementById('sfiNoResults').textContent = 'Could not connect to API \u2014 is the backend running?';
-  }
-}
-
-function buildFilters() {
-  const cats = [...new Set(specs.map(s => s.category))].sort();
-  const row = document.getElementById('sfiFilters');
-  row.innerHTML = '<button type="button" class="sfi__chip active" data-category="all">All</button>';
-  cats.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'sfi__chip';
-    btn.dataset.category = cat;
-    btn.textContent = cat;
-    row.appendChild(btn);
-  });
-}
-
-function buildCategoryGrid() {
-  const cats = {};
-  specs.forEach(s => { cats[s.category] = (cats[s.category] || 0) + 1; });
-  const grid = document.getElementById('catGrid');
-  grid.innerHTML = Object.entries(cats).sort((a,b) => b[1] - a[1]).map(([cat, count]) => `
-    <div class="sfi__category" onclick="filterByCategory('${cat.replace(/'/g, "\\'")}')">
-      <div class="sfi__category-name">${cat}</div>
-      <div class="sfi__category-count">${count} spec${count !== 1 ? 's' : ''}</div>
-    </div>
-  `).join('');
-}
-
-function filterByCategory(cat) {
-  if (!document.getElementById('adminView').classList.contains('sfi__hidden')) {
-    adminCategory = cat;
-    setAdminTab('manage');
-    renderAdminTable();
-    document.getElementById('adminTable').scrollIntoView({ behavior: 'smooth' });
-    return;
-  }
-  activeCategory = cat;
-  document.querySelectorAll('#sfiFilters .sfi__chip').forEach(b => {
-    b.classList.toggle('active', b.dataset.category === cat);
-  });
-  renderSearch();
-  document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
-}
-
-function renderSearch() {
-  const q = document.getElementById('sfiSearch').value.trim();
-  const tbody = document.getElementById('sfiBody');
-  const noRes = document.getElementById('sfiNoResults');
-  const countEl = document.getElementById('sfiCount');
-  const hintEl = document.getElementById('sfiFuzzyHint');
-
-  // Category filter first
-  let pool = activeCategory === 'all' ? specs : specs.filter(s => s.category === activeCategory);
-
-  if (!q) {
-    // No query — show all in category
-    hintEl.className = 'sfi__hint';
-    countEl.textContent = `Showing ${pool.length} of ${specs.length} specs`;
-    if (!pool.length) { tbody.innerHTML = ''; noRes.classList.remove('sfi__hidden'); return; }
-    noRes.classList.add('sfi__hidden');
-    tbody.innerHTML = pool.map(s => specRow(s)).join('');
-    return;
-  }
-
-  // Score and sort by fuzzy relevance
-  const scored = pool.map(s => ({ spec: s, score: fuzzyMatch(q, s) }))
-    .filter(x => x.score >= 0.55)
-    .sort((a, b) => b.score - a.score);
-
-  // "Did you mean?" suggestion
-  const suggestion = getSuggestion(q);
-  if (suggestion && scored.length < 5) {
-    hintEl.innerHTML = `Did you mean: <strong onclick="applySuggestion('${suggestion.replace(/'/g, "\\'")}')">${suggestion}</strong>?`;
-    hintEl.className = 'sfi__hint visible';
-  } else {
-    hintEl.className = 'sfi__hint';
-  }
-
-  countEl.textContent = `Showing ${scored.length} of ${specs.length} specs`;
-  if (!scored.length) { tbody.innerHTML = ''; noRes.classList.remove('sfi__hidden'); return; }
-  noRes.classList.add('sfi__hidden');
-  tbody.innerHTML = scored.map(x => specRow(x.spec)).join('');
-}
-
-function applySuggestion(text) {
-  document.getElementById('sfiSearch').value = text;
-  renderSearch();
-}
-
-function specRow(s) {
-  const pdfs = [];
-  if (s.spec_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${s.spec_pdf}" target="_blank">Spec</a>`);
-  if (s.manufacturer_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${s.manufacturer_pdf}" target="_blank">Mfrs</a>`);
-  return `<tr>
-    <td class="num">SFI ${s.spec_number}</td>
-    <td>${s.product_name}</td>
-    <td><span class="sfi__badge info">${s.category}</span></td>
-    <td>${s.effective_date || '\u2014'}</td>
-    <td>${pdfs.join(' \u2022 ') || '\u2014'}</td>
-  </tr>`;
-}
-
-document.getElementById('sfiSearch').addEventListener('input', renderSearch);
-document.getElementById('sfiFilters').addEventListener('click', e => {
-  if (!e.target.classList.contains('sfi__chip')) return;
-  document.querySelectorAll('#sfiFilters .sfi__chip').forEach(b => b.classList.remove('active'));
-  e.target.classList.add('active');
-  activeCategory = e.target.dataset.category;
-  renderSearch();
-});
+const specSearch = window.SFISpecSearch.mount({ api: API, onCatalog(items) { specs = items; buildVocabulary(); } });
+function loadSpecs() { return specSearch.load(); }
+function filterByCategory(category) { return specSearch.setCategory(category); }
 
 // ═══════════════ ADMIN PANEL ═══════════════
 function esc(v) {
@@ -800,10 +674,8 @@ document.getElementById('retrainBtn').addEventListener('click', async () => {
 });
 
 function adminPdfLinks(s) {
-  const pdfs = [];
-  if (s.spec_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${encodeURI(s.spec_pdf)}" target="_blank" rel="noopener">Spec</a>`);
-  if (s.manufacturer_pdf) pdfs.push(`<a class="sfi__link" href="https://www.sfifoundation.com/wp-content/pdfs/${encodeURI(s.manufacturer_pdf)}" target="_blank" rel="noopener">Mfrs</a>`);
-  return pdfs.join(' \u2022 ') || '\u2014';
+  const url = window.SFISpecSearch.verifiedUrl(s);
+  return url ? `<a class="sfi__link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">View specification</a>` : 'Current PDF unavailable';
 }
 
 function adminSortValue(s, key) {
@@ -812,7 +684,7 @@ function adminSortValue(s, key) {
 }
 
 function renderAdminChips() {
-  const cats = [...new Set(adminSpecs.map(s => s.category))].sort();
+  const cats = [...new Set(adminSpecs.flatMap(s => s.categories || [s.category]))].sort();
   if (adminCategory !== 'all' && !cats.includes(adminCategory)) adminCategory = 'all';
   document.getElementById('adminChips').innerHTML = ['all', ...cats].map(c =>
     `<button type="button" class="sfi__chip${c === adminCategory ? ' active' : ''}" data-category="${esc(c)}">${c === 'all' ? 'All' : esc(c)}</button>`).join('');
@@ -821,7 +693,7 @@ function renderAdminChips() {
 function renderAdminTable() {
   const q = document.getElementById('adminFilter').value.trim();
   const hintEl = document.getElementById('adminHint');
-  let rows = adminCategory === 'all' ? adminSpecs : adminSpecs.filter(s => s.category === adminCategory);
+  let rows = adminCategory === 'all' ? adminSpecs : adminSpecs.filter(s => (s.categories || [s.category]).includes(adminCategory));
 
   let relevance = false;
   if (q) {
@@ -979,6 +851,11 @@ async function revealAdminPanel() {
     }
   } catch (e) {}
 }
+
+document.getElementById('classifyResults').addEventListener('click', e => {
+  const link = e.target.closest('[data-spec-search]');
+  if (link) { document.getElementById('sfiSearch').value = link.dataset.specSearch; loadSpecs(); }
+});
 
 // ═══════════════ INIT ═══════════════
 revealAdminPanel();
