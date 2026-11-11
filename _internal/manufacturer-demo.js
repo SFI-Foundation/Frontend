@@ -54,8 +54,8 @@
     const initial = todayInZone(instant, el('demoZone').value);
     let records = sampleRecords(initial);
     const intervals = [
-      { id: 'six', months: 6, enabled: true }, { id: 'ninety', days: 90, enabled: true },
-      { id: 'thirty', days: 30, enabled: true }, { id: 'seven', days: 7, enabled: true }
+      { id: 'six', months: 6, enabled: false }, { id: 'ninety', days: 90, enabled: false },
+      { id: 'thirty', days: 30, enabled: false }, { id: 'seven', days: 7, enabled: false }
     ];
     function render() {
       try {
@@ -83,7 +83,7 @@
         el('demoSummary').textContent = `Demo date ${today} (${el('demoZone').value}). ${selected.length} of ${all.length} sample registrations. ${all.filter(r => r.days < 0).length} overdue; ${all.filter(r => r.days >= 0 && r.notices.length).length} upcoming.`;
         el('demoRows').innerHTML = selected.map(r => `<article class="sfi__result"><div class="sfi__result-body"><h3>${escape(r.manufacturer)}</h3><p>${escape(r.id)} · ${escape(r.spec)} · ${escape(r.revision)}</p><p><strong>${escape(r.status)}</strong> · Sample expiration ${escape(r.expires)} · ${r.days} days remaining</p><label>Change sample expiration <input class="sfi__field" type="date" data-demo-id="${r.id}" value="${r.expires}" required></label></div></article>`).join('') || '<p>No sample records match.</p>';
         el('demoUpcoming').innerHTML = all.filter(r => r.days <= 0 || r.notices.length).map(r => `<li>${escape(r.manufacturer)} — ${escape(r.expires)}: ${escape(r.status)}</li>`).join('') || '<li>No upcoming or overdue samples under these intervals.</li>';
-        el('demoMessages').innerHTML = all.flatMap(r => r.days < 0 ? [`<li>PREVIEW ONLY: ${escape(r.manufacturer)}, sample ${escape(r.id)} expired on ${r.expires}. Please review this fictional registration.</li>`] : r.notices.map(i => `<li>PREVIEW ONLY (${i.months != null ? i.months + ' months' : i.days + ' days'}): ${escape(r.manufacturer)}, sample ${escape(r.id)} expires on ${r.expires}. Please review the sample registration. No notification has been sent.</li>`)).join('') || '<li>No enabled notice is due.</li>';
+        el('demoMessages').innerHTML = !intervals.some(i => i.enabled) ? '<li>Reminder previews are disabled. No notifications are sent.</li>' : all.flatMap(r => r.days < 0 ? [`<li>PREVIEW ONLY: ${escape(r.manufacturer)}, sample ${escape(r.id)} expired on ${r.expires}. Please review this fictional registration.</li>`] : r.notices.map(i => `<li>PREVIEW ONLY (${i.months != null ? i.months + ' months' : i.days + ' days'}): ${escape(r.manufacturer)}, sample ${escape(r.id)} expires on ${r.expires}. Please review the sample registration. No notification has been sent.</li>`)).join('') || '<li>No enabled notice is due.</li>';
         el('demoError').textContent = '';
       } catch (error) {
         el('demoError').textContent = error.message;

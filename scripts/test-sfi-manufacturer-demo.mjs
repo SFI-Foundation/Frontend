@@ -48,6 +48,10 @@ test('demo uses synthetic records only, supports search and changes, never conta
   const doc = dom.window.document;
   assert.equal(doc.querySelectorAll('#demoRows article').length, 5);
   assert.match(doc.body.textContent, /fictional/);
+  assert.equal(doc.querySelectorAll('#demoIntervals input:checked').length, 0);
+  assert.match(doc.getElementById('demoMessages').textContent, /disabled/);
+  doc.getElementById('interval-six').checked = true;
+  doc.getElementById('interval-six').dispatchEvent(new dom.window.Event('input', { bubbles: true }));
   assert.match(doc.getElementById('demoMessages').textContent, /PREVIEW ONLY/);
   const before = doc.querySelectorAll('#demoMessages li').length;
   doc.getElementById('interval-six').checked = false;
@@ -72,6 +76,8 @@ test('every reminder input has an individual label, feedback, and disabled state
     assert.equal(input.labels.length, 1, input.id);
     assert.equal(input.labels[0].htmlFor, input.id);
   }
+  doc.getElementById('interval-six').checked = true;
+  doc.getElementById('interval-six').dispatchEvent(new dom.window.Event('input', { bubbles: true }));
   const input = doc.getElementById('value-six');
   input.value = '0'; input.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
   assert.equal(input.getAttribute('aria-invalid'), 'true');

@@ -45,6 +45,7 @@ test('no known committed credential values or provider tokens in generated asset
       else {
         assert.ok(!/^(?:\.env(?:\..*)?|.*\.(?:pem|key|p12|pfx))$/.test(entry.name), `Private file present: ${path.relative(site, filename)}`);
         const data = readFileSync(filename); scanned++;
+        if (/\.html$/i.test(filename)) assert.doesNotMatch(data.toString(), /href=["'][^"']*sfi-manufacturer-demo/i, `Public demo entry point in ${path.relative(site, filename)}`);
         for (const value of needles) assert.equal(data.includes(Buffer.from(value)), false, `Known credential exposure in ${path.relative(site, filename)}`);
         if (/\.(?:html|css|js|mjs|json|txt|xml|map|yml)$/i.test(filename)) assert.equal(tokens.test(data.toString()), false, `Potential provider credential in ${path.relative(site, filename)}`);
         assert.equal(data.includes(Buffer.from('Fictional Apex Safety Lab')), false, `Fictional manufacturer data in ${path.relative(site, filename)}`);

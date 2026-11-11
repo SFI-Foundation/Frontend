@@ -7,6 +7,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const frontend = 'http://localhost:4000', backend = 'http://localhost:8605';
 const evidence = path.resolve(process.env.SFI_QA_EVIDENCE || 'qa-evidence');
+const database = process.env.SFI_QA_DATABASE;
 const results = { checks: [], screenshots: [], pageErrors: [], consoleErrors: [], failedRequests: [], expectedHttpErrors: [] };
 const desktop = {width:1440,height:1000}, mobile = {width:390,height:844};
 let browser;
@@ -17,6 +18,8 @@ function check(text) { results.checks.push(text); console.log('PASS:',text); }
   browser=await chromium.launch({executablePath:process.env.CHROME_PATH,headless:true,args:['--no-sandbox']});
   const context=await browser.newContext({viewport:desktop});
   const page=await context.newPage();
+  const researchRequests=[];
+  page.on('request',r=>{if(/classifier|classify|manufacturer-demo|\.joblib|\.onnx|tensorflow/i.test(r.url()))researchRequests.push(r.url());});
   page.on('pageerror',e=>results.pageErrors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')results.consoleErrors.push({text:m.text(),url:m.location().url});});
   page.on('requestfailed',r=>results.failedRequests.push({url:r.url(),error:r.failure()?.errorText}));
@@ -25,9 +28,9 @@ function check(text) { results.checks.push(text); console.log('PASS:',text); }
   async function api(route,options={}) { return request.fetch(backend+route,options); }
   async function go(url){await page.waitForLoadState('networkidle');return page.goto(url);}
   async function idle(){await page.waitForFunction(()=>document.querySelector('#sfiResults')?.getAttribute('aria-busy')==='false');}
-  async function search(q){await page.getByLabel('Specification number or product name').fill(q);await page.locator('#sfiSearchForm').getByRole('button',{name:'Search',exact:true}).click();await idle();}
+  async function search(q){await page.getByLabel('Specification number or product name').fill(q);if(q==='16.1')await page.getByLabel('Specification number or product name').press('Enter');else await page.locator('#sfiSearchForm').getByRole('button',{name:'Search',exact:true}).click();await idle();}
   async function shot(name,searchArea=false){
-   if(searchArea)await page.locator(page.viewportSize().width<600?'#sfiResults':'#search').evaluate(e=>scrollTo(0,e.getBoundingClientRect().top+scrollY-65));
+   if(searchArea)await page.locator(page.viewportSize().width<600?'#sfiResults':'#search').evaluate(e=>scrollTo({top:e.getBoundingClientRect().top+scrollY-65,behavior:'instant'}));
    await page.screenshot({path:path.join(evidence,name),animations:'disabled'});
    results.screenshots.push({file:name,viewport:page.viewportSize()});
   }
@@ -90,6 +93,9 @@ function check(text) { results.checks.push(text); console.log('PASS:',text); }
   await popup.waitForLoadState('domcontentloaded').catch(()=>{});assert.equal(popup.url(),url);await popup.close();
   const pdf=await request.get(url);assert.equal(pdf.status(),200);assert.equal((await pdf.body()).subarray(0,5).toString(),'%PDF-');
   check('verified PDF opens official document in separate tab; actual response is 200 PDF bytes');
+  await shot('verified-pdf-action.png',true);
+  assert.deepEqual(researchRequests,[],'Public search requested experimental assets or endpoints');
+  check('public specification searches never request classifier/model or manufacturer assets');
   // Every internal public nav link resolves against the actual localhost build.
   await go(frontend+'/sfi-specs/');await page.waitForSelector('#sfiResults article');
   const links=await page.locator('.sfi-nav a').evaluateAll(es=>es.map(e=>e.href));
@@ -132,7 +138,10 @@ function check(text) { results.checks.push(text); console.log('PASS:',text); }
   const credential = spawnSync(process.env.SFI_QA_PYTHON, ['-c', `
 import sqlite3,secrets
 from werkzeug.security import generate_password_hash
-connection=sqlite3.connect('/tmp/sfi-public-cleanup-local.db')
+from pathlib import Path
+database=Path(${JSON.stringify(database || '')})
+assert database.is_absolute() and database.parent == Path('/tmp') and database.name.startswith('sfi-ui-cleanup-'), 'Use an explicitly named disposable QA database'
+connection=sqlite3.connect(database)
 assert connection.execute('SELECT id FROM phase1_local_sandbox WHERE id=1').fetchone()
 value=secrets.token_urlsafe(32)
 connection.execute('UPDATE users SET _password=? WHERE _uid=?',(generate_password_hash(value,'pbkdf2:sha256'), 'phase1-synthetic-member'))
@@ -149,6 +158,24 @@ print(value)
 
   const after=await (await api('/api/sfi/specs?limit=200')).json();assert.deepEqual(after.map(s=>({number:s.spec_number,status:s.document_status,url:s.view_spec_url})),snapshot);
   check('complete PDF status and verified URL snapshot unchanged after acceptance');
+  if(process.env.SFI_QA_DEMO_URL){
+    const demo=await context.newPage();const requests=[];
+    demo.on('request',r=>{if(r.method()!=='GET')requests.push(r.url());});
+    demo.on('pageerror',e=>results.pageErrors.push(e.message));
+    assert.equal((await demo.goto(process.env.SFI_QA_DEMO_URL+'/sfi-manufacturer-demo/')).status(),200);
+    await demo.waitForSelector('#demoRows article');
+    assert.equal(await demo.locator('#demoRows article').count(),5);
+    assert.match(await demo.locator('body').innerText(),/fictional/);
+    assert.equal(await demo.locator('#demoIntervals input:checked').count(),0);
+    assert.doesNotMatch(await demo.locator('#demoMessages').innerText(),/PREVIEW ONLY/);
+    await demo.getByLabel('Search sample manufacturers or registrations').fill('Imaginary');
+    assert.equal(await demo.locator('#demoRows article').count(),1);
+    await demo.getByLabel('Search sample manufacturers or registrations').fill('');
+    await demo.screenshot({path:path.join(evidence,'development-only-manufacturer-demo.png'),animations:'disabled'});
+    results.screenshots.push({file:'development-only-manufacturer-demo.png',viewport:desktop});
+    assert.deepEqual(requests,[]);await demo.close();
+    check('explicit development prototype displays five fictional records and filters; reminder intervals default off and no notification requests occur');
+  }
   // Print the shareable report from its local artifact, never publish it.
   const report=await context.newPage();await report.goto('file://'+path.resolve(__dirname,'../../Backend/docs/sfi-pdf-discrepancies-for-jennifer.html'));
   await report.pdf({path:path.join(evidence,'sfi-pdf-discrepancies-for-jennifer.pdf'),preferCSSPageSize:true,printBackground:true});await report.close();

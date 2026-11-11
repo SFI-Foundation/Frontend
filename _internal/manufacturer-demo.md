@@ -24,29 +24,29 @@ permalink: /sfi-manufacturer-demo/
 </section>
 <section class="sfi__section" aria-labelledby="noticeHeading">
 <h2 id="noticeHeading" class="sfi__title">Reminder configuration prototype</h2>
-<p>Intervals apply only to these fictional registrations. Real schedules must come from reviewed manufacturer or product requirements. Turn off any interval independently, including the six-month notice.</p>
+<p>Reminder previews are disabled by default. Intervals apply only to these fictional registrations. Real schedules must come from reviewed manufacturer or product requirements. Turn off any interval independently, including the six-month notice.</p>
 <fieldset id="demoIntervals"><legend>Enabled notice intervals</legend>
 <div class="sfi__demo-controls">
 <div class="sfi__interval">
-<label for="interval-six"><input id="interval-six" type="checkbox" checked> Calendar-month notice enabled</label>
+<label for="interval-six"><input id="interval-six" type="checkbox"> Calendar-month notice enabled</label>
 <label for="value-six">Calendar-month notice interval (months)</label>
 <input class="sfi__field" id="value-six" type="number" min="1" max="24" step="1" value="6" required aria-describedby="help-six error-six">
 <small id="help-six">Enter 1–24 whole months.</small><span id="error-six" class="sfi__input-error"></span>
 </div>
 <div class="sfi__interval">
-<label for="interval-ninety"><input id="interval-ninety" type="checkbox" checked> 90-day notice enabled</label>
+<label for="interval-ninety"><input id="interval-ninety" type="checkbox"> 90-day notice enabled</label>
 <label for="value-ninety">90-day notice interval (days)</label>
 <input class="sfi__field" id="value-ninety" type="number" min="1" max="730" step="1" value="90" required aria-describedby="help-ninety error-ninety">
 <small id="help-ninety">Enter 1–730 whole days.</small><span id="error-ninety" class="sfi__input-error"></span>
 </div>
 <div class="sfi__interval">
-<label for="interval-thirty"><input id="interval-thirty" type="checkbox" checked> 30-day notice enabled</label>
+<label for="interval-thirty"><input id="interval-thirty" type="checkbox"> 30-day notice enabled</label>
 <label for="value-thirty">30-day notice interval (days)</label>
 <input class="sfi__field" id="value-thirty" type="number" min="1" max="730" step="1" value="30" required aria-describedby="help-thirty error-thirty">
 <small id="help-thirty">Enter 1–730 whole days.</small><span id="error-thirty" class="sfi__input-error"></span>
 </div>
 <div class="sfi__interval">
-<label for="interval-seven"><input id="interval-seven" type="checkbox" checked> 7-day notice enabled</label>
+<label for="interval-seven"><input id="interval-seven" type="checkbox"> 7-day notice enabled</label>
 <label for="value-seven">7-day notice interval (days)</label>
 <input class="sfi__field" id="value-seven" type="number" min="1" max="730" step="1" value="7" required aria-describedby="help-seven error-seven">
 <small id="help-seven">Enter 1–730 whole days.</small><span id="error-seven" class="sfi__input-error"></span>
