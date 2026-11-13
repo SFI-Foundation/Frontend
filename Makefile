@@ -1,6 +1,6 @@
 HOST ?= localhost
 PORT ?= 4500
-# Local preview stays at /; production uses _config.yml /Frontend.
+# Local preview and the production custom domain both use /.
 BASEURL ?=
 # Keep local root-path HTML separate from production _site output.
 PREVIEW_DESTINATION ?= _site_preview/$(PORT)

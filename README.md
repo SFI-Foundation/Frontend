@@ -170,8 +170,8 @@ detector, chatbot and auth configuration. Set `sfi_api_base` in `_config.yml`
 locally and `https://greppers-be.opencodingsociety.com` elsewhere. No replacement
 production URL has been confirmed; production verification remains pending.
 
-Flask owns credentialed CORS for exact local origins and
-`https://sfi-foundation.github.io` (no `/Frontend` path); nginx forwards OPTIONS
+Flask owns credentialed CORS for exact local origins,
+`https://sfi.opencodingsociety.com` and `https://sfi-foundation.github.io` (origins have no path); nginx forwards OPTIONS
 without duplicate headers. Deploy the companion backend before relying on this
 policy. Existing production auth cookies target `.opencodingsociety.com`; a
 new backend domain requires cookie and browser verification by the deployer.
@@ -180,15 +180,16 @@ new backend domain requires cookie and browser verification by the deployer.
 
 ```bash
 bundle exec jekyll build --disable-disk-cache
-python3 scripts/test-sfi-paths.py _site /Frontend
+python3 scripts/test-sfi-paths.py _site
 # Optional root-path preview build, separate output:
 bundle exec jekyll build --baseurl "" --destination /tmp/sfi-local --disable-disk-cache
 python3 scripts/test-sfi-paths.py /tmp/sfi-local
 ```
 
-Production `_config.yml` uses `/Frontend` for the verified GitHub Pages project
-URL <https://sfi-foundation.github.io/Frontend/>. Local `make` overrides it with
-an empty base URL and serves isolated `_site_preview/4500/` output;
+Production `_config.yml` and `CNAME` match the GitHub Pages custom domain
+<https://sfi.opencodingsociety.com/> with an empty base URL. The former
+`/Frontend` prefix produces broken navigation and assets on that domain.
+Local `make` serves isolated `_site_preview/4500/` output at the root;
 `make BASEURL=/Frontend` previews the project path. Preview startup runs Jekyll
 clean only on its generated output/cache, then regenerates it. Production builds
 write `_site/`, so they cannot overwrite the running local preview. Do not use

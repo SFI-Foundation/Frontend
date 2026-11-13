@@ -20,8 +20,8 @@ description: "SFI Foundation capstone · 2026–27"
 owner_name: SFI Foundation
 github_username: SFI-Foundation
 github_repo: "Frontend"
-url: "https://sfi-foundation.github.io"
-baseurl: "/Frontend"
+url: "https://sfi.opencodingsociety.com"
+baseurl: ""
 future: true
 
 # Exclude from Jekyll watch - these are processed by our conversion scripts

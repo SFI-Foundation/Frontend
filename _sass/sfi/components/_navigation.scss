@@ -132,7 +132,8 @@
 .sfi-nav-toggle[aria-expanded="true"] .sfi-nav-toggle-line:last-child {
   transform: translateY(-7px) rotate(-45deg);
 }
-@media (max-width: 900px) {
+// The full navigation needs more space than a tablet viewport provides.
+@media (max-width: 1199px) {
   .sfi-nav-toggle { display: inline-flex; }
   .sfi-nav-inner { padding: 0 $space-4; }
   .sfi-nav-links {

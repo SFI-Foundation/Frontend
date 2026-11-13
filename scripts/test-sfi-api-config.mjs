@@ -4,9 +4,9 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import path from 'node:path';
 const site = process.argv[2];
-const base = process.env.SFI_BASEURL ?? '/Frontend';
+const base = process.env.SFI_BASEURL ?? '';
 const source = await readFile(path.join(site, 'assets/js/sfi/api-base.js'), 'utf8');
-for (const [host, expected] of [['localhost', 'http://localhost:8605'], ['127.0.0.1', 'http://localhost:8605'], ['sfi-foundation.github.io', 'https://greppers-be.opencodingsociety.com']]) {
+for (const [host, expected] of [['localhost', 'http://localhost:8605'], ['127.0.0.1', 'http://localhost:8605'], ['sfi-foundation.github.io', 'https://greppers-be.opencodingsociety.com'], ['sfi.opencodingsociety.com', 'https://greppers-be.opencodingsociety.com']]) {
   const context = vm.createContext({ window: {}, location: { hostname: host } });
   vm.runInContext(source, context);
   assert.equal(context.window.SFI_API_BASE, expected);

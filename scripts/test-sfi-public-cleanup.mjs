@@ -24,7 +24,9 @@ test('production artifact excludes prototypes, QA, docs, scripts and credential 
 
 test('no known committed credential values or provider tokens in generated assets', { skip: !site && 'Set SFI_BUILT_SITE' }, () => {
   // Read known exposures privately in memory; never emit values or response bodies.
-  const originals = [['.env', root], ['_includes/slim_sidebar.html',root], ['_posts/Foundation/B-tools_and_equipment/2025-08-06-flask-api.md',root], ['scripts/old/rds_init.py', path.resolve(root, '../Backend')], ['scripts/old/update_data.py', path.resolve(root, '../Backend')]];
+  const backend = ['Backend', 'SFI-Backend'].map(name => path.resolve(root, '..', name)).find(dir => existsSync(path.join(dir, 'main.py')));
+  assert.ok(backend, 'Clone sibling Backend or SFI-Backend for the credential baseline');
+  const originals = [['.env', root], ['_includes/slim_sidebar.html',root], ['_posts/Foundation/B-tools_and_equipment/2025-08-06-flask-api.md',root], ['scripts/old/rds_init.py', backend], ['scripts/old/update_data.py', backend]];
   const needles = [];
   for (const [file, repo] of originals) {
     const base = repo.endsWith('Backend') ? 'b134c76fa75cdac857975d306cd7fc75780c85b3' : '77915a71106e82a215ac3da54fab129290d221bc';

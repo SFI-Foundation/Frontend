@@ -45,11 +45,11 @@ permalink: /
       <p>Search specification records or browse categories to find relevant safety standards.</p>
       <span class="sfi-experience-action">Search standards <span aria-hidden="true">&rarr;</span></span>
     </a>
-    <a class="sfi-experience-card" href="{{ '/sfi-specs/#classify' | relative_url }}">
+    <a class="sfi-experience-card" href="{{ '/sfi-specs/#categories' | relative_url }}">
       <span class="sfi-experience-number" aria-hidden="true">02</span>
-      <h3>Describe a Part</h3>
-      <p>Describe your equipment to get suggested specification matches from the existing classifier.</p>
-      <span class="sfi-experience-action">Describe your part <span aria-hidden="true">&rarr;</span></span>
+      <h3>Browse Categories</h3>
+      <p>Explore specifications by racing category or equipment type.</p>
+      <span class="sfi-experience-action">Browse categories <span aria-hidden="true">&rarr;</span></span>
     </a>
     <a class="sfi-experience-card" href="{{ '/detect/' | relative_url }}">
       <span class="sfi-experience-number" aria-hidden="true">03</span>

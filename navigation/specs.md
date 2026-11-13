@@ -39,7 +39,7 @@ permalink: /specs/
       <div class="sfi-cat-tile-name">Drag Racing</div>
       <div class="sfi-cat-tile-count">Supercharger restraints, clutches, turbos, bellhousings</div>
     </a>
-    <a class="sfi-cat-tile" href="{{ '/sfi-specs/' | relative_url }}" onclick="localStorage.setItem('sfiCat','Chassis')">
+    <a class="sfi-cat-tile" href="{{ '/sfi-specs/' | relative_url }}" onclick="localStorage.setItem('sfiCat','Drag Racing Chassis')">
       <span class="sfi-cat-tile-icon">&#128295;</span>
       <div class="sfi-cat-tile-name">Drag Racing Chassis</div>
       <div class="sfi-cat-tile-count">Chassis specifications for various drag racing classes</div>
@@ -54,7 +54,7 @@ permalink: /specs/
       <div class="sfi-cat-tile-name">Boat Racing</div>
       <div class="sfi-cat-tile-count">Marine motorsport safety equipment</div>
     </a>
-    <a class="sfi-cat-tile" href="{{ '/sfi-specs/' | relative_url }}" onclick="localStorage.setItem('sfiCat','Tractor Pulling')">
+    <a class="sfi-cat-tile" href="{{ '/sfi-specs/' | relative_url }}" onclick="localStorage.setItem('sfiCat','Tractor Pulling & Chassis')">
       <span class="sfi-cat-tile-icon">&#128668;</span>
       <div class="sfi-cat-tile-name">Tractor Pulling & Chassis</div>
       <div class="sfi-cat-tile-count">Pulling sled and chassis specifications</div>
@@ -96,8 +96,8 @@ permalink: /specs/
 <section class="sfi-sect">
   <div class="sfi-cta-banner">
     <h2>SEARCH ALL SPECIFICATIONS</h2>
-    <p>Use our full database search or ML-powered classifier to find exactly what you need.</p>
+    <p>Search by specification number or product name, or browse the catalog by category.</p>
     <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Open Spec Search &rarr;</a>
-    <a href="{{ '/sfi-specs/#classify' | relative_url }}" class="sfi-btn sfi-btn-secondary">ML Classifier</a>
+    <a href="{{ '/sfi-specs/#categories' | relative_url }}" class="sfi-btn sfi-btn-secondary">Browse Categories</a>
   </div>
 </section>

@@ -32,6 +32,7 @@ import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | 
     a.href = baseurl + (user ? '/sfi-profile/' : '/login/');
     if (user) {
       a.className = 'sfi-nav-auth-avatar';
+      a.setAttribute('aria-label', 'My profile');
       var dot = document.createElement('span');
       dot.className = 'sfi-nav-auth-dot';
       a.appendChild(dot);

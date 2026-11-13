@@ -43,10 +43,33 @@ test('accessible API search, category overlap, clear, pagination and labels', as
   assert.equal(doc.querySelector('[data-category="Drag Racing"]').getAttribute('aria-pressed'), 'true');
   doc.getElementById('sfiNext').click(); await settle();
   assert.equal(calls.at(-1).searchParams.get('page'), '2');
+  assert.equal(doc.activeElement.id, 'sfiCount');
   doc.getElementById('sfiClear').click(); await settle();
   assert.equal(doc.activeElement.id, 'sfiSearch');
   assert.equal(calls.at(-1).pathname, '/api/sfi/specs');
   assert.equal(doc.getElementById('sfiResults').getAttribute('aria-busy'), 'false');
+  dom.window.close();
+});
+
+test('pagination waits for a response and does not steal focus from a newer search', async () => {
+  let resolve;
+  let pending = false;
+  const { dom, app, doc, calls } = setup(() => pending ? new Promise(r => { resolve = r; }) : result([item], 60));
+  await app.load();
+  pending = true;
+  doc.getElementById('sfiNext').click();
+  assert.equal(doc.getElementById('sfiPrevious').disabled, true);
+  assert.equal(doc.getElementById('sfiNext').disabled, true);
+  const count = calls.length;
+  doc.getElementById('sfiNext').click();
+  assert.equal(calls.length, count);
+  doc.getElementById('sfiSearch').focus();
+  doc.getElementById('sfiSearch').value = 'helmet';
+  doc.getElementById('sfiSearch').dispatchEvent(new dom.window.Event('input'));
+  resolve(result([item], 60));
+  await settle();
+  assert.equal(doc.activeElement.id, 'sfiSearch');
+  assert.equal(doc.querySelectorAll('#sfiResults article').length, 0);
   dom.window.close();
 });
 

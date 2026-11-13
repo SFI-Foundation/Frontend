@@ -43,7 +43,7 @@ body_class: sfi-spec-search
     <div class="sfi__filters" id="sfiFilters" role="group" aria-label="Specification category">
       <button type="button" class="sfi__chip active" data-category="all" aria-pressed="true">All</button>
     </div>
-    <p class="sfi__count" id="sfiCount" role="status" aria-live="polite"></p>
+    <p class="sfi__count" id="sfiCount" role="status" aria-live="polite" tabindex="-1"></p>
     <div id="sfiResults" aria-busy="false"></div>
     <p class="sfi__empty" id="sfiNoResults" hidden></p>
     <button type="button" class="sfi__btn" id="sfiRetry" hidden>Retry loading specifications</button>

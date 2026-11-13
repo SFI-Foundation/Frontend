@@ -66,6 +66,7 @@
       const id = ++requestId;
       const requestedPage = page;
       const query = el('sfiSearch').value.trim().replace(/\s+/g, ' ');
+      el('sfiPrevious').disabled = true; el('sfiNext').disabled = true;
       el('sfiCount').textContent = 'Loading specifications…'; el('sfiResults').setAttribute('aria-busy', 'true');
       el('sfiResults').replaceChildren(); el('sfiNoResults').hidden = true; el('sfiRetry').hidden = true;
       const params = new URLSearchParams({ format: 'page', page, limit, category });
@@ -104,8 +105,17 @@
     el('sfiClear').addEventListener('click', () => { clearTimeout(timer); el('sfiSearch').value = ''; page = 1; el('sfiSearch').focus(); load(); });
     el('sfiFilters').addEventListener('click', e => { const b = e.target.closest('[data-category]'); if (b) setCategory(b.dataset.category); });
     el('sfiRetry').addEventListener('click', () => { filters(); load(); });
-    el('sfiPrevious').addEventListener('click', () => { if (page > 1) { page--; load(); } });
-    el('sfiNext').addEventListener('click', () => { if (page * limit < total) { page++; load(); } });
+    async function changePage(next) {
+      page = next;
+      const loading = load();
+      const id = requestId;
+      await loading;
+      // Keep keyboard and viewport position with the new results, including
+      // when the activated pagination button becomes disabled on the last page.
+      if (id === requestId) el('sfiCount').focus();
+    }
+    el('sfiPrevious').addEventListener('click', () => { if (page > 1) changePage(page - 1); });
+    el('sfiNext').addEventListener('click', () => { if (page * limit < total) changePage(page + 1); });
     let saved;
     try { saved = root.localStorage?.getItem('sfiCat'); root.localStorage?.removeItem('sfiCat'); } catch {}
     if (saved) category = saved;
