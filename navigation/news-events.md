@@ -11,9 +11,12 @@ permalink: /news-events/
     <p>Updates from SFI and upcoming specification review meetings.</p>
   </div>
 </header>
-<div class="sfi-sect sfi-two-grid sfi-news-grid">
+<div class="sfi-sect sfi-two-grid sfi-news-grid sfi-news-grid--photography">
   <section aria-labelledby="latest-news">
     <h2 id="latest-news">Latest announcements</h2>
+    <div class="sfi-news-feature">
+      {% include sfi/photograph.html key="news" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1200px) 42vw, 320px" %}
+      <div>
     <ul class="sfi-news-list">
       {% for news in site.data.sfi_updates.news limit:3 %}
       <li>
@@ -23,6 +26,8 @@ permalink: /news-events/
       {% endfor %}
     </ul>
     <p><a href="https://sfifoundation.com/blog/">More official SFI announcements &rarr;</a></p>
+      </div>
+    </div>
   </section>
   <section aria-labelledby="upcoming-meetings">
     <h2 id="upcoming-meetings">Upcoming meetings</h2>

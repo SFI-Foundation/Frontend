@@ -1,30 +1,26 @@
-# Racing photograph attribution
+# SFI website photography licenses
 
-`dragster-header-120.webp` and `dragster-header-240.webp` are cropped and resized
-derivatives of **“Dragster” by Ozzy Delaney**, photographed 27 October 2012.
+The five current photographs are recorded in `_data/sfi_photography.yml`.
+The public `/photo-credits/` page provides the photographer, source, exact
+Creative Commons license, and modification notice for each image.
 
-- Original photographer's page: https://www.flickr.com/photos/24931020@N02/8128576328/
-- Source and license record: https://commons.wikimedia.org/wiki/File:Dragster_(8128576328).jpg
-- Reviewed source revision: https://commons.wikimedia.org/w/index.php?title=File:Dragster_(8128576328).jpg&oldid=1286983973
-- Download: https://upload.wikimedia.org/wikipedia/commons/f/fc/Dragster_%288128576328%29.jpg
-- License: **Creative Commons Attribution 2.0 Generic (CC BY 2.0)**
-  https://creativecommons.org/licenses/by/2.0/
-- Legal code: https://creativecommons.org/licenses/by/2.0/legalcode
+| Asset stem | Photographer | License |
+| --- | --- | --- |
+| `photography/hero-*` | Scott cutler | CC BY-SA 2.0 |
+| `photography/safety-*` | Bo Nash | CC BY-SA 2.0 |
+| `photography/specs-*` | Bryce Walker | CC BY 2.0 |
+| `photography/history-*` | JOHN LLOYD | CC BY 2.0 |
+| `photography/news-*` | JoseE1471 | CC BY-SA 4.0 |
 
-The Commons file record identifies Ozzy Delaney as the photographer and records
-a Flickr license review on 13 October 2026 confirming CC BY 2.0. The source and
-license pages were reviewed on 12 November 2026 (Pacific time). This image is
-licensed separately from the site's source code and the SFI logo.
+Each image derivative retains the license listed above, separately from the
+website's code license. Crops, dimensions, original hashes, derivative hashes,
+and byte sizes are in `docs/site-photography/image-manifest.json`. The full
+source and verification records are in `docs/SFI_SITE_PHOTOGRAPHY_REPORT.md`.
 
-Changes: cropped the 3751×2131 original to the rectangle `(80, 440, 3740, 1721)`
-(left, top, right, bottom); resized to 120×42 and 240×84; converted to WebP at
-quality 84; removed original metadata. No generated imagery, compositing,
-recoloring, or alteration of the vehicle or equipment.
+Only optimized local WebP and JPEG derivatives are shipped. No generative
+imagery, recoloring, compositing or changes to depicted equipment were used.
+No photograph establishes SFI certification, endorsement, or participation.
+The original SFI Foundation logo is unchanged and is not relicensed here.
 
-Public attribution, license and modification notice appear in the shared footer.
-Use is decorative and does not assert SFI certification, affiliation, or
-endorsement of the depicted vehicle, driver, equipment, event, or photographer.
-
-Only the optimized derivatives are shipped. The original 842,325-byte JPEG is
-not included in the application. Processing hashes and dimensions are recorded
-in `docs/header-photography/image-processing.json`.
+The former Ozzy Delaney navbar crop is no longer used or shipped; its source
+record remains in `docs/header-photography/` as historical implementation evidence.

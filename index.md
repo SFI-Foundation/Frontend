@@ -6,17 +6,25 @@ nav_title: Home
 description: About SFI Foundation and its motorsports equipment specification programs.
 permalink: /
 ---
-<header class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>About <span class="gold">SFI Foundation</span></h1>
-    <p>Setting the standard for motorsports safety since 1978.</p>
+<header class="sfi-home-hero">
+  <div class="sfi-home-hero-copy">
+    <p class="sfi-eyebrow">SFI Foundation</p>
+    <h1>Motorsports Safety Starts Here</h1>
+    <p>Setting the standard for motorsports safety since 1978. Explore specifications and programs for specialty performance and racing equipment.</p>
+    <div class="sfi-home-hero-actions">
+      <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find Specifications</a>
+      <a class="sfi-btn sfi-btn-secondary" href="#sfi-purpose">About SFI</a>
+    </div>
   </div>
+  {% include sfi/photograph.html key="hero" caption=false loading="eager" priority=true sizes="(max-width: 800px) calc(100vw - 32px), (max-width: 1200px) 55vw, 644px" %}
 </header>
-<section class="sfi-sect sfi-prose sfi-simple-home" aria-labelledby="sfi-purpose">
+<section class="sfi-sect sfi-prose sfi-simple-home sfi-editorial sfi-home-safety" aria-labelledby="sfi-purpose">
+  <div>
   <h2 id="sfi-purpose">Safety standards for motorsports</h2>
   <p>The SFI Foundation, Inc. is a nonprofit organization that issues and administers standards for the quality assurance of specialty performance and racing equipment.</p>
   <p>SFI serves manufacturers, racers, and sanctioning bodies through specification programs, testing criteria, and certification programs. Manufacturers test and self-certify products to SFI specifications, which sanctioning bodies adopt into their racing rules.</p>
-  <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find SFI specifications &rarr;</a>
+  </div>
+  {% include sfi/photograph.html key="safety" %}
 </section>
 
 <section class="sfi-sect sfi-prose sfi-home-details" aria-labelledby="program-process">

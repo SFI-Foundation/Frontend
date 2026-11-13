@@ -1,0 +1,16 @@
+✔ profile renders identity and quiz saves, reloads, updates and clears (10.52873ms)
+✔ failed quiz save keeps edits and expired authentication hides private profile (5.867236ms)
+✔ profile load failure offers a working retry (5.182081ms)
+✔ name and quiz editing preserve unsaved changes in the other form (5.859473ms)
+✔ login requires a working authentication cookie and signup requires eight characters (3.410374ms)
+✔ signup reports failed automatic login; failed logout leaves profile visible (2.226265ms)
+Integration transport: live HTTP over Unix socket
+✔ rendered SFI login/profile/quiz/role UI → real Flask authentication → persistent SQLite (14605.607234ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16086.030168

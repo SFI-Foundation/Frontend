@@ -8,9 +8,10 @@ body_class: sfi-spec-search
 ---
 
 <header class="sfi-page-header">
-  <div class="sfi-page-header-content">
+  <div class="sfi-page-header-content sfi-spec-intro">
     <h1>Find <span class="gold">SFI Specifications</span></h1>
-    <p>Search by specification number, equipment name, or category to find verified current documents.</p>
+    <p>Search by specification number, equipment name, or category.</p>
+    {% include sfi/photograph.html key="specs" caption=false loading="eager" sizes="(max-width: 600px) 96px, 160px" %}
   </div>
 </header>
 

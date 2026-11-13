@@ -10,8 +10,13 @@ permalink: /history/
   <p>From racing manufacturers to an independent quality assurance foundation.</p>
 </div></header>
 <section class="sfi-sect sfi-prose sfi-simple-home" aria-label="SFI history">
+  <div class="sfi-editorial sfi-editorial--history">
+    <div>
   <h2>Why specifications were needed</h2>
   <p>Racing equipment is pushed to its performance limits. Early product failures highlighted the need for consistent performance requirements and testing, helping manufacturers and sanctioning bodies work from a common standard.</p>
+    </div>
+    {% include sfi/photograph.html key="history" sizes="(max-width: 600px) calc(100vw - 32px), 320px" %}
+  </div>
   <h2>Key milestones</h2>
   <dl class="sfi-history-list">
     <div><dt>1963</dt><dd>Racing product manufacturers form the Speed Equipment Manufacturers Association (SEMA) to support product specifications and testing.</dd></div>

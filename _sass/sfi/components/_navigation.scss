@@ -29,17 +29,6 @@
   height: 40px;
   object-fit: contain;
 }
-.opencs-bar__brand .opencs-bar__racing-photo {
-  display: none;
-  width: 120px;
-  height: 42px;
-  margin-left: $space-1;
-  border-radius: $radius-sm;
-  // Leave room for the six destinations on smaller screens.
-  @media (min-width: 1024px) {
-    display: block;
-  }
-}
 .opencs-nav {
   display: flex;
   align-items: center;

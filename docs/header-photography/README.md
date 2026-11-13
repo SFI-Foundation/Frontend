@@ -1,5 +1,7 @@
 # Real racing photography in the SFI header
 
+Historical implementation at `4bae7bd93`, superseded by [photography in page content](../SFI_SITE_PHOTOGRAPHY_REPORT.md). The navbar photo and its thumbnails have been removed.
+
 Branch: `feature/sfi-final-ui-polish`. Baseline: `d72acaf94`.
 
 Replaced the helmet/checkered-flag SVG with one real drag-racing photograph. Removed the SVG file, its CSS class and runtime references. The original SFI logo, six navigation destinations, authentication and specification-search logic are unchanged.

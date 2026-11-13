@@ -1,0 +1,4 @@
+PASS 20 photography layouts, 4 additional accessibility scans, fallback and delayed-loading checks
+PASS Five page-content photographs; clean 68px navbar; visible mobile images; compact search and desktop hero; source/license credits; keyboard menu
+PASS JPEG fallback decodes when WebP sources are unavailable
+PASS Standard/Retina responsive selection and zero measured layout shift with delayed photos

@@ -1,0 +1,10 @@
+PASS unchanged: _config.yml
+PASS unchanged: _config.development.yml
+PASS unchanged: assets/js/sfi/spec-search.js
+PASS unchanged: assets/js/sfi/navigation.js
+PASS unchanged: navigation/login.md
+PASS unchanged: images/sfi/SFI-Logo.png
+PASS specification UI and logic below the introductory header unchanged
+PASS retired navbar photo markup/styles and tiny thumbnails removed
+PASS all 16 local image variants match processing hashes; each below 200KB
+PASS configuration and photo-data YAML parsed

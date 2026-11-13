@@ -1,0 +1,34 @@
+
+> test
+> node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs
+
+✔ pending and rejected gear retain independent expiry warnings and review notes (110.339196ms)
+✔ approved badge remains visible beside current or missing expiry dates (20.437684ms)
+✔ device-only gear survives add/reload/remove with no staff review badges or notes (19.36088ms)
+✔ calendar expiry handles today, 89/90-day boundary, invalid dates and leap day (15.643176ms)
+✔ urgency sort puts expired first and does not discard zero-day deadlines (18.007316ms)
+✔ gear and reviewer strings render as text without executable markup (19.843382ms)
+✔ failed remote writes retain inputs and records without populating a local cache (27.567572ms)
+✔ server failure displays a device-only cache without pretending its review is current (30.468033ms)
+✔ admin rejection opens an accessible notes form; cancel and blank notes send nothing (72.991196ms)
+✔ admin PUT rejection refreshes queues and the owner sees it after reload (113.584575ms)
+✔ admin approval uses PUT and prevents duplicate submissions while saving (60.687207ms)
+✔ failed review keeps notes and row visible and restores usable controls (18.336351ms)
+✔ expired/revoked admin access hides private dashboard data (45.300139ms)
+✔ unknown remote review status is not presented as approved (25.664651ms)
+✔ a saved decision with a failed queue refresh offers retry without claiming fresh data (53.505554ms)
+✔ dashboard recognizes the trusted Admin role and denies an ordinary member (71.616554ms)
+✔ profile renders identity and quiz saves, reloads, updates and clears (20.27432ms)
+✔ failed quiz save keeps edits and expired authentication hides private profile (4.612095ms)
+✔ profile load failure offers a working retry (3.738346ms)
+✔ name and quiz editing preserve unsaved changes in the other form (5.019061ms)
+✔ login requires a working authentication cookie and signup requires eight characters (5.675283ms)
+✔ signup reports failed automatic login; failed logout leaves profile visible (8.511031ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1347.051664
