@@ -9,7 +9,7 @@ body_class: sfi-spec-search
 
 <header class="sfi-page-header">
   <div class="sfi-page-header-content">
-    <h1>Find SFI Specifications</h1>
+    <h1>Find <span class="gold">SFI Specifications</span></h1>
     <p>Search by specification number, equipment name, or category to find verified current documents.</p>
   </div>
 </header>

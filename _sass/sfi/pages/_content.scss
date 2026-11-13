@@ -15,7 +15,9 @@
   padding: 0;
   text-decoration: none;
   display: block;
-  transition: box-shadow 0.2s, border-top-color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border-top-color 0.2s;
   box-shadow: var(--sfi-shadow);
   overflow: hidden;
 }
@@ -43,7 +45,7 @@
   padding: 18px 20px 20px;
 }
 .sfi-home-card h3 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--sfi-blue);
@@ -51,7 +53,7 @@
   letter-spacing: 0.3px;
 }
 .sfi-home-card p {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.83rem;
   color: var(--sfi-muted);
   line-height: 1.6;
@@ -70,7 +72,7 @@
   margin: 0 auto;
 }
 .sfi-welcome h2 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--sfi-text);
@@ -78,7 +80,7 @@
   letter-spacing: 0.5px;
 }
 .sfi-welcome p {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.92rem;
   color: var(--sfi-text-secondary);
   line-height: 1.75;
@@ -98,7 +100,9 @@
   border-top: 3px solid var(--sfi-blue);
   border-radius: var(--sfi-radius);
   padding: 24px 22px;
-  transition: box-shadow 0.2s, border-top-color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border-top-color 0.2s;
   box-shadow: var(--sfi-shadow);
   text-decoration: none;
   display: block;
@@ -113,7 +117,7 @@
   display: block;
 }
 .sfi-feature-card h3 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: var(--sfi-blue);
@@ -121,7 +125,7 @@
   letter-spacing: 0.3px;
 }
 .sfi-feature-card p {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.83rem;
   color: var(--sfi-muted);
   line-height: 1.6;
@@ -150,16 +154,20 @@
   box-shadow: var(--sfi-shadow-md);
   transform: translateY(-2px);
 }
-.sfi-cat-tile-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+.sfi-cat-tile-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+}
 .sfi-cat-tile-name {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 700;
   color: var(--sfi-blue);
   font-size: 0.82rem;
   margin-bottom: 4px;
 }
 .sfi-cat-tile-count {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--sfi-muted);
   font-size: 0.72rem;
 }
@@ -174,18 +182,20 @@
 .sfi-stat-item {
   padding: 28px 16px;
   text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
-.sfi-stat-item:last-child { border-right: none; }
+.sfi-stat-item:last-child {
+  border-right: none;
+}
 .sfi-stat-num {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
   line-height: 1;
 }
 .sfi-stat-desc {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.7rem;
   color: #fff;
   text-transform: uppercase;
@@ -193,7 +203,9 @@
   margin-top: 6px;
 }
 @media (max-width: 600px) {
-  .sfi-stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .sfi-stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ── Info Grid ────────────────────────────────── */
@@ -202,7 +214,11 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-@media (max-width: 768px) { .sfi-info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .sfi-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .sfi-info-card {
   background: var(--sfi-white);
   border: 1px solid var(--sfi-border);
@@ -211,7 +227,7 @@
   box-shadow: var(--sfi-shadow);
 }
 .sfi-info-card h3 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--sfi-blue);
@@ -221,15 +237,22 @@
   padding-bottom: 10px;
 }
 .sfi-info-card p {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.88rem;
   color: var(--sfi-text-secondary);
   line-height: 1.7;
   margin: 0 0 10px;
 }
-.sfi-info-card p:last-child { margin-bottom: 0; }
-.sfi-info-card a { color: var(--sfi-blue); text-decoration: none; }
-.sfi-info-card a:hover { text-decoration: underline; }
+.sfi-info-card p:last-child {
+  margin-bottom: 0;
+}
+.sfi-info-card a {
+  color: var(--sfi-blue);
+  text-decoration: none;
+}
+.sfi-info-card a:hover {
+  text-decoration: underline;
+}
 
 /* ── Timeline ─────────────────────────────────── */
 .sfi-timeline {
@@ -237,9 +260,11 @@
   padding-left: 36px;
 }
 .sfi-timeline::before {
-  content: '';
+  content: "";
   position: absolute;
-  left: 12px; top: 0; bottom: 0;
+  left: 12px;
+  top: 0;
+  bottom: 0;
   width: 2px;
   background: var(--sfi-blue);
   opacity: 0.2;
@@ -249,24 +274,26 @@
   margin-bottom: 28px;
 }
 .sfi-timeline-item::before {
-  content: '';
+  content: "";
   position: absolute;
-  left: -29px; top: 5px;
-  width: 10px; height: 10px;
+  left: -29px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--sfi-blue);
   border: 2px solid var(--sfi-white);
   box-shadow: 0 0 0 2px var(--sfi-blue);
 }
 .sfi-timeline-year {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--sfi-blue);
   margin-bottom: 4px;
 }
 .sfi-timeline-text {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.88rem;
   color: var(--sfi-text-secondary);
   line-height: 1.6;
@@ -280,7 +307,7 @@
   text-align: center;
 }
 .sfi-cta-banner h2 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.7rem;
   font-weight: 700;
   color: #fff;
@@ -288,13 +315,15 @@
   letter-spacing: 0.5px;
 }
 .sfi-cta-banner p {
-  font-family: 'Inter', sans-serif;
-  color: rgba(255,255,255,0.8);
+  font-family: "Inter", sans-serif;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
   margin: 0 0 24px;
   line-height: 1.6;
 }
-.sfi-cta-banner .sfi-btn { margin: 0 6px; }
+.sfi-cta-banner .sfi-btn {
+  margin: 0 6px;
+}
 
 /* ── Contact ──────────────────────────────────── */
 .sfi-contact-grid {
@@ -311,10 +340,15 @@
   box-shadow: var(--sfi-shadow);
   transition: box-shadow 0.2s;
 }
-.sfi-contact-item:hover { box-shadow: var(--sfi-shadow-md); }
-.sfi-contact-item-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.sfi-contact-item:hover {
+  box-shadow: var(--sfi-shadow-md);
+}
+.sfi-contact-item-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
 .sfi-contact-item-label {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -323,12 +357,17 @@
   margin-bottom: 5px;
 }
 .sfi-contact-item-val {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.88rem;
   color: var(--sfi-text);
 }
-.sfi-contact-item-val a { color: var(--sfi-blue); text-decoration: none; }
-.sfi-contact-item-val a:hover { text-decoration: underline; }
+.sfi-contact-item-val a {
+  color: var(--sfi-blue);
+  text-decoration: none;
+}
+.sfi-contact-item-val a:hover {
+  text-decoration: underline;
+}
 
 /* ── Divider ──────────────────────────────────── */
 .sfi-divider {
@@ -342,3 +381,68 @@
   background: var(--sfi-border);
 }
 
+// Moderate information density for the four-page public site.
+.sfi-home-details,
+.sfi-contact-guidance {
+  padding-top: 0;
+}
+.sfi-home-details > h2,
+.sfi-contact-guidance > h2 {
+  margin-top: 0;
+}
+.sfi-home-details > p {
+  max-width: 78ch;
+  color: $text-soft;
+  margin-bottom: $space-5;
+}
+.sfi-role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-5;
+}
+.sfi-role-grid > section {
+  border-top: 2px solid $blue;
+  padding-top: $space-4;
+  min-width: 0;
+}
+.sfi-role-grid h3 {
+  margin: 0 0 $space-2;
+  font-size: 1.0625rem;
+  color: $blue-dark;
+}
+.sfi-role-grid p {
+  margin: 0;
+  color: $text-soft;
+}
+.sfi-blue-note {
+  margin-top: $space-6;
+  padding: $space-5;
+  background: $blue-dark;
+  border-left: 4px solid $gold;
+  border-radius: $radius-sm;
+  color: $surface;
+}
+.sfi-blue-note h2 {
+  color: $gold-text;
+  margin: 0 0 $space-3;
+  font-size: 1.375rem;
+}
+.sfi-blue-note p {
+  margin: 0 0 $space-3;
+  max-width: 90ch;
+  color: $surface;
+}
+.sfi-blue-note a {
+  color: $gold-text;
+  display: inline-block;
+  padding-block: $space-1;
+}
+.sfi-blue-note :focus-visible {
+  outline-color: $surface;
+}
+@media (max-width: 760px) {
+  .sfi-role-grid {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
+}

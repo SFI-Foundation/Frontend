@@ -19,7 +19,11 @@ The public shell uses an OCS-style horizontal top navigation bar in `_includes/n
 
 The earlier SFI appearance is restored: the original blue `#1a5fa8` navigation, blue page banners with white text, white content, and yellow `#f0a500` active-link accents. Public pages load only `/assets/css/sfi.css`, without Minima's header, stylesheet, or theme-switching scripts. The remote theme dependency remains available to inherited non-SFI layouts during the Jekyll build.
 
-The extra home hero, second search form, services cards, news feed, promotional sections, chatbot, and public statistics strip were removed. Search result counts and dynamic backend categories remain because they serve the specification search itself. No extra public widgets, events, or content sections were added.
+The white page background and horizontal navigation remain. Yellow text `#ffe082` now highlights page-title words, the active navigation link, and headings/links in blue information panels. The lighter text yellow contrasts 5.00:1 against SFI blue and 7.84:1 against dark blue; the existing `#f0a500` remains the border/accent color.
+
+Content is now moderately expanded: Home explains the roles of manufacturers, technical committees, and racing organizations, plus testing and quality assurance. History adds context before and after its short timeline. Contact adds practical guidance for specification, testing, and product/label questions. Spec Search remains immediately accessible, without extra material above its controls. No extra pages, statistics, news feed, chatbot, or decorative hero were restored.
+
+At 1440×900 the document heights are 1133px for Home, 1078px for History, and 978px for Contact: a short scroll beyond the first screen rather than the former long landing page. [Full Home screenshot](ui-overhaul/screenshots/after-home-full-1440.png), [full History](ui-overhaul/screenshots/after-history-full-1440.png), [full Contact](ui-overhaul/screenshots/after-contact-full-1440.png).
 
 ## Preserved functionality
 

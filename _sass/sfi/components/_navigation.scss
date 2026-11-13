@@ -47,10 +47,12 @@
   text-decoration: none;
 }
 .opencs-nav__link:hover {
+  color: $gold-text;
   text-decoration: underline;
   text-underline-offset: 5px;
 }
 .opencs-nav__link[aria-current] {
+  color: $gold-text;
   border-bottom-color: $gold;
 }
 .opencs-bar :focus-visible {
