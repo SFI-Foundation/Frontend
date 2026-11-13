@@ -2,8 +2,8 @@
 > test
 > node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs
 
-✔ scripts/test-sfi-gear.mjs (2998.709781ms)
-✔ scripts/test-sfi-profile.mjs (309.381402ms)
+✔ scripts/test-sfi-gear.mjs (2399.520284ms)
+✔ scripts/test-sfi-profile.mjs (142.85645ms)
 ℹ tests 2
 ℹ suites 0
 ℹ pass 2
@@ -11,4 +11,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 3024.660718
+ℹ duration_ms 2416.269785

@@ -17,7 +17,7 @@ plugins:
   - jekyll-include-cache
 
 # Ordered source paths for the OCS menu. Public pages load only SFI styles.
-# Account access stays in the footer, outside the four-page menu.
+# News and account access are included in the horizontal public menu.
 minima:
   skin: classic
   social_links:
@@ -26,7 +26,9 @@ minima:
     - index.md
     - navigation/sfi-specs.md
     - navigation/history.md
+    - navigation/news-events.md
     - navigation/contact.md
+    - navigation/login.md
 
 # Backend origin override; blank preserves existing environment resolution.
 sfi_api_base: ""

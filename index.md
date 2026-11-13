@@ -36,9 +36,13 @@ permalink: /
       <p>Sanctioning bodies adopt SFI specifications into their rulebooks, giving competitors a common reference for equipment requirements.</p>
     </section>
   </div>
-  <aside class="sfi-blue-note" aria-labelledby="quality-assurance">
-    <h2 id="quality-assurance">Quality assurance beyond the specification</h2>
-    <p>SFI supports its programs through test reports, periodic specification reviews, and licensing agreements. Its Poway laboratory provides thermal, flammability, strength, and mechanical testing for racing equipment.</p>
+  <aside class="sfi-blue-note" id="services" aria-labelledby="services-heading">
+    <h2 id="services-heading">SFI services &amp; programs</h2>
+    <ul class="sfi-services-list">
+      <li><strong>Equipment testing.</strong> The Poway laboratory provides thermal, flammability, strength, and mechanical testing for racing equipment.</li>
+      <li><strong>Quality assurance.</strong> Test reports, periodic specification reviews, and licensing agreements support SFI specification programs.</li>
+      <li><strong>Training.</strong> Tech Inspector Certification and Incident Response Training programs support motorsports officials and track personnel.</li>
+    </ul>
     <a href="{{ '/contact/' | relative_url }}">Ask SFI about testing or program participation &rarr;</a>
   </aside>
 </section>

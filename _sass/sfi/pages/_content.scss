@@ -446,3 +446,37 @@
     gap: $space-4;
   }
 }
+
+.sfi-services-list {
+  margin: 0 0 $space-3;
+  padding-left: $space-5;
+}
+.sfi-services-list li {
+  margin-bottom: $space-2;
+}
+.sfi-services-list strong {
+  color: $gold-text;
+}
+.sfi-news-grid {
+  gap: $space-6;
+  align-items: start;
+}
+.sfi-news-grid h2 {
+  margin-top: 0;
+}
+.sfi-event-row {
+  padding: $space-4 0;
+  border-bottom: 1px solid $border;
+}
+.sfi-event-row time {
+  color: $text-muted;
+  font-size: 0.875rem;
+}
+.sfi-event-row h3 {
+  margin: $space-1 0 $space-2;
+  font-size: 1.0625rem;
+}
+.sfi-event-row p {
+  margin: 0 0 $space-2;
+  color: $text-soft;
+}

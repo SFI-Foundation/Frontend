@@ -1,6 +1,7 @@
 ---
 layout: sfi
-title: Login
+title: Sign In
+nav_title: Sign In
 description: Sign in to your SFI Foundation account.
 permalink: /login/
 ---

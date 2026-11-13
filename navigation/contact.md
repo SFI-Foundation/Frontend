@@ -1,12 +1,12 @@
 ---
 layout: sfi
-title: Contact & Location
-nav_title: Contact & Location
+title: Contact
+nav_title: Contact
 description: Contact SFI Foundation in Poway, California.
 permalink: /contact/
 ---
 <header class="sfi-page-header"><div class="sfi-page-header-content">
-  <h1><span class="gold">Contact</span> &amp; Location</h1>
+  <h1><span class="gold">Contact</span> SFI</h1>
   <p>Questions about specifications, testing, or certification? Contact SFI.</p>
 </div></header>
 <div class="sfi-sect sfi-two-grid">

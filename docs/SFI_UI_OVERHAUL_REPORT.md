@@ -1,48 +1,48 @@
-# SFI frontend — revised four-page scope
+# SFI frontend — current navigation and content
 
-The latest requested structure replaces the earlier consolidated design. The existing draft PR #31 was closed at the user's request. No new PR is being created.
+The current scope preserves the white background, blue headers, readable yellow accents, and horizontal website navigation. Draft PR #31 remains closed; no new PR is being created.
 
-## Public pages
+## Destinations
 
-| Menu entry | Route | Content |
+| Top tab | Route | Content |
 | --- | --- | --- |
-| Home | `/` | About SFI: purpose, how specification programs work, and one spec-search action |
-| Spec Search | `/sfi-specs/` | Existing canonical specification search and authorized administration |
-| History | `/history/` | A short, separate history of SFI |
-| Contact & Location | `/contact/` | Verified email, phone, fax, address, and a map link |
+| Home | `/` | About SFI, how its programs work, and a concise Services & Programs section |
+| Spec Search | `/sfi-specs/` | Canonical specification search and authorized administration |
+| History | `/history/` | SFI timeline and historical context |
+| News & Events | `/news-events/` | Sourced SFI announcements and upcoming specification review meetings |
+| Contact | `/contact/` | Verified contact details, address, map link, and useful enquiry guidance |
+| Sign In | `/login/` | Existing sign-in, Create Account, and authenticated profile flows |
 
-`/about/`, `/services/`, `/news-events/`, `/search/`, `/navigation/blogs/`, and the old home aliases redirect to the appropriate remaining page. They no longer present separate About, Services, News, generic Search, or Blog interfaces. Existing account, gear, and administration functionality remains available outside the public menu.
+Sign In was preserved and is now an explicit top-level tab. Its forms, registration tab, authentication API, account aliases, and profile access remain intact. Contact is the tab/page name; the physical address remains useful contact information on that page.
 
-## Menu and colors
+`/about/` redirects to Home, `/services/` to `/#services`, and the generic Search/Blog and old home entry points remain compatible redirects. News & Events is now a real page rather than a redirect. No separate Services page is needed because its summary is on Home.
 
-The public shell uses an OCS-style horizontal top navigation bar in `_includes/nav/ocs-menu.html`. Its four visible links come from `_config.yml` and remain in one row at desktop widths. Narrow windows wrap the same links below the brand. There is no side drawer, modal, hamburger button, or navigation JavaScript; the obsolete drawer script was removed.
+## Design
 
-The earlier SFI appearance is restored: the original blue `#1a5fa8` navigation, blue page banners with white text, white content, and yellow `#f0a500` active-link accents. Public pages load only `/assets/css/sfi.css`, without Minima's header, stylesheet, or theme-switching scripts. The remote theme dependency remains available to inherited non-SFI layouts during the Jekyll build.
+The OCS-style top navigation renders the ordered page paths from `_config.yml`. All six links remain visible in one row at desktop widths; narrower viewports wrap the same links. There is no side drawer, modal navigation, hamburger button, or navigation JavaScript. Public pages request only the SFI stylesheet, not Minima's header/theme bundle.
 
-The white page background and horizontal navigation remain. Yellow text `#ffe082` now highlights page-title words, the active navigation link, and headings/links in blue information panels. The lighter text yellow contrasts 5.00:1 against SFI blue and 7.84:1 against dark blue; the existing `#f0a500` remains the border/accent color.
+The content background stays white. SFI blue is `#1a5fa8`, text-yellow is `#ffe082`, and border/accent gold remains `#f0a500`. Yellow text has 5.00:1 contrast on SFI blue and 7.84:1 on dark blue. It highlights titles, the active navigation entry, and blue information panels.
 
-Content is now moderately expanded: Home explains the roles of manufacturers, technical committees, and racing organizations, plus testing and quality assurance. History adds context before and after its short timeline. Contact adds practical guidance for specification, testing, and product/label questions. Spec Search remains immediately accessible, without extra material above its controls. No extra pages, statistics, news feed, chatbot, or decorative hero were restored.
+Content remains moderately expanded and grouped: Home explains participant roles and summarizes equipment testing, quality assurance, and training. History adds context around its short timeline. Contact includes practical enquiry guidance. Spec Search remains immediately accessible without extra text above its controls. No decorative hero, chatbot, generic site-search interface, fake statistics, or unsupported events were added.
 
-At 1440×900 the document heights are 1133px for Home, 1078px for History, and 978px for Contact: a short scroll beyond the first screen rather than the former long landing page. [Full Home screenshot](ui-overhaul/screenshots/after-home-full-1440.png), [full History](ui-overhaul/screenshots/after-history-full-1440.png), [full Contact](ui-overhaul/screenshots/after-contact-full-1440.png).
+## News and service sources
 
-## Preserved functionality
+News uses the existing `sfi_updates` data, limits the announcement list to three entries, and filters meetings against the build date. Each announcement links to its official source, and event entries direct visitors to confirm the official session schedule and location.
 
-The specification API, canonical identities, category relationships, pagination, search ranking, loading/empty/error feedback, PDF approval guard, and admin authorization remain intact. A document URL alone cannot enable a PDF action. No backend source, specification records, credentials, environment files, production URL, or deployment workflow was changed.
+The current entries were checked against the [official SFI announcements](https://sfifoundation.com/blog/) and [meeting schedule](https://sfifoundation.com/meeting-schedule/). Home's program descriptions were checked against [Tech Inspector Certification](https://sfifoundation.com/tech-inspector-certification/) and [Incident Response Training](https://sfifoundation.com/incident-response-training/). Training is not represented as product certification.
 
-## Validation
+## Preserved behavior
 
-See [current validation results](ui-overhaul/VALIDATION.md) and [browser results](ui-overhaul/browser-results.json). The complete production build passed, and its four pages, account page, and CSS exactly matched the browser-reviewed output.
+The specification API, canonical identities, category relationships, pagination, ranking, loading/empty/error feedback, verified-only PDF action guard, admin authorization, and all account workflows remain. A document URL alone cannot enable an approved PDF action. Backend source, specification records, credentials, environment files, production URL, and deployment workflow are unchanged.
 
-Five viewport sizes were checked: 1440×900, 1024×768, 768×1024, 390×844, and 320×720. All passed without horizontal overflow. Fifteen axe scans found no WCAG A/AA violations. Browser checks verify that only the SFI stylesheet loads, desktop links are visible in one top row, and no drawer or menu script is present. Search, all 111 canonical records, all categories, pagination, PDF gating, error recovery, redirects, and member/admin view separation passed against the disposable local API.
+## Verification and screenshots
 
-The existing preview on port 4500 had cached the former navigation configuration. It was restarted with the verified output and refreshed configuration, preserving its host, port, destination, and incremental watching.
+[Validation](ui-overhaul/VALIDATION.md) and [structured browser results](ui-overhaul/browser-results.json) record actual checks. Six pages were exercised at 1440×900, 1024×768, 768×1024, 390×844, and 320×720. Tests cover the exact six top links, no overflow, top-row desktop layout, News & Events, Home services, Sign In/Create Account, canonical search across all 111 records, categories, pagination, PDF gating, failure recovery, redirects, and member/admin separation. Eighteen axe scans report zero WCAG A/AA violations.
 
-## Screenshots
+Current screenshots: [Home](ui-overhaul/screenshots/after-home-1440.png), [News & Events](ui-overhaul/screenshots/after-news-events-1440.png), [Sign In](ui-overhaul/screenshots/after-sign-in-1440.png), [Contact](ui-overhaul/screenshots/after-contact-1440.png), [Spec Search](ui-overhaul/screenshots/after-specifications-1440.png). Full-page images are also available under `docs/ui-overhaul/screenshots/`. QA artifacts remain excluded from publication.
 
-Current: [desktop home](ui-overhaul/screenshots/after-home-1440.png), [mobile home](ui-overhaul/screenshots/after-home-390.png), [desktop spec search](ui-overhaul/screenshots/after-specifications-1440.png), [mobile spec search](ui-overhaul/screenshots/after-specifications-390.png), [1024px desktop home](ui-overhaul/screenshots/after-home-1024.png), [desktop history](ui-overhaul/screenshots/after-history-1440.png), [desktop contact](ui-overhaul/screenshots/after-contact-1440.png).
-
-The `before-*` images show the original main-branch UI. Reports and screenshots are excluded from the published site.
+The normal preview on localhost:4500 is refreshed with the new configuration so its menu does not retain the former four-link configuration.
 
 ## Limits
 
-Tests use Chromium and a disposable API/database; production account writes and manual screen-reader testing were not performed. Existing unrelated legacy Jekyll post/permalink and Sass deprecation warnings remain. Historical educational source content is retained; its former public Blog and Search entry pages now redirect.
+Chromium and a disposable local API/database were used. Production account writes and manual screen-reader/native toolbar zoom testing were not performed. Existing unrelated Jekyll post/permalink and Sass deprecation warnings remain. News freshness depends on the existing sync-and-rebuild workflow; past meetings are omitted at build time. Historical educational source remains, while its old public Blog/Search entry pages redirect.

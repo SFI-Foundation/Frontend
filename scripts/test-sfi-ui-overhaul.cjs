@@ -1,4 +1,4 @@
-// Optional browser acceptance for the four-page SFI site and OCS-style top navigation.
+// Optional browser acceptance for the SFI public pages and OCS-style top navigation.
 // Use the existing isolated phase1_local.py API, never production accounts/data.
 const { chromium } = require(process.env.SFI_PLAYWRIGHT_MODULE || "playwright");
 const assert = require("node:assert/strict");
@@ -18,8 +18,22 @@ const check = (message) => {
   report.checks.push(message);
   console.log("PASS", message);
 };
-const pages = ["/", "/sfi-specs/", "/history/", "/contact/", "/login/"];
-const labels = ["Home", "Spec Search", "History", "Contact & Location"];
+const pages = [
+  "/",
+  "/sfi-specs/",
+  "/history/",
+  "/news-events/",
+  "/contact/",
+  "/login/",
+];
+const labels = [
+  "Home",
+  "Spec Search",
+  "History",
+  "News & Events",
+  "Contact",
+  "Sign In",
+];
 let browser;
 (async () => {
   try {
@@ -133,6 +147,8 @@ let browser;
             "/sfi-specs/": "specifications",
             "/history/": "history",
             "/contact/": "contact",
+            "/news-events/": "news-events",
+            "/login/": "sign-in",
           }[route];
           if (name) await screenshot(`after-${name}-${width}.png`);
         }
@@ -157,7 +173,7 @@ let browser;
         }
       }
       check(
-        `four public pages and account access at ${width}×${height}: visible top navigation, no side drawer, no theme CSS or overflow`,
+        `five public pages and Sign In at ${width}×${height}: visible top navigation, no side drawer, no theme CSS or overflow`,
       );
     }
     await page.setViewportSize({ width: 390, height: 844 });
@@ -194,6 +210,41 @@ let browser;
     );
     check(
       "keyboard skip and top-link navigation; standalone History and verified Contact & Location",
+    );
+    await go("/");
+    assert.match(
+      await page.locator("#services").innerText(),
+      /Equipment testing[\s\S]*Quality assurance[\s\S]*Training/,
+    );
+    await page
+      .locator("#navLinks")
+      .getByRole("link", { name: "News & Events", exact: true })
+      .click();
+    await page.waitForURL(site + "/news-events/");
+    assert.equal(await page.locator(".sfi-news-list li").count(), 3);
+    assert.ok(
+      (await page
+        .locator('.sfi-news-list a[href^="https://sfifoundation.com/"]')
+        .count()) > 0,
+    );
+    assert.equal(await page.locator("meta[http-equiv=refresh]").count(), 0);
+    for (const date of await page
+      .locator(".sfi-event-row time")
+      .evaluateAll((nodes) => nodes.map((n) => n.dateTime)))
+      assert.ok(date >= new Date().toISOString().slice(0, 10));
+    await page
+      .locator("#navLinks")
+      .getByRole("link", { name: "Sign In", exact: true })
+      .click();
+    await page.waitForURL(site + "/login/");
+    assert.equal(await page.locator("#loginUid").isVisible(), true);
+    assert.equal(await page.locator("#loginPass").isVisible(), true);
+    await page.locator("#tabRegister").click();
+    assert.equal(await page.locator("#regName").isVisible(), true);
+    await page.locator("#tabLogin").click();
+    assert.equal(await page.locator("#loginUid").isVisible(), true);
+    check(
+      "Home services, sourced News & Events, and top Sign In/Create Account entry points",
     );
     await go("/sfi-specs/");
     const all = await (
@@ -277,8 +328,7 @@ let browser;
     );
     for (const [old, target] of [
       ["/about/", "/"],
-      ["/services/", "/"],
-      ["/news-events/", "/contact/"],
+      ["/services/", "/#services"],
       ["/search/", "/sfi-specs/"],
       ["/navigation/blogs/", "/"],
       ["/home.html", "/"],
