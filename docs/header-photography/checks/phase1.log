@@ -1,0 +1,30 @@
+
+> test:phase1
+> node --test scripts/test-sfi-spec-search.mjs scripts/test-sfi-manufacturer-demo.mjs scripts/test-sfi-public-cleanup.mjs
+
+✔ timezone day boundaries and DST transitions use calendar dates (21.821189ms)
+✔ calendar months clamp leap and month-end boundaries (0.54459ms)
+✔ threshold inclusive, expiration inclusive, overdue following day, disable six-month (0.826357ms)
+✔ demo uses synthetic records only, supports search and changes, never contacts services (187.174452ms)
+✔ every reminder input has an individual label, feedback, and disabled state (76.091877ms)
+✔ public search source contains no research UI or demo navigation (5.336307ms)
+﹣ production artifact excludes prototypes, QA, docs, scripts and credential files (0.154581ms) # Set SFI_BUILT_SITE to a completed production-mode build
+﹣ no known committed credential values or provider tokens in generated assets (0.166867ms) # Set SFI_BUILT_SITE
+✔ accessible API search, category overlap, clear, pagination and labels (221.379708ms)
+✔ pagination waits for a response and does not steal focus from a newer search (61.326669ms)
+✔ loading, empty and error states have actionable retry (35.849292ms)
+✔ stale responses never replace newer results (34.865935ms)
+✔ unverified, unsafe and outdated links cannot become actions; content escaped (34.091543ms)
+✔ typing invalidates an in-flight response during the debounce window (19.377196ms)
+✔ category and explicit loads cancel a pending debounce without duplicate requests (331.980599ms)
+✔ all non-current document states expose clear text without actions (20.195554ms)
+✔ entire cleaned public page initializes without references to removed controls (38.211423ms)
+✔ homepage query initializes canonical search safely and reset clears category (38.032076ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 1352.93442

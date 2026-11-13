@@ -24,6 +24,16 @@
   gap: $space-2;
   color: $blue;
 }
+.sfi-footer .sfi-photo-credit {
+  flex-basis: 100%;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: $text-muted;
+}
+.sfi-footer .sfi-photo-credit a {
+  display: inline;
+  min-height: 0;
+}
 .sfi-simple-home {
   margin-left: auto;
   margin-right: auto;

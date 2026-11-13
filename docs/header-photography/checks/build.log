@@ -1,0 +1,242 @@
+Configuration file: /tmp/sfi-ui-current-source/_config.yml
+      Remote Theme: Using theme jekyll/minima
+            Source: /tmp/sfi-ui-current-source
+       Destination: /tmp/sfi-photo-preview
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+      Remote Theme: Using theme jekyll/minima
+       Jekyll Feed: Generating feed for posts
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "sfi/main";
+  │         ^^^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/assets/css/sfi.scss 1:9  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │ @import "tokens", "mixins";
+  │         ^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/_sass/sfi/_main.scss 3:9  @import
+    /tmp/sfi-ui-current-source/assets/css/sfi.scss 1:9   root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │ @import "tokens", "mixins";
+  │                   ^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/_sass/sfi/_main.scss 3:19  @import
+    /tmp/sfi-ui-current-source/assets/css/sfi.scss 1:9    root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+6 │   @import "base/properties", "base/foundation";
+  │           ^^^^^^^^^^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/_sass/sfi/_main.scss 6:11  @import
+    /tmp/sfi-ui-current-source/assets/css/sfi.scss 1:9    root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+6 │   @import "base/properties", "base/foundation";
+  │                              ^^^^^^^^^^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/_sass/sfi/_main.scss 6:30  @import
+    /tmp/sfi-ui-current-source/assets/css/sfi.scss 1:9    root stylesheet
+WARNING: 19 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+2 │   "minima/skins/classic",
+  │   ^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │   "minima/initialize";
+  │   ^^^^^^^^^^^^^^^^^^^
+  ╵
+    /tmp/sfi-ui-current-source/assets/css/style.scss 3:3  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+5 │ @import "minima/skins/auto";
+  │         ^^^^^^^^^^^^^^^^^^^
+  ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+14 │ $lm-brand-color-light:     lighten($lm-brand-color, 40%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 14:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [color-functions]: lighten() is deprecated. Suggestions:
+
+color.scale($color, $lightness: 80.9523809524%)
+color.adjust($color, $lightness: 40%)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+14 │ $lm-brand-color-light:     lighten($lm-brand-color, 40%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 14:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+15 │ $lm-brand-color-dimmed:    darken($lm-brand-color, 11%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 15:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [color-functions]: darken() is deprecated. Suggestions:
+
+color.scale($color, $lightness: -21.7441860465%)
+color.adjust($color, $lightness: -11%)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+15 │ $lm-brand-color-dimmed:    darken($lm-brand-color, 11%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 15:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+16 │ $lm-brand-color-dark:      darken($lm-brand-color, 25%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 16:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [color-functions]: darken() is deprecated. Suggestions:
+
+color.scale($color, $lightness: -49.4186046512%)
+color.adjust($color, $lightness: -25%)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+16 │ $lm-brand-color-dark:      darken($lm-brand-color, 25%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 16:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+26 │ $lm-link-visited-color:    darken($lm-link-base-color, 15%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 26:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [color-functions]: darken() is deprecated. Suggestions:
+
+color.scale($color, $lightness: -31.0975609756%)
+color.adjust($color, $lightness: -15%)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+26 │ $lm-link-visited-color:    darken($lm-link-base-color, 15%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 26:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+30 │ $lm-border-color-02:       lighten($lm-brand-color, 35%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 30:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [color-functions]: lighten() is deprecated. Suggestions:
+
+color.scale($color, $lightness: 70.8333333333%)
+color.adjust($color, $lightness: 35%)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+30 │ $lm-border-color-02:       lighten($lm-brand-color, 35%) !default;
+   │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/auto.scss 30:28   @import
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/skins/classic.scss 5:9  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 2:3                                 root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+46 │   "minima/custom-variables", // Hook to override predefined variables.
+   │   ^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/initialize.scss 46:3  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 3:3                               root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+47 │   "minima/base",             // Defines element resets.
+   │   ^^^^^^^^^^^^^
+   ╵
+    /tmp/jekyll-remote-theme-20261112-474946-k1or94/_sass/minima/initialize.scss 47:3  @import
+    /tmp/sfi-ui-current-source/assets/css/style.scss 3:3                               root stylesheet
+WARNING: 24 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+                    done in 0.195 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+Jekyll exit status: 0

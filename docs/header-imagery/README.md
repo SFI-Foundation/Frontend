@@ -1,5 +1,7 @@
 # SFI header imagery
 
+Historical SVG implementation at `d72acaf94`, superseded by [real racing photography](../header-photography/README.md).
+
 Baseline: `3fb4d6eab`. Implemented on `feature/sfi-final-ui-polish`.
 
 Added one original, local SVG containing a helmet outline and checkered flag. The two elements share a muted neutral color and line weight. The SVG is 424 bytes, uses only paths, and has no external resources, fonts, scripts, or embedded raster data. No third-party artwork was used.

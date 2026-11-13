@@ -1,0 +1,375 @@
+{
+  "checks": [
+    "six destinations and Create Account at 1440×900: responsive top navigation, no side drawer, no theme CSS or overflow",
+    "six destinations and Create Account at 1024×768: responsive top navigation, no side drawer, no theme CSS or overflow",
+    "six destinations and Create Account at 768×1024: responsive top navigation, no side drawer, no theme CSS or overflow",
+    "six destinations and Create Account at 390×844: responsive top navigation, no side drawer, no theme CSS or overflow",
+    "six destinations and Create Account at 320×720: responsive top navigation, no side drawer, no theme CSS or overflow",
+    "keyboard skip and top-link navigation; standalone History and verified Contact & Location",
+    "Home services, sourced News & Events, and top Sign In/Create Account entry points",
+    "real specification search, all 111 canonical identities, categories, pagination, PDF gating, empty/error/retry",
+    "blog/general search and retired pages redirect; spec query handoff preserved",
+    "member/admin separation and existing administration view preserved",
+    "no-JavaScript menu fallback; zero page exceptions; 21 axe scans with zero violations"
+  ],
+  "layouts": [
+    {
+      "route": "/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1200
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 4321
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1053
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 900
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1006
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 900
+    },
+    {
+      "route": "/login/#register",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 900
+    },
+    {
+      "route": "/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1301
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 4341
+    },
+    {
+      "route": "/history/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1102
+    },
+    {
+      "route": "/news-events/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 858
+    },
+    {
+      "route": "/contact/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1030
+    },
+    {
+      "route": "/login/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 768
+    },
+    {
+      "route": "/login/#register",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 768
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1447
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 4679
+    },
+    {
+      "route": "/history/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1147
+    },
+    {
+      "route": "/news-events/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1024
+    },
+    {
+      "route": "/contact/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1201
+    },
+    {
+      "route": "/login/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1024
+    },
+    {
+      "route": "/login/#register",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1024
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2196
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 5632
+    },
+    {
+      "route": "/history/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 1674
+    },
+    {
+      "route": "/news-events/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 1389
+    },
+    {
+      "route": "/contact/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 1643
+    },
+    {
+      "route": "/login/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 844
+    },
+    {
+      "route": "/login/#register",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 844
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 2560
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 6572
+    },
+    {
+      "route": "/history/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 2003
+    },
+    {
+      "route": "/news-events/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 1454
+    },
+    {
+      "route": "/contact/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 1819
+    },
+    {
+      "route": "/login/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 750
+    },
+    {
+      "route": "/login/#register",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 839
+    }
+  ],
+  "accessibility": [
+    {
+      "route": "/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/login/#register",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/history/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/contact/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/login/#register",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/history/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/contact/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/login/#register",
+      "width": 320,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "after-home-1440.png",
+    "after-specifications-1440.png",
+    "after-history-1440.png",
+    "after-news-events-1440.png",
+    "after-contact-1440.png",
+    "after-sign-in-1440.png",
+    "after-create-account-1440.png",
+    "after-home-1024.png",
+    "after-specifications-1024.png",
+    "after-history-1024.png",
+    "after-news-events-1024.png",
+    "after-contact-1024.png",
+    "after-sign-in-1024.png",
+    "after-create-account-1024.png",
+    "after-home-768.png",
+    "after-specifications-768.png",
+    "after-history-768.png",
+    "after-news-events-768.png",
+    "after-contact-768.png",
+    "after-sign-in-768.png",
+    "after-create-account-768.png",
+    "after-home-390.png",
+    "after-specifications-390.png",
+    "after-history-390.png",
+    "after-news-events-390.png",
+    "after-contact-390.png",
+    "after-sign-in-390.png",
+    "after-create-account-390.png",
+    "after-home-320.png",
+    "after-specifications-320.png",
+    "after-history-320.png",
+    "after-news-events-320.png",
+    "after-contact-320.png",
+    "after-sign-in-320.png",
+    "after-create-account-320.png",
+    "after-mobile-navigation.png",
+    "after-sign-in-validation.png",
+    "after-create-account-validation.png"
+  ]
+}
