@@ -1,6 +1,6 @@
 .sfi-page-header {
-  background: $surface-alt;
-  border-bottom: 1px solid $border;
+  background: linear-gradient(105deg, $hero-start, $blue);
+  border-bottom: 1px solid $blue;
   padding: $space-5;
 }
 .sfi-page-header-content {
@@ -8,17 +8,17 @@
   margin: auto;
 }
 .sfi-page-header h1 {
-  color: $blue-dark;
+  color: $surface;
   font-size: clamp(1.625rem, 3vw, 2rem);
   margin: 0 0 $space-2;
   letter-spacing: -0.02em;
 }
 .sfi-page-header h1 .gold {
-  color: $blue-dark;
+  color: $gold;
 }
 .sfi-page-header p {
   margin: 0;
-  color: $text-soft;
+  color: $surface;
   max-width: 80ch;
 }
 .sfi-page-header .sfi-eyebrow {

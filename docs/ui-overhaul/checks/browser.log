@@ -1,9 +1,9 @@
-PASS four public pages and account access at 1440×900: OCS menu only, no theme CSS or overflow
-PASS four public pages and account access at 1024×768: OCS menu only, no theme CSS or overflow
-PASS four public pages and account access at 768×1024: OCS menu only, no theme CSS or overflow
-PASS four public pages and account access at 390×844: OCS menu only, no theme CSS or overflow
-PASS four public pages and account access at 320×720: OCS menu only, no theme CSS or overflow
-PASS keyboard skip/menu/Escape/link navigation; standalone History and verified Contact & Location
+PASS four public pages and account access at 1440×900: visible top navigation, no side drawer, no theme CSS or overflow
+PASS four public pages and account access at 1024×768: visible top navigation, no side drawer, no theme CSS or overflow
+PASS four public pages and account access at 768×1024: visible top navigation, no side drawer, no theme CSS or overflow
+PASS four public pages and account access at 390×844: visible top navigation, no side drawer, no theme CSS or overflow
+PASS four public pages and account access at 320×720: visible top navigation, no side drawer, no theme CSS or overflow
+PASS keyboard skip and top-link navigation; standalone History and verified Contact & Location
 PASS real specification search, all 111 canonical identities, categories, pagination, PDF gating, empty/error/retry
 PASS blog/general search and retired pages redirect; spec query handoff preserved
 PASS member/admin separation and existing administration view preserved

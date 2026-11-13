@@ -1,4 +1,4 @@
-// Optional browser acceptance for the four-page SFI site and standalone OCS menu.
+// Optional browser acceptance for the four-page SFI site and OCS-style top navigation.
 // Use the existing isolated phase1_local.py API, never production accounts/data.
 const { chromium } = require(process.env.SFI_PLAYWRIGHT_MODULE || "playwright");
 const assert = require("node:assert/strict");
@@ -50,7 +50,7 @@ let browser;
       );
     const go = async (route) => {
       assert.equal((await page.goto(site + route)).status(), 200);
-      await page.waitForSelector("#navToggle:not([hidden])");
+      await page.waitForSelector("#navLinks a");
       if (route.startsWith("/sfi-specs/")) await idle();
     };
     const search = async (value) => {
@@ -89,7 +89,7 @@ let browser;
         );
         assert.equal(
           await page.locator('script[src$="/ocs-menu.js"]').count(),
-          1,
+          0,
         );
         assert.equal(
           await page
@@ -110,30 +110,30 @@ let browser;
           dimensions.scrollWidth <= width,
           `${route} overflows at ${width}`,
         );
-        await page.locator("#navToggle").click();
         assert.equal(
-          await page.locator("#opencsMenu").evaluate((x) => x.open),
-          true,
+          await page.locator("#navToggle,dialog,.opencs-drawer").count(),
+          0,
         );
         assert.ok(await page.locator("#navLinks a").first().isVisible());
-        await page.keyboard.press("Escape");
-        await page.waitForFunction(
-          () =>
-            document
-              .getElementById("navToggle")
-              .getAttribute("aria-expanded") === "false",
-        );
-        assert.equal(
-          await page.evaluate(() => document.activeElement.id),
-          "navToggle",
-        );
-        if (width === 1440 || width === 390) {
-          const name =
-            route === "/"
-              ? "home"
-              : route === "/sfi-specs/"
-                ? "specifications"
-                : null;
+        if (width >= 1024) {
+          const positions = await page
+            .locator("#navLinks a")
+            .evaluateAll((nodes) =>
+              nodes.map((n) => n.getBoundingClientRect().top),
+            );
+          assert.ok(
+            positions.every((y) => Math.abs(y - positions[0]) < 2),
+            "desktop navigation remains in one top row",
+          );
+          assert.ok((await page.locator("#navLinks").boundingBox()).y < 80);
+        }
+        if ([1440, 1024, 390].includes(width)) {
+          const name = {
+            "/": "home",
+            "/sfi-specs/": "specifications",
+            "/history/": "history",
+            "/contact/": "contact",
+          }[route];
           if (name) await screenshot(`after-${name}-${width}.png`);
         }
         if (process.env.SFI_AXE_SOURCE && [1440, 390, 320].includes(width)) {
@@ -157,7 +157,7 @@ let browser;
         }
       }
       check(
-        `four public pages and account access at ${width}×${height}: OCS menu only, no theme CSS or overflow`,
+        `four public pages and account access at ${width}×${height}: visible top navigation, no side drawer, no theme CSS or overflow`,
       );
     }
     await page.setViewportSize({ width: 390, height: 844 });
@@ -174,17 +174,14 @@ let browser;
       await page.evaluate(() => document.activeElement.id),
       "sfi-main",
     );
-    await page.locator("#navToggle").click();
     await screenshot("after-mobile-navigation.png");
     await page.getByRole("link", { name: "History", exact: true }).click();
     await page.waitForURL(site + "/history/");
     assert.match(await page.locator("h1").innerText(), /History/);
-    await page.locator("#navToggle").click();
     assert.equal(
       await page.locator("#navLinks [aria-current=page]").innerText(),
       "History",
     );
-    await page.keyboard.press("Escape");
     await go("/contact/");
     assert.equal(await page.locator("address").count(), 1);
     assert.match(
@@ -196,7 +193,7 @@ let browser;
       1,
     );
     check(
-      "keyboard skip/menu/Escape/link navigation; standalone History and verified Contact & Location",
+      "keyboard skip and top-link navigation; standalone History and verified Contact & Location",
     );
     await go("/sfi-specs/");
     const all = await (

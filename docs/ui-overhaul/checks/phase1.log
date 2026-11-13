@@ -2,9 +2,9 @@
 > test:phase1
 > node --test scripts/test-sfi-spec-search.mjs scripts/test-sfi-manufacturer-demo.mjs scripts/test-sfi-public-cleanup.mjs
 
-✔ scripts/test-sfi-manufacturer-demo.mjs (1529.15978ms)
-✔ scripts/test-sfi-public-cleanup.mjs (110.860739ms)
-✔ scripts/test-sfi-spec-search.mjs (2141.680459ms)
+✔ scripts/test-sfi-manufacturer-demo.mjs (2874.628169ms)
+✔ scripts/test-sfi-public-cleanup.mjs (243.859067ms)
+✔ scripts/test-sfi-spec-search.mjs (3902.105387ms)
 ℹ tests 3
 ℹ suites 0
 ℹ pass 3
@@ -12,4 +12,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 2173.580119
+ℹ duration_ms 3973.12277

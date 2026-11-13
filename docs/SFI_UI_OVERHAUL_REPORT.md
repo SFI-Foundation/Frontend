@@ -15,9 +15,9 @@ The latest requested structure replaces the earlier consolidated design. The exi
 
 ## Menu and colors
 
-The public shell loads the standalone OCS compact bar/drawer in `_includes/nav/ocs-menu.html` and `assets/js/sfi/ocs-menu.js`. The menu reads its four ordered page paths from `_config.yml`. The same navigation links are enhanced into a native dialog; Escape, focus return, backdrop dismissal, link navigation, and a no-JavaScript fallback are supported.
+The public shell uses an OCS-style horizontal top navigation bar in `_includes/nav/ocs-menu.html`. Its four visible links come from `_config.yml` and remain in one row at desktop widths. Narrow windows wrap the same links below the brand. There is no side drawer, modal, hamburger button, or navigation JavaScript; the obsolete drawer script was removed.
 
-Public pages request only `/assets/css/sfi.css`: they do not load Minima's header, theme stylesheet, or theme-switching scripts. The remote theme dependency remains available to inherited non-SFI layouts during the Jekyll build. Colors are white, existing light blue `#e8f0fa`, readable blue text/actions, and restrained yellow `#f0a500` accents.
+The earlier SFI appearance is restored: the original blue `#1a5fa8` navigation, blue page banners with white text, white content, and yellow `#f0a500` active-link accents. Public pages load only `/assets/css/sfi.css`, without Minima's header, stylesheet, or theme-switching scripts. The remote theme dependency remains available to inherited non-SFI layouts during the Jekyll build.
 
 The extra home hero, second search form, services cards, news feed, promotional sections, chatbot, and public statistics strip were removed. Search result counts and dynamic backend categories remain because they serve the specification search itself. No extra public widgets, events, or content sections were added.
 
@@ -27,15 +27,15 @@ The specification API, canonical identities, category relationships, pagination,
 
 ## Validation
 
-See [current validation results](ui-overhaul/VALIDATION.md) and [browser results](ui-overhaul/browser-results.json). The complete production build passed, and its four pages, account page, menu script, and CSS exactly matched the browser-reviewed output.
+See [current validation results](ui-overhaul/VALIDATION.md) and [browser results](ui-overhaul/browser-results.json). The complete production build passed, and its four pages, account page, and CSS exactly matched the browser-reviewed output.
 
-Five viewport sizes were checked: 1440×900, 1024×768, 768×1024, 390×844, and 320×720. All passed without horizontal overflow. Fifteen axe scans found no WCAG A/AA violations. Actual browser requests verified that only the SFI stylesheet and standalone OCS menu load. Search, all 111 canonical records, all categories, pagination, PDF gating, error recovery, redirects, and member/admin view separation passed against the disposable local API.
+Five viewport sizes were checked: 1440×900, 1024×768, 768×1024, 390×844, and 320×720. All passed without horizontal overflow. Fifteen axe scans found no WCAG A/AA violations. Browser checks verify that only the SFI stylesheet loads, desktop links are visible in one top row, and no drawer or menu script is present. Search, all 111 canonical records, all categories, pagination, PDF gating, error recovery, redirects, and member/admin view separation passed against the disposable local API.
 
 The existing preview on port 4500 had cached the former navigation configuration. It was restarted with the verified output and refreshed configuration, preserving its host, port, destination, and incremental watching.
 
 ## Screenshots
 
-Current: [desktop home](ui-overhaul/screenshots/after-home-1440.png), [mobile home](ui-overhaul/screenshots/after-home-390.png), [desktop spec search](ui-overhaul/screenshots/after-specifications-1440.png), [mobile spec search](ui-overhaul/screenshots/after-specifications-390.png), [OCS drawer](ui-overhaul/screenshots/after-mobile-navigation.png).
+Current: [desktop home](ui-overhaul/screenshots/after-home-1440.png), [mobile home](ui-overhaul/screenshots/after-home-390.png), [desktop spec search](ui-overhaul/screenshots/after-specifications-1440.png), [mobile spec search](ui-overhaul/screenshots/after-specifications-390.png), [1024px desktop home](ui-overhaul/screenshots/after-home-1024.png), [desktop history](ui-overhaul/screenshots/after-history-1440.png), [desktop contact](ui-overhaul/screenshots/after-contact-1440.png).
 
 The `before-*` images show the original main-branch UI. Reports and screenshots are excluded from the published site.
 
