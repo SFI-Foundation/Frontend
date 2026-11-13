@@ -1,0 +1,14 @@
+
+> test
+> node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs
+
+✔ scripts/test-sfi-gear.mjs (8207.823434ms)
+✔ scripts/test-sfi-profile.mjs (568.274263ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8289.406583

@@ -1,0 +1,2 @@
+PASS: approved 16.1 action opens the exact official URL in a separate tab; HTTP 200 with PDF bytes
+PASS: compact category grid screenshot captured

@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     {% if page.sfi_redirect %}
     <meta http-equiv="refresh" content="0; url={{ page.sfi_redirect | relative_url }}">
-    <link rel="canonical" href="{{ page.sfi_redirect | relative_url }}">
+    <link rel="canonical" href="{{ page.sfi_redirect | split: '#' | first | absolute_url }}">
+    {% else %}
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
     {% endif %}
     {% if page.sitemap == false %}<meta name="robots" content="noindex, nofollow">{% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,21 +19,17 @@
   </head>
   <body class="sfi-site{% if page.body_class %} {{ page.body_class | escape }}{% endif %}">
     <a class="sfi-skip-link" href="#sfi-main">Skip to content</a>
-    <header class="sfi-header">
-      <a href="{{ '/' | relative_url }}" class="sfi-header-logo">
-        <img src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="SFI Foundation" class="sfi-logo-img">
-      </a>
-      <div class="sfi-header-tagline">Setting the Standard for<br>Motorsports Safety Since 1978.</div>
-    </header>
     {% include sfi/nav.html %}
     <main id="sfi-main" tabindex="-1">
       {{ content }}
     </main>
     {% include sfi/footer.html %}
-    {% include sfi/chatbot.html %}
     <script>
       const navToggle = document.getElementById('navToggle');
       const navLinks = document.getElementById('navLinks');
+
+      navToggle.hidden = false;
+      navLinks.classList.add('enhanced');
 
       function setNavOpen(open) {
         navLinks.classList.toggle('open', open);
@@ -52,7 +50,7 @@
         }
       });
       window.addEventListener('resize', () => {
-        if (window.matchMedia('(min-width: 901px)').matches) setNavOpen(false);
+        if (window.matchMedia('(min-width: 861px)').matches) setNavOpen(false);
       });
     </script>
   </body>

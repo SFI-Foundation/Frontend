@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: center;
   gap: $space-2;
-  padding: 9px 18px;
+  min-height: 44px;
+  padding: 9px 16px;
   border: 1px solid $border-strong;
   border-radius: $radius-sm;
   background: $surface;
@@ -29,7 +30,8 @@
 
 // Pill used for category filters.
 .sfi__chip {
-  padding: 5px 14px;
+  min-height: 36px;
+  padding: 7px 12px;
   border: 1px solid $border;
   border-radius: 999px;
   background: $surface;

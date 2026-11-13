@@ -1,0 +1,15 @@
+
+> test:phase1
+> node --test scripts/test-sfi-spec-search.mjs scripts/test-sfi-manufacturer-demo.mjs scripts/test-sfi-public-cleanup.mjs
+
+✔ scripts/test-sfi-manufacturer-demo.mjs (5011.330681ms)
+✔ scripts/test-sfi-public-cleanup.mjs (544.958935ms)
+✔ scripts/test-sfi-spec-search.mjs (5992.192885ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6086.563303

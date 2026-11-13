@@ -2,12 +2,14 @@
   <div class="sfi-footer-inner">
     <div class="sfi-footer-about">
       <div class="sfi-footer-brand">SFI FOUNDATION</div>
-      <p>Setting the Standard for Motorsports Safety Since 1978</p>
+      <p>Setting the standard for motorsports safety since 1978.</p>
+      <p>A student capstone supporting SFI. <a href="https://sfifoundation.com/">Official SFI website</a></p>
     </div>
     <nav class="sfi-footer-links" aria-label="Footer links">
-      <span>Built by <a href="https://github.com/SFI-Foundation" target="_blank" rel="noopener noreferrer">SFI Foundation team</a></span>
-      <a href="https://github.com/SFI-Foundation/Backend" target="_blank" rel="noopener noreferrer">Backend repository</a>
-      <a href="{{ '/sfi-specs/' | relative_url }}">Spec Search</a>
+      <a href="{{ '/sfi-specs/' | relative_url }}">Specifications</a>
+      <a href="{{ '/news-events/#contact' | relative_url }}">Contact SFI</a>
+      <a href="https://sfifoundation.com/notices/">Safety notices</a>
     </nav>
+    {% include sfi/chatbot.html %}
   </div>
 </footer>

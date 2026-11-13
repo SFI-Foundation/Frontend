@@ -1,25 +1,23 @@
-<nav class="sfi-nav" aria-label="Primary navigation">
-  <div class="sfi-nav-inner">
-    <a href="{{ '/' | relative_url }}" class="sfi-nav-brand"><span>SFI</span> Foundation</a>
-    <button class="sfi-nav-toggle" id="navToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation menu">
-      <span class="sfi-nav-toggle-line"></span>
-      <span class="sfi-nav-toggle-line"></span>
-      <span class="sfi-nav-toggle-line"></span>
+<header class="sfi-nav">
+  <nav class="sfi-nav-inner" aria-label="Primary navigation">
+    <a href="{{ '/' | relative_url }}" class="sfi-nav-brand" aria-label="SFI Foundation home">
+      <img src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="" width="64" height="40">
+      <span>SFI Foundation</span>
+    </a>
+    <button class="sfi-nav-toggle" id="navToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation menu" hidden>
+      <span class="sfi-nav-toggle-line"></span><span class="sfi-nav-toggle-line"></span><span class="sfi-nav-toggle-line"></span>
     </button>
     <ul class="sfi-nav-links" id="navLinks">
-      <li><a href="{{ '/about/' | relative_url }}"{% if page.permalink == '/about/' %} class="active"{% endif %}>About</a></li>
-      <li><a href="{{ '/history/' | relative_url }}"{% if page.permalink == '/history/' %} class="active"{% endif %}>History</a></li>
-      <li><a href="{{ '/specs/' | relative_url }}"{% if page.permalink == '/specs/' %} class="active"{% endif %}>Specs</a></li>
-      <li><a href="{{ '/services/' | relative_url }}"{% if page.permalink == '/services/' %} class="active"{% endif %}>Services</a></li>
-      <li><a href="{{ '/news-events/' | relative_url }}"{% if page.permalink == '/news-events/' %} class="active"{% endif %}>News &amp; Events</a></li>
-      <li><a href="{{ '/contact/' | relative_url }}"{% if page.permalink == '/contact/' %} class="active"{% endif %}>Contact</a></li>
-      <li><a href="{{ '/quiz/' | relative_url }}" class="sfi-nav-highlight{% if page.permalink == '/quiz/' %} active{% endif %}">My Gear</a></li>
-      <li><a href="{{ '/detect/' | relative_url }}" class="sfi-nav-highlight{% if page.permalink == '/detect/' %} active{% endif %}">Detect</a></li>
-      <li><a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-nav-cta{% if page.permalink == '/sfi-specs/' %} active{% endif %}">Spec Search</a></li>
-      <li id="navAuth"><a href="{{ '/login/' | relative_url }}" class="sfi-nav-auth-link">Sign In</a></li>
+      {% for nav_path in site.minima.nav_pages %}
+        {% assign nav_page = site.pages | where: 'path', nav_path | first %}
+        {% if nav_page.title %}
+        <li><a href="{{ nav_page.url | relative_url }}"{% if page.url == nav_page.url %} class="active" aria-current="page"{% endif %}>{{ nav_page.nav_title | default: nav_page.title | escape }}</a></li>
+        {% endif %}
+      {% endfor %}
+      <li id="navAuth"><a href="{{ '/login/' | relative_url }}" class="sfi-nav-auth-link"{% if page.url == '/login/' %} aria-current="page"{% endif %}>Sign In</a></li>
     </ul>
-  </div>
-</nav>
+  </nav>
+</header>
 
 <script type="module">
 import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | relative_url }}';

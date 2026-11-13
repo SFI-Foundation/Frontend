@@ -1,0 +1,386 @@
+{
+  "checks": [
+    "before screenshots use isolated, unchanged main source",
+    "six public routes fit 1440×900; heading/navigation/search checks",
+    "six public routes fit 1024×768; heading/navigation/search checks",
+    "six public routes fit 768×1024; heading/navigation/search checks",
+    "six public routes fit 390×844; heading/navigation/search checks",
+    "six public routes fit 320×720; heading/navigation/search checks",
+    "keyboard skip link, mobile menu toggle, Tab order, Escape focus return and link closure",
+    "200% zoom-equivalent reflow preserves search and avoids overflow",
+    "homepage GET query safely reaches canonical search",
+    "pagination browses all 111 canonical identities with no duplicate results",
+    "all backend category filters, category browsing, focus return and reset",
+    "approved specification opens its official PDF in a new tab; HTTP 200 and PDF bytes",
+    "exact, qualified, product, mixed-case and partial queries; approved PDF only; unavailable PDFs and empty state",
+    "service failure and retry are accessible and recover",
+    "revoked status suppresses a previously approved URL (controlled response regression)",
+    "legacy redirects resolve once, preserve query strings and have destination canonicals",
+    "footer assistant stays out of results, closed controls are unfocusable, Escape returns focus, replies are escaped and reduced motion is respected",
+    "mobile navigation remains usable without JavaScript",
+    "real anonymous/member writes denied; synthetic admin validation, create, edit, archive, restore and view switching",
+    "zero page exceptions",
+    "18 WCAG A/AA automated accessibility scans: zero violations"
+  ],
+  "layouts": [
+    {
+      "version": "before",
+      "route": "/",
+      "width": 1440,
+      "height": 3219,
+      "scrollWidth": 1440
+    },
+    {
+      "version": "before",
+      "route": "/",
+      "width": 390,
+      "height": 6134,
+      "scrollWidth": 390
+    },
+    {
+      "version": "after",
+      "route": "/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1057,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 4409,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/about/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1108,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/services/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1059,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/news-events/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1242,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/login/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 900,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1108,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 4429,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/about/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1183,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/services/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1083,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/news-events/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 1310,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/login/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "height": 768,
+      "header": 68
+    },
+    {
+      "version": "after",
+      "route": "/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1611,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/sfi-specs/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 4779,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/about/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1412,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/services/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1210,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/news-events/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1400,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/login/",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 1024,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2071,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/sfi-specs/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 5437,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/about/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2113,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/services/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 1866,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/news-events/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2098,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/login/",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 905,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 2386,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/sfi-specs/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 6828,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/about/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 2655,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/services/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 2255,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/news-events/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 2222,
+      "header": 64
+    },
+    {
+      "version": "after",
+      "route": "/login/",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 1053,
+      "header": 64
+    }
+  ],
+  "accessibility": [
+    {
+      "route": "/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/about/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/services/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/about/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/services/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "width": 320,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "before-home-1440.png",
+    "before-specifications-1440.png",
+    "before-home-390.png",
+    "before-specifications-390.png",
+    "before-mobile-navigation.png",
+    "after-home-1440.png",
+    "after-specifications-1440.png",
+    "after-home-390.png",
+    "after-specifications-390.png",
+    "after-mobile-navigation.png"
+  ]
+}

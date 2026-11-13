@@ -1,17 +1,17 @@
 .auth-container {
   max-width: 440px;
-  margin: 120px auto 60px;
+  margin: $space-6 auto;
   padding: 0 20px;
 }
 .auth-card {
   background: var(--sfi-surface);
   border: 1px solid var(--sfi-border);
   border-radius: var(--sfi-radius);
-  padding: 40px 36px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  padding: $space-5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .auth-card h2 {
-  font-family: 'Oswald', sans-serif;
+  font-family: $font-heading;
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--sfi-text);

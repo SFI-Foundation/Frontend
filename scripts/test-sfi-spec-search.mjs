@@ -162,3 +162,26 @@ test('entire cleaned public page initializes without references to removed contr
   assert.equal(dom.window.document.getElementById('statSpecs').textContent, '1');
   dom.window.close();
 });
+
+test('homepage query initializes canonical search safely and reset clears category', async () => {
+  const query = 'driver suit & <test>';
+  const dom = new JSDOM(page, { url: 'http://localhost:4000/sfi-specs/?q=' + encodeURIComponent(query), runScripts: 'outside-only' });
+  dom.window.fetch = async () => { throw new Error('Unexpected fetch'); };
+  dom.window.eval(source);
+  const calls = [];
+  const fetch = async url => {
+    const parsed = new URL(url); calls.push(parsed);
+    return {ok: true, json: async () => parsed.pathname.endsWith('/categories') ? ['Auto Racing'] : parsed.pathname.endsWith('/stats') ? { by_category: { 'Auto Racing': 1 } } : {items: [item], total: 1}};
+  };
+  const app = dom.window.SFISpecSearch.mount({api:'http://backend.test/api/sfi',fetch});
+  await app.load(); await settle();
+  assert.equal(dom.window.document.getElementById('sfiSearch').value,query);
+  assert.equal(calls.at(-1).searchParams.get('q'),query);
+  assert.equal(dom.window.document.querySelector('#sfiResults test'),null);
+  await app.setCategory('Auto Racing');
+  dom.window.document.getElementById('sfiClear').click(); await settle();
+  assert.equal(calls.at(-1).searchParams.get('category'),'all');
+  assert.equal(calls.at(-1).searchParams.has('q'),false);
+  assert.equal(dom.window.document.querySelector('#sfiFilters [aria-pressed="true"]').dataset.category,'all');
+  dom.window.close();
+});

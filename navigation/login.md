@@ -8,6 +8,7 @@ permalink: /login/
 
 
 <div class="auth-container">
+  <h1 class="sfi-visually-hidden">SFI account</h1>
   <!-- Login/Register Form (shown when logged out) -->
   <div class="auth-card" id="authForm">
     <div class="auth-tabs">

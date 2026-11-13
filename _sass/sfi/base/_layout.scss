@@ -1,75 +1,188 @@
-/* ── Page Header (subpages) ───────────────────── */
 .sfi-page-header {
-  background: linear-gradient(105deg, #0d2e5c 0%, #1a5fa8 60%, #1e7bc4 100%);
-  padding: 56px 32px 44px;
-  border-bottom: 3px solid var(--sfi-blue-accent);
+  background: $surface-alt;
+  border-bottom: 1px solid $border;
+  padding: $space-5;
 }
 .sfi-page-header-content {
-  max-width: 1100px;
-  margin: 0 auto;
+  max-width: 1152px;
+  margin: auto;
 }
 .sfi-page-header h1 {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 8px;
-  letter-spacing: 1px;
+  color: $blue-dark;
+  font-size: clamp(1.625rem, 3vw, 2rem);
+  margin: 0 0 $space-2;
+  letter-spacing: -0.02em;
 }
-.sfi-page-header h1 .gold { color: #f0c040; }
+.sfi-page-header h1 .gold {
+  color: $blue-dark;
+}
 .sfi-page-header p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  color: rgba(255,255,255,0.8);
   margin: 0;
-  font-style: italic;
+  color: $text-soft;
+  max-width: 80ch;
 }
-.sfi-breadcrumb {
-  font-size: 0.78rem;
-  color: #fff;
-  margin-bottom: 10px;
-  font-family: 'Inter', sans-serif;
+.sfi-page-header .sfi-eyebrow {
+  margin-bottom: $space-2;
 }
-.sfi-breadcrumb a { color: #fff; text-decoration: none; }
-.sfi-breadcrumb a:hover { color: #fff; }
-.sfi-breadcrumb span { margin: 0 6px; }
-
-/* ── Main content area ────────────────────────── */
-.sfi-main-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 36px 24px 60px;
-}
-
-/* ── Section Shared ───────────────────────────── */
-.sfi-sect {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 48px 24px;
-}
-.sfi-sect-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
+.sfi-eyebrow {
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: $blue;
-  margin-bottom: 8px;
+  margin: 0 0 $space-2;
+}
+.sfi-main-wrap,
+.sfi-sect {
+  max-width: $site-width;
+  margin: 0 auto;
+  padding: $space-6 $space-5;
 }
 .sfi-sect-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: 1.625rem;
+  margin: 0 0 $space-3;
+}
+.sfi-sect-label {
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--sfi-text);
-  margin: 0 0 12px;
-  letter-spacing: 0.5px;
+  color: $blue;
+  margin-bottom: $space-2;
 }
 .sfi-sect-desc {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  color: var(--sfi-muted);
-  line-height: 1.7;
-  max-width: 680px;
-  margin-bottom: 32px;
+  max-width: 75ch;
+  color: $text-soft;
+  margin: 0 0 $space-5;
 }
-
+.sfi-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-4;
+}
+.sfi-section-heading h2 {
+  margin: 0;
+}
+.sfi-sect h2 {
+  font-size: 1.375rem;
+}
+.sfi-panel {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-5;
+  min-width: 0;
+}
+.sfi-panel h2,
+.sfi-panel h3 {
+  margin: 0 0 $space-3;
+}
+.sfi-panel h3 {
+  font-size: 1.0625rem;
+}
+.sfi-panel p {
+  margin: 0 0 $space-4;
+  color: $text-soft;
+}
+.sfi-panel p:last-child {
+  margin-bottom: 0;
+}
+.sfi-two-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-4;
+}
+.sfi-content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: $space-6;
+  align-items: start;
+}
+.sfi-prose {
+  overflow-wrap: anywhere;
+}
+.sfi-prose h2:not(:first-child) {
+  margin-top: $space-6;
+}
+.sfi-history-list {
+  margin: $space-4 0;
+}
+.sfi-history-list > div {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: $space-4;
+  padding: $space-3 0;
+  border-bottom: 1px solid $border;
+}
+.sfi-history-list dt {
+  color: $blue;
+  font-weight: 700;
+}
+.sfi-history-list dd {
+  margin: 0;
+}
+.sfi-inline-callout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-top: $space-5;
+  padding: $space-5;
+  background: $blue-tint;
+  border-radius: $radius;
+}
+.sfi-inline-callout h2,
+.sfi-inline-callout p {
+  margin: 0 0 $space-2;
+}
+.sfi-news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sfi-news-list li {
+  padding: $space-4 0;
+  border-bottom: 1px solid $border;
+}
+.sfi-news-list h3 {
+  font-size: 1rem;
+  margin: $space-1 0;
+}
+.sfi-news-list time {
+  font-size: 0.875rem;
+  color: $text-muted;
+}
+.sfi-contact-panel {
+  border-top: 3px solid $gold;
+  scroll-margin-top: $space-4;
+  overflow-wrap: anywhere;
+}
+.sfi-contact-panel address {
+  font-style: normal;
+}
+.sfi-contact-panel address a {
+  display: inline-block;
+  padding-block: $space-2;
+}
+@media (max-width: 760px) {
+  .sfi-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .sfi-page-header {
+    padding: $space-5 $space-4;
+  }
+  .sfi-sect,
+  .sfi-main-wrap {
+    padding: $space-5 $space-4;
+  }
+  .sfi-two-grid {
+    grid-template-columns: 1fr;
+  }
+  .sfi-panel {
+    padding: $space-4;
+  }
+}

@@ -1,89 +1,19 @@
 ---
 layout: sfi
 title: About SFI Foundation
-description: A non-profit organization established to issue and administer standards for motorsports safety equipment.
+nav_title: About
+description: SFI's mission, history and role in motorsports safety.
 permalink: /about/
 ---
-
-<div class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>About <span class="gold">SFI Foundation</span></h1>
-    <p>
-      A non-profit organization established in 1978 to issue and administer standards
-      for the quality assurance of specialty performance and racing equipment.
-    </p>
-  </div>
+<header class="sfi-page-header"><div class="sfi-page-header-content"><p class="sfi-eyebrow">Our organization</p><h1>About SFI Foundation</h1><p>Quality assurance for specialty performance and racing equipment since 1978.</p></div></header>
+<div class="sfi-sect sfi-content-grid">
+  <section class="sfi-prose" aria-labelledby="mission"><h2 id="mission">Our mission</h2><p>The SFI Foundation, Inc. is a nonprofit organization established to issue and administer standards for the quality assurance of specialty performance and racing equipment.</p><p>SFI serves the automotive aftermarket and motorsports industry through standards, certification programs, and testing criteria.</p>
+  <h2 id="history">From SEMA to SFI</h2><dl class="sfi-history-list">
+    <div><dt>1963</dt><dd>Racing product manufacturers form the Speed Equipment Manufacturers Association (SEMA).</dd></div>
+    <div><dt>1970s</dt><dd>SEMA's Service Bureau responds to growing demand for safety specifications and product quality standards.</dd></div>
+    <div><dt>1978</dt><dd>The SEMA Foundation, Inc. is established to replace the Service Bureau and administer an expanded specifications program.</dd></div>
+    <div><dt>Today</dt><dd>SFI operates independently from SEMA, retaining the SFI Foundation name.</dd></div>
+    <div><dt>1999</dt><dd>The SFI Test Laboratory opens in Escondido, California. It later relocates to Poway.</dd></div>
+  </dl><p>Today, SFI specifications cover equipment across auto racing, drag racing, boat racing, and tractor pulling.</p></section>
+  <section class="sfi-panel sfi-prose" aria-labelledby="programs"><h2 id="programs">How the programs work</h2><p>Manufacturers test and self-certify products to SFI specifications. Sanctioning bodies adopt these standards into their racing rules.</p><p>Technical committees bring together industry expertise. Licensing agreements, test reports, and periodic specification reviews support quality monitoring.</p><p>Manufacturer licensing fees and donations fund the programs.</p><a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find specifications &rarr;</a><p><a href="https://sfifoundation.com/about-sfi/">About SFI on the official website &rarr;</a></p></section>
 </div>
-
-<section class="sfi-sect">
-  <div class="sfi-sect-label">Who We Are</div>
-  <div class="sfi-sect-title">Our Mission</div>
-  <div class="sfi-sect-desc">
-    The SFI Foundation, Inc. (SFI) is a non-profit organization that has served the automotive
-    aftermarket and the motorsports industry since 1978. Our service to the industry is a system
-    of developing and administering various standards, certifications, and testing criteria
-    for use in motorsports.
-  </div>
-
-  <div class="sfi-info-grid">
-    <div class="sfi-info-card">
-      <h3>What is SFI?</h3>
-      <p>
-        The SFI Foundation, Inc. is a non-profit organization established to issue and administer
-        standards for the quality assurance of specialty performance and racing equipment.
-        The letters originally stood for "SEMA Foundation, Inc." but SFI is now fully independent.
-      </p>
-      <p>
-        SFI has approximately 100 member sanctioning bodies and over 300 individual equipment
-        manufacturers participating in more than 85 specification programs.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>How It Works</h3>
-      <p>
-        Equipment manufacturers test and self-certify their products to SFI standards, which
-        are then included in race sanctioning organization rules. Participation is voluntary
-        once a standard is enacted.
-      </p>
-      <p>
-        Programs are funded by manufacturer licensing fees and donations. Enforcement uses
-        contractual and licensing agreements with inspection provisions.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Who Uses SFI?</h3>
-      <p>
-        Equipment manufacturers are the primary users of SFI standards. These standards are
-        adopted by race sanctioning bodies into their rulebooks, making them requirements
-        for competitors.
-      </p>
-      <p>
-        Standards are initiated by the SFI Technical Committee, comprised of experts from
-        across the motorsports industry.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Open Process</h3>
-      <p>
-        SFI's programs are open to all interested parties, use technical committees with
-        cross-sector expertise, follow due process procedures, and publish specifications
-        publicly for full transparency.
-      </p>
-      <p>
-        SFI monitors adherence through certified test reports, periodic spec reviews, and
-        licensing agreements.
-      </p>
-    </div>
-  </div>
-</section>
-
-<div class="sfi-divider"><hr></div>
-
-<section class="sfi-sect">
-  <div class="sfi-cta-banner">
-    <h2>EXPLORE OUR SPECIFICATIONS</h2>
-    <p>Browse all SFI specifications or use our ML-powered search to find what you need.</p>
-    <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
-    <a href="{{ '/history/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Our History</a>
-  </div>
-</section>

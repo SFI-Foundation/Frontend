@@ -1,7 +1,9 @@
 /* ── Buttons ──────────────────────────────────── */
 .sfi-btn {
   font-family: 'Inter', sans-serif;
-  padding: 11px 28px;
+  padding: 10px 16px;
+  min-height: 44px;
+  justify-content: center;
   border-radius: var(--sfi-radius-sm);
   font-size: 0.9rem;
   font-weight: 700;

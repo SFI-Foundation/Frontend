@@ -1,0 +1,21 @@
+PASS before screenshots use isolated, unchanged main source
+PASS six public routes fit 1440×900; heading/navigation/search checks
+PASS six public routes fit 1024×768; heading/navigation/search checks
+PASS six public routes fit 768×1024; heading/navigation/search checks
+PASS six public routes fit 390×844; heading/navigation/search checks
+PASS six public routes fit 320×720; heading/navigation/search checks
+PASS keyboard skip link, mobile menu toggle, Tab order, Escape focus return and link closure
+PASS 200% zoom-equivalent reflow preserves search and avoids overflow
+PASS homepage GET query safely reaches canonical search
+PASS pagination browses all 111 canonical identities with no duplicate results
+PASS all backend category filters, category browsing, focus return and reset
+PASS approved specification opens its official PDF in a new tab; HTTP 200 and PDF bytes
+PASS exact, qualified, product, mixed-case and partial queries; approved PDF only; unavailable PDFs and empty state
+PASS service failure and retry are accessible and recover
+PASS revoked status suppresses a previously approved URL (controlled response regression)
+PASS legacy redirects resolve once, preserve query strings and have destination canonicals
+PASS footer assistant stays out of results, closed controls are unfocusable, Escape returns focus, replies are escaped and reduced motion is respected
+PASS mobile navigation remains usable without JavaScript
+PASS real anonymous/member writes denied; synthetic admin validation, create, edit, archive, restore and view switching
+PASS zero page exceptions
+PASS 18 WCAG A/AA automated accessibility scans: zero violations

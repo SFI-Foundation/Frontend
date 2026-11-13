@@ -1,26 +1,17 @@
 ---
 layout: sfi
-title: SFI News & Events
-description: Latest SFI Foundation announcements, upcoming meetings and capstone events.
+title: News & Contact
+nav_title: News & Contact
+description: SFI announcements, specification review meetings and contact information.
 permalink: /news-events/
 ---
-
-<header class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>SFI <span class="gold">News &amp; Events</span></h1>
-    <p>Upcoming meetings, recent announcements and events connected to our SFI Foundation capstone project.</p>
-  </div>
-</header>
-
-<div class="sfi__container">
-  <section class="sfi__section" aria-labelledby="capstone-about">
-    <h2 class="sfi__title" id="capstone-about">Our Capstone Partnership</h2>
-    <p>We are serving the SFI Foundation as part of our capstone project, building tools and experiences to make motorsports safety information easier to explore. This is a student capstone project; for official SFI announcements, always consult <a href="https://sfifoundation.com/">sfifoundation.com</a>.</p>
-  </section>
-
-  <section class="sfi__section" aria-labelledby="upcoming-events">
-    <h2 class="sfi__title" id="upcoming-events">Upcoming SFI events</h2>
-    <p>Meeting dates are automatically checked against the official <a href="https://sfifoundation.com/meeting-schedule/">SFI meeting schedule</a> each day. Confirm times and locations there before attending.</p>
+<header class="sfi-page-header"><div class="sfi-page-header-content"><p class="sfi-eyebrow">Stay connected</p><h1>News &amp; Contact</h1><p>Updates from SFI and direct help with specifications, testing, and certification.</p></div></header>
+<div class="sfi-sect sfi-content-grid">
+  <div>
+    <section aria-labelledby="recent-announcements"><h2 id="recent-announcements">Latest announcements</h2><ul class="sfi-news-list">
+    {% for news in site.data.sfi_updates.news limit:3 %}<li><time datetime="{{ news.published | date_to_xmlschema }}">{{ news.published | date: '%B %-d, %Y' }}</time><h3><a href="{{ news.url | escape }}">{{ news.title | escape }}</a></h3></li>{% endfor %}
+    </ul><p><a href="https://sfifoundation.com/blog/">All official SFI news &rarr;</a></p></section>
+    <section aria-labelledby="upcoming-events"><h2 id="upcoming-events">Specification review meetings</h2>
     {% assign today = 'now' | date: '%Y-%m-%d' %}
     {% assign count = 0 %}
     {% for event in site.data.sfi_updates.events %}
@@ -36,42 +27,10 @@ permalink: /news-events/
     {% if count == 0 %}
       <p>No upcoming official SFI meetings are currently listed. Check the official meeting schedule for new announcements.</p>
     {% endif %}
-  </section>
 
-  <section class="sfi__section" aria-labelledby="capstone-events">
-    <h2 class="sfi__title" id="capstone-events">Capstone demos &amp; N@TM events</h2>
-    <p>Our team can publish Night at the Museum (N@TM) demos and other capstone presentations here as dates are confirmed.</p>
-    {% assign capstone_count = 0 %}
-    {% for event in site.data.sfi_capstone_events %}
-      {% if event.date >= today %}
-        {% assign capstone_count = capstone_count | plus: 1 %}
-        <article class="sfi__card">
-          <h3>{{ event.title | escape }}</h3>
-          <p><strong>{{ event.date | escape }}</strong> &middot; {{ event.location | escape }}</p>
-          <p>{{ event.description | escape }}</p>
-        </article>
-      {% endif %}
-    {% endfor %}
-    {% if capstone_count == 0 %}
-      <p>No capstone demo date has been confirmed for this listing yet.</p>
-    {% endif %}
-  </section>
-
-  <section class="sfi__section" aria-labelledby="recent-announcements">
-    <h2 class="sfi__title" id="recent-announcements">Latest SFI announcements</h2>
-    {% for news in site.data.sfi_updates.news limit:8 %}
-      <article class="sfi__card">
-        <h3>{{ news.title | escape }}</h3>
-        <p>{{ news.published | escape }}</p>
-        <p><a class="sfi__link" href="{{ news.url | escape }}">Read on the official SFI site &rarr;</a></p>
-      </article>
-    {% endfor %}
-    <p><a class="sfi__link" href="https://sfifoundation.com/blog/">Explore all SFI news &rarr;</a></p>
-  </section>
-
-  <section class="sfi__section">
-    <h2 class="sfi__title">Safety notices &amp; resources</h2>
-    <p><a class="sfi__link" href="https://sfifoundation.com/notices/">Official SFI safety notices &rarr;</a></p>
-    <p><a class="sfi__link" href="https://sfifoundation.com/articles/">Technical and safety articles &rarr;</a></p>
-  </section>
+    <p><a href="https://sfifoundation.com/meeting-schedule/">Confirm the official meeting schedule &rarr;</a></p></section>
+    {% assign today = 'now' | date: '%Y-%m-%d' %}
+    {% for event in site.data.sfi_capstone_events %}{% if event.date >= today %}<article class="sfi-panel"><h3>{{ event.title | escape }}</h3><p>{{ event.date | escape }} · {{ event.location | escape }}</p><p>{{ event.description | escape }}</p></article>{% endif %}{% endfor %}
+  </div>
+  <section id="contact" class="sfi-panel sfi-contact-panel" aria-labelledby="contact-heading"><p class="sfi-eyebrow">Get in touch</p><h2 id="contact-heading">Contact SFI</h2><p>For specification questions, testing, program participation, or suspected counterfeit labels.</p><address><a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a><br><a href="tel:+18584518868">(858) 451-8868</a><p>15708 Pomerado Road<br>Suite N208<br>Poway, CA 92064</p><span>Fax: (858) 451-9268</span></address><p><a href="https://sfifoundation.com/notices/">Official safety notices &rarr;</a></p></section>
 </div>
