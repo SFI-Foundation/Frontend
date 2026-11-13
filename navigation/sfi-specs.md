@@ -1,15 +1,17 @@
 ---
 layout: sfi
-title: SFI Specification Search
+title: SFI Specifications
+nav_title: Spec Search
 description: Search SFI specifications by number, product name and category.
 permalink: /sfi-specs/
 body_class: sfi-spec-search
 ---
 
 <header class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>SFI <span class="gold">Specification Search</span></h1>
-    <p>Search specifications by number or product name, browse categories, and view verified current documents.</p>
+  <div class="sfi-page-header-content sfi-spec-intro">
+    <h1>Find <span class="gold">SFI Specifications</span></h1>
+    <p>Search by specification number, equipment name, or category.</p>
+    {% include sfi/photograph.html key="specs" caption=false loading="eager" sizes="(max-width: 600px) 96px, 160px" %}
   </div>
 </header>
 
@@ -21,28 +23,22 @@ body_class: sfi-spec-search
     <button type="button" class="sfi__btn primary" id="backToAdminBtn">&larr; Back to admin view</button>
   </div>
 
-  <section class="sfi__section">
-    <div class="sfi__stats" id="statsBar" aria-label="Catalog statistics">
-      <div class="sfi__stat"><div class="sfi__stat-value" id="statSpecs">&mdash;</div><div class="sfi__stat-label">Total specs</div></div>
-      <div class="sfi__stat"><div class="sfi__stat-value" id="statCats">&mdash;</div><div class="sfi__stat-label">Categories</div></div>
-      <div class="sfi__stat"><div class="sfi__stat-value" id="statSubs">&mdash;</div><div class="sfi__stat-label">Subcategories</div></div>
-    </div>
-  </section>
-
 <script src="{{ "/assets/js/sfi/api-base.js" | relative_url }}"></script>
 
   <section class="sfi__section" id="search">
-    <h2 class="sfi__title">Find a specification</h2>
-    <p class="sfi__lead">Filter by category or search the catalog. Current PDF links appear only after verification; documents awaiting review remain unavailable.</p>
+    <h2 class="sfi-visually-hidden">Search the catalog</h2>
     <form id="sfiSearchForm" class="sfi__form-row" role="search">
       <label for="sfiSearch">Specification number or product name</label>
       <input type="search" class="sfi__field" id="sfiSearch" maxlength="200" placeholder="e.g. 3.2A, 16.1, driver suit">
       <button type="submit" class="sfi__btn primary">Search</button>
       <button type="button" class="sfi__btn" id="sfiClear">Clear search</button>
     </form>
+    <details class="sfi-filter-panel" id="sfiCategoryPanel" open>
+    <summary>Filter by category: <span id="sfiSelectedCategory">All categories</span></summary>
     <div class="sfi__filters" id="sfiFilters" role="group" aria-label="Specification category">
       <button type="button" class="sfi__chip active" data-category="all" aria-pressed="true">All</button>
     </div>
+    </details>
     <p class="sfi__count" id="sfiCount" role="status" aria-live="polite" tabindex="-1"></p>
     <div id="sfiResults" aria-busy="false"></div>
     <p class="sfi__empty" id="sfiNoResults" hidden></p>
@@ -59,13 +55,9 @@ body_class: sfi-spec-search
   </section>
 
   <section class="sfi__section" id="about">
-    <h2 class="sfi__title">About SFI Foundation</h2>
-    <div class="sfi__card">
-      <p>The <strong>SFI Foundation</strong> (originally the SEMA Foundation, Inc.) was established in 1978 as a nonprofit organization to develop and administer quality assurance programs for the motorsports aftermarket. SFI specifications cover safety equipment used across drag racing, auto racing, boat racing, tractor pulling and more.</p>
-      <p>Each specification number corresponds to a type of racing equipment, from driver suits and helmets to roll cages, fuel cells, supercharger restraints and turbochargers. Search by product name or specification number to find catalog metadata.</p>
-      <p>Learn more at <a class="sfi__link" href="{{ '/about/' | relative_url }}">About SFI Foundation</a>.</p>
-    </div>
+    <details class="sfi-search-help"><summary>Understanding specifications &amp; document status</summary><p>Each SFI number identifies a type of racing equipment. Only verified current documents have a PDF action. Confirm product-specific recertification requirements with the manufacturer.</p><a href="{{ '/' | relative_url }}">About SFI Foundation &rarr;</a></details>
   </section>
+
 
 </div><!-- /publicView -->
 
@@ -147,18 +139,6 @@ th[aria-sort="descending"] .sfi__sort::after { content: ' \25BC'; opacity: 1; }
 // ── API Configuration ────────────────────────────
 const API_BASE = window.SFI_API_BASE;
 const API = API_BASE + "/api/sfi";
-
-// ═══════════════ STATS BAR ═══════════════
-async function loadStats() {
-  try {
-    const response = await fetch(`${API}/stats`);
-    if (!response.ok) throw new Error('Statistics unavailable');
-    const stats = await response.json();
-    document.getElementById('statSpecs').textContent = stats.total_specs || 0;
-    document.getElementById('statCats').textContent = stats.total_categories || 0;
-    document.getElementById('statSubs').textContent = stats.total_subcategories || 0;
-  } catch (e) { console.log('Stats load error:', e); }
-}
 
 // ═══════════════ FUZZY SEARCH ENGINE ═══════════════
 
@@ -536,6 +516,5 @@ async function revealAdminPanel() {
 
 // ═══════════════ INIT ═══════════════
 revealAdminPanel();
-loadStats();
 loadSpecs();
 </script>

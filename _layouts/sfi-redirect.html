@@ -1,9 +1,14 @@
 ---
 layout: sfi
 ---
-<section class="sfi-profile">
-  <div class="sfi-profile-card">
-    <h1>{{ page.title }}</h1>
-    <p>Continue to <a href="{{ page.sfi_redirect | relative_url }}">your SFI Foundation account</a>.</p>
-  </div>
+<section class="sfi-sect">
+  <h1>{{ page.title | escape }}</h1>
+  <p>This content has moved. <a href="{{ page.sfi_redirect | relative_url }}">{{ page.redirect_label | default: 'Continue to SFI Foundation' | escape }} &rarr;</a></p>
 </section>
+<script>
+  // Preserve search queries and old section bookmarks without redirect chains.
+  const destination = new URL({{ page.sfi_redirect | relative_url | jsonify }}, window.location.href);
+  destination.search = window.location.search;
+  if (!destination.hash) destination.hash = window.location.hash;
+  window.location.replace(destination.href);
+</script>

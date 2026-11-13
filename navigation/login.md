@@ -1,6 +1,7 @@
 ---
 layout: sfi
-title: Login
+title: Sign In
+nav_title: Sign In
 description: Sign in to your SFI Foundation account.
 permalink: /login/
 ---
@@ -8,6 +9,7 @@ permalink: /login/
 
 
 <div class="auth-container">
+  <h1 class="sfi-visually-hidden">SFI account</h1>
   <!-- Login/Register Form (shown when logged out) -->
   <div class="auth-card" id="authForm">
     <div class="auth-tabs">
@@ -15,7 +17,7 @@ permalink: /login/
       <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">Create Account</button>
     </div>
 
-    <div id="msgBox" class="auth-msg"></div>
+    <div id="msgBox" class="auth-msg" role="status" aria-atomic="true"></div>
 
     <!-- Login Fields -->
     <div id="loginFields">

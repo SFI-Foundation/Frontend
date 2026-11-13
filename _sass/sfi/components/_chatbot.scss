@@ -1,34 +1,47 @@
+// Assistant is an optional footer action; it cannot cover search controls.
 .sfi-chat-fab {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 10000;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #F0A500 0%, #d49400 100%);
-  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-sm;
+  background: $gold;
+  border: 0;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(240,165,0,0.4), 0 0 0 0 rgba(240,165,0,0.3);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s, box-shadow 0.25s;
-  animation: chatFabPulse 3s ease-in-out infinite;
 }
 .sfi-chat-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 28px rgba(240,165,0,0.5);
+  background: #ffd16b;
 }
-.sfi-chat-fab svg { width: 28px; height: 28px; fill: #0d1117; }
-.sfi-chat-fab.open svg.icon-chat { display: none; }
-.sfi-chat-fab:not(.open) svg.icon-close { display: none; }
-
-@keyframes chatFabPulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(240,165,0,0.4), 0 0 0 0 rgba(240,165,0,0.3); }
-  50% { box-shadow: 0 4px 20px rgba(240,165,0,0.4), 0 0 0 10px rgba(240,165,0,0); }
+.sfi-chat-fab svg {
+  width: 24px;
+  height: 24px;
+  fill: $blue-dark;
 }
-
+.sfi-chat-fab.open svg.icon-chat,
+.sfi-chat-fab:not(.open) svg.icon-close {
+  display: none;
+}
+.sfi-chat-window[hidden] {
+  display: none;
+}
+.sfi-chat-window :focus-visible {
+  outline-color: $blue;
+}
+.sfi-chat-header :focus-visible {
+  outline-color: #fff;
+}
+.sfi-chat-close {
+  margin-left: auto;
+  min-width: 44px;
+  min-height: 44px;
+  background: transparent;
+  border: 1px solid rgba(#fff, 0.5);
+  border-radius: $radius-sm;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 .sfi-chat-window {
   position: fixed;
   bottom: 100px;
@@ -48,8 +61,15 @@
   opacity: 0;
   transform: translateY(20px) scale(0.95);
   pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 .sfi-chat-window.open {
   opacity: 1;
@@ -60,7 +80,7 @@
 .sfi-chat-header {
   padding: 16px 20px;
   background: linear-gradient(105deg, $hero-start, $blue);
-  border-bottom: 1px solid rgba(240,165,0,0.15);
+  border-bottom: 1px solid rgba(240, 165, 0, 0.15);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -70,14 +90,14 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #F0A500, #d49400);
+  background: linear-gradient(135deg, #f0a500, #d49400);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
   flex-shrink: 0;
 }
-.sfi-chat-header-text h4 {
+.sfi-chat-header-text h2 {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 700;
@@ -98,10 +118,15 @@
   flex-direction: column;
   gap: 12px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(240,165,0,0.2) transparent;
+  scrollbar-color: rgba(240, 165, 0, 0.2) transparent;
 }
-.sfi-chat-messages::-webkit-scrollbar { width: 5px; }
-.sfi-chat-messages::-webkit-scrollbar-thumb { background: rgba(240,165,0,0.2); border-radius: 4px; }
+.sfi-chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+.sfi-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(240, 165, 0, 0.2);
+  border-radius: 4px;
+}
 
 .sfi-chat-msg {
   max-width: 85%;
@@ -124,12 +149,14 @@
   border: 1px solid $border;
   border-bottom-right-radius: 4px;
 }
-.sfi-chat-msg.bot b { color: $blue-dark; }
+.sfi-chat-msg.bot b {
+  color: $blue-dark;
+}
 .sfi-chat-msg .chat-code {
-  background: rgba(240,165,0,0.1);
+  background: rgba(240, 165, 0, 0.1);
   padding: 1px 5px;
   border-radius: 4px;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 0.82em;
   color: $blue-dark;
 }
@@ -146,19 +173,33 @@
   align-items: center;
   margin: 0 16px 4px;
 }
-.sfi-chat-typing.active { display: flex; }
+.sfi-chat-typing.active {
+  display: flex;
+}
 .sfi-chat-typing span {
   width: 7px;
   height: 7px;
-  background: rgba(240,165,0,0.5);
+  background: rgba(240, 165, 0, 0.5);
   border-radius: 50%;
   animation: chatTyping 1.4s ease-in-out infinite;
 }
-.sfi-chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-.sfi-chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+.sfi-chat-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.sfi-chat-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
 @keyframes chatTyping {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-  30% { transform: translateY(-6px); opacity: 1; }
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
 }
 
 .sfi-chat-input-row {
@@ -183,24 +224,40 @@
   outline: none;
   transition: border-color 0.2s;
 }
-.sfi-chat-input-row input::placeholder { color: $text-muted; }
-.sfi-chat-input-row input:focus { border-color: $blue; }
+.sfi-chat-input-row input::placeholder {
+  color: $text-muted;
+}
+.sfi-chat-input-row input:focus {
+  border-color: $blue;
+}
 .sfi-chat-send {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #F0A500, #d49400);
+  background: linear-gradient(135deg, #f0a500, #d49400);
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s, opacity 0.15s;
+  transition:
+    transform 0.15s,
+    opacity 0.15s;
   flex-shrink: 0;
 }
-.sfi-chat-send:hover { transform: scale(1.08); }
-.sfi-chat-send:disabled { opacity: 0.4; cursor: default; transform: none; }
-.sfi-chat-send svg { width: 18px; height: 18px; fill: #0d1117; }
+.sfi-chat-send:hover {
+  transform: scale(1.08);
+}
+.sfi-chat-send:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+.sfi-chat-send svg {
+  width: 18px;
+  height: 18px;
+  fill: #0d1117;
+}
 
 @media (max-width: 480px) {
   .sfi-chat-window {
@@ -210,5 +267,4 @@
     height: calc(100vh - 100px);
     border-radius: 14px;
   }
-  .sfi-chat-fab { bottom: 16px; right: 16px; width: 54px; height: 54px; }
 }

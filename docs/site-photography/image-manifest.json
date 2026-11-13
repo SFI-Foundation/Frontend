@@ -1,0 +1,189 @@
+{
+  "hero": {
+    "source_sha256": "bfbf7d4753c7fe11a4c75694d420ddd146d1e6f4e6d4a269df0c7fbc1caeacce",
+    "original_dimensions": [
+      3863,
+      1365
+    ],
+    "crop": [
+      200,
+      0,
+      2930,
+      1365
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/hero-480.webp",
+        "width": 480,
+        "height": 240,
+        "bytes": 29016,
+        "sha256": "da4b160f40718b8eb594af0d8cc18cf14bb07910d79cb6e7a756701abca2ebee"
+      },
+      {
+        "path": "images/sfi/photography/hero-800.webp",
+        "width": 800,
+        "height": 400,
+        "bytes": 63918,
+        "sha256": "c55684499b093cd91e91adaf8224c451e38b5bb673970b004dbe09dbd3b567ba"
+      },
+      {
+        "path": "images/sfi/photography/hero-1280.webp",
+        "width": 1280,
+        "height": 640,
+        "bytes": 147390,
+        "sha256": "815eea63d6a91f35c364d57725899be029a752edf9d15588691b798b6f2888fe"
+      },
+      {
+        "path": "images/sfi/photography/hero-1280.jpg",
+        "width": 1280,
+        "height": 640,
+        "bytes": 188153,
+        "sha256": "f5318545342c220ca8cfbc75ddaaf3209ce398ce869660d8313d00e3ffaf2f79"
+      }
+    ]
+  },
+  "safety": {
+    "source_sha256": "d12ac5cbfaf338f99eba03f290f42392f1a00b423b667a75b06763dd62462a5f",
+    "original_dimensions": [
+      3504,
+      2336
+    ],
+    "crop": [
+      0,
+      0,
+      3504,
+      2336
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/safety-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 12164,
+        "sha256": "d7091bf61994b9f1b1bb0d131e9471850db17e6ca36789ed6bb034ca8cd7f770"
+      },
+      {
+        "path": "images/sfi/photography/safety-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 28832,
+        "sha256": "6b913eb64b69ff3a09ab9fdd8645eee70539d56db72699574f3f05d9f870356c"
+      },
+      {
+        "path": "images/sfi/photography/safety-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 61577,
+        "sha256": "44a4bd47c8d7d8f3a52cf71259a8f66c561b47ef1cf4ef158b9ef72eecba3186"
+      }
+    ]
+  },
+  "specs": {
+    "source_sha256": "319053436c134106900c016d318f70b579971d2f0d8ac49a3aa06f2279d149ed",
+    "original_dimensions": [
+      3008,
+      2000
+    ],
+    "crop": [
+      150,
+      350,
+      1800,
+      1450
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/specs-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 28502,
+        "sha256": "413466ad2d9c9620500b32223ff41f3fd92c14d358c15f5300703b9d001e87e4"
+      },
+      {
+        "path": "images/sfi/photography/specs-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 74448,
+        "sha256": "95f666bb46eea6d87dacb709a3a642737979ac75430a857bd5d20fe6bfd50f1e"
+      },
+      {
+        "path": "images/sfi/photography/specs-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 111685,
+        "sha256": "c048011b4d2ddb76747477b8d85275053525660306fba43a86f77b516cdb5979"
+      }
+    ]
+  },
+  "history": {
+    "source_sha256": "bfdf0c708d3612fa7cc2ef21f28afb16f3bde805d5fc793287350137d20cbf79",
+    "original_dimensions": [
+      1953,
+      1128
+    ],
+    "crop": [
+      150,
+      0,
+      1842,
+      1128
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/history-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 18762,
+        "sha256": "e062e4824f9e822e2a98f8f9b1083b3a9add56812f0c56a2d66b6b1fbd99d289"
+      },
+      {
+        "path": "images/sfi/photography/history-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 59332,
+        "sha256": "a1cc7fbf7e75c3f69a2d5e52cb3854325c67ed7344c8659b987b5a68e4b994b5"
+      },
+      {
+        "path": "images/sfi/photography/history-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 90586,
+        "sha256": "238f39c470558c601401162105cf0c74e5f7421ea92bd9d40284b33f68970da7"
+      }
+    ]
+  },
+  "news": {
+    "source_sha256": "7ebae35d7183e207da595ac347245cab15f7dfbc8bb565c6c64161ae999af336",
+    "original_dimensions": [
+      5472,
+      3648
+    ],
+    "crop": [
+      0,
+      0,
+      5472,
+      3648
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/news-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 27958,
+        "sha256": "2c40b413c0e2602a1b9482efa8a98533994e517af411f9380409d308ba91fb41"
+      },
+      {
+        "path": "images/sfi/photography/news-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 85816,
+        "sha256": "58d704402f61d88c2e1de5132c882d84c4efcf7c8b0fe032252ab8c6ccf97bed"
+      },
+      {
+        "path": "images/sfi/photography/news-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 113738,
+        "sha256": "bd3fa949a05e0bebde83edb1e994a33d2486b59d33fbe1c33ccc450259f00e16"
+      }
+    ]
+  }
+}

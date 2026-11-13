@@ -1,79 +1,123 @@
-/* ── Hero banner ──────────────────────────────── */
 .sfi-hero {
-  position: relative;
-  background: linear-gradient(105deg, $hero-start 0%, $blue 40%, $hero-accent 70%, $hero-end 100%);
-  overflow: hidden;
-  min-height: 340px;
-  display: flex;
-  align-items: center;
-}
-.sfi-hero-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2018_NHRA_US_Nationals_%2844261143952%29.jpg/1280px-2018_NHRA_US_Nationals_%2844261143952%29.jpg')
-    center/cover no-repeat;
-  opacity: 0.18;
+  background: $blue-dark;
+  color: #fff;
+  border-bottom: 1px solid $border;
 }
 .sfi-hero-content {
-  position: relative;
-  z-index: 1;
-  @include site-container;
-  padding-block: $space-7;
+  max-width: $site-width;
+  margin: auto;
+  padding: $space-7 $space-5;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(200px, 320px);
-  align-items: center;
+  grid-template-columns: 1.25fr 1fr;
   gap: $space-7;
-  @include tablet {
-    grid-template-columns: minmax(0, 1fr);
-    gap: $space-6;
-  }
+  align-items: center;
 }
 .sfi-hero h1 {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 12px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  letter-spacing: 1px;
-}
-.sfi-hero h1 em {
-  font-style: normal;
-  color: #7dd3fa;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  margin: $space-3 0 $space-4;
 }
 .sfi-hero-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-style: italic;
-  color: rgba(255,255,255,0.85);
-  margin: 0 0 28px;
-  max-width: 520px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  max-width: 58ch;
+  color: #e1eaf6;
+  margin: 0 0 $space-5;
 }
 .sfi-hero-actions {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: $space-3;
 }
-
-
-
-// The official image stays intact; a white surface protects the logo contrast.
-.sfi-hero-copy { min-width: 0; }
-.sfi-hero-logo {
-  display: block;
-  width: 100%;
-  height: auto;
+.sfi-hero .sfi-eyebrow {
+  color: #f4cc65;
+}
+.sfi-hero .sfi-btn-primary {
+  background: $gold;
+  color: #172b46;
+  border-color: $gold;
+}
+.sfi-hero .sfi-btn-primary:hover {
+  background: #ffd16b;
+  border-color: #ffd16b;
+}
+.sfi-home-search {
+  background: $surface;
+  color: $text;
   padding: $space-5;
-  background: $surface;
   border-radius: $radius;
-  @include tablet { width: min(100%, 260px); }
+  display: grid;
+  gap: $space-3;
+  box-shadow: 0 2px 8px rgba(#000, 0.1);
 }
-.sfi-hero-sub { color: $surface; line-height: 1.75; }
-.sfi-hero-actions .sfi-btn-secondary {
-  background: $surface;
-  color: $blue-dark;
-  border-color: $surface;
-  &:hover { background: $blue-tint; border-color: $blue-tint; }
+.sfi-home-search h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.sfi-home-search p {
+  color: $text-soft;
+  margin: 0;
+}
+.sfi-home-search label {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.sfi-home-search a {
+  font-size: 0.875rem;
+}
+.sfi-hero .sfi-home-search :focus-visible {
+  outline-color: $blue;
+}
+.sfi-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-4;
+}
+.sfi-panel-number {
+  color: $blue;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.sfi-home-update {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr auto;
+  gap: $space-5;
+  align-items: center;
+  border-top: 1px solid $border;
+}
+.sfi-home-update h2,
+.sfi-home-update h3 {
+  margin: $space-1 0;
+}
+.sfi-home-update h3 {
+  font-size: 1rem;
+}
+.sfi-home-update time {
+  color: $text-muted;
+  font-size: 0.875rem;
+}
+@media (max-width: 860px) {
+  .sfi-hero-content {
+    gap: $space-5;
+    padding: $space-6 $space-5;
+    grid-template-columns: 1fr 1fr;
+  }
+  .sfi-service-grid {
+    grid-template-columns: 1fr;
+  }
+  .sfi-home-update {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .sfi-hero-content {
+    grid-template-columns: 1fr;
+    padding: $space-5 $space-4;
+  }
+  .sfi-home-search {
+    padding: $space-4;
+  }
+  .sfi-home-update {
+    grid-template-columns: 1fr;
+    gap: $space-3;
+  }
 }

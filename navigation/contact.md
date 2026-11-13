@@ -1,100 +1,47 @@
 ---
 layout: sfi
 title: Contact
-description: Get in touch with SFI Foundation for technical questions, specification info, or product certification.
+nav_title: Contact
+description: Contact SFI Foundation in Poway, California.
 permalink: /contact/
 ---
-
-<div class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>Contact <span class="gold">SFI Foundation</span></h1>
-    <p>
-      Have technical questions, need specification information, or want to learn about
-      product certification? We are committed to prompt, respectful responses.
-    </p>
-  </div>
+<header class="sfi-page-header"><div class="sfi-page-header-content">
+  <h1><span class="gold">Contact</span> SFI</h1>
+  <p>Questions about specifications, testing, or certification? Contact SFI.</p>
+</div></header>
+<div class="sfi-sect sfi-two-grid">
+  <section aria-labelledby="contact-details" id="contact">
+    <h2 id="contact-details">Contact SFI</h2>
+    <p><a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a></p>
+    <p><a href="tel:+18584518868">(858) 451-8868</a></p>
+    <p>Fax: (858) 451-9268</p>
+  </section>
+  <section aria-labelledby="location">
+    <h2 id="location">Location</h2>
+    <address>SFI Foundation, Inc.<br>15708 Pomerado Road<br>Suite N208<br>Poway, CA 92064</address>
+    <p><a href="https://www.google.com/maps/search/?api=1&amp;query=15708%20Pomerado%20Road%20Suite%20N208%20Poway%20CA%2092064" target="_blank" rel="noopener noreferrer">View location on map (opens in new tab)</a></p>
+  </section>
 </div>
 
-<section class="sfi-sect">
-  <div class="sfi-sect-label">Reach Out</div>
-  <div class="sfi-sect-title">Get in Touch</div>
-  <div class="sfi-sect-desc">
-    We welcome inquiries about specifications, testing, certification, and all
-    aspects of motorsports safety.
+<section class="sfi-sect sfi-contact-guidance" aria-labelledby="inquiry-help">
+  <h2 id="inquiry-help">Help SFI understand your question</h2>
+  <div class="sfi-role-grid">
+    <section aria-labelledby="spec-questions">
+      <h3 id="spec-questions">Specifications</h3>
+      <p>Have the specification number or equipment name handy, along with the part of the document you want to ask about.</p>
+    </section>
+    <section aria-labelledby="testing-questions">
+      <h3 id="testing-questions">Testing &amp; participation</h3>
+      <p>Describe the equipment and the testing or program information you need so you can discuss the relevant requirements with SFI.</p>
+    </section>
+    <section aria-labelledby="label-questions">
+      <h3 id="label-questions">Product &amp; label concerns</h3>
+      <p>Include the manufacturer, model, and any specification or label details when asking about a product or reporting a concern.</p>
+    </section>
   </div>
-
-  <div class="sfi-contact-grid">
-    <div class="sfi-contact-item">
-      <div class="sfi-contact-item-icon">&#128205;</div>
-      <div class="sfi-contact-item-label">Address</div>
-      <div class="sfi-contact-item-val">15708 Pomerado Road<br>Suite N208, Poway, CA 92064</div>
-    </div>
-    <div class="sfi-contact-item">
-      <div class="sfi-contact-item-icon">&#128222;</div>
-      <div class="sfi-contact-item-label">Phone</div>
-      <div class="sfi-contact-item-val"><a href="tel:8584518868">(858) 451-8868</a></div>
-    </div>
-    <div class="sfi-contact-item">
-      <div class="sfi-contact-item-icon">&#128231;</div>
-      <div class="sfi-contact-item-label">Email</div>
-      <div class="sfi-contact-item-val"><a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a></div>
-    </div>
-    <div class="sfi-contact-item">
-      <div class="sfi-contact-item-icon">&#128224;</div>
-      <div class="sfi-contact-item-label">Fax</div>
-      <div class="sfi-contact-item-val">(858) 451-9268</div>
-    </div>
-  </div>
-</section>
-
-<div class="sfi-divider"><hr></div>
-
-<section class="sfi-sect">
-  <div class="sfi-sect-label">Common Inquiries</div>
-  <div class="sfi-sect-title">How Can We Help?</div>
-
-  <div class="sfi-info-grid">
-    <div class="sfi-info-card">
-      <h3>Manufacturers</h3>
-      <p>
-        Interested in certifying your products to SFI specifications? Contact us to learn
-        about the licensing process, testing requirements, and how to participate in our
-        specification programs.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Sanctioning Bodies</h3>
-      <p>
-        Want to adopt SFI standards into your rulebook or become a member sanctioning body?
-        We can provide information about membership, specification access, and how SFI
-        can support your organization.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Racers & Teams</h3>
-      <p>
-        Have questions about which SFI specification applies to your equipment? Use our
-        <a href="{{ '/sfi-specs/' | relative_url }}">Spec Search</a> tool or contact us directly for guidance.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Counterfeit Reports</h3>
-      <p>
-        Suspect counterfeit SFI labels or non-compliant products? Report them to us
-        immediately. We actively investigate and publish notices to protect the
-        motorsports community.
-      </p>
-    </div>
-  </div>
-</section>
-
-<div class="sfi-divider"><hr></div>
-
-<section class="sfi-sect">
-  <div class="sfi-cta-banner">
-    <h2>FIND A SPECIFICATION</h2>
-    <p>Search our complete database of SFI specifications.</p>
-    <a href="{{ '/sfi-specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
-    <a href="{{ '/about/' | relative_url }}" class="sfi-btn sfi-btn-secondary">About SFI</a>
-  </div>
+  <aside class="sfi-blue-note" aria-labelledby="find-spec-first">
+    <h2 id="find-spec-first">Looking for a specification?</h2>
+    <p>Start with a specification number or equipment name. The catalog shows document status and provides links to verified current PDFs.</p>
+    <a href="{{ '/sfi-specs/' | relative_url }}">Open Spec Search &rarr;</a>
+  </aside>
 </section>

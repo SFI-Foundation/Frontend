@@ -2,10 +2,11 @@
   max-width: $content-width;
   margin: 0 auto;
   padding: 0 $space-5;
+  @include phone { padding: 0 $space-4; }
 }
 
 .sfi__section {
-  padding: $space-6 0;
+  padding: $space-5 0;
   & + & { padding-top: 0; }
 }
 
@@ -54,19 +55,4 @@
   display: grid;
   gap: $space-4;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-}
-
-// Keep catalog controls close to the statistics after prototype removal.
-#publicView #statsBar { margin-bottom: 0; }
-#publicView #search > .sfi__lead { margin-bottom: $space-4; }
-
-@media (max-width: 600px) {
-  &.sfi-spec-search .sfi-page-header { padding: $space-5 $space-5; }
-  #publicView #statsBar {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: $space-2;
-    .sfi__stat { padding: $space-3; }
-    .sfi__stat-value { font-size: 1.5rem; }
-    .sfi__stat-label { font-size: 0.6rem; letter-spacing: 0.02em; }
-  }
 }

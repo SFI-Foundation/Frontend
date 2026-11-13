@@ -1,18 +1,19 @@
 /* ── Buttons ──────────────────────────────────── */
 .sfi-btn {
-  font-family: 'Inter', sans-serif;
-  padding: 11px 28px;
+  font-family: $font-body;
+  padding: 10px 16px;
+  min-height: 44px;
+  justify-content: center;
   border-radius: var(--sfi-radius-sm);
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.2s;
-  border: 2px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  letter-spacing: 0.3px;
 }
 .sfi-btn-primary {
   background: var(--sfi-blue);
@@ -24,22 +25,14 @@
   border-color: var(--sfi-blue-dark);
   color: #fff;
 }
-.sfi-btn-secondary {
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255,255,255,0.6);
-}
-.sfi-btn-secondary:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: #fff;
-}
+.sfi-btn-secondary,
 .sfi-btn-outline {
-  background: transparent;
-  color: var(--sfi-blue);
-  border-color: var(--sfi-blue);
+  background: $surface;
+  color: $blue;
+  border-color: $border;
+  &:hover {
+    background: $surface-alt;
+    border-color: $blue;
+    color: $blue-dark;
+  }
 }
-.sfi-btn-outline:hover {
-  background: var(--sfi-blue);
-  color: #fff;
-}
-

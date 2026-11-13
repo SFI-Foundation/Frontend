@@ -27,7 +27,7 @@
                         {%- if my_page.course -%}
                             {{ my_page.course | upcase | escape }}
                         {%- else -%}
-                            {{ my_page.title | escape }}
+                            {{ my_page.nav_title | default: my_page.title | escape }}
                         {%- endif -%}
                     </a>
                     {%- endif -%}

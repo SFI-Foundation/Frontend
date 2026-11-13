@@ -1,4 +1,5 @@
 .sfi__field {
+  min-height: 44px;
   width: 100%;
   padding: 10px 12px;
   border: 1px solid $border-strong;
@@ -8,7 +9,7 @@
   font: 0.92rem/1.3 $font-body;
   transition: border-color 0.15s, box-shadow 0.15s;
 
-  &::placeholder { color: $text-muted; opacity: 0.8; }
+  &::placeholder { color: $text-muted; opacity: 1; }
   &:focus { outline: none; border-color: $blue; box-shadow: 0 0 0 3px rgba($blue, 0.15); }
 }
 

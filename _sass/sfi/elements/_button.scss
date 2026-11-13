@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: center;
   gap: $space-2;
-  padding: 9px 18px;
+  min-height: 44px;
+  padding: 9px 16px;
   border: 1px solid $border-strong;
   border-radius: $radius-sm;
   background: $surface;
@@ -29,17 +30,18 @@
 
 // Pill used for category filters.
 .sfi__chip {
-  padding: 5px 14px;
+  min-height: 36px;
+  padding: 7px 12px;
   border: 1px solid $border;
   border-radius: 999px;
   background: $surface;
   color: $text-soft;
-  font: 500 0.8rem/1.2 $font-body;
+  font: 500 0.875rem/1.3 $font-body;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
   @include focus-ring;
 
-  &:hover { border-color: $blue; color: $blue; }
+  &:hover { background: $surface-alt; border-color: $blue; color: $blue; }
   &.active { background: $blue; border-color: $blue; color: #fff; }
 }
 

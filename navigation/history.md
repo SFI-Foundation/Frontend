@@ -1,94 +1,31 @@
 ---
 layout: sfi
-title: Our History
-description: From SEMA to SFI Foundation - a legacy of motorsports safety since 1963.
+title: History of SFI
+nav_title: History
+description: The development of SFI Foundation from SEMA to an independent motorsports standards organization.
 permalink: /history/
 ---
-
-<div class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>Our <span class="gold">History</span></h1>
-    <p>
-      From the early days of SEMA to a globally recognized safety standards organization,
-      SFI has been dedicated to reducing product failures in motorsports.
-    </p>
+<header class="sfi-page-header"><div class="sfi-page-header-content">
+  <h1>History of <span class="gold">SFI</span></h1>
+  <p>From racing manufacturers to an independent quality assurance foundation.</p>
+</div></header>
+<section class="sfi-sect sfi-prose sfi-simple-home" aria-label="SFI history">
+  <div class="sfi-editorial sfi-editorial--history">
+    <div>
+  <h2>Why specifications were needed</h2>
+  <p>Racing equipment is pushed to its performance limits. Early product failures highlighted the need for consistent performance requirements and testing, helping manufacturers and sanctioning bodies work from a common standard.</p>
+    </div>
+    {% include sfi/photograph.html key="history" sizes="(max-width: 600px) calc(100vw - 32px), 320px" %}
   </div>
-</div>
-
-<section class="sfi-sect">
-  <div class="sfi-sect-label">Heritage</div>
-  <div class="sfi-sect-title">A Legacy of Motorsports Safety</div>
-  <div class="sfi-sect-desc">
-    For over four decades, SFI Foundation has worked to ensure the highest levels of
-    quality and safety in motorsports equipment.
-  </div>
-
-  <div class="sfi-timeline">
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">1963</div>
-      <div class="sfi-timeline-text">
-        Racing product manufacturers form the Speed Equipment Manufacturers Association (SEMA)
-        to serve the growing automotive aftermarket industry.
-      </div>
-    </div>
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">1970s</div>
-      <div class="sfi-timeline-text">
-        SEMA creates the Service Bureau to handle the increasing demand for safety specifications
-        and product quality standards in motorsports. The need for a dedicated organization
-        becomes clear.
-      </div>
-    </div>
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">1978</div>
-      <div class="sfi-timeline-text">
-        The SEMA Foundation, Inc. (SFI) is established as a non-profit organization to replace
-        the Service Bureau and manage an expanded specifications program. This marks the
-        beginning of SFI as a formal institution.
-      </div>
-    </div>
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">1990s</div>
-      <div class="sfi-timeline-text">
-        SFI becomes independent from SEMA while retaining the SFI Foundation, Inc. name.
-        The organization expands its specification programs to cover an ever-wider range
-        of motorsports equipment.
-      </div>
-    </div>
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">1999</div>
-      <div class="sfi-timeline-text">
-        The SFI Test Laboratory opens in Escondido, California, giving manufacturers
-        access to professional testing for heat and flame resistance, structural integrity,
-        seatbelt strength, and more.
-      </div>
-    </div>
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">2000s&ndash;2010s</div>
-      <div class="sfi-timeline-text">
-        SFI grows to serve approximately 100 member sanctioning bodies worldwide.
-        The test lab relocates to Poway, CA. Spec programs expand to cover drag racing chassis,
-        boat racing, tractor pulling, and more.
-      </div>
-    </div>
-    <div class="sfi-timeline-item">
-      <div class="sfi-timeline-year">Today</div>
-      <div class="sfi-timeline-text">
-        SFI serves over 300 manufacturers across 85+ specification programs. The organization
-        continues its mission to reduce product failures and improve safety across all
-        forms of motorsport worldwide.
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="sfi-divider"><hr></div>
-
-<section class="sfi-sect">
-  <div class="sfi-cta-banner">
-    <h2>SEE OUR WORK IN ACTION</h2>
-    <p>Explore the specifications and services that carry forward our legacy.</p>
-    <a href="{{ '/specs/' | relative_url }}" class="sfi-btn sfi-btn-primary">Browse Specs &rarr;</a>
-    <a href="{{ '/services/' | relative_url }}" class="sfi-btn sfi-btn-secondary">Our Services</a>
-  </div>
+  <h2>Key milestones</h2>
+  <dl class="sfi-history-list">
+    <div><dt>1963</dt><dd>Racing product manufacturers form the Speed Equipment Manufacturers Association (SEMA) to support product specifications and testing.</dd></div>
+    <div><dt>1970s</dt><dd>The SEMA Service Bureau takes responsibility for specification and testing programs.</dd></div>
+    <div><dt>1978</dt><dd>The SEMA Foundation, Inc. is formed to replace the Service Bureau and manage an expanded specification program.</dd></div>
+    <div><dt>1999</dt><dd>The SFI Test Laboratory opens in Escondido, California. It later relocates to Poway.</dd></div>
+    <div><dt>Today</dt><dd>SFI Foundation operates independently from SEMA, administering motorsports equipment quality assurance programs.</dd></div>
+  </dl>
+  <h2>A continuing focus on quality assurance</h2>
+  <p>As racing technology has developed, the need to verify equipment performance has remained. SFI's independent specification programs continue that work across auto racing, drag racing, boat racing, and tractor pulling.</p>
+  <p><a href="https://sfifoundation.com/our-history/">Read SFI's official history &rarr;</a></p>
 </section>

@@ -1,0 +1,45 @@
+<!-- OCS-style top navigation, rendered from the configured page paths. -->
+<header class="opencs-bar">
+  <div class="opencs-bar__inner">
+    <a
+      class="opencs-bar__brand"
+      href="{{ '/' | relative_url }}"
+      aria-label="SFI Foundation home"
+    >
+      <img
+        src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}"
+        alt=""
+        width="95"
+        height="40"
+      />
+      <span>SFI Foundation</span>
+    </a>
+    <button
+      id="navToggle"
+      class="opencs-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="navLinks"
+      hidden
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M3 6h18M3 12h18M3 18h18" />
+      </svg>
+    </button>
+    <nav id="navLinks" class="opencs-nav" aria-label="Primary navigation">
+      {% for nav_path in site.minima.nav_pages %}
+        {% assign nav_page = site.pages | where: 'path', nav_path | first %}
+        {% if nav_page.title %}
+        <a class="opencs-nav__link" href="{{ nav_page.url | relative_url }}"{% if page.url == nav_page.url %} aria-current="page"{% endif %}>{{ nav_page.nav_title | default: nav_page.title | escape }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
+</header>

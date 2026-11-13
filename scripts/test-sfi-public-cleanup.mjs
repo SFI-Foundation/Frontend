@@ -10,7 +10,7 @@ const site = process.env.SFI_BUILT_SITE;
 test('public search source contains no research UI or demo navigation', () => {
   const source = readFileSync(path.join(root, 'navigation/sfi-specs.md'), 'utf8');
   assert.doesNotMatch(source, /safetyCanvas|safety-showcase|classifyInput|classifyBtn|ML accuracy|classifier\/status|sfi-manufacturer-demo|panel-classifier/i);
-  for (const id of ['sfiSearchForm', 'sfiFilters', 'sfiResults', 'sfiNext', 'sfiPrevious', 'statSpecs']) assert.ok(source.includes(`id="${id}"`));
+  for (const id of ['sfiSearchForm', 'sfiFilters', 'sfiResults', 'sfiNext', 'sfiPrevious', 'sfiCategoryPanel']) assert.ok(source.includes(`id="${id}"`));
   assert.match(readFileSync(path.join(root, '_config.yml'), 'utf8'), /sfi_manufacturer_demo: false/);
 });
 
