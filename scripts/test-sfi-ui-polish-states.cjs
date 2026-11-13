@@ -2,7 +2,9 @@
 const { chromium } = require(process.env.SFI_PLAYWRIGHT_MODULE || "playwright");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
-const output = "docs/ui-polish";
+const path = require("node:path");
+const output = path.resolve(process.env.SFI_UI_OUTPUT || "qa-evidence/ui-polish");
+fs.mkdirSync(path.join(output, "screenshots"), { recursive: true });
 const site = process.env.SFI_UI_URL || "http://localhost:4600";
 const checks = [];
 const scans = [];

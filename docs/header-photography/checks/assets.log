@@ -1,9 +1,0 @@
-PASS original SFI logo is byte-identical to d72acaf94
-PASS retired decorative SVG and runtime style/references removed
-PASS dragster-header-120.webp (120, 42) 2288 bytes
-PASS dragster-header-240.webp (240, 84) 6614 bytes
-PASS unchanged _config.yml
-PASS unchanged _config.development.yml
-PASS unchanged assets/js/sfi/spec-search.js
-PASS unchanged assets/js/sfi/navigation.js
-PASS unchanged navigation/login.md

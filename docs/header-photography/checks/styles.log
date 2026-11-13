@@ -1,5 +1,0 @@
-
-> test:styles
-> node scripts/test-sfi-gear-sass.mjs /tmp/sfi-photo-preview
-
-PASS: scoped SFI Sass compiled (24 imports); quiz/admin use one generated stylesheet and no inline presentation

@@ -94,4 +94,31 @@ SpecList.docx
 *.key
 *.p12
 *.pfx
-/qa-evidence/
+
+# Frontend QA output (logs, screenshots, browser JSON and traces live here)
+/coverage/
+/.nyc_output/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/.jekyll-cache/
+/.sass-cache/
+
+# Older UI QA output locations; keep source documentation and photo provenance
+/docs/header-imagery/screenshots/
+/docs/header-imagery/checks/
+/docs/header-imagery/*-results.json
+/docs/header-photography/screenshots/
+/docs/header-photography/checks/
+/docs/header-photography/*-results.json
+/docs/header-photography/image-processing.json
+/docs/site-photography/screenshots/
+/docs/site-photography/checks/
+/docs/site-photography/*-results.json
+/docs/ui-overhaul/screenshots/
+/docs/ui-overhaul/checks/
+/docs/ui-overhaul/*-results.json
+/docs/ui-polish/screenshots/
+/docs/ui-polish/checks/
+/docs/ui-polish/*-results.json
+/docs/ui-polish/state-failure.json

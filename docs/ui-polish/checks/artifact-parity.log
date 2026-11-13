@@ -1,8 +1,0 @@
-PASS identical preview/full/live artifact: index.html 78b48d4e23a0
-PASS identical preview/full/live artifact: sfi-specs/index.html 072f9d5fa973
-PASS identical preview/full/live artifact: history/index.html cb9327ae4e4e
-PASS identical preview/full/live artifact: news-events/index.html a95f52b7f7f5
-PASS identical preview/full/live artifact: contact/index.html 9fc79f704f24
-PASS identical preview/full/live artifact: login/index.html c8cc6187f906
-PASS identical preview/full/live artifact: assets/css/sfi.css b2b553668bad
-PASS identical preview/full/live artifact: assets/js/sfi/navigation.js 3dc48067412c

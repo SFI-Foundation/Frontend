@@ -1,8 +1,0 @@
-PASS local preview matches verified artifact: index.html
-PASS local preview matches verified artifact: sfi-specs/index.html
-PASS local preview matches verified artifact: history/index.html
-PASS local preview matches verified artifact: news-events/index.html
-PASS local preview matches verified artifact: contact/index.html
-PASS local preview matches verified artifact: login/index.html
-PASS local preview matches verified artifact: assets/css/sfi.css
-PASS local preview matches verified artifact: assets/js/sfi/navigation.js

@@ -5,8 +5,9 @@ const fs = require("node:fs");
 const path = require("node:path");
 const site = process.env.SFI_UI_URL || "http://localhost:4600";
 const output = path.resolve(
-  process.env.SFI_PHOTO_OUTPUT || "docs/site-photography",
+  process.env.SFI_PHOTO_OUTPUT || "qa-evidence/site-photography",
 );
+fs.mkdirSync(path.join(output, "screenshots"), { recursive: true });
 const routes = [
   ["home", "/", ["hero", "safety"]],
   ["specifications", "/sfi-specs/", ["specs"]],

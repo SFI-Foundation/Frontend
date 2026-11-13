@@ -6,7 +6,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const site = process.env.SFI_UI_URL || "http://localhost:4600";
 const api = process.env.SFI_UI_API || "http://localhost:8427";
-const output = path.resolve(process.env.SFI_UI_OUTPUT || "docs/ui-polish");
+const output = path.resolve(process.env.SFI_UI_OUTPUT || "qa-evidence/ui-overhaul");
+fs.mkdirSync(path.join(output, "screenshots"), { recursive: true });
 const report = {
   checks: [],
   layouts: [],
