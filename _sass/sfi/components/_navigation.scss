@@ -29,6 +29,17 @@
   height: 40px;
   object-fit: contain;
 }
+.opencs-bar__brand .opencs-bar__motorsports {
+  display: none;
+  width: 80px;
+  height: 32px;
+  margin-left: $space-1;
+  opacity: 0.75;
+  // Leave room for the six destinations on smaller screens.
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
 .opencs-nav {
   display: flex;
   align-items: center;

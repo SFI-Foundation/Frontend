@@ -1,0 +1,53 @@
+{
+  "layouts": [
+    {
+      "width": 1440,
+      "height": 68,
+      "artworkVisible": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 68,
+      "artworkVisible": true,
+      "overflow": false
+    },
+    {
+      "width": 1023,
+      "height": 68,
+      "artworkVisible": false,
+      "overflow": false
+    },
+    {
+      "width": 960,
+      "height": 68,
+      "artworkVisible": false,
+      "overflow": false
+    },
+    {
+      "width": 801,
+      "height": 68,
+      "artworkVisible": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "height": 68,
+      "artworkVisible": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 68,
+      "artworkVisible": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "height": 68,
+      "artworkVisible": false,
+      "overflow": false
+    }
+  ],
+  "openMenuAccessibilityViolations": []
+}
