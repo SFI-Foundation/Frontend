@@ -1,0 +1,28 @@
+✔ profile renders identity and quiz saves, reloads, updates and clears (35.947853ms)
+✔ failed quiz save keeps edits and expired authentication hides private profile (4.49058ms)
+✔ profile load failure offers a working retry (4.979871ms)
+✔ name and quiz editing preserve unsaved changes in the other form (8.457598ms)
+✔ login requires a working authentication cookie and signup requires eight characters (5.692835ms)
+✔ signup reports failed automatic login; failed logout leaves profile visible (6.492816ms)
+✔ public account aliases keep SFI destinations and classroom forms remain available (2.259906ms)
+✔ signup alias selects the existing Create Account tab without changing authentication (5.310474ms)
+✔ SFI logout deletes the Python cookie session and returns to the baseurl login (4.944775ms)
+✔ SFI logout treats an expired cookie as signed out and offers retry on failure (11.13268ms)
+✔ accessible API search, category overlap, clear, pagination and labels (609.136569ms)
+✔ pagination waits for a response and does not steal focus from a newer search (131.163247ms)
+✔ loading, empty and error states have actionable retry (93.584584ms)
+✔ stale responses never replace newer results (53.540596ms)
+✔ unverified, unsafe and outdated links cannot become actions; content escaped (61.542929ms)
+✔ typing invalidates an in-flight response during the debounce window (67.314723ms)
+✔ category and explicit loads cancel a pending debounce without duplicate requests (397.379288ms)
+✔ all non-current document states expose clear text without actions (40.466505ms)
+✔ entire cleaned public page initializes without references to removed controls (59.703071ms)
+✔ homepage query initializes canonical search safely and reset clears category (80.000128ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3054.027396

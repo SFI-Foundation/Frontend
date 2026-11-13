@@ -20,6 +20,7 @@
   <body class="sfi-site{% if page.body_class %} {{ page.body_class | escape }}{% endif %}">
     <a class="sfi-skip-link" href="#sfi-main">Skip to content</a>
     {% include sfi/nav.html %}
+    <script src="{{ '/assets/js/sfi/navigation.js' | relative_url }}" defer></script>
     <main id="sfi-main" tabindex="-1">
       {{ content }}
     </main>

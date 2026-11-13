@@ -6,7 +6,8 @@
 }
 .sfi-hero :focus-visible,
 .sfi-cta-banner :focus-visible,
-.sfi-nav :focus-visible {
+.sfi-nav :focus-visible,
+.opencs-bar :focus-visible {
   outline-color: $surface;
 }
 

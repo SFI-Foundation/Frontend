@@ -1,0 +1,62 @@
+{
+  "checks": [
+    "Mobile keyboard Space/Tab/Escape, visible white focus, outside-click closing, and open-menu accessibility",
+    "All seven views reflow at 720 CSS pixels (1440px/200% equivalent); 390px viewport screenshots",
+    "Blue/white submit, no gradient, reduced motion, validation and simulated account success presentation"
+  ],
+  "accessibility": [
+    {
+      "name": "390px open navigation, keyboard focus",
+      "violations": []
+    },
+    {
+      "name": "390px Sign In validation",
+      "violations": []
+    },
+    {
+      "name": "390px Create Account validation",
+      "violations": []
+    },
+    {
+      "name": "390px account-created success presentation (stubbed response)",
+      "violations": []
+    }
+  ],
+  "contrasts": [
+    {
+      "name": "navy/white",
+      "ratio": 10.62,
+      "minimum": 4.5
+    },
+    {
+      "name": "blue/white",
+      "ratio": 6.3,
+      "minimum": 4.5
+    },
+    {
+      "name": "body/white",
+      "ratio": 12.64,
+      "minimum": 4.5
+    },
+    {
+      "name": "muted/subtle",
+      "ratio": 5.98,
+      "minimum": 4.5
+    },
+    {
+      "name": "input border/white",
+      "ratio": 3.65,
+      "minimum": 3
+    },
+    {
+      "name": "error/tint",
+      "ratio": 5.28,
+      "minimum": 4.5
+    },
+    {
+      "name": "success/tint",
+      "ratio": 5.68,
+      "minimum": 4.5
+    }
+  ]
+}

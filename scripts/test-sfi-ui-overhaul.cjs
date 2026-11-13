@@ -6,7 +6,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const site = process.env.SFI_UI_URL || "http://localhost:4600";
 const api = process.env.SFI_UI_API || "http://localhost:8427";
-const output = path.resolve("docs/ui-overhaul");
+const output = path.resolve(process.env.SFI_UI_OUTPUT || "docs/ui-polish");
 const report = {
   checks: [],
   layouts: [],
@@ -25,6 +25,7 @@ const pages = [
   "/news-events/",
   "/contact/",
   "/login/",
+  "/login/#register",
 ];
 const labels = [
   "Home",
@@ -63,19 +64,30 @@ let browser;
           "false",
       );
     const go = async (route) => {
-      assert.equal((await page.goto(site + route)).status(), 200);
-      await page.waitForSelector("#navLinks a");
+      const response = await page.goto(site + route);
+      if (response) assert.equal(response.status(), 200);
+      else assert.equal(new URL(page.url()).pathname, route.split("#")[0]);
+      await page.waitForSelector("#navLinks a", { state: "attached" });
       if (route.startsWith("/sfi-specs/")) await idle();
+      if (route.startsWith("/login/"))
+        await page.waitForFunction(
+          () => typeof window.switchTab === "function",
+        );
+      if (route.endsWith("#register")) {
+        await page.locator("#tabRegister").click();
+        await page.locator("#regName").waitFor();
+      }
     };
     const search = async (value) => {
       await page.locator("#sfiSearch").fill(value);
       await page.locator("#sfiSearch").press("Enter");
       await idle();
     };
-    const screenshot = async (name) => {
+    const screenshot = async (name, fullPage = true) => {
       await page.screenshot({
         path: path.join(output, "screenshots", name),
         animations: "disabled",
+        fullPage,
       });
       report.screenshots.push(name);
     };
@@ -124,11 +136,28 @@ let browser;
           dimensions.scrollWidth <= width,
           `${route} overflows at ${width}`,
         );
+        assert.equal(await page.locator("dialog,.opencs-drawer").count(), 0);
         assert.equal(
-          await page.locator("#navToggle,dialog,.opencs-drawer").count(),
-          0,
+          await page.locator("#navToggle").isVisible(),
+          width <= 800,
         );
-        assert.ok(await page.locator("#navLinks a").first().isVisible());
+        if (width <= 800) {
+          assert.equal(
+            await page.locator("#navLinks a").first().isVisible(),
+            false,
+          );
+          await page.locator("#navToggle").click();
+          assert.equal(
+            await page.locator("#navToggle").getAttribute("aria-expanded"),
+            "true",
+          );
+          assert.ok(await page.locator("#navLinks a").first().isVisible());
+          await page.keyboard.press("Escape");
+          assert.equal(
+            await page.evaluate(() => document.activeElement.id),
+            "navToggle",
+          );
+        } else assert.ok(await page.locator("#navLinks a").first().isVisible());
         if (width >= 1024) {
           const positions = await page
             .locator("#navLinks a")
@@ -141,7 +170,7 @@ let browser;
           );
           assert.ok((await page.locator("#navLinks").boundingBox()).y < 80);
         }
-        if ([1440, 1024, 390].includes(width)) {
+        if ([1440, 1024, 768, 390, 320].includes(width)) {
           const name = {
             "/": "home",
             "/sfi-specs/": "specifications",
@@ -149,6 +178,7 @@ let browser;
             "/contact/": "contact",
             "/news-events/": "news-events",
             "/login/": "sign-in",
+            "/login/#register": "create-account",
           }[route];
           if (name) await screenshot(`after-${name}-${width}.png`);
         }
@@ -173,7 +203,7 @@ let browser;
         }
       }
       check(
-        `five public pages and Sign In at ${width}×${height}: visible top navigation, no side drawer, no theme CSS or overflow`,
+        `six destinations and Create Account at ${width}×${height}: responsive top navigation, no side drawer, no theme CSS or overflow`,
       );
     }
     await page.setViewportSize({ width: 390, height: 844 });
@@ -190,7 +220,13 @@ let browser;
       await page.evaluate(() => document.activeElement.id),
       "sfi-main",
     );
+    await page.locator("#navToggle").click();
+    await page.locator("#navLinks a").first().focus();
     await screenshot("after-mobile-navigation.png");
+    assert.equal(
+      await page.locator("#navToggle").getAttribute("aria-expanded"),
+      "true",
+    );
     await page.getByRole("link", { name: "History", exact: true }).click();
     await page.waitForURL(site + "/history/");
     assert.match(await page.locator("h1").innerText(), /History/);
@@ -211,6 +247,7 @@ let browser;
     check(
       "keyboard skip and top-link navigation; standalone History and verified Contact & Location",
     );
+    await page.setViewportSize({ width: 1440, height: 900 });
     await go("/");
     assert.match(
       await page.locator("#services").innerText(),
@@ -239,8 +276,28 @@ let browser;
     await page.waitForURL(site + "/login/");
     assert.equal(await page.locator("#loginUid").isVisible(), true);
     assert.equal(await page.locator("#loginPass").isVisible(), true);
+    await page.locator("#loginBtn").click();
+    assert.match(
+      await page.locator("#msgBox").innerText(),
+      /fill in all fields/i,
+    );
+    await screenshot("after-sign-in-validation.png");
     await page.locator("#tabRegister").click();
     assert.equal(await page.locator("#regName").isVisible(), true);
+    await page.locator("#regBtn").click();
+    assert.match(
+      await page.locator("#msgBox").innerText(),
+      /fill in all fields/i,
+    );
+    await page.locator("#regName").fill("Visual QA");
+    await page.locator("#regUid").fill("visual-qa");
+    await page.locator("#regPass").fill("short");
+    await page.locator("#regBtn").click();
+    assert.match(
+      await page.locator("#msgBox").innerText(),
+      /at least 8 characters/i,
+    );
+    await screenshot("after-create-account-validation.png");
     await page.locator("#tabLogin").click();
     assert.equal(await page.locator("#loginUid").isVisible(), true);
     check(

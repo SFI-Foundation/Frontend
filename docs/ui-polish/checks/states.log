@@ -1,0 +1,4 @@
+PASS Mobile keyboard Space/Tab/Escape, visible white focus, outside-click closing, and open-menu accessibility
+PASS All seven views reflow at 720 CSS pixels (1440px/200% equivalent); 390px viewport screenshots
+PASS Blue/white submit, no gradient, reduced motion, validation and simulated account success presentation
+PASS 4 additional state accessibility scans and 7 contrast pairs

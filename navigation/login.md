@@ -17,7 +17,7 @@ permalink: /login/
       <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">Create Account</button>
     </div>
 
-    <div id="msgBox" class="auth-msg"></div>
+    <div id="msgBox" class="auth-msg" role="status" aria-atomic="true"></div>
 
     <!-- Login Fields -->
     <div id="loginFields">

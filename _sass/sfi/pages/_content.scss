@@ -35,7 +35,7 @@
 .sfi-home-card-img-placeholder {
   width: 100%;
   height: 160px;
-  background: linear-gradient(135deg, #1a5fa8 0%, #3b9ede 100%);
+  background: $blue;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +301,7 @@
 
 /* ── CTA Banner ───────────────────────────────── */
 .sfi-cta-banner {
-  background: linear-gradient(105deg, #0d2e5c, #1a5fa8);
+  background: $blue-dark;
   border-radius: var(--sfi-radius);
   padding: 48px 40px;
   text-align: center;
@@ -381,7 +381,7 @@
   background: var(--sfi-border);
 }
 
-// Moderate information density for the four-page public site.
+// Moderate information density for the public site.
 .sfi-home-details,
 .sfi-contact-guidance {
   padding-top: 0;
@@ -417,30 +417,30 @@
 .sfi-blue-note {
   margin-top: $space-6;
   padding: $space-5;
-  background: $blue-dark;
-  border-left: 4px solid $gold;
+  background: $surface-alt;
+  border: 1px solid $border;
   border-radius: $radius-sm;
-  color: $surface;
+  color: $text-soft;
 }
 .sfi-blue-note h2 {
-  color: $gold-text;
+  color: $blue-dark;
   margin: 0 0 $space-3;
   font-size: 1.375rem;
 }
 .sfi-blue-note p {
   margin: 0 0 $space-3;
   max-width: 90ch;
-  color: $surface;
+  color: $text-soft;
 }
 .sfi-blue-note a {
-  color: $gold-text;
+  color: $blue;
   display: inline-block;
   padding-block: $space-1;
 }
 .sfi-blue-note :focus-visible {
-  outline-color: $surface;
+  outline-color: $text-soft;
 }
-@media (max-width: 760px) {
+@media (max-width: $bp-tablet) {
   .sfi-role-grid {
     grid-template-columns: 1fr;
     gap: $space-4;
@@ -455,7 +455,7 @@
   margin-bottom: $space-2;
 }
 .sfi-services-list strong {
-  color: $gold-text;
+  color: $blue-dark;
 }
 .sfi-news-grid {
   gap: $space-6;

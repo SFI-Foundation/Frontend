@@ -1,10 +1,10 @@
 .sfi-footer {
   background: $blue-tint;
-  border-top: 2px solid $gold;
+  border-top: 1px solid $border;
   padding: $space-4 $space-5;
 }
 .sfi-footer-inner {
-  max-width: 1152px;
+  max-width: $site-width - 2 * $space-5;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -25,7 +25,6 @@
   color: $blue;
 }
 .sfi-simple-home {
-  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }

@@ -154,7 +154,7 @@
     margin-bottom: 2px;
   }
   &-count {
-    font-size: 0.78rem;
+    font-size: 0.875rem;
     color: $text-muted;
   }
 }
@@ -213,6 +213,8 @@
 }
 
 .sfi__spec-card {
+  border-left: 1px solid $border;
+  align-items: flex-start;
   margin-bottom: $space-3;
   overflow-wrap: anywhere;
   padding: $space-4;
@@ -331,7 +333,7 @@
 .sfi-catalog-value {
   font-weight: 700;
 }
-@media (max-width: 860px) {
+@media (max-width: $bp-tablet) {
   #catGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -339,7 +341,7 @@
     grid-column: span 2;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: $bp-phone) {
   #sfiSearchForm {
     grid-template-columns: 1fr 1fr;
   }
@@ -357,7 +359,7 @@
     gap: $space-2;
   }
   .sfi__chip {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
   }
 }
 @media (max-width: 360px) {

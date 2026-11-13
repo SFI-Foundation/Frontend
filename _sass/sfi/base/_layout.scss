@@ -1,24 +1,24 @@
 .sfi-page-header {
-  background: linear-gradient(105deg, $hero-start, $blue);
-  border-bottom: 1px solid $blue;
+  background: $surface-alt;
+  border-bottom: 1px solid $border;
   padding: $space-5;
 }
 .sfi-page-header-content {
-  max-width: 1152px;
+  max-width: $site-width - 2 * $space-5;
   margin: auto;
 }
 .sfi-page-header h1 {
-  color: $surface;
+  color: $blue-dark;
   font-size: clamp(1.625rem, 3vw, 2rem);
   margin: 0 0 $space-2;
   letter-spacing: -0.02em;
 }
 .sfi-page-header h1 .gold {
-  color: $gold-text;
+  color: inherit;
 }
 .sfi-page-header p {
   margin: 0;
-  color: $surface;
+  color: $text-soft;
   max-width: 80ch;
 }
 .sfi-page-header .sfi-eyebrow {
@@ -155,7 +155,7 @@
   color: $text-muted;
 }
 .sfi-contact-panel {
-  border-top: 3px solid $gold;
+  border-top: 2px solid $blue;
   scroll-margin-top: $space-4;
   overflow-wrap: anywhere;
 }
@@ -166,7 +166,7 @@
   display: inline-block;
   padding-block: $space-2;
 }
-@media (max-width: 760px) {
+@media (max-width: $bp-tablet) {
   .sfi-content-grid {
     grid-template-columns: 1fr;
   }

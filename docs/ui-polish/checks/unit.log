@@ -1,0 +1,34 @@
+
+> test
+> node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs
+
+✔ pending and rejected gear retain independent expiry warnings and review notes (315.670972ms)
+✔ approved badge remains visible beside current or missing expiry dates (71.231018ms)
+✔ device-only gear survives add/reload/remove with no staff review badges or notes (40.548325ms)
+✔ calendar expiry handles today, 89/90-day boundary, invalid dates and leap day (45.436681ms)
+✔ urgency sort puts expired first and does not discard zero-day deadlines (105.586402ms)
+✔ gear and reviewer strings render as text without executable markup (81.179852ms)
+✔ failed remote writes retain inputs and records without populating a local cache (121.146943ms)
+✔ server failure displays a device-only cache without pretending its review is current (113.276157ms)
+✔ admin rejection opens an accessible notes form; cancel and blank notes send nothing (173.210021ms)
+✔ admin PUT rejection refreshes queues and the owner sees it after reload (194.453714ms)
+✔ admin approval uses PUT and prevents duplicate submissions while saving (139.81514ms)
+✔ failed review keeps notes and row visible and restores usable controls (61.82894ms)
+✔ expired/revoked admin access hides private dashboard data (155.179929ms)
+✔ unknown remote review status is not presented as approved (45.934634ms)
+✔ a saved decision with a failed queue refresh offers retry without claiming fresh data (105.775012ms)
+✔ dashboard recognizes the trusted Admin role and denies an ordinary member (78.46781ms)
+✔ profile renders identity and quiz saves, reloads, updates and clears (124.811724ms)
+✔ failed quiz save keeps edits and expired authentication hides private profile (16.676586ms)
+✔ profile load failure offers a working retry (28.873092ms)
+✔ name and quiz editing preserve unsaved changes in the other form (17.308443ms)
+✔ login requires a working authentication cookie and signup requires eight characters (18.078339ms)
+✔ signup reports failed automatic login; failed logout leaves profile visible (20.347995ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4032.969137
