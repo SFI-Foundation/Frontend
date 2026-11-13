@@ -24,7 +24,7 @@ try {
       const url = new URL(request.url());
       if (request.method() !== 'GET') return route.abort();
       // Never contact the production API during visual inspection.
-      if (url.hostname === 'greppers-be.opencodingsociety.com') return route.fulfill({ status: 401, contentType: 'application/json', body: '{"message":"Visual test: signed out"}', headers: { 'access-control-allow-origin': 'http://sfi.test', 'access-control-allow-credentials': 'true' } });
+      if (url.hostname === 'sfi-api.opencodingsociety.com') return route.fulfill({ status: 401, contentType: 'application/json', body: '{"message":"Visual test: signed out"}', headers: { 'access-control-allow-origin': 'http://sfi.test', 'access-control-allow-credentials': 'true' } });
       if (url.hostname !== 'sfi.test') return route.continue();
       let relative = decodeURIComponent(url.pathname).replace(/^\//, '');
       if (!relative || relative.endsWith('/')) relative += 'index.html';

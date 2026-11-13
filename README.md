@@ -167,8 +167,8 @@ API addresses are shared through `assets/js/sfi/api-base.js` by SFI specs, quiz,
 detector, chatbot and auth configuration. Set `sfi_api_base` in `_config.yml`
 (or a local Jekyll override config) to a confirmed backend base URL, without
 `/api`. Rebuild after changing it. Blank preserves `http://localhost:8605`
-locally and `https://greppers-be.opencodingsociety.com` elsewhere. No replacement
-production URL has been confirmed; production verification remains pending.
+locally and `https://sfi-api.opencodingsociety.com` elsewhere. The production backend is
+served by nginx at `sfi-api.opencodingsociety.com` → Flask on port 8605.
 
 Flask owns credentialed CORS for exact local origins,
 `https://sfi.opencodingsociety.com` and `https://sfi-foundation.github.io` (origins have no path); nginx forwards OPTIONS

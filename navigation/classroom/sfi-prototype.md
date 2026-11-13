@@ -398,7 +398,7 @@ search_exclude: true
   // ── API Configuration ────────────────────────────
   var API_BASE = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
     ? "http://localhost:8605"
-    : "https://greppers-be.opencodingsociety.com";
+    : "https://sfi-api.opencodingsociety.com";
   var API = API_BASE + "/api/sfi";
 
   var SVG_ATTR = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"';

@@ -6,5 +6,5 @@
   const local = ['localhost', '127.0.0.1'].includes(location.hostname);
   window.SFI_API_BASE = (configured || (local
     ? 'http://localhost:8605'
-    : 'https://greppers-be.opencodingsociety.com')).replace(/\/+$/, '');
+    : 'https://sfi-api.opencodingsociety.com')).replace(/\/+$/, '');
 })();
