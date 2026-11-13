@@ -1,7 +1,7 @@
 ---
 layout: sfi
 title: SFI Specifications
-nav_title: Specifications
+nav_title: Spec Search
 description: Search SFI specifications by number, product name and category.
 permalink: /sfi-specs/
 body_class: sfi-spec-search
@@ -54,15 +54,9 @@ body_class: sfi-spec-search
   </section>
 
   <section class="sfi__section" id="about">
-    <details class="sfi-search-help"><summary>Understanding specifications &amp; document status</summary><p>Each SFI number identifies a type of racing equipment. Only verified current documents have a PDF action. Confirm product-specific recertification requirements with the manufacturer.</p><a href="{{ '/about/' | relative_url }}">About SFI Foundation &rarr;</a></details>
+    <details class="sfi-search-help"><summary>Understanding specifications &amp; document status</summary><p>Each SFI number identifies a type of racing equipment. Only verified current documents have a PDF action. Confirm product-specific recertification requirements with the manufacturer.</p><a href="{{ '/' | relative_url }}">About SFI Foundation &rarr;</a></details>
   </section>
-  <section class="sfi__section">
-    <div class="sfi-catalog-stats" id="statsBar" aria-label="Catalog statistics">
-      <div class="sfi-catalog-stat"><div class="sfi-catalog-value" id="statSpecs">&mdash;</div><div class="sfi-catalog-label">Total specs</div></div>
-      <div class="sfi-catalog-stat"><div class="sfi-catalog-value" id="statCats">&mdash;</div><div class="sfi-catalog-label">Categories</div></div>
-      <div class="sfi-catalog-stat"><div class="sfi-catalog-value" id="statSubs">&mdash;</div><div class="sfi-catalog-label">Subcategories</div></div>
-    </div>
-  </section>
+
 
 </div><!-- /publicView -->
 
@@ -144,18 +138,6 @@ th[aria-sort="descending"] .sfi__sort::after { content: ' \25BC'; opacity: 1; }
 // ── API Configuration ────────────────────────────
 const API_BASE = window.SFI_API_BASE;
 const API = API_BASE + "/api/sfi";
-
-// ═══════════════ STATS BAR ═══════════════
-async function loadStats() {
-  try {
-    const response = await fetch(`${API}/stats`);
-    if (!response.ok) throw new Error('Statistics unavailable');
-    const stats = await response.json();
-    document.getElementById('statSpecs').textContent = stats.total_specs ?? '—';
-    document.getElementById('statCats').textContent = stats.total_categories || 0;
-    document.getElementById('statSubs').textContent = stats.total_subcategories || 0;
-  } catch (e) { console.log('Stats load error:', e); }
-}
 
 // ═══════════════ FUZZY SEARCH ENGINE ═══════════════
 
@@ -533,6 +515,5 @@ async function revealAdminPanel() {
 
 // ═══════════════ INIT ═══════════════
 revealAdminPanel();
-loadStats();
 loadSpecs();
 </script>

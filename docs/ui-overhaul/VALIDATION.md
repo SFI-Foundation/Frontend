@@ -1,71 +1,44 @@
-# SFI UI validation
+# Four-page SFI validation
 
-Validation date: November 12, 2026 (America/Los_Angeles). Feature branch based on organization main `3e946491e`.
+Current scope: Home/About, Spec Search, History, Contact & Location. The earlier draft PR is closed; no new PR is requested.
 
-## Executed checks
-
-| Check | Result | Evidence |
+| Check | Actual result | Evidence |
 | --- | --- | --- |
-| YAML parsing: production and development configuration | Pass | [YAML output](checks/yaml.log) |
-| Full production Jekyll build | Pass: completed in 230.523 seconds | [Build summary](checks/build-summary.log); existing Gemfile and remote theme |
-| `npm test` | Pass: 2 test files | [Frontend output](checks/frontend.log) |
-| `npm run test:phase1` | Pass: 3 test files | [Phase 1 output](checks/phase1.log) |
-| Direct search/account tests with test isolation disabled | Pass: 20 individual tests | [Search/account output](checks/search-account.log) |
-| `npm run test:styles -- BUILT_SITE` | Pass: scoped Sass; 26 imports; gear/admin styling preserved | [Styles output](checks/styles.log) |
-| Existing API configuration checks | Pass: local, Pages/custom host, explicit override and credentialed auth | [API configuration output](checks/api-config.log) |
-| Existing authentication integration | Pass: 7 tests | [Integration output](checks/auth-integration.log) |
-| Production publication/secret checks | Pass: 3 checks; final complete production output | [Artifact output](checks/public-artifact.log) |
-| Existing generated path checks | Pass | [Existing path output](checks/existing-paths.log) |
-| New public route/asset/anchor check | Pass: 145 targets, no missing links | [Link output](checks/links.json) |
-| Chromium acceptance | Pass: 21 acceptance checks, five viewports, real API search and synthetic admin workflows | [Browser log](checks/browser.log), [structured results](browser-results.json) |
-| axe WCAG A/AA | Pass: 18 scans, zero violations | [Structured results](browser-results.json) |
-| Official approved PDF | Pass: exact URL opens in a separate tab; HTTP 200 and `%PDF-` bytes | [PDF browser output](checks/pdf-browser.log) |
-| Diff whitespace check and JS syntax | Pass | `git diff --check`; `node --check` on search/browser scripts |
+| YAML configuration | Valid production and development YAML | [YAML log](checks/yaml.log) |
+| Full production build | Pass, 252.053 seconds | [Build summary](checks/build-summary.log) |
+| `npm test` | 2 test files pass | [Frontend log](checks/frontend.log) |
+| `npm run test:phase1` | 3 test files pass | [Phase 1 log](checks/phase1.log) |
+| Direct search/account tests | 20 individual tests pass | [Search/account log](checks/search-account.log) |
+| Scoped Sass and account/admin styles | Pass, 24 imports | [Styles log](checks/styles.log) |
+| API origin and credential settings | Pass | [API configuration log](checks/api-config.log) |
+| Authentication integration | 7 tests pass, actual Flask WSGI over supported pipe transport | [Integration log](checks/auth-integration.log) |
+| Publication and credential safeguards | 3 checks pass on the complete artifact | [Artifact log](checks/public-artifact.log) |
+| Existing links/assets check | 15 pages, 208 targets, pass | [Path log](checks/existing-paths.log) |
+| Public links and fragments | 143 targets, zero errors | [Link results](checks/links.json) |
+| Chromium responsive/menu/search/access checks | Pass at all five requested sizes | [Browser log](checks/browser.log), [structured results](browser-results.json) |
+| axe WCAG A/AA | 15 scans, zero violations | [Structured results](browser-results.json) |
+| Restored normal preview | Correct four-link menu, SFI CSS only, SFI 16.1 found through the real local backend | [Live preview log](checks/live-preview.log) |
 
-The direct test invocation was:
+The browser run covers all four public pages and account access at 1440×900, 1024×768, 768×1024, 390×844, and 320×720. It checks that only SFI CSS and the standalone OCS menu load, all four menu entries match configuration, menu Escape/focus/link behavior works, pages have no overflow, and the menu remains usable without JavaScript.
+
+Real localhost HTTP checks cover all 111 active canonical specifications without duplicate pagination, all actual categories, exact/qualified/product/mixed-case searches, approved/unapproved/missing PDF gating, empty results, controlled 503 recovery, retired-page redirects, query preservation, and member/admin separation. Only API origin selection and the explicit negative transport case are intercepted; normal catalog responses come from Flask. Synthetic account cookies and data remain in the existing disposable QA database. Backend source and the working database were not changed.
+
+The complete build's reviewed pages, menu JavaScript, and SFI CSS were compared byte-for-byte with the public preview artifact. The existing local preview was reloaded because its old running process retained stale navigation configuration.
+
+Reproduction:
 
 ```sh
+JEKYLL_ENV=production bundle exec jekyll build --disable-disk-cache --destination /tmp/sfi-four-final
+npm test
+npm run test:phase1
 node --test --test-isolation=none scripts/test-sfi-spec-search.mjs scripts/test-sfi-account-routes.mjs
+npm run test:styles -- /tmp/sfi-four-final
+SFI_BUILT_SITE=/tmp/sfi-four-final npm run test:public-build
+node scripts/test-sfi-api-config.mjs /tmp/sfi-four-final
+python3 scripts/test-sfi-paths.py /tmp/sfi-four-final
+python3 scripts/check-sfi-public-links.py /tmp/sfi-four-final
 ```
 
-The existing `test-sfi-integration.mjs` ran the generated client against actual Flask authentication and a disposable SQLite fixture. The tool sandbox prohibited that fixture's Unix socket, so its supported WSGI pipe transport was used. The separate Chromium run used real localhost HTTP with the normal authorization decorators, cookies, and credentialed CORS.
+The optional browser runner is `scripts/test-sfi-ui-overhaul.cjs`. It uses `SFI_UI_URL`, `SFI_UI_API`, `SFI_PLAYWRIGHT_MODULE`, `SFI_CHROMIUM`, and `SFI_AXE_SOURCE`. The API must identify itself as the existing isolated local catalog sandbox. For this run the reviewed site was localhost:4600 and the disposable API was localhost:8427. The user's normal preview remains localhost:4500.
 
-## Browser coverage
-
-Six pages (`/`, `/sfi-specs/`, `/about/`, `/services/`, `/news-events/`, `/login/`) were exercised at 1440×900, 1024×768, 768×1024, 390×844, and 320×720. All fit the viewport. The header measured 68px on desktop and 64px on mobile.
-
-Acceptance includes:
-
-- Exact specification numbers including slash qualifiers, equipment names, mixed case, and partial queries.
-- All 111 active canonical identities across pagination without duplicates; previous-page focus return.
-- Every actual backend category, category-grid shortcuts, and full reset.
-- Loading/empty/error feedback and recovery after a controlled 503.
-- Approved, rejected, missing, unsafe, and newly revoked document behavior. Revocation is a controlled response using an otherwise approved URL; no real approval is changed.
-- Official approved PDF bytes and separate-tab navigation.
-- Anonymous write 401, member write 403, synthetic admin validation/create/edit/archive/restore, and public/admin/explore switching.
-- Safe GET query handoff from the homepage and compatible redirect destinations/query strings/canonicals.
-- Keyboard skip link, mobile menu/Tab/Escape, category focus, and assistant focus return.
-- Navigation without JavaScript, reduced motion, closed assistant controls removed from the focus order, and escaped assistant response markup.
-
-Only the local API origin is overridden in the browser; catalog/search/filter responses come from the real Flask API. Negative transport, revocation, and assistant formatting cases use explicit controlled responses. The API requires the existing isolated-local-catalog health marker before the runner permits synthetic write tests. Actual specification rows are copied read-only to a new disposable database; synthetic records are confined there and archived after the successful run.
-
-## Reproduction
-
-The full build uses the supported Jekyll path, equivalent to the recipe behind `make public-review-build`:
-
-```sh
-JEKYLL_ENV=production bundle exec jekyll build --disable-disk-cache --destination /tmp/sfi-ui-verified
-SFI_BUILT_SITE=/tmp/sfi-ui-verified npm run test:public-build
-npm run test:styles -- /tmp/sfi-ui-verified
-node scripts/test-sfi-api-config.mjs /tmp/sfi-ui-verified
-python3 scripts/test-sfi-paths.py /tmp/sfi-ui-verified
-python3 scripts/check-sfi-public-links.py /tmp/sfi-ui-verified
-```
-
-Browser testing is optional tooling, with Playwright and axe installed outside the project. `scripts/test-sfi-ui-overhaul.cjs` accepts `SFI_PLAYWRIGHT_MODULE`, `SFI_CHROMIUM`, `SFI_AXE_SOURCE`, `SFI_UI_URL`, `SFI_UI_BASELINE`, and `SFI_UI_API`. Set `SFI_UI_FETCH_PDF=1` for the official PDF network check. Set `SFI_UI_FUNCTIONAL_ONLY=1` to skip already-completed layout/screenshots/axe scans during diagnosis; it writes a separate report and does not claim those scans ran.
-
-For this run, the unchanged source baseline was served at localhost:4100. Public route review used localhost:4600, and the final production artifact uses localhost:8080. The API used the existing backend `scripts/phase1_local.py` with a newly prepared `/tmp/sfi-ui-qa.db`, fictional demo accounts, and port 8427. No backend source or environment files were edited. Playwright, Chromium, and its temporary system-library directory were already available. Axe and the formatter were installed temporarily outside the project; package files are unchanged.
-
-## Limits
-
-Chromium was tested; Firefox/Safari, production authentication/writes, and NVDA/VoiceOver were not. Automated checks do not prove full WCAG conformance. The 200% check emulates 720×450 CSS pixels at scale 2, representing the reflow dimensions of a 1440×900 browser at 200%; it does not manipulate browser-toolbar zoom. The live assistant model service was not called. Existing unrelated post/permalink and Sass deprecation warnings remain in the full Jekyll build.
+Limits: Chromium only; automated scans do not prove full accessibility conformance. Manual screen-reader and native browser-toolbar zoom testing were not performed. The inherited full build still emits unrelated legacy warnings. The older PDF-opening log is historical evidence from the preceding iteration; the current browser run checks the unchanged PDF approval guard rather than downloading an official PDF again.

@@ -5,12 +5,12 @@
 .sfi-site {
   @import "base/properties", "base/foundation";
   @import "components/navigation";
-  @import "pages/hero", "components/buttons";
+  @import "components/buttons";
   @import "base/layout", "pages/content", "components/footer", "components/data", "pages/admin";
   @import "base/page", "pages/document";
   @import "elements/card", "elements/button", "elements/form", "elements/table";
   @import "pages/detect", "pages/gear", "pages/specs";
   // These originally followed the shared styles in the rendered document.
-  @import "pages/auth", "pages/profile", "components/chatbot";
+  @import "pages/auth", "pages/profile";
   @import "base/accessibility";
 }

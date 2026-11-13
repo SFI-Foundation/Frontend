@@ -1,15 +1,28 @@
 <footer class="sfi-footer">
   <div class="sfi-footer-inner">
-    <div class="sfi-footer-about">
-      <div class="sfi-footer-brand">SFI FOUNDATION</div>
-      <p>Setting the standard for motorsports safety since 1978.</p>
-      <p>A student capstone supporting SFI. <a href="https://sfifoundation.com/">Official SFI website</a></p>
-    </div>
-    <nav class="sfi-footer-links" aria-label="Footer links">
-      <a href="{{ '/sfi-specs/' | relative_url }}">Specifications</a>
-      <a href="{{ '/news-events/#contact' | relative_url }}">Contact SFI</a>
-      <a href="https://sfifoundation.com/notices/">Safety notices</a>
-    </nav>
-    {% include sfi/chatbot.html %}
+    <p>SFI Foundation · Motorsports safety since 1978</p>
+    <span id="navAuth"><a href="{{ '/login/' | relative_url }}">Sign In</a></span>
   </div>
 </footer>
+<script type="module">
+import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | relative_url }}';
+(function() {
+  var navAuth = document.getElementById('navAuth');
+
+  function setNavUser(user) {
+    while (navAuth.firstChild) navAuth.removeChild(navAuth.firstChild);
+    var a = document.createElement('a');
+    a.href = baseurl + (user ? '/sfi-profile/' : '/login/');
+    a.textContent = user ? 'My profile' : 'Sign In';
+    if (user) a.setAttribute('aria-label', 'My profile');
+    navAuth.appendChild(a);
+  }
+
+  fetch(AUTH_API + '/api/id', { credentials: 'include', cache: 'no-store' })
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function(data) { setNavUser(data); })
+    .catch(function() { setNavUser(null); });
+
+  window.addEventListener('sfi-auth', function(e) { setNavUser(e.detail); });
+})();
+</script>

@@ -1,48 +1,43 @@
 .sfi-footer {
-  background: $blue-dark;
-  color: #fff;
-  padding: $space-5;
+  background: $blue-tint;
+  border-top: 2px solid $gold;
+  padding: $space-4 $space-5;
 }
 .sfi-footer-inner {
   max-width: 1152px;
   margin: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  gap: $space-4;
-}
-.sfi-footer-brand {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
 }
 .sfi-footer p {
-  font-size: 0.8125rem;
-  color: #e1eaf6;
-  margin: $space-1 0;
-}
-.sfi-footer a {
-  color: #fff;
-  text-underline-offset: 0.2em;
-}
-.sfi-footer-links {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: $space-2 $space-5;
+  margin: 0;
+  color: $text-soft;
   font-size: 0.875rem;
 }
-.sfi-footer-links a {
+.sfi-footer a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  gap: $space-2;
+  color: $blue;
 }
-.sfi-footer :focus-visible {
-  outline-color: #fff;
+.sfi-simple-home {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
-@media (max-width: 600px) {
-  .sfi-footer {
-    padding: $space-5 $space-4;
-  }
+.sfi-simple-home > h2 {
+  margin-top: 0;
+}
+.sfi-simple-home p {
+  max-width: 75ch;
+}
+.sfi-two-grid address {
+  font-style: normal;
+}
+.sfi-catalog-stats[hidden] {
+  display: none;
 }

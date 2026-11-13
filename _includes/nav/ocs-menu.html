@@ -1,0 +1,21 @@
+<!-- OCS compact bar and drawer, using the SFI page list and local styles only. -->
+<header class="opencs-bar">
+  <div class="opencs-bar__inner">
+    <button id="navToggle" class="opencs-drawer-button" type="button" aria-controls="opencsMenu" aria-expanded="false" aria-label="Open navigation menu" hidden>
+      <svg viewBox="0 0 18 16" width="20" height="18" aria-hidden="true"><path d="M1 2h16M1 8h16M1 14h16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <span>Menu</span>
+    </button>
+    <a class="opencs-bar__brand" href="{{ '/' | relative_url }}" aria-label="SFI Foundation home">
+      <img src="{{ '/images/sfi/SFI-Logo.png' | relative_url }}" alt="" width="76" height="38">
+      <span>SFI Foundation</span>
+    </a>
+  </div>
+  <nav id="navLinks" class="opencs-drawer__nav" aria-label="Primary navigation">
+    {% for nav_path in site.minima.nav_pages %}
+      {% assign nav_page = site.pages | where: 'path', nav_path | first %}
+      {% if nav_page.title %}
+      <a class="opencs-drawer__link" href="{{ nav_page.url | relative_url }}"{% if page.url == nav_page.url %} aria-current="page"{% endif %}>{{ nav_page.nav_title | default: nav_page.title | escape }}</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</header>

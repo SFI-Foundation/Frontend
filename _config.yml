@@ -16,17 +16,17 @@ plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
 
-# Ordered source paths, resolved via page front matter by both headers.
-# Authentication remains a separate, session-aware entry in the SFI header.
+# Ordered source paths for the OCS menu. Public pages load only SFI styles.
+# Account access stays in the footer, outside the four-page menu.
 minima:
-  skin: dark
+  skin: classic
   social_links:
     - { platform: github, user_url: "https://github.com/SFI-Foundation" }
   nav_pages:
-    - navigation/about.md
+    - index.md
     - navigation/sfi-specs.md
-    - navigation/services.md
-    - navigation/news-events.md
+    - navigation/history.md
+    - navigation/contact.md
 
 # Backend origin override; blank preserves existing environment resolution.
 sfi_api_base: ""

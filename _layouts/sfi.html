@@ -24,34 +24,6 @@
       {{ content }}
     </main>
     {% include sfi/footer.html %}
-    <script>
-      const navToggle = document.getElementById('navToggle');
-      const navLinks = document.getElementById('navLinks');
-
-      navToggle.hidden = false;
-      navLinks.classList.add('enhanced');
-
-      function setNavOpen(open) {
-        navLinks.classList.toggle('open', open);
-        navToggle.setAttribute('aria-expanded', String(open));
-        navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-      }
-
-      navToggle.addEventListener('click', () => {
-        setNavOpen(navToggle.getAttribute('aria-expanded') !== 'true');
-      });
-      navLinks.addEventListener('click', event => {
-        if (event.target.closest('a')) setNavOpen(false);
-      });
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
-          setNavOpen(false);
-          navToggle.focus();
-        }
-      });
-      window.addEventListener('resize', () => {
-        if (window.matchMedia('(min-width: 861px)').matches) setNavOpen(false);
-      });
-    </script>
+    <script src="{{ '/assets/js/sfi/ocs-menu.js' | relative_url }}" defer></script>
   </body>
 </html>

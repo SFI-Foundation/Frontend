@@ -1,129 +1,120 @@
-// One navigation tree at every viewport; expanded in document flow on mobile.
-.sfi-nav {
-  background: $blue-dark;
+// OCS compact menu, scoped to SFI; no Minima stylesheet is loaded.
+.opencs-bar {
+  background: $blue-tint;
   border-bottom: 3px solid $gold;
 }
-.sfi-nav-inner {
-  max-width: $site-width;
-  margin: auto;
-  padding: 0 $space-5;
+.opencs-bar__inner {
   display: flex;
   align-items: center;
-  gap: $space-5;
-  min-height: 65px;
+  gap: $space-4;
+  max-width: $site-width;
+  margin: auto;
+  padding: $space-2 $space-5;
+  min-height: 64px;
 }
-.sfi-nav-brand {
+.opencs-bar__brand {
   display: inline-flex;
   align-items: center;
   gap: $space-3;
-  color: #fff;
+  color: $blue-dark;
   font-weight: 700;
   text-decoration: none;
-  margin-right: auto;
-  line-height: 1.2;
 }
-.sfi-nav-brand img {
-  width: 64px;
-  height: 40px;
+.opencs-bar__brand img {
   object-fit: contain;
   background: $surface;
   border-radius: $radius-sm;
 }
-.sfi-nav-brand span {
-  color: #fff;
-}
-.sfi-nav-links {
-  display: flex;
-  align-items: center;
-  gap: $space-2;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.sfi-nav-links li {
-  display: flex;
-  align-items: center;
-}
-.sfi-nav-links a {
+.opencs-drawer-button {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  min-height: 44px;
+  padding: $space-2 $space-3;
+  border: 1px solid $blue;
+  border-radius: $radius-sm;
+  background: $surface;
+  color: $blue-dark;
+  font: inherit;
+  cursor: pointer;
+}
+.opencs-drawer-button[hidden] {
+  display: none;
+}
+.opencs-drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  margin: 0;
+  width: min(340px, 100%);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: $space-4;
+  background: $surface;
+  color: $text;
+  border: 0;
+  border-right: 3px solid $gold;
+  overflow-y: auto;
+}
+.opencs-drawer::backdrop {
+  background: rgba($blue-dark, 0.25);
+}
+.opencs-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-4;
+  color: $blue-dark;
+  font-weight: 700;
+}
+.opencs-drawer__close {
+  width: 44px;
+  height: 44px;
+  background: $blue-tint;
+  color: $blue-dark;
+  border: 1px solid $blue;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.opencs-drawer__nav {
+  display: grid;
+  gap: $space-2;
+  padding: $space-3;
+}
+.opencs-drawer__link {
+  display: flex;
   align-items: center;
   min-height: 44px;
   padding: $space-2 $space-3;
-  color: #fff;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-}
-.sfi-nav-links a:hover {
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
-.sfi-nav-links a.active,
-.sfi-nav-links a[aria-current] {
-  border-bottom-color: $gold;
-}
-.sfi-nav-links a.sfi-nav-auth-avatar {
-  gap: $space-2;
-}
-.sfi-nav-auth-dot {
-  width: 8px;
-  height: 8px;
-  background: #fff;
-  border-radius: 50%;
-}
-.sfi-nav-toggle {
-  display: none;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
-  border: 1px solid rgba(#fff, 0.5);
   border-radius: $radius-sm;
-  color: #fff;
-  background: transparent;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
+  color: $blue-dark;
+  text-decoration: none;
 }
-.sfi-nav-toggle-line {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: currentColor;
+.opencs-drawer__link:hover {
+  background: $blue-tint;
+  text-decoration: underline;
 }
-.sfi-nav-toggle[aria-expanded="true"] {
-  background: rgba(#fff, 0.12);
+.opencs-drawer__link[aria-current] {
+  background: $blue-tint;
+  border-left: 4px solid $gold;
+  font-weight: 700;
 }
-@media (max-width: 860px) {
-  .sfi-nav-inner {
-    flex-wrap: wrap;
-    gap: 0;
-    padding: $space-2 $space-4;
-    min-height: 61px;
+@media (max-width: 600px) {
+  .opencs-bar__inner {
+    padding-inline: $space-4;
+    gap: $space-3;
   }
-  .sfi-nav-brand {
-    min-height: 44px;
+  .opencs-bar__brand {
+    gap: $space-2;
+    font-size: 0.9375rem;
   }
-  .sfi-nav-toggle:not([hidden]) {
-    display: inline-flex;
+  .opencs-bar__brand img {
+    width: 60px;
   }
-  .sfi-nav-links {
-    flex-basis: 100%;
-    align-items: stretch;
-    flex-direction: column;
-    gap: 0;
-    padding-top: $space-2;
-  }
-  .sfi-nav-links.enhanced {
-    display: none;
-  }
-  .sfi-nav-links.open {
-    display: flex;
-  }
-  .sfi-nav-links a {
-    width: 100%;
-    white-space: normal;
+  .opencs-drawer-button {
+    padding-inline: $space-2;
   }
 }

@@ -159,7 +159,8 @@ test('entire cleaned public page initializes without references to removed contr
   for (const script of dom.window.document.querySelectorAll('script:not([src])')) dom.window.eval(script.textContent);
   await settle();
   assert.equal(dom.window.document.querySelectorAll('#sfiResults article').length, 1);
-  assert.equal(dom.window.document.getElementById('statSpecs').textContent, '1');
+  assert.equal(dom.window.document.getElementById('statSpecs'), null);
+  assert.match(dom.window.document.getElementById('sfiCount').textContent, /1–1 of 1/);
   dom.window.close();
 });
 

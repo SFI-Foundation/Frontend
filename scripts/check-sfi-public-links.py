@@ -9,7 +9,7 @@ if len(sys.argv) != 2:
     raise SystemExit("Usage: python3 scripts/check-sfi-public-links.py BUILT_SITE")
 root = Path(sys.argv[1])
 routes = ["/", "/about/", "/services/", "/news-events/", "/sfi-specs/",
-          "/specs/", "/history/", "/contact/", "/login/"]
+          "/specs/", "/history/", "/contact/", "/login/", "/search/", "/navigation/blogs/"]
 
 
 class Parser(HTMLParser):
