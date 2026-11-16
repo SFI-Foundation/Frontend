@@ -1,0 +1,113 @@
+.sfi-contact-layout {
+  @include site-container;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: $space-7;
+  padding-block: $space-7;
+
+  h2 {
+    margin: 0 0 $space-5;
+    font-size: 1.75rem;
+    letter-spacing: -0.03em;
+  }
+}
+
+.sfi-contact-cards {
+  display: grid;
+  gap: $space-4;
+}
+
+.sfi-contact-card {
+  padding: $space-5;
+  border: 1px solid $border;
+  border-left: 3px solid $blue;
+  border-radius: $radius-sm;
+  overflow-wrap: anywhere;
+
+  h3 {
+    margin: 0 0 $space-2;
+    color: $text-muted;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: $space-2 0 0;
+    color: $text-soft;
+  }
+
+  > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+  }
+
+  address {
+    color: $text;
+    font-style: normal;
+  }
+}
+
+.sfi-contact-guidance {
+  padding: $space-6;
+  border-radius: $radius;
+  background: $surface-alt;
+
+  h2 {
+    max-width: 19ch;
+    margin-bottom: $space-4;
+  }
+
+  section {
+    padding-block: $space-4;
+    border-top: 1px solid $border;
+  }
+
+  h3 {
+    margin: 0 0 $space-2;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 0 0 $space-4;
+    color: $text-soft;
+  }
+
+  section p {
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+
+  .sfi-btn {
+    margin-top: $space-4;
+  }
+}
+
+.sfi-contact-search {
+  @include site-container;
+  padding-bottom: $space-7;
+
+  .sfi-inline-callout {
+    margin: 0;
+  }
+}
+
+@include tablet {
+  .sfi-contact-layout {
+    grid-template-columns: 1fr;
+    gap: $space-5;
+  }
+}
+
+@include phone {
+  .sfi-contact-layout {
+    padding-block: $space-6;
+  }
+
+  .sfi-contact-guidance {
+    padding: $space-5;
+  }
+}

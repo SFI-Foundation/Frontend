@@ -1,0 +1,72 @@
+// Responsive <picture> images behave as decorative backgrounds, without a
+// second CSS image download. Keep the overlay in Sass and the sources in Liquid.
+.sfi-image-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: $charcoal;
+  color: $surface;
+
+  > .sfi-photograph {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  picture,
+  .sfi-photograph img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .sfi-photograph img {
+    object-fit: cover;
+    object-position: 65% 50%;
+    border-radius: 0;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba($charcoal, 0.97), rgba($charcoal, 0.8) 45%, rgba($charcoal, 0.3));
+  }
+
+  h1 {
+    margin: 0 0 $space-4;
+    max-width: 20ch;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+  }
+
+  p:not(.sfi-eyebrow) {
+    max-width: 51ch;
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .sfi-eyebrow {
+    color: $surface;
+    margin-bottom: $space-4;
+    padding-left: $space-3;
+    border-left: 3px solid $gold;
+  }
+
+  :focus-visible {
+    outline-color: $surface;
+  }
+}
+
+.sfi-banner-content {
+  @include site-container;
+  padding-block: $space-7;
+}
+
+@include phone {
+  .sfi-image-banner::before {
+    background: linear-gradient(90deg, rgba($charcoal, 0.94), rgba($charcoal, 0.72));
+  }
+}

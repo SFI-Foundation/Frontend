@@ -1,8 +1,32 @@
 <footer class="sfi-footer">
   <div class="sfi-footer-inner">
-    <p>SFI Foundation · Motorsports safety since 1978</p>
-    <span id="navAuth"><a href="{{ '/login/' | relative_url }}">Sign In</a></span>
-    <p class="sfi-photo-credit"><a href="{{ '/photo-credits/' | relative_url }}">Photography credits &amp; licenses</a></p>
+    <div class="sfi-footer-brand">
+      <p class="sfi-footer-title">SFI Foundation</p>
+      <p>Setting the standard for<br>motorsports safety since 1978.</p>
+      <span id="navAuth"><a href="{{ '/login/' | relative_url }}">Sign In</a></span>
+    </div>
+    <nav aria-label="Foundation navigation">
+      <h2>Foundation</h2>
+      <a href="{{ '/about/' | relative_url }}">About SFI</a>
+      <a href="{{ '/history/' | relative_url }}">Our history</a>
+      <a href="{{ '/news-events/' | relative_url }}">News &amp; events</a>
+    </nav>
+    <nav aria-label="Resource navigation">
+      <h2>Resources</h2>
+      <a href="{{ '/sfi-specs/' | relative_url }}">Find specifications</a>
+      <a href="{{ '/services/' | relative_url }}">Programs &amp; services</a>
+      <a href="{{ '/contact/' | relative_url }}">Contact SFI</a>
+    </nav>
+    <div class="sfi-footer-contact">
+      <h2>Get in touch</h2>
+      <a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a>
+      <a href="tel:+18584518868">(858) 451-8868</a>
+      <address>15708 Pomerado Road, Suite N208<br>Poway, CA 92064</address>
+    </div>
+  </div>
+  <div class="sfi-footer-bottom">
+    <p>SFI Foundation, Inc. &middot; Motorsports equipment standards</p>
+    <a href="{{ '/photo-credits/' | relative_url }}">Photography credits &amp; licenses</a>
   </div>
 </footer>
 <script type="module">

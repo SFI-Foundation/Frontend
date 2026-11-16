@@ -1,56 +1,42 @@
 ---
 layout: sfi
 body_class: sfi-home
-title: About SFI Foundation
+title: Motorsports Safety Standards
 nav_title: Home
-description: About SFI Foundation and its motorsports equipment specification programs.
+description: Explore SFI Foundation specifications, equipment testing, and certification programs for motorsports safety.
 permalink: /
 ---
-<header class="sfi-home-hero">
-  <div class="sfi-home-hero-copy">
-    <p class="sfi-eyebrow">SFI Foundation</p>
-    <h1>Motorsports Safety Starts Here</h1>
-    <p>Setting the standard for motorsports safety since 1978. Explore specifications and programs for specialty performance and racing equipment.</p>
+<header class="sfi-image-banner sfi-home-hero">
+  {% include sfi/photograph.html key="hero" caption=false decorative=true loading="eager" priority=true sizes="100vw" %}
+  <div class="sfi-banner-content">
+    <p class="sfi-eyebrow">Setting the standard since 1978</p>
+    <h1>Safety Standards That Drive <span>Motorsports Forward</span></h1>
+    <p>Explore the specifications, certification programs, and resources that help keep motorsports safe.</p>
     <div class="sfi-home-hero-actions">
-      <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find Specifications</a>
-      <a class="sfi-btn sfi-btn-secondary" href="#sfi-purpose">About SFI</a>
+      <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find Specifications <span aria-hidden="true">&rarr;</span></a>
+      <a class="sfi-btn sfi-btn-secondary" href="{{ '/about/' | relative_url }}">About SFI</a>
     </div>
   </div>
-  {% include sfi/photograph.html key="hero" caption=false loading="eager" priority=true sizes="(max-width: 800px) calc(100vw - 32px), (max-width: 1200px) 55vw, 644px" %}
 </header>
-<section class="sfi-sect sfi-prose sfi-simple-home sfi-editorial sfi-home-safety" aria-labelledby="sfi-purpose">
-  <div>
-  <h2 id="sfi-purpose">Safety standards for motorsports</h2>
-  <p>The SFI Foundation, Inc. is a nonprofit organization that issues and administers standards for the quality assurance of specialty performance and racing equipment.</p>
-  <p>SFI serves manufacturers, racers, and sanctioning bodies through specification programs, testing criteria, and certification programs. Manufacturers test and self-certify products to SFI specifications, which sanctioning bodies adopt into their racing rules.</p>
+<section class="sfi-home-explore" aria-labelledby="explore-sfi">
+  <div class="sfi-section-heading">
+    <div>
+      <p class="sfi-eyebrow">Your next step</p>
+      <h2 id="explore-sfi">Explore SFI</h2>
+    </div>
+    <p>Standards. Programs. Resources.</p>
   </div>
-  {% include sfi/photograph.html key="safety" %}
+  {% include sfi/feature-grid.html %}
 </section>
-
-<section class="sfi-sect sfi-prose sfi-home-details" aria-labelledby="program-process">
-  <h2 id="program-process">How SFI specification programs work</h2>
-  <p>A specification establishes performance and testing requirements for a type of equipment. Manufacturers, technical experts, and racing organizations each have a role in putting those requirements into practice.</p>
-  <div class="sfi-role-grid">
-    <section aria-labelledby="manufacturers-role">
-      <h3 id="manufacturers-role">Manufacturers</h3>
-      <p>Equipment manufacturers test and self-certify their products to the appropriate SFI specification and participate through licensing agreements.</p>
-    </section>
-    <section aria-labelledby="technical-role">
-      <h3 id="technical-role">Technical experts</h3>
-      <p>Technical committees contribute industry expertise to the development and review of equipment specifications and testing criteria.</p>
-    </section>
-    <section aria-labelledby="racing-role">
-      <h3 id="racing-role">Racing organizations</h3>
-      <p>Sanctioning bodies adopt SFI specifications into their rulebooks, giving competitors a common reference for equipment requirements.</p>
-    </section>
+<section class="sfi-home-purpose" aria-labelledby="sfi-purpose">
+  <div class="sfi-home-purpose-inner">
+    <div>
+      <p class="sfi-eyebrow">Our purpose</p>
+      <h2 id="sfi-purpose">A shared commitment to safer racing.</h2>
+    </div>
+    <div>
+      <p>SFI Foundation is a nonprofit organization that issues and administers standards for specialty performance and racing equipment. We bring manufacturers, racers, and sanctioning bodies together around a common standard for quality assurance.</p>
+      <a href="{{ '/about/' | relative_url }}">Learn about SFI Foundation &rarr;</a>
+    </div>
   </div>
-  <aside class="sfi-blue-note" id="services" aria-labelledby="services-heading">
-    <h2 id="services-heading">SFI services &amp; programs</h2>
-    <ul class="sfi-services-list">
-      <li><strong>Equipment testing.</strong> The Poway laboratory provides thermal, flammability, strength, and mechanical testing for racing equipment.</li>
-      <li><strong>Quality assurance.</strong> Test reports, periodic specification reviews, and licensing agreements support SFI specification programs.</li>
-      <li><strong>Training.</strong> Tech Inspector Certification and Incident Response Training programs support motorsports officials and track personnel.</li>
-    </ul>
-    <a href="{{ '/contact/' | relative_url }}">Ask SFI about testing or program participation &rarr;</a>
-  </aside>
 </section>

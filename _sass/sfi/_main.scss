@@ -13,5 +13,7 @@
   // These originally followed the shared styles in the rendered document.
   @import "pages/auth", "pages/profile";
   @import "pages/photography";
+  @import "components/image-banner", "components/feature-grid";
+  @import "pages/home", "pages/contact";
   @import "base/accessibility";
 }

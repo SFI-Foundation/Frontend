@@ -122,3 +122,6 @@ SpecList.docx
 /docs/ui-polish/checks/
 /docs/ui-polish/*-results.json
 /docs/ui-polish/state-failure.json
+
+# Generated repository-analysis output (original documents stay in _docx/)
+/graphify-out/

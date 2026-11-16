@@ -1,0 +1,114 @@
+.sfi-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-5;
+}
+
+.sfi-feature-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: end;
+  min-width: 0;
+  min-height: 288px;
+  padding: $space-5;
+  overflow: hidden;
+  border-radius: $radius;
+  background: $charcoal;
+  color: $surface;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  > .sfi-photograph {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  picture,
+  .sfi-photograph img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .sfi-photograph img {
+    border-radius: 0;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.25s ease;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba($charcoal, 0.03) 20%, rgba($charcoal, 0.2) 38%, rgba($charcoal, 0.88) 72%, rgba($charcoal, 0.96));
+  }
+
+  h3 {
+    margin: 0 0 $space-2;
+    font-size: 1.375rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 0;
+    max-width: 32ch;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba($charcoal, 0.16);
+    .sfi-photograph img {
+      transform: scale(1.035);
+    }
+
+    .sfi-feature-card-arrow {
+      color: $charcoal;
+      background: $surface;
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid $blue;
+    outline-offset: 4px;
+  }
+}
+
+.sfi-feature-card-content {
+  padding-right: $space-6;
+}
+
+.sfi-feature-card-arrow {
+  position: absolute;
+  right: $space-4;
+  bottom: $space-5;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba($surface, 0.6);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+@media (max-width: 1000px) {
+  .sfi-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include phone {
+  .sfi-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sfi-feature-card {
+    min-height: 260px;
+  }
+}
