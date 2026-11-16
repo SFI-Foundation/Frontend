@@ -151,3 +151,253 @@ news:
   license_evidence: Photographer’s own-work license declaration on the Commons file
     page.
   reviewed: '2026-11-12'
+services-banner:
+  title: McLaren mechanic on 2010 Canadian GP.jpg
+  photographer: Mark McArdle
+  license: CC BY-SA 2.0
+  license_url: https://creativecommons.org/licenses/by-sa/2.0
+  caption: McLaren mechanic during public pit-stop practice at the 2010 Canadian Grand Prix.
+  alt: A McLaren mechanic in a protective helmet during pit-stop practice.
+  crop:
+  - 0
+  - 102
+  - 1280
+  - 614
+  crop_source_dimensions:
+  - 1280
+  - 853
+  widths:
+  - 480
+  - 960
+  - 1280
+  width: 1280
+  height: 512
+  id: services-banner
+  source: https://commons.wikimedia.org/wiki/File:McLaren_mechanic_on_2010_Canadian_GP.jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/0/0b/McLaren_mechanic_on_2010_Canadian_GP.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/McLaren_mechanic_on_2010_Canadian_GP.jpg/1280px-McLaren_mechanic_on_2010_Canadian_GP.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1033805398
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: Credit photographer and title, link source and license, and identify
+    modifications. Distribute these image derivatives under the same license.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+card-contact:
+  title: 2012 Italian GP - Mechanic.jpg
+  photographer: Francesco Crippa
+  license: CC BY 2.0
+  license_url: https://creativecommons.org/licenses/by/2.0
+  caption: McLaren mechanic at the 2012 Italian Grand Prix.
+  alt: A helmeted McLaren mechanic wearing a protective suit.
+  crop:
+  - 0
+  - 287
+  - 2848
+  - 2186
+  crop_source_dimensions:
+  - 2848
+  - 4288
+  widths:
+  - 480
+  - 960
+  width: 960
+  height: 640
+  id: card-contact
+  source: https://commons.wikimedia.org/wiki/File:2012_Italian_GP_-_Mechanic.jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/b/b7/2012_Italian_GP_-_Mechanic.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://upload.wikimedia.org/wikipedia/commons/b/b7/2012_Italian_GP_-_Mechanic.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1148970651
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: Credit photographer and title, link source and license, and identify
+    modifications.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+card-news:
+  title: NASCAR-LasVegas-2012.jpg
+  photographer: Todd Ellis
+  license: CC0
+  license_url: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+  caption: NASCAR stock cars at Las Vegas Motor Speedway.
+  alt: Stock cars racing together at Las Vegas Motor Speedway.
+  crop:
+  - 0
+  - 0
+  - 1280
+  - 853
+  crop_source_dimensions:
+  - 1280
+  - 853
+  widths:
+  - 480
+  - 960
+  width: 960
+  height: 640
+  id: card-news
+  source: https://commons.wikimedia.org/wiki/File:NASCAR-LasVegas-2012.jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/e/e6/NASCAR-LasVegas-2012.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/NASCAR-LasVegas-2012.jpg/1280px-NASCAR-LasVegas-2012.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1157036883
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: CC0 public-domain dedication; attribution is retained here with
+    source and modification details.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+card-about:
+  title: NASCAR-LasVegas-2008.jpg
+  photographer: WikiImages (Pixabay)
+  license: CC0
+  license_url: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+  caption: Las Vegas Motor Speedway during pre-race ceremonies, 2008.
+  alt: A panoramic view of Las Vegas Motor Speedway during pre-race ceremonies.
+  crop:
+  - 30
+  - 0
+  - 1251
+  - 814
+  crop_source_dimensions:
+  - 1280
+  - 814
+  widths:
+  - 480
+  - 960
+  width: 960
+  height: 640
+  id: card-about
+  source: https://commons.wikimedia.org/wiki/File:NASCAR-LasVegas-2008.jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/1/10/NASCAR-LasVegas-2008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/NASCAR-LasVegas-2008.jpg/1280px-NASCAR-LasVegas-2008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1157036893
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: CC0 public-domain dedication; attribution is retained here with
+    source and modification details.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+card-specifications:
+  title: Chip Ganassi Racing helmets - Carb Day 2015 - Sarah Stierch.jpg
+  photographer: Sarah Stierch
+  license: CC BY 4.0
+  license_url: https://creativecommons.org/licenses/by/4.0
+  caption: Chip Ganassi Racing helmets, Carb Day 2015.
+  alt: Two pit-crew helmets resting on an IndyCar.
+  crop:
+  - 0
+  - 200
+  - 2848
+  - 2099
+  crop_source_dimensions:
+  - 2848
+  - 3568
+  widths:
+  - 480
+  - 960
+  width: 960
+  height: 640
+  id: card-specifications
+  source: https://commons.wikimedia.org/wiki/File:Chip_Ganassi_Racing_helmets_-_Carb_Day_2015_-_Sarah_Stierch.jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/2/27/Chip_Ganassi_Racing_helmets_-_Carb_Day_2015_-_Sarah_Stierch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://upload.wikimedia.org/wikipedia/commons/2/27/Chip_Ganassi_Racing_helmets_-_Carb_Day_2015_-_Sarah_Stierch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1253756691
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: Credit photographer and title, link source and license, and identify
+    modifications.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+card-certification:
+  title: No. 22 pit crew member (40564671273).jpg
+  photographer: Zach Catanzareti Photo
+  license: CC BY 2.0
+  license_url: https://creativecommons.org/licenses/by/2.0
+  caption: Pit-crew member at the 2019 O’Reilly Auto Parts 500.
+  alt: A yellow pit-crew helmet with the pit lane reflected in its visor.
+  crop:
+  - 0
+  - 0
+  - 1280
+  - 853
+  crop_source_dimensions:
+  - 1280
+  - 853
+  widths:
+  - 480
+  - 960
+  width: 960
+  height: 640
+  id: card-certification
+  source: https://commons.wikimedia.org/wiki/File:No._22_pit_crew_member_(40564671273).jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/0/09/No._22_pit_crew_member_%2840564671273%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/No._22_pit_crew_member_%2840564671273%29.jpg/1280px-No._22_pit_crew_member_%2840564671273%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=916461361
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: Credit photographer and title, link source and license, and identify
+    modifications.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+contact-banner:
+  title: Front row pit crew (53698604971).jpg
+  photographer: Zach Catanzareti Photo
+  license: CC BY 2.0
+  license_url: https://creativecommons.org/licenses/by/2.0
+  caption: Front Row Motorsports pit crew. Illustrative motorsports photograph.
+  alt: A helmeted Front Row Motorsports pit-crew member beside a race car.
+  crop:
+  - 0
+  - 829
+  - 5184
+  - 2903
+  crop_source_dimensions:
+  - 5184
+  - 3456
+  widths:
+  - 480
+  - 960
+  - 1280
+  width: 1280
+  height: 512
+  id: contact-banner
+  source: https://commons.wikimedia.org/wiki/File:Front_row_pit_crew_(53698604971).jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/8/82/Front_row_pit_crew_%2853698604971%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://upload.wikimedia.org/wikipedia/commons/8/82/Front_row_pit_crew_%2853698604971%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1262211593
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: Credit photographer and title, link source and license, and identify
+    modifications.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'
+card-testing:
+  title: Inside the cockpit of a race car (6051590642).jpg
+  photographer: Chris Waits
+  license: CC BY 2.0
+  license_url: https://creativecommons.org/licenses/by/2.0
+  caption: Race-car cockpit at Watkins Glen, 2011.
+  alt: Steering wheel, dashboard, and controls inside a race-car cockpit.
+  crop:
+  - 0
+  - 0
+  - 5184
+  - 3456
+  crop_source_dimensions:
+  - 5184
+  - 3456
+  widths:
+  - 480
+  - 960
+  width: 960
+  height: 640
+  id: card-testing
+  source: https://commons.wikimedia.org/wiki/File:Inside_the_cockpit_of_a_race_car_(6051590642).jpg
+  original_url: https://upload.wikimedia.org/wikipedia/commons/9/91/Inside_the_cockpit_of_a_race_car_%286051590642%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  downloaded_source_url: https://upload.wikimedia.org/wikipedia/commons/9/91/Inside_the_cockpit_of_a_race_car_%286051590642%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  evidence: https://commons.wikimedia.org/w/index.php?oldid=1185576176
+  modifications: Cropped, resized and converted to WebP/JPEG; metadata removed. No generated
+    content or recoloring.
+  attribution_requirements: Credit photographer and title, link source and license, and identify
+    modifications.
+  license_evidence: Wikimedia Commons file-page license declaration and API imageinfo metadata.
+  reviewed: '2026-11-15'

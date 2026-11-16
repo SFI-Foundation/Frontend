@@ -1,15 +1,16 @@
 .sfi-page-header {
   background: $surface-alt;
   border-bottom: 1px solid $border;
-  padding: $space-5;
+  padding: $space-7 $space-6;
+  border-top: 3px solid $blue;
 }
 .sfi-page-header-content {
-  max-width: $site-width - 2 * $space-5;
+  max-width: $site-width - 2 * $space-6;
   margin: auto;
 }
 .sfi-page-header h1 {
   color: $blue-dark;
-  font-size: clamp(1.625rem, 3vw, 2rem);
+  font-size: clamp(1.875rem, 3vw, 2.75rem);
   margin: 0 0 $space-2;
   letter-spacing: -0.02em;
 }
@@ -19,7 +20,7 @@
 .sfi-page-header p {
   margin: 0;
   color: $text-soft;
-  max-width: 80ch;
+  max-width: 68ch;
 }
 .sfi-page-header .sfi-eyebrow {
   margin-bottom: $space-2;
@@ -36,7 +37,7 @@
 .sfi-sect {
   max-width: $site-width;
   margin: 0 auto;
-  padding: $space-6 $space-5;
+  padding: $space-7 $space-6;
 }
 .sfi-sect-title {
   font-size: 1.625rem;

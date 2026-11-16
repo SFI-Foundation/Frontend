@@ -55,14 +55,14 @@ body_class: sfi-spec-search
   </section>
 
   <section class="sfi__section" id="about">
-    <details class="sfi-search-help"><summary>Understanding specifications &amp; document status</summary><p>Each SFI number identifies a type of racing equipment. Only verified current documents have a PDF action. Confirm product-specific recertification requirements with the manufacturer.</p><a href="{{ '/' | relative_url }}">About SFI Foundation &rarr;</a></details>
+    <details class="sfi-search-help"><summary>Understanding specifications &amp; document status</summary><p>Each SFI number identifies a type of racing equipment. Only verified current documents have a PDF action. Confirm product-specific recertification requirements with the manufacturer.</p><a href="{{ '/about/' | relative_url }}">About SFI Foundation &rarr;</a></details>
   </section>
 
 
 </div><!-- /publicView -->
 
   <section class="sfi__section sfi__hidden" id="adminView">
-    <div class="sfi__row" style="justify-content:space-between;align-items:center;">
+    <div class="sfi__row sfi-spec-admin-heading">
       <h2 class="sfi__title">Manage SFI specifications</h2>
       <button type="button" class="sfi__btn" id="viewPublicBtn">View as public</button>
     </div>
@@ -127,12 +127,7 @@ body_class: sfi-spec-search
 
 </div>
 
-<style>
-.sfi__sort { background: none; border: 0; padding: 0; color: inherit; font: inherit; font-weight: inherit; cursor: pointer; }
-.sfi__sort::after { content: ' \2195'; opacity: .4; }
-th[aria-sort="ascending"] .sfi__sort::after { content: ' \25B2'; opacity: 1; }
-th[aria-sort="descending"] .sfi__sort::after { content: ' \25BC'; opacity: 1; }
-</style>
+
 
 <script src="{{ '/assets/js/sfi/spec-search.js' | relative_url }}"></script>
 <script>
@@ -361,7 +356,7 @@ function renderAdminTable() {
     relevance = true;
     const suggestion = getSuggestion(q);
     if (suggestion && rows.length < 5) {
-      hintEl.innerHTML = `Did you mean: <strong style="cursor:pointer" data-suggest="${esc(suggestion)}">${esc(suggestion)}</strong>?`;
+      hintEl.innerHTML = `Did you mean: <strong class="sfi-spec-suggestion" data-suggest="${esc(suggestion)}">${esc(suggestion)}</strong>?`;
       hintEl.className = 'sfi__hint visible';
     } else { hintEl.className = 'sfi__hint'; }
   } else { hintEl.className = 'sfi__hint'; }

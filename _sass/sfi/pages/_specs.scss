@@ -1,5 +1,38 @@
 // Spec search (/sfi-specs/)
 
+// Admin table presentation belongs in the same compiled entry as public search.
+.sfi-spec-admin-heading {
+  justify-content: space-between;
+}
+
+.sfi-spec-suggestion {
+  cursor: pointer;
+}
+
+.sfi__sort {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+
+  &::after {
+    content: " \2195";
+    opacity: 0.4;
+  }
+}
+
+th[aria-sort="ascending"] .sfi__sort::after {
+  content: " \25B2";
+  opacity: 1;
+}
+
+th[aria-sort="descending"] .sfi__sort::after {
+  content: " \25BC";
+  opacity: 1;
+}
+
 .sfi__showcase {
   display: grid;
   gap: $space-4;

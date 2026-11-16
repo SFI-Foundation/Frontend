@@ -88,49 +88,7 @@
   margin: 0;
 }
 
-/* ── Feature Cards ────────────────────────────── */
-.sfi-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 18px;
-}
-.sfi-feature-card {
-  background: var(--sfi-white);
-  border: 1px solid var(--sfi-border);
-  border-top: 3px solid var(--sfi-blue);
-  border-radius: var(--sfi-radius);
-  padding: 24px 22px;
-  transition:
-    box-shadow 0.2s,
-    border-top-color 0.2s;
-  box-shadow: var(--sfi-shadow);
-  text-decoration: none;
-  display: block;
-}
-.sfi-feature-card:hover {
-  box-shadow: var(--sfi-shadow-md);
-  border-top-color: var(--sfi-blue-accent);
-}
-.sfi-feature-icon {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-  display: block;
-}
-.sfi-feature-card h3 {
-  font-family: "Oswald", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--sfi-blue);
-  margin: 0 0 8px;
-  letter-spacing: 0.3px;
-}
-.sfi-feature-card p {
-  font-family: "Inter", sans-serif;
-  font-size: 0.83rem;
-  color: var(--sfi-muted);
-  line-height: 1.6;
-  margin: 0;
-}
+// Photographic navigation cards live in components/_feature-grid.scss.
 
 /* ── Category Tiles ───────────────────────────── */
 .sfi-cat-browse {
@@ -383,11 +341,11 @@
 
 // Moderate information density for the public site.
 .sfi-home-details,
-.sfi-contact-guidance {
+.sfi-program-roles {
   padding-top: 0;
 }
 .sfi-home-details > h2,
-.sfi-contact-guidance > h2 {
+.sfi-program-roles > h2 {
   margin-top: 0;
 }
 .sfi-home-details > p {

@@ -342,12 +342,13 @@ bundle-install:
 		mkdir -p .bundle && touch .bundle/install_marker; \
 	fi
 
-# Start Jekyll server (incremental for development, production is GitHub Actions)
+# Data-driven photo and navigation pages need full dependency regeneration.
+# Jekyll incremental mode does not track _data changes.
 jekyll-serve: bundle-install
 	@bundle exec jekyll clean --destination "$(PREVIEW_DESTINATION)"
 	@: > $(LOG_FILE)
 	@touch /tmp/.notebook_watch_marker
-	@bundle exec jekyll serve -H $(HOST) -P $(PORT) --baseurl "$(BASEURL)" --destination "$(PREVIEW_DESTINATION)" --incremental > $(LOG_FILE) 2>&1 & \
+	@bundle exec jekyll serve -H $(HOST) -P $(PORT) --baseurl "$(BASEURL)" --destination "$(PREVIEW_DESTINATION)" --disable-disk-cache > $(LOG_FILE) 2>&1 & \
 		echo "Server PID: $$!"
 	@make wait-for-server
 

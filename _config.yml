@@ -25,7 +25,7 @@ minima:
   nav_pages:
     - index.md
     - navigation/sfi-specs.md
-    - navigation/history.md
+    - navigation/about.md
     - navigation/news-events.md
     - navigation/contact.md
     - navigation/login.md

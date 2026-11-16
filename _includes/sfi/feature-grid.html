@@ -1,0 +1,12 @@
+<div class="sfi-feature-grid">
+  {% for item in site.data.sfi_home_navigation %}
+  <a class="sfi-feature-card" href="{{ item.url | relative_url }}" aria-labelledby="sfi-feature-{{ forloop.index }}">
+    {% include sfi/photograph.html key=item.photograph caption=false decorative=true sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1000px) 46vw, 368px" %}
+    <div class="sfi-feature-card-content">
+      <h3 id="sfi-feature-{{ forloop.index }}">{{ item.title | escape }}</h3>
+      <p>{{ item.description | escape }}</p>
+    </div>
+    <span class="sfi-feature-card-arrow" aria-hidden="true">&nearr;</span>
+  </a>
+  {% endfor %}
+</div>
