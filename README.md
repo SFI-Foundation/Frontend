@@ -52,7 +52,7 @@ Important frontend files and directories:
 - A newly selected backend database requires the additive Phase 1 catalog setup. An empty catalog returns HTTP 503 rather than a misleading successful empty result; see `docs/sfi-phase1.md`.
 - The retained chatbot include and its Sass are not loaded by the public shell. Reconnecting or removing them requires a separate feature decision.
 - Live AI-provider behavior and PDF-summary quality are outside the photographic redesign's acceptance checks.
-- Older visual/import tests retain assumptions from superseded layouts. Current build and browser checks are documented in `docs/sfi-final-premerge-audit.md`.
+- Older visual/import checks still flag the retained, disconnected chatbot Sass partial. The Backend profile fixture has three pre-existing empty-catalog subtest failures; MySQL checks require `SFI_QA_MYSQL_URI` for an explicitly disposable QA schema.
 - The detector is browser-side image classification. It can suggest likely equipment categories, but it does not verify official SFI labels, certification status, or compliance.
 
 ## Future Work
@@ -217,10 +217,10 @@ Before continuing development:
 
 The public SFI layout uses the official logo, a white header with a prominent blue Spec Search action, photographic banners, a six-card homepage navigation grid with distinct photographs and numbered markers, and a charcoal footer. Each of the thirteen public photo placements has its own licensed source; regression checks reject repeats across pages. About and Services preserve the longer program information outside the homepage. Contact provides verified email, phone, address, and inquiry guidance. Edit the shared tokens and scoped partials under `_sass/sfi/`; Jekyll compiles `assets/css/sfi.scss` into `/assets/css/sfi.css`. Classroom and vendor styles remain separate.
 
-See [the photographic redesign report](docs/sfi-photographic-redesign.md) for the file inventory, photography sources, screenshots, verification results, and preview instructions. After building, run `npm run test:styles -- /path/to/build` and `npm run test:redesign -- /path/to/build`. The browser review script is `scripts/test-sfi-redesign-browser.cjs`; it uses configurable Playwright/axe tooling and the existing local specification API.
+Photography sources and licensing are maintained in the [photography notice](images/sfi/PHOTOGRAPHY.md) and [image manifest](docs/site-photography/image-manifest.json). After building, run `npm run test:styles -- /path/to/build` and `npm run test:redesign -- /path/to/build`. The browser review script is `scripts/test-sfi-redesign-browser.cjs`; it uses configurable Playwright/axe tooling and the existing local specification API.
 
 
 SFI Sass architecture and approved-baseline verification:
-[implementation report](docs/sfi-sass-architecture.md).
+[Sass architecture](docs/sfi-sass-architecture.md).
 Run `bundle exec ruby scripts/test-sfi-sass.rb <built-site> [baseline.css]` to
 verify the actual entry, all imported partials, scoped output and loaded stylesheet.

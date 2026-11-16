@@ -26,7 +26,7 @@ website's code license. Crops, dimensions, original hashes, derivative hashes,
 and byte sizes are in the [image manifest](../../docs/site-photography/image-manifest.json).
 Source URLs, permanent license evidence links, attribution requirements, and
 modification notices are in the shared data file. See the
-[UI maintenance guide](../../docs/SFI_UI_OVERHAUL.md) for rendering and validation.
+[README](../../README.md#public-visual-theme) for rendering and validation.
 
 Only optimized local WebP and JPEG derivatives are shipped. No generative
 imagery, recoloring, compositing or changes to depicted equipment were used.
