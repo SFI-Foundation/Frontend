@@ -1,6 +1,6 @@
 ---
 toc: true
-layout: post
+layout: sfi-document
 title: How We're Using ML in SFI Spec Search
 description: A deep dive into how our team is applying machine learning to transform SFI Foundation's static spec pages into an intelligent, instant search experience for motorsport safety inspectors.
 permalink: /sfi-ml

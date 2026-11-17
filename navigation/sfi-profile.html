@@ -1,0 +1,155 @@
+---
+layout: sfi
+title: My Profile
+description: Your SFI Foundation profile and optional motorsports preferences.
+permalink: /sfi-profile/
+---
+
+
+
+<section class="sfi-profile">
+  <div class="sfi-profile-card">
+    <h1>My SFI Profile</h1>
+    <p id="profileStatus" role="status" aria-live="polite">Loading your profile…</p>
+    <p id="profileSignIn" hidden><a href="{{ '/login/' | relative_url }}">Sign in to view your profile</a></p>
+    <button id="profileRetry" type="button" hidden>Try again</button>
+    <div id="profileContent" hidden>
+      <dl>
+        <dt>Name</dt><dd id="sfiProfileName"></dd>
+        <dt>Username</dt><dd id="sfiProfileUid"></dd>
+        <dt>Role</dt><dd id="sfiProfileRole"></dd>
+      </dl>
+      <details><summary>Previously saved community interests</summary><dl>
+        <dt>Nonprofit causes</dt><dd id="sfiProfileCauses"></dd>
+        <dt>Participation preferences</dt><dd id="sfiProfileParticipation"></dd>
+        <dt>Skills and experience</dt><dd id="sfiProfileSkills"></dd>
+        <dt>Volunteering opportunities</dt><dd id="sfiProfileVolunteering"></dd>
+        <dt>Availability</dt><dd id="sfiProfileAvailability"></dd>
+      </dl>
+      </details>
+      <form id="profileNameForm">
+        <label for="profileNameInput">Display name</label>
+        <input id="profileNameInput" type="text" minlength="2" maxlength="255" autocomplete="name" required>
+        <p id="profileNameStatus" role="status" aria-live="polite"></p>
+        <button id="profileNameSave" type="submit">Save name</button>
+      </form>
+      <p><a href="{{ '/login/' | relative_url }}">Account and sign out</a></p>
+<section class="sfi-quick-access" aria-labelledby="quickAccessTitle"><h2 id="quickAccessTitle">Recommended for You</h2><p>Explore SFI resources. All public resources remain available to everyone.</p><ul id="recommendedLinks" data-base="{{ '/' | relative_url }}"></ul></section>
+      <details id="onboardingQuiz">
+        <summary>Edit Preferences</summary>
+        <h2 id="preferencesHeading" tabindex="-1">Tell Us About Yourself</h2>
+        <p>Help us tailor your SFI Foundation experience. Tell us about your involvement in motorsports and what you're looking for. All questions are optional, and you can update your answers anytime.</p>
+        <p class="sfi-pref-hint">Choose any questions below. You can save even if every answer is blank.</p>
+        <form id="preferencesForm" novalidate>
+<fieldset id="pref-involvement" aria-describedby="hint-involvement error-involvement"><legend>1. What best describes your involvement with motorsports?</legend><p id="hint-involvement" class="sfi-pref-hint">Select all that apply. These are self-reported interests and do not grant account permissions.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="checkbox" name="involvement" value="manufacturer"><span>Manufacturer / Equipment Supplier</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="driver"><span>Driver / Racer</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="race_team"><span>Race Team / Team Owner</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="sanctioning_body"><span>Sanctioning Body / Racing Organization</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="technical_inspector"><span>Technical Inspector / Scrutineer</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="distributor"><span>Distributor / Retailer</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="event_organizer"><span>Racing Event Organizer</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="engineer"><span>Engineer / Safety Professional</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="sfi_staff"><span>SFI Foundation Staff</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="enthusiast"><span>Motorsport Enthusiast / General Public</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="other"><span>Other</span></label>
+<label class="sfi-choice"><input type="checkbox" name="involvement" value="prefer_not_to_answer"><span>Prefer not to answer</span></label></div><p id="error-involvement" class="sfi-pref-error"></p></fieldset>
+<fieldset id="pref-visit_reasons" aria-describedby="hint-visit_reasons error-visit_reasons"><legend>2. What brings you to SFI Foundation?</legend><p id="hint-visit_reasons" class="sfi-pref-hint">Select all that apply.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="find_specification"><span>Find an SFI Specification</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="technical_specifications"><span>View or Download Technical Specifications</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="safety_equipment"><span>Research SFI-Certified Safety Equipment</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="find_manufacturer"><span>Find an SFI-Participating Manufacturer</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="certification_requirements"><span>Understand SFI Certification Requirements</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="safety_standards"><span>Learn About Safety Standards</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="manufacturer_participation"><span>Explore Manufacturer Participation</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="sanctioning_resources"><span>Access Sanctioning Body Resources</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="product_compliance"><span>Research Product Compliance</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="safety_updates"><span>Stay Updated on Motorsports Safety</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="education"><span>General Research / Education</span></label>
+<label class="sfi-choice"><input type="checkbox" name="visit_reasons" value="other"><span>Other</span></label></div><p id="error-visit_reasons" class="sfi-pref-error"></p></fieldset>
+<fieldset id="pref-disciplines" aria-describedby="hint-disciplines error-disciplines"><legend>3. Which motorsport disciplines are you involved in?</legend><p id="hint-disciplines" class="sfi-pref-hint">These describe your interests, not official SFI program categories.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="checkbox" name="disciplines" value="drag_racing"><span>Drag Racing</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="oval_racing"><span>Circle Track / Oval Racing</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="road_racing"><span>Road Racing</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="off_road"><span>Off-Road Racing</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="karting"><span>Karting</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="motorcycle"><span>Motorcycle Racing</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="other"><span>Other Motorsports</span></label>
+<label class="sfi-choice"><input type="checkbox" name="disciplines" value="not_applicable"><span>Not Applicable</span></label></div><p id="error-disciplines" class="sfi-pref-error"></p></fieldset>
+<fieldset><legend>4. Are you affiliated with an organization?</legend><p class="sfi-pref-hint">Optional, self-reported details. This does not link your account to an official SFI record or grant organization access.</p><label for="pref-organization_name">Organization / Company Name</label><input id="pref-organization_name" name="organization_name" type="text" maxlength="200" autocomplete="organization" aria-describedby="error-organization_name"><p id="error-organization_name" class="sfi-pref-error"></p><label for="pref-organization_website">Organization Website</label><input id="pref-organization_website" name="organization_website" type="url" maxlength="500" autocomplete="url" aria-describedby="error-organization_website"><p id="error-organization_website" class="sfi-pref-error"></p><label for="pref-job_title">Job Title / Position</label><input id="pref-job_title" name="job_title" type="text" maxlength="120" autocomplete="organization-title" aria-describedby="error-job_title"><p id="error-job_title" class="sfi-pref-error"></p></fieldset>
+<fieldset id="pref-resources" aria-describedby="hint-resources error-resources"><legend>5. Which SFI resources interest you?</legend><p id="hint-resources" class="sfi-pref-hint">Tell us what interests you. Some resources may not be available online.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="checkbox" name="resources" value="specification_search"><span>Specification Search</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="specification_documents"><span>Specification PDF Documents</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="manufacturer_directory"><span>Manufacturer Directory</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="safety_equipment"><span>Safety Equipment Information</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="technical_updates"><span>Technical Bulletins / Updates</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="certification_compliance"><span>Certification and Compliance Information</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="education"><span>Educational Resources</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="safety_news"><span>Motorsport Safety News</span></label>
+<label class="sfi-choice"><input type="checkbox" name="resources" value="events"><span>Events and Industry Information</span></label></div><p id="error-resources" class="sfi-pref-error"></p></fieldset>
+<fieldset id="pref-primary_goal" aria-describedby="hint-primary_goal error-primary_goal"><legend>6. What is your primary goal?</legend><p id="hint-primary_goal" class="sfi-pref-hint">Choose one, or leave this unanswered.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="radio" name="primary_goal" value="find_specification"><span>Find a Specific SFI Specification</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value="research_equipment"><span>Research Safety Equipment</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value="certification_requirements"><span>Understand Certification Requirements</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value="manufacturer_information"><span>Find Manufacturer Information</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value="technical_resources"><span>Access Technical Resources</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value="about_sfi"><span>Learn More About SFI Foundation</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value="exploring"><span>Just Exploring</span></label>
+<label class="sfi-choice"><input type="radio" name="primary_goal" value=""><span>Prefer not to answer</span></label></div><p id="error-primary_goal" class="sfi-pref-error"></p></fieldset>
+<fieldset id="pref-update_interests" aria-describedby="hint-update_interests error-update_interests"><legend>7. Would you like to receive updates?</legend><p id="hint-update_interests" class="sfi-pref-hint">Interest preferences only. These answers do not subscribe you to email or give marketing consent.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="checkbox" name="update_interests" value="specification_updates"><span>New or Updated SFI Specifications</span></label>
+<label class="sfi-choice"><input type="checkbox" name="update_interests" value="technical_announcements"><span>Technical and Safety Announcements</span></label>
+<label class="sfi-choice"><input type="checkbox" name="update_interests" value="manufacturer_program"><span>Manufacturer Program Information</span></label>
+<label class="sfi-choice"><input type="checkbox" name="update_interests" value="safety_education"><span>Motorsport Safety Education</span></label>
+<label class="sfi-choice"><input type="checkbox" name="update_interests" value="foundation_news"><span>SFI Foundation News</span></label>
+<label class="sfi-choice"><input type="checkbox" name="update_interests" value="volunteering_events"><span>Volunteering and Event Opportunities</span></label></div><p id="error-update_interests" class="sfi-pref-error"></p></fieldset><fieldset><legend>8. Is there anything else you'd like SFI to know?</legend>
+<label for="pref-additional_notes">Additional information (optional)</label><p id="notesHint" class="sfi-pref-hint">Up to 500 characters. Please do not include sensitive personal information.</p>
+<textarea id="pref-additional_notes" name="additional_notes" rows="4" maxlength="500" aria-describedby="notesHint error-additional_notes"></textarea><p id="error-additional_notes" class="sfi-pref-error"></p></fieldset>
+<p id="preferencesStatus" role="status" aria-live="polite" tabindex="-1"></p>
+<div class="sfi-pref-actions"><button id="preferencesSave" type="submit">Save Preferences</button><button id="preferencesSkip" type="button" class="sfi-pref-secondary">Skip for Now</button></div>
+</form></details>
+      <details id="interestQuiz">
+        <summary>Legacy community interests (optional)</summary>
+        <h2>Community interests</h2>
+        <p>Every question is optional. You can return here to change or clear your answers. Please do not include private or sensitive information.</p>
+        <form id="interestForm">
+          <fieldset>
+            <legend>1. What nonprofit causes interest you?</legend>
+            <label><input type="checkbox" name="causes" value="Motorsports safety"> Motorsports safety</label>
+            <label><input type="checkbox" name="causes" value="Youth education"> Youth education</label>
+            <label><input type="checkbox" name="causes" value="Community support"> Community support</label>
+            <label><input type="checkbox" name="causes" value="Accessibility"> Accessibility</label>
+            <label><input type="checkbox" name="causes" value="Environment"> Environment</label>
+          </fieldset>
+          <fieldset>
+            <legend>2. How would you like to participate?</legend>
+            <label><input type="checkbox" name="participation" value="Volunteer"> Volunteer</label>
+            <label><input type="checkbox" name="participation" value="Donate"> Donate</label>
+            <label><input type="checkbox" name="participation" value="Attend events"> Attend events</label>
+            <label><input type="checkbox" name="participation" value="Share expertise"> Share expertise</label>
+            <label><input type="checkbox" name="participation" value="Stay informed"> Stay informed</label>
+          </fieldset>
+          <label for="interestSkills">3. What relevant skills or experience would you like to share?</label>
+          <textarea id="interestSkills" rows="3" maxlength="500" placeholder="Optional, up to 500 characters"></textarea>
+          <label for="interestVolunteering">4. Would you like volunteering opportunities?</label>
+          <select id="interestVolunteering">
+            <option value="">Prefer not to answer</option><option value="yes">Yes</option><option value="no">No</option>
+          </select>
+          <label for="interestAvailability">How often might you be available? (optional)</label>
+          <select id="interestAvailability">
+            <option value="">Prefer not to answer</option><option>Occasionally</option><option>Monthly</option><option>Weekly</option>
+          </select>
+          <p id="interestStatus" role="status" aria-live="polite"></p>
+          <button id="interestSave" type="submit">Save answers</button>
+          <button id="interestClear" type="button">Clear saved answers</button>
+        </form>
+      </details>
+      <details id="roleManagement" hidden>
+        <summary>Manage user roles (administrators)</summary>
+        <p>Member, Volunteer, and Donor have ordinary member access. Admin can manage users and permissions. Existing User and Teacher roles remain supported.</p>
+        <button id="rolesLoad" type="button">Load users</button>
+        <form id="roleForm" hidden>
+          <label for="roleUser">User</label><select id="roleUser"></select>
+          <label for="roleValue">Role</label><select id="roleValue"></select>
+          <button id="roleSave" type="submit">Save role</button>
+        </form>
+        <p id="roleStatus" role="status" aria-live="polite"></p>
+      </details>
+    </div>
+  </div>
+</section>
+<script type="module" src="{{ '/assets/js/sfi/profile.js' | relative_url }}"></script>

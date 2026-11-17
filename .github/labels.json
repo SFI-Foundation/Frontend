@@ -1,0 +1,52 @@
+[
+  {
+    "name": "frontend",
+    "color": "1D76DB",
+    "description": "Frontend pages, browser behavior, and client integration."
+  },
+  {
+    "name": "backend",
+    "color": "5319E7",
+    "description": "Server APIs, persistence, and backend services."
+  },
+  {
+    "name": "ml",
+    "color": "C2E0C6",
+    "description": "Machine learning models, inference, and data pipelines."
+  },
+  {
+    "name": "ui",
+    "color": "D4C5F9",
+    "description": "Visual design, interaction, accessibility, and responsive layout."
+  },
+  {
+    "name": "bug",
+    "color": "D73A4A",
+    "description": "Existing behavior differs from the intended behavior."
+  },
+  {
+    "name": "docs",
+    "color": "0075CA",
+    "description": "Documentation, diagrams, and contributor guidance."
+  },
+  {
+    "name": "blocked",
+    "color": "B60205",
+    "description": "Cannot proceed until a documented dependency or decision is resolved."
+  },
+  {
+    "name": "P1",
+    "color": "B60205",
+    "description": "Highest priority: address first due to a critical impact or dependency."
+  },
+  {
+    "name": "P2",
+    "color": "FBCA04",
+    "description": "Normal priority: planned work ordered within the sprint."
+  },
+  {
+    "name": "P3",
+    "color": "0E8A16",
+    "description": "Lower priority: schedule after higher-priority commitments."
+  }
+]

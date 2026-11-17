@@ -32,7 +32,7 @@
 
                     // Display Toolkits"
                     calendarLink.innerHTML = `<a href="{{site.baseurl}}/student/calendar">Calendar</a>`;
-                    profileLink.innerHTML = `<a href="{{site.baseurl}}/profile">Profile</a>`;
+                    profileLink.innerHTML = `<a href="{{site.baseurl}}/classroom/profile/">Profile</a>`;
                     studentToolkitLink.innerHTML = `<a href="{{site.baseurl}}/student">Student Toolkit</a>`;
                     // Check for teacher role to display "Teacher Toolkit"
                     const isTeacher = data.roles.some(role => role.name === 'ROLE_TEACHER');
@@ -44,8 +44,8 @@
                     logoutLink.innerHTML = `<a href="{{site.baseurl}}/logoutjava">Logout of Toolkit</a>`;
                 } else {
                     // User is not authenticated, show signup and login links
-                    signupLink.innerHTML = `<a href="{{site.baseurl}}/signup">Signup for Toolkit</a>`;
-                    loginLink.innerHTML = `<a href="{{site.baseurl}}login">Login to Toolkit</a>`;
+                    signupLink.innerHTML = `<a href="{{site.baseurl}}/classroom/signup/">Signup for Toolkit</a>`;
+                    loginLink.innerHTML = `<a href="{{site.baseurl}}/classroom/login/">Login to Toolkit</a>`;
 
                     // Hide other links
                     calendarLink.style.display = 'none';

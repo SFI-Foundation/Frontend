@@ -1,0 +1,36 @@
+@mixin phone  { @media (max-width: $bp-phone)  { @content; } }
+@mixin tablet { @media (max-width: $bp-tablet) { @content; } }
+
+@mixin focus-ring {
+  &:focus-visible { outline: 2px solid $blue; outline-offset: 2px; }
+}
+
+// Small uppercase label used for table heads, stat captions, etc.
+@mixin caption {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+@mixin tint($fg, $bg) {
+  color: $fg;
+  background: $bg;
+}
+
+// Keep all public content inside the viewport, including nested grid items.
+@mixin site-container {
+  width: 100%;
+  max-width: $site-width;
+  margin-inline: auto;
+  padding-inline: $space-6;
+  @include phone { padding-inline: $space-4; }
+}
+
+@mixin surface-card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 1px 4px rgba($text, 0.08);
+}

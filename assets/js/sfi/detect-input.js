@@ -93,11 +93,13 @@ const DetectInput = (() => {
   }
 
   function switchTab(tab) {
-    document.querySelectorAll('.detect-tab').forEach((t, i) => {
-      t.classList.toggle('active', (tab === 'upload' && i === 0) || (tab === 'camera' && i === 1));
+    document.querySelectorAll('.sfi__tab').forEach((t, i) => {
+      const isActive = (tab === 'upload' && i === 0) || (tab === 'camera' && i === 1);
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', String(isActive));
     });
-    document.getElementById('uploadPanel').style.display = tab === 'upload' ? 'block' : 'none';
-    document.getElementById('cameraPanel').style.display = tab === 'camera' ? 'block' : 'none';
+    document.getElementById('uploadPanel').classList.toggle('sfi__hidden', tab !== 'upload');
+    document.getElementById('cameraPanel').classList.toggle('sfi__hidden', tab !== 'camera');
     // Any switch away from camera tears down the stream + live loop.
     if (tab !== 'camera' && cameraStream) stopCamera();
   }
@@ -125,7 +127,7 @@ const DetectInput = (() => {
     const video = document.getElementById('cameraVideo');
     const overlay = document.getElementById('cameraOverlay');
     // contain keeps boxes aligned without cover-crop math (brief item 2).
-    video.style.objectFit = 'contain';
+    video.classList.add('sfi-camera-live');
 
     if (video.clientWidth && video.clientHeight) {
       overlay.width = video.clientWidth;
@@ -177,7 +179,7 @@ const DetectInput = (() => {
     }
     const video = document.getElementById('cameraVideo');
     video.srcObject = null;
-    video.style.objectFit = '';
+    video.classList.remove('sfi-camera-live');
     setCameraButtons(false);
 
     const overlay = document.getElementById('cameraOverlay');

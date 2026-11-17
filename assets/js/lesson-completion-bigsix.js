@@ -11,7 +11,7 @@
 
 (function() {
     const LessonCompletion = {
-        pythonURI: window.pythonURI || 'http://localhost:5000',
+        pythonURI: window.pythonURI || 'http://localhost:8605',
         javaURI: window.javaURI || 'http://localhost:8585',
         completedLessons: new Set(),
         lessonStartTimes: new Map(),

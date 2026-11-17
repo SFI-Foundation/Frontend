@@ -1,0 +1,23 @@
+// SFI project write-ups use the same public shell and typography.
+.sfi-document {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: $space-5;
+  overflow-wrap: anywhere;
+  h1 { font: 700 clamp(1.5rem, 4vw, 2rem)/1.25 $font-heading; color: $blue; }
+  h2 { margin: $space-6 0 $space-3; padding-bottom: $space-2; border-bottom: 1px solid $border; color: $text; }
+  h3 { color: $blue; margin: $space-5 0 $space-3; }
+  p, li { color: $text-soft; }
+  ul, ol { padding-left: $space-5; }
+  li { margin: $space-1 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; background: $surface-alt; border-radius: $radius-sm; padding: 2px 4px; }
+  pre { background: $surface-alt; border: 1px solid $border; border-radius: $radius; padding: $space-4; overflow-x: auto; white-space: pre; }
+  pre code { padding: 0; border-radius: 0; }
+  table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+  th, td { padding: $space-2 $space-3; border: 1px solid $border; text-align: left; }
+  th { background: $surface-alt; }
+  blockquote { border-left: 4px solid $blue; padding-left: $space-3; margin-left: 0; font-style: italic; }
+}
+.sfi-document-meta { color: $text-muted; font-size: .85rem; }
+.sfi-document-toc { background: $surface; border: 1px solid $border; border-radius: $radius; padding: $space-4; margin: $space-5 0; }
+@include phone { .sfi-document { padding-left: 20px; padding-right: 20px; } }

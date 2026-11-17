@@ -27,12 +27,12 @@
                         {%- if my_page.course -%}
                             {{ my_page.course | upcase | escape }}
                         {%- else -%}
-                            {{ my_page.title | escape }}
+                            {{ my_page.nav_title | default: my_page.title | escape }}
                         {%- endif -%}
                     </a>
                     {%- endif -%}
                     {%- endfor -%}
-                    <a id="loginArea" class="page-link" href="{{ site.baseurl }}/login">Login</a>
+                    <a id="loginArea" class="page-link" href="{{ site.baseurl }}/classroom/login/">Login</a>
                 </div>
             </nav>
             {%- endif -%}

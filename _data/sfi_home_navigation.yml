@@ -1,0 +1,24 @@
+- title: Find Specifications
+  description: Search equipment standards and available documents.
+  url: /sfi-specs/
+  photograph: card-specifications
+- title: Certification Programs
+  description: Understand SFI programs and manufacturer participation.
+  url: /services/#certification-programs
+  photograph: card-certification
+- title: Testing & Services
+  description: Explore equipment testing and technical services.
+  url: /services/#testing
+  photograph: card-testing
+- title: News & Updates
+  description: Read announcements and find upcoming review meetings.
+  url: /news-events/
+  photograph: card-news
+- title: About SFI
+  description: Discover the organization behind the standards.
+  url: /about/
+  photograph: card-about
+- title: Contact SFI
+  description: Connect with the team for questions and assistance.
+  url: /contact/
+  photograph: card-contact

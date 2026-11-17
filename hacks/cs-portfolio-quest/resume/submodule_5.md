@@ -270,7 +270,7 @@ date: 2025-10-21
 
 <script>
 // ================= Configuration =================
-const API_KEY = 'AIzaSyACXPXKEgZ_9P6ikvDiFnNpDZe1cXUR3jY';
+const API_KEY = '';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 const STORAGE_KEY = 'linkedin_profile_v3';
 

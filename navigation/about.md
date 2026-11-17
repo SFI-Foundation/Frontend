@@ -1,89 +1,53 @@
 ---
 layout: sfi
-title: About SFI Foundation
-description: A non-profit organization established to issue and administer standards for motorsports safety equipment.
+title: About SFI
+nav_title: About SFI
+description: Learn how SFI Foundation brings motorsports manufacturers and racing organizations together through equipment standards.
 permalink: /about/
 ---
-
-<div class="sfi-page-header">
-  <div class="sfi-page-header-content">
-    <h1>About <span class="gold">SFI Foundation</span></h1>
-    <p>
-      A non-profit organization established in 1978 to issue and administer standards
-      for the quality assurance of specialty performance and racing equipment.
-    </p>
+<header class="sfi-image-banner">
+  {% include sfi/photograph.html key="safety" caption=false decorative=true loading="eager" sizes="100vw" %}
+  <div class="sfi-banner-content">
+    <p class="sfi-eyebrow">About the Foundation</p>
+    <h1>A Common Standard.<br>A Safer Sport.</h1>
+    <p>Connecting the motorsports community through equipment standards and quality assurance.</p>
   </div>
-</div>
-
-<section class="sfi-sect">
-  <div class="sfi-sect-label">Who We Are</div>
-  <div class="sfi-sect-title">Our Mission</div>
-  <div class="sfi-sect-desc">
-    The SFI Foundation, Inc. (SFI) is a non-profit organization that has served the automotive
-    aftermarket and the motorsports industry since 1978. Our service to the industry is a system
-    of developing and administering various standards, certifications, and testing criteria
-    for use in motorsports.
-  </div>
-
-  <div class="sfi-info-grid">
-    <div class="sfi-info-card">
-      <h3>What is SFI?</h3>
-      <p>
-        The SFI Foundation, Inc. is a non-profit organization established to issue and administer
-        standards for the quality assurance of specialty performance and racing equipment.
-        The letters originally stood for "SEMA Foundation, Inc." but SFI is now fully independent.
-      </p>
-      <p>
-        SFI has approximately 100 member sanctioning bodies and over 300 individual equipment
-        manufacturers participating in more than 85 specification programs.
-      </p>
+</header>
+<section class="sfi-sect sfi-prose" aria-labelledby="our-mission">
+  <div class="sfi-content-grid">
+    <div>
+      <p class="sfi-eyebrow">Who we are</p>
+      <h2 id="our-mission">Safety standards for motorsports</h2>
+      <p>The SFI Foundation, Inc. is a nonprofit organization that issues and administers standards for the quality assurance of specialty performance and racing equipment.</p>
+      <p>SFI serves manufacturers, racers, and sanctioning bodies through specification programs, testing criteria, and certification programs. Manufacturers test and self-certify products to SFI specifications, which sanctioning bodies adopt into their racing rules.</p>
     </div>
-    <div class="sfi-info-card">
-      <h3>How It Works</h3>
-      <p>
-        Equipment manufacturers test and self-certify their products to SFI standards, which
-        are then included in race sanctioning organization rules. Participation is voluntary
-        once a standard is enacted.
-      </p>
-      <p>
-        Programs are funded by manufacturer licensing fees and donations. Enforcement uses
-        contractual and licensing agreements with inspection provisions.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Who Uses SFI?</h3>
-      <p>
-        Equipment manufacturers are the primary users of SFI standards. These standards are
-        adopted by race sanctioning bodies into their rulebooks, making them requirements
-        for competitors.
-      </p>
-      <p>
-        Standards are initiated by the SFI Technical Committee, comprised of experts from
-        across the motorsports industry.
-      </p>
-    </div>
-    <div class="sfi-info-card">
-      <h3>Open Process</h3>
-      <p>
-        SFI's programs are open to all interested parties, use technical committees with
-        cross-sector expertise, follow due process procedures, and publish specifications
-        publicly for full transparency.
-      </p>
-      <p>
-        SFI monitors adherence through certified test reports, periodic spec reviews, and
-        licensing agreements.
-      </p>
-    </div>
+    <aside class="sfi-panel" aria-labelledby="our-history">
+      <p class="sfi-eyebrow">Since 1978</p>
+      <h2 id="our-history">Built on a safety mission</h2>
+      <p>From early industry specifications to an independent quality assurance foundation.</p>
+      <a href="{{ '/history/' | relative_url }}">Explore SFI's history &rarr;</a>
+    </aside>
   </div>
 </section>
-
-<div class="sfi-divider"><hr></div>
-
-<section class="sfi-sect">
-  <div class="sfi-cta-banner">
-    <h2>EXPLORE OUR SPECIFICATIONS</h2>
-    <p>Browse all SFI specifications or use our ML-powered search to find what you need.</p>
-    <a href="/sfi-specs/" class="sfi-btn sfi-btn-primary">Spec Search &rarr;</a>
-    <a href="/history/" class="sfi-btn sfi-btn-secondary">Our History</a>
+<section class="sfi-sect sfi-prose sfi-program-roles" aria-labelledby="program-process">
+  <h2 id="program-process">How specification programs work</h2>
+  <p>A specification establishes performance and testing requirements for a type of equipment. Manufacturers, technical experts, and racing organizations each have a role in putting those requirements into practice.</p>
+  <div class="sfi-role-grid">
+    <section aria-labelledby="manufacturers-role">
+      <h3 id="manufacturers-role">Manufacturers</h3>
+      <p>Equipment manufacturers test and self-certify their products to the appropriate SFI specification and participate through licensing agreements.</p>
+    </section>
+    <section aria-labelledby="technical-role">
+      <h3 id="technical-role">Technical experts</h3>
+      <p>Technical committees contribute industry expertise to the development and review of equipment specifications and testing criteria.</p>
+    </section>
+    <section aria-labelledby="racing-role">
+      <h3 id="racing-role">Racing organizations</h3>
+      <p>Sanctioning bodies adopt SFI specifications into their rulebooks, giving competitors a common reference for equipment requirements.</p>
+    </section>
+  </div>
+  <div class="sfi-inline-callout">
+    <div><h2>From standards to practice</h2><p>Explore testing, quality assurance, and training programs.</p></div>
+    <a class="sfi-btn sfi-btn-primary" href="{{ '/services/' | relative_url }}">SFI Programs &amp; Services &rarr;</a>
   </div>
 </section>

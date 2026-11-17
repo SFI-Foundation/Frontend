@@ -1,0 +1,118 @@
+.sfi-footer {
+  padding-block: $space-7 $space-4;
+  background: $charcoal;
+  color: $surface;
+
+  h2 {
+    margin: 0 0 $space-2;
+    color: $surface;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  p,
+  address {
+    margin: 0;
+    color: rgba($surface, 0.8);
+    font-size: 0.875rem;
+    font-style: normal;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    width: fit-content;
+    max-width: 100%;
+    color: $surface;
+    font-size: 0.875rem;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .sfi-footer-title {
+    margin-bottom: $space-3;
+    color: $surface;
+    font-size: 1.375rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  :focus-visible {
+    outline-color: $surface;
+  }
+}
+
+.sfi-footer-inner {
+  @include site-container;
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr 1fr 1.2fr;
+  gap: $space-6;
+  padding-bottom: $space-6;
+
+  > * {
+    min-width: 0;
+  }
+}
+
+.sfi-footer-bottom {
+  @include site-container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  padding-top: $space-4;
+  border-top: 1px solid rgba($surface, 0.18);
+
+  p,
+  a {
+    font-size: 0.75rem;
+  }
+}
+
+@include tablet {
+  .sfi-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include phone {
+  .sfi-footer {
+    padding-top: $space-6;
+  }
+
+  .sfi-footer-inner {
+    gap: $space-5 $space-4;
+  }
+
+  .sfi-footer-brand,
+  .sfi-footer-contact {
+    grid-column: 1 / -1;
+  }
+}
+
+.sfi-simple-home {
+  margin-inline: auto;
+
+  > h2 {
+    margin-top: 0;
+  }
+
+  p {
+    max-width: 75ch;
+  }
+}
+
+.sfi-two-grid address {
+  font-style: normal;
+}
+
+.sfi-catalog-stats[hidden] {
+  display: none;
+}

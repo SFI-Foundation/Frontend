@@ -1,0 +1,2 @@
+# Only with JEKYLL_ENV=development; never use this overlay for publication.
+sfi_manufacturer_demo: true

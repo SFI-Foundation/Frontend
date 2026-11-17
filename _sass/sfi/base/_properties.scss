@@ -1,0 +1,27 @@
+/* ── Variables ─────────────────────────────────── */
+& {
+  --sfi-nav-breakpoint: #{$bp-tablet};
+  --sfi-navy: #{$blue-dark};
+  --sfi-gold: #{$gold};
+  --sfi-gold-dim: #{$gold-dim};
+  --sfi-bg: #{$bg};
+  --sfi-white: #{$surface};
+  --sfi-surface: #{$surface};
+  --sfi-surface2: #{$surface-alt};
+  --sfi-surface3: #{$border};
+  --sfi-border: #{$border};
+  --sfi-border-bright: #{$border-strong};
+  --sfi-blue: #{$blue};
+  --sfi-blue-dark: #{$blue-dark};
+  --sfi-blue-light: #{$blue};
+  --sfi-blue-accent: #{$blue};
+  --sfi-text: #{$text};
+  --sfi-text-secondary: #{$text-soft};
+  --sfi-muted: #{$text-muted};
+  --sfi-red: #{$bad};
+  --sfi-green: #{$good};
+  --sfi-radius: #{$radius};
+  --sfi-radius-sm: #{$radius-sm};
+  --sfi-shadow: #{$shadow};
+  --sfi-shadow-md: #{$shadow-md};
+}

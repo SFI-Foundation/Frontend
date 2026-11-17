@@ -1,5 +1,9 @@
 HOST ?= localhost
 PORT ?= 4500
+# Local preview and the production custom domain both use /.
+BASEURL ?=
+# Keep local root-path HTML separate from production _site output.
+PREVIEW_DESTINATION ?= _site_preview/$(PORT)
 LOG_FILE = /tmp/jekyll$(PORT).log
 PYTHON := venv/bin/python3
 
@@ -338,10 +342,13 @@ bundle-install:
 		mkdir -p .bundle && touch .bundle/install_marker; \
 	fi
 
-# Start Jekyll server (incremental for development, production is GitHub Actions)
+# Data-driven photo and navigation pages need full dependency regeneration.
+# Jekyll incremental mode does not track _data changes.
 jekyll-serve: bundle-install
+	@bundle exec jekyll clean --destination "$(PREVIEW_DESTINATION)"
+	@: > $(LOG_FILE)
 	@touch /tmp/.notebook_watch_marker
-	@bundle exec jekyll serve -H $(HOST) -P $(PORT) --incremental > $(LOG_FILE) 2>&1 & \
+	@bundle exec jekyll serve -H $(HOST) -P $(PORT) --baseurl "$(BASEURL)" --destination "$(PREVIEW_DESTINATION)" --disable-disk-cache > $(LOG_FILE) 2>&1 & \
 		echo "Server PID: $$!"
 	@make wait-for-server
 
@@ -354,7 +361,7 @@ wait-for-server:
 			grep "Server address:" $(LOG_FILE); \
 			break; \
 		fi; \
-		if [ $$COUNTER -eq 300 ]; then \
+		if [ $$COUNTER -eq 600 ]; then \
 			echo "Server timed out after $$COUNTER seconds."; \
 			echo "Review errors from $(LOG_FILE)."; \
 			cat $(LOG_FILE); \
@@ -478,3 +485,12 @@ list-projects:
 	done || echo "  None found"
 
 .PHONY: list-projects build-registered-projects convert-registered-notebooks build-registered-docs watch-registered-projects clean-registered-projects
+# Focused SFI review; avoids legacy conversion/stop targets and unrelated servers.
+PUBLIC_REVIEW_DESTINATION ?= /tmp/sfi-public-cleanup-preview
+.PHONY: public-review-build public-review-serve public-review-test
+public-review-build:
+	JEKYLL_ENV=production bundle exec jekyll build --disable-disk-cache --destination "$(PUBLIC_REVIEW_DESTINATION)"
+public-review-serve:
+	JEKYLL_ENV=production bundle exec jekyll serve --host 127.0.0.1 --port 4000 --baseurl "" --destination "$(PUBLIC_REVIEW_DESTINATION)" --disable-disk-cache
+public-review-test: public-review-build
+	SFI_BUILT_SITE="$(PUBLIC_REVIEW_DESTINATION)" npm run test:public-build

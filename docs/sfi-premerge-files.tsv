@@ -1,0 +1,93 @@
+path	status	commit_group	category	bytes
+.gitignore	M	cleanup	source/configuration	2624
+Makefile	M	feature	source/configuration	18652
+README.md	M	feature	documentation/provenance	13124
+_config.yml	M	feature	source/configuration	1480
+_data/sfi_home_navigation.yml	A	feature	source/configuration	864
+_data/sfi_photography.yml	M	feature	source/configuration	17367
+_includes/sfi/feature-grid.html	A	feature	source/configuration	647
+_includes/sfi/footer.html	M	feature	source/configuration	2271
+_includes/sfi/nav.html	M	feature	source/configuration	1151
+_includes/sfi/photograph.html	M	feature	source/configuration	1126
+_sass/sfi/_main.scss	M	feature	SCSS	863
+_sass/sfi/_tokens.scss	M	feature	SCSS	1069
+_sass/sfi/base/_accessibility.scss	M	feature	SCSS	1529
+_sass/sfi/base/_layout.scss	M	feature	SCSS	3483
+_sass/sfi/components/_experience.scss	D	cleanup	cleanup deletion	1135
+_sass/sfi/components/_feature-grid.scss	A	feature	SCSS	2105
+_sass/sfi/components/_footer.scss	M	feature	SCSS	1810
+_sass/sfi/components/_header.scss	D	cleanup	cleanup deletion	2043
+_sass/sfi/components/_image-banner.scss	A	feature	SCSS	1419
+_sass/sfi/components/_nav-account.scss	D	cleanup	cleanup deletion	674
+_sass/sfi/components/_navigation.scss	M	feature	SCSS	2558
+_sass/sfi/pages/_contact.scss	A	feature	SCSS	1719
+_sass/sfi/pages/_content.scss	M	feature	SCSS	9702
+_sass/sfi/pages/_hero.scss	D	cleanup	cleanup deletion	2303
+_sass/sfi/pages/_home-responsive.scss	D	cleanup	cleanup deletion	3136
+_sass/sfi/pages/_home.scss	A	feature	SCSS	2232
+_sass/sfi/pages/_photography.scss	M	feature	SCSS	2088
+_sass/sfi/pages/_specs.scss	M	feature	SCSS	8731
+assets/js/search-data.json	M	search-fix	source/configuration	2009
+docs/sfi-final-premerge-audit.md	A	audit	documentation/provenance	25158
+docs/sfi-home-image-navigation-repair.md	A	feature	documentation/provenance	12576
+docs/sfi-photographic-redesign-pr.md	A	audit	documentation/provenance	1594
+docs/sfi-photographic-redesign.md	A	feature	documentation/provenance	19838
+docs/sfi-premerge-files.tsv	A	audit	documentation/provenance	n/a
+docs/sfi-repository-cleanup-duplicates.tsv	A	cleanup	documentation/provenance	55437
+docs/sfi-repository-cleanup-report.md	A	cleanup	documentation/provenance	41717
+docs/site-photography/image-manifest.json	M	feature	documentation/provenance	18051
+graphify-out/.graphify_detect.json	D	cleanup	cleanup deletion	305935
+graphify-out/.graphify_python	D	cleanup	cleanup deletion	41
+graphify-out/converted/CSA-Period 2-Comp-Sci-Quest-Frontend-Module_6d41d9a7.md	D	cleanup	cleanup deletion	3497
+graphify-out/converted/CSA-Period 2-Comp-Sci-Quest-Outline_e251bce7.md	D	cleanup	cleanup deletion	7337
+graphify-out/converted/Design-for-Whole-Child-WGU-E-learning_c4200192.md	D	cleanup	cleanup deletion	7182
+graphify-out/converted/Flask-Server-Crash-Course-WGU-E-learning_1736e742.md	D	cleanup	cleanup deletion	10026
+graphify-out/converted/GameBuilder-Capstone-Report_8797fb1b.md	D	cleanup	cleanup deletion	91703
+graphify-out/converted/Plagiarism-WGU-SGM2-Task1-Ideation-Higher-Level-Education_8d92b34e.md	D	cleanup	cleanup deletion	12654
+graphify-out/converted/Plagiarism-WGU-SGM2-Task2-Storyboard-Higher-Level-Education_5b6bf7b2.md	D	cleanup	cleanup deletion	10213
+graphify-out/converted/Plagiarism-WGU-SGM2-Task3-Mockup-Higher-Level-Education_415d28ad.md	D	cleanup	cleanup deletion	6337
+graphify-out/converted/Plagiarism-WGU-SGM2-Task4-Test-Plan-Higher-Level-Education_63a27c1e.md	D	cleanup	cleanup deletion	44316
+graphify-out/converted/QuestOfCode-AIUsage-Thinkers_e328b7bf.md	D	cleanup	cleanup deletion	14975
+graphify-out/converted/QuestOfCode-WGU-Assessments-E-Learning_89ab6a69.md	D	cleanup	cleanup deletion	6445
+graphify-out/converted/QuestOfCode-WGU-Collaborative-E-Learning_a507ab73.md	D	cleanup	cleanup deletion	4973
+graphify-out/converted/QuestOfCode-WGU-Demonstrating-Essential-Concepts_b5425c76.md	D	cleanup	cleanup deletion	23216
+graphify-out/converted/QuestOfCode-WGU-Digital-Citizenship_d6e7d68d.md	D	cleanup	cleanup deletion	15576
+graphify-out/converted/QuestOfSpook-Game-Development_b1bee769.md	D	cleanup	cleanup deletion	14666
+graphify-out/converted/usability-test-plan-response_b2ad659b.md	D	cleanup	cleanup deletion	30678
+images/sfi/PHOTOGRAPHY.md	M	feature	documentation/provenance	2485
+images/sfi/photography/card-about-480.webp	A	feature	responsive image	33806
+images/sfi/photography/card-about-960.jpg	A	feature	responsive image	167931
+images/sfi/photography/card-about-960.webp	A	feature	responsive image	136584
+images/sfi/photography/card-certification-480.webp	A	feature	responsive image	20900
+images/sfi/photography/card-certification-960.jpg	A	feature	responsive image	90523
+images/sfi/photography/card-certification-960.webp	A	feature	responsive image	56948
+images/sfi/photography/card-contact-480.webp	A	feature	responsive image	24406
+images/sfi/photography/card-contact-960.jpg	A	feature	responsive image	98550
+images/sfi/photography/card-contact-960.webp	A	feature	responsive image	58056
+images/sfi/photography/card-news-480.webp	A	feature	responsive image	28686
+images/sfi/photography/card-news-960.jpg	A	feature	responsive image	122460
+images/sfi/photography/card-news-960.webp	A	feature	responsive image	80824
+images/sfi/photography/card-specifications-480.webp	A	feature	responsive image	29464
+images/sfi/photography/card-specifications-960.jpg	A	feature	responsive image	112909
+images/sfi/photography/card-specifications-960.webp	A	feature	responsive image	69874
+images/sfi/photography/card-testing-480.webp	A	feature	responsive image	17680
+images/sfi/photography/card-testing-960.jpg	A	feature	responsive image	80763
+images/sfi/photography/card-testing-960.webp	A	feature	responsive image	45768
+images/sfi/photography/contact-banner-1280.jpg	A	feature	responsive image	59633
+images/sfi/photography/contact-banner-1280.webp	A	feature	responsive image	33372
+images/sfi/photography/contact-banner-480.webp	A	feature	responsive image	9604
+images/sfi/photography/contact-banner-960.webp	A	feature	responsive image	22914
+images/sfi/photography/services-banner-1280.jpg	A	feature	responsive image	124634
+images/sfi/photography/services-banner-1280.webp	A	feature	responsive image	80080
+images/sfi/photography/services-banner-480.webp	A	feature	responsive image	15814
+images/sfi/photography/services-banner-960.webp	A	feature	responsive image	48014
+index.md	M	feature	documentation/provenance	1924
+navigation/about.md	M	feature	documentation/provenance	3155
+navigation/contact.md	M	feature	documentation/provenance	3426
+navigation/services.md	M	feature	documentation/provenance	2428
+navigation/sfi-specs.md	M	feature	documentation/provenance	23365
+package.json	M	feature,search-fix	source/configuration	653
+scripts/test-sfi-photo-assets.mjs	A	feature	test	4823
+scripts/test-sfi-redesign-browser.cjs	A	feature	test	15289
+scripts/test-sfi-redesign.mjs	A	feature	test	5385
+scripts/test-sfi-search-index.mjs	A	search-fix	test	2926

@@ -51,7 +51,7 @@ To set up the workspace for your frontend project, follow these steps:
    - Create a `.env` file in the root directory of your project with the following content:
      ```plaintext
      ADMIN_USER='toby'
-     ADMIN_PASSWORD='123Toby!'
+     ADMIN_PASSWORD="replace-with-local-only-value"
      DEFAULT_USER='hop'
      DEFAULT_PASSWORD='123Hop!'
      ```

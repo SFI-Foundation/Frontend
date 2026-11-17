@@ -1,0 +1,552 @@
+{
+  "hero": {
+    "source_sha256": "bfbf7d4753c7fe11a4c75694d420ddd146d1e6f4e6d4a269df0c7fbc1caeacce",
+    "original_dimensions": [
+      3863,
+      1365
+    ],
+    "crop": [
+      200,
+      0,
+      2930,
+      1365
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/hero-480.webp",
+        "width": 480,
+        "height": 240,
+        "bytes": 29016,
+        "sha256": "da4b160f40718b8eb594af0d8cc18cf14bb07910d79cb6e7a756701abca2ebee"
+      },
+      {
+        "path": "images/sfi/photography/hero-800.webp",
+        "width": 800,
+        "height": 400,
+        "bytes": 63918,
+        "sha256": "c55684499b093cd91e91adaf8224c451e38b5bb673970b004dbe09dbd3b567ba"
+      },
+      {
+        "path": "images/sfi/photography/hero-1280.webp",
+        "width": 1280,
+        "height": 640,
+        "bytes": 147390,
+        "sha256": "815eea63d6a91f35c364d57725899be029a752edf9d15588691b798b6f2888fe"
+      },
+      {
+        "path": "images/sfi/photography/hero-1280.jpg",
+        "width": 1280,
+        "height": 640,
+        "bytes": 188153,
+        "sha256": "f5318545342c220ca8cfbc75ddaaf3209ce398ce869660d8313d00e3ffaf2f79"
+      }
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/NHRA_Winter_Nationals_%286925152129%29.jpg"
+  },
+  "safety": {
+    "source_sha256": "d12ac5cbfaf338f99eba03f290f42392f1a00b423b667a75b06763dd62462a5f",
+    "original_dimensions": [
+      3504,
+      2336
+    ],
+    "crop": [
+      0,
+      0,
+      3504,
+      2336
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/safety-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 12164,
+        "sha256": "d7091bf61994b9f1b1bb0d131e9471850db17e6ca36789ed6bb034ca8cd7f770"
+      },
+      {
+        "path": "images/sfi/photography/safety-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 28832,
+        "sha256": "6b913eb64b69ff3a09ab9fdd8645eee70539d56db72699574f3f05d9f870356c"
+      },
+      {
+        "path": "images/sfi/photography/safety-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 61577,
+        "sha256": "44a4bd47c8d7d8f3a52cf71259a8f66c561b47ef1cf4ef158b9ef72eecba3186"
+      }
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Ken_SchraderHANSdevice.jpg"
+  },
+  "specs": {
+    "source_sha256": "319053436c134106900c016d318f70b579971d2f0d8ac49a3aa06f2279d149ed",
+    "original_dimensions": [
+      3008,
+      2000
+    ],
+    "crop": [
+      150,
+      350,
+      1800,
+      1450
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/specs-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 28502,
+        "sha256": "413466ad2d9c9620500b32223ff41f3fd92c14d358c15f5300703b9d001e87e4"
+      },
+      {
+        "path": "images/sfi/photography/specs-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 74448,
+        "sha256": "95f666bb46eea6d87dacb709a3a642737979ac75430a857bd5d20fe6bfd50f1e"
+      },
+      {
+        "path": "images/sfi/photography/specs-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 111685,
+        "sha256": "c048011b4d2ddb76747477b8d85275053525660306fba43a86f77b516cdb5979"
+      }
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Racers_Helmet_%286234927568%29.jpg"
+  },
+  "history": {
+    "source_sha256": "bfdf0c708d3612fa7cc2ef21f28afb16f3bde805d5fc793287350137d20cbf79",
+    "original_dimensions": [
+      1953,
+      1128
+    ],
+    "crop": [
+      150,
+      0,
+      1842,
+      1128
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/history-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 18762,
+        "sha256": "e062e4824f9e822e2a98f8f9b1083b3a9add56812f0c56a2d66b6b1fbd99d289"
+      },
+      {
+        "path": "images/sfi/photography/history-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 59332,
+        "sha256": "a1cc7fbf7e75c3f69a2d5e52cb3854325c67ed7344c8659b987b5a68e4b994b5"
+      },
+      {
+        "path": "images/sfi/photography/history-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 90586,
+        "sha256": "238f39c470558c601401162105cf0c74e5f7421ea92bd9d40284b33f68970da7"
+      }
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Racing_in_San_Antonio%2C_Texas_1968_%283949605466%29.jpg"
+  },
+  "news": {
+    "source_sha256": "7ebae35d7183e207da595ac347245cab15f7dfbc8bb565c6c64161ae999af336",
+    "original_dimensions": [
+      5472,
+      3648
+    ],
+    "crop": [
+      0,
+      0,
+      5472,
+      3648
+    ],
+    "files": [
+      {
+        "path": "images/sfi/photography/news-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 27958,
+        "sha256": "2c40b413c0e2602a1b9482efa8a98533994e517af411f9380409d308ba91fb41"
+      },
+      {
+        "path": "images/sfi/photography/news-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 85816,
+        "sha256": "58d704402f61d88c2e1de5132c882d84c4efcf7c8b0fe032252ab8c6ccf97bed"
+      },
+      {
+        "path": "images/sfi/photography/news-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 113738,
+        "sha256": "bd3fa949a05e0bebde83edb1e994a33d2486b59d33fbe1c33ccc450259f00e16"
+      }
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Drag_Racing_Cars.jpg"
+  },
+  "services-banner": {
+    "source_sha256": "edcfbce60db02a38db06081bae43bfc697b3cd41d7e267c35f5181eff5205f66",
+    "original_dimensions": [
+      4368,
+      2912
+    ],
+    "downloaded_source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/McLaren_mechanic_on_2010_Canadian_GP.jpg/1280px-McLaren_mechanic_on_2010_Canadian_GP.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "downloaded_source_dimensions": [
+      1280,
+      853
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/McLaren_mechanic_on_2010_Canadian_GP.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      102,
+      1280,
+      614
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/services-banner-480.webp",
+        "width": 480,
+        "height": 192,
+        "bytes": 15814,
+        "sha256": "59a6a91c028dc2b5596065f7ca4f2aa83ae3dd64a25a70f1d46a56f46d3b8be3"
+      },
+      {
+        "path": "images/sfi/photography/services-banner-960.webp",
+        "width": 960,
+        "height": 384,
+        "bytes": 48014,
+        "sha256": "18d263712c62560728ac8ca27f179910cc651494bfd17c7944a19d805bd6a921"
+      },
+      {
+        "path": "images/sfi/photography/services-banner-1280.webp",
+        "width": 1280,
+        "height": 512,
+        "bytes": 80080,
+        "sha256": "d1986d189e5a7e056e7ef1c2acdef277b76c708cb350b3d416a57987602932a7"
+      },
+      {
+        "path": "images/sfi/photography/services-banner-1280.jpg",
+        "width": 1280,
+        "height": 512,
+        "bytes": 124634,
+        "sha256": "e905b445f0b33f6f9dbb2f9365f3b1fbaae422ee7d849956b04287ae163b8ca0"
+      }
+    ]
+  },
+  "card-contact": {
+    "source_sha256": "99176ecbf2722e6372911205c53239bccc1852fea53b01c08172f63ba0564521",
+    "original_dimensions": [
+      2848,
+      4288
+    ],
+    "downloaded_source_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/2012_Italian_GP_-_Mechanic.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "downloaded_source_dimensions": [
+      2848,
+      4288
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/2012_Italian_GP_-_Mechanic.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      287,
+      2848,
+      2186
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/card-contact-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 24406,
+        "sha256": "8ba3df37f3331d9796214462f790afbac0ab1d67e08005c7efc35d0dfc6cb895"
+      },
+      {
+        "path": "images/sfi/photography/card-contact-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 58056,
+        "sha256": "b8fa70d1818af6385492c657ce09fe3da9dd12db2adf37b11117dedae650a750"
+      },
+      {
+        "path": "images/sfi/photography/card-contact-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 98550,
+        "sha256": "d1399e1e12873ab875d37c78ae9757456c299172859cbc7b93c8e879cfc48e4f"
+      }
+    ]
+  },
+  "card-news": {
+    "source_sha256": "f3f74d1f6f154a19aa6a02d76e6a2e6415c894e9ed41b97a7aedd23106216bd8",
+    "original_dimensions": [
+      1920,
+      1280
+    ],
+    "downloaded_source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/NASCAR-LasVegas-2012.jpg/1280px-NASCAR-LasVegas-2012.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "downloaded_source_dimensions": [
+      1280,
+      853
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/NASCAR-LasVegas-2012.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      0,
+      1280,
+      853
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/card-news-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 28686,
+        "sha256": "ea9aff3ca3e5244647099aa7ad76c2734162f857f8e50fe28e0bb3876e71589d"
+      },
+      {
+        "path": "images/sfi/photography/card-news-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 80824,
+        "sha256": "a5f6ec74ae85805b1a4f58aef1b068d986a79fdfcf027e76ac85b4dee240108e"
+      },
+      {
+        "path": "images/sfi/photography/card-news-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 122460,
+        "sha256": "ae84c4ad6ef607d94a3c5c79192bd311d73663413b952313836c4dde8b849cd1"
+      }
+    ]
+  },
+  "card-about": {
+    "source_sha256": "270c21701faa0f6a26c20957df6e8807a2e7b70bd4833c7b171ce7d25d95e6a5",
+    "original_dimensions": [
+      1800,
+      1144
+    ],
+    "downloaded_source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/NASCAR-LasVegas-2008.jpg/1280px-NASCAR-LasVegas-2008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "downloaded_source_dimensions": [
+      1280,
+      814
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/NASCAR-LasVegas-2008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      30,
+      0,
+      1251,
+      814
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/card-about-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 33806,
+        "sha256": "6a3a9081a15c8247734afbeb23d6098954e55a20c723881c5064bc735867bf3e"
+      },
+      {
+        "path": "images/sfi/photography/card-about-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 136584,
+        "sha256": "d4ffc25947db4da269b4e26464008cc4a5761c75dcc753dd809f99abc8afe07c"
+      },
+      {
+        "path": "images/sfi/photography/card-about-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 167931,
+        "sha256": "80885f75720d049add4e47972f63eb787bcf21f2908bab2c80e38e264a7db8df"
+      }
+    ]
+  },
+  "card-specifications": {
+    "source_sha256": "b5d12e0b3a51ac644942927ddf7333b509aad1a2b8bcf839ef2c36e913e56bea",
+    "original_dimensions": [
+      2848,
+      3568
+    ],
+    "downloaded_source_url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Chip_Ganassi_Racing_helmets_-_Carb_Day_2015_-_Sarah_Stierch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "downloaded_source_dimensions": [
+      2848,
+      3568
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Chip_Ganassi_Racing_helmets_-_Carb_Day_2015_-_Sarah_Stierch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      200,
+      2848,
+      2099
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/card-specifications-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 29464,
+        "sha256": "707084e3f29d86eed1f6f696ce36531b179734a6b3a013c41a939921af65b199"
+      },
+      {
+        "path": "images/sfi/photography/card-specifications-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 69874,
+        "sha256": "6baeeade6fb4ec991bc2a140cbb7aae3e55309f4f02ceca1376d2868e461ea52"
+      },
+      {
+        "path": "images/sfi/photography/card-specifications-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 112909,
+        "sha256": "a980ae59357c3172188c0558078352cf8900485a70b096831f952a558035d0d4"
+      }
+    ]
+  },
+  "card-certification": {
+    "source_sha256": "030c3fed71e1f570dd3c15b5354cffa8247efc09bf6705b2fa6572acc7573513",
+    "original_dimensions": [
+      5184,
+      3456
+    ],
+    "downloaded_source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/No._22_pit_crew_member_%2840564671273%29.jpg/1280px-No._22_pit_crew_member_%2840564671273%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "downloaded_source_dimensions": [
+      1280,
+      853
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/No._22_pit_crew_member_%2840564671273%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      0,
+      1280,
+      853
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/card-certification-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 20900,
+        "sha256": "9d44c16fe6684050de137e76133becd9f6dcbc56f06e7c78cd641d60c3917699"
+      },
+      {
+        "path": "images/sfi/photography/card-certification-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 56948,
+        "sha256": "6f041ebc67c4c16de1974db66d2a8fd170cb60c12429c7ee34d3daefae97bee4"
+      },
+      {
+        "path": "images/sfi/photography/card-certification-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 90523,
+        "sha256": "6a0c1bd402d3d3e9657a99f1fe9244ccb98a8f7c3faf01509dc94ad712aa845a"
+      }
+    ]
+  },
+  "contact-banner": {
+    "source_sha256": "ec819ea5df7da9c1a3d7fb97ae6b47c11e7329914b44db7e975ec6ba466eeb83",
+    "original_dimensions": [
+      5184,
+      3456
+    ],
+    "downloaded_source_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Front_row_pit_crew_%2853698604971%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "downloaded_source_dimensions": [
+      5184,
+      3456
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Front_row_pit_crew_%2853698604971%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      829,
+      5184,
+      2903
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/contact-banner-480.webp",
+        "width": 480,
+        "height": 192,
+        "bytes": 9604,
+        "sha256": "60f457ce0f55796550eccda8ff281eb5fbd51cdeb890e873e59e3793985b8d47"
+      },
+      {
+        "path": "images/sfi/photography/contact-banner-960.webp",
+        "width": 960,
+        "height": 384,
+        "bytes": 22914,
+        "sha256": "44ff259038c870ca93ff53e9e72c3d612e28b589710a54dc9d3ad3623cf67990"
+      },
+      {
+        "path": "images/sfi/photography/contact-banner-1280.webp",
+        "width": 1280,
+        "height": 512,
+        "bytes": 33372,
+        "sha256": "d484149dbe8d69d137e40c31a5edd2c1f68a40f0bae39b67e547a70c296570f6"
+      },
+      {
+        "path": "images/sfi/photography/contact-banner-1280.jpg",
+        "width": 1280,
+        "height": 512,
+        "bytes": 59633,
+        "sha256": "d586a714e7d5a549a5328fba9dead130e2ed238e59ea19cf268e4bb7991ced22"
+      }
+    ]
+  },
+  "card-testing": {
+    "source_sha256": "a4c1dba5833f7c373326fc07757fec80f8b647d0c7c53a2dffadb5393d9f77e1",
+    "original_dimensions": [
+      5184,
+      3456
+    ],
+    "downloaded_source_url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Inside_the_cockpit_of_a_race_car_%286051590642%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "downloaded_source_dimensions": [
+      5184,
+      3456
+    ],
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Inside_the_cockpit_of_a_race_car_%286051590642%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "crop": [
+      0,
+      0,
+      5184,
+      3456
+    ],
+    "crop_coordinate_space": "downloaded_source_dimensions",
+    "files": [
+      {
+        "path": "images/sfi/photography/card-testing-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 17680,
+        "sha256": "f987e263ea55c2cb587f90f9bb3542dd69efa1ad7bad23bcf5d1073854a2e939"
+      },
+      {
+        "path": "images/sfi/photography/card-testing-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 45768,
+        "sha256": "0b488bf767b3320ad3f87a274c430397bcab32e7e10fffcd030fa98dcf078e97"
+      },
+      {
+        "path": "images/sfi/photography/card-testing-960.jpg",
+        "width": 960,
+        "height": 640,
+        "bytes": 80763,
+        "sha256": "c04b48ff2fb6635a6a0a575fa618c1dc58c00b5b7077f7baac1c62f522f710b6"
+      }
+    ]
+  }
+}

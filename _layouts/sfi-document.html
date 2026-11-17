@@ -1,0 +1,13 @@
+---
+layout: sfi
+---
+<article class="sfi-document">
+  <header>
+    <p class="sfi-sect-label">SFI project notes</p>
+    <h1>{{ page.title | escape }}</h1>
+    <p class="sfi-document-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B %-d, %Y' }}</time>{% if page.author %} · {{ page.author | join: ', ' | escape }}{% endif %}</p>
+    {% if page.description %}<p>{{ page.description | escape }}</p>{% endif %}
+  </header>
+  {% if page.toc %}<nav class="sfi-document-toc" aria-label="Table of contents">{% include toc.html html=content %}</nav>{% endif %}
+  <div class="sfi-document-body">{{ content }}</div>
+</article>

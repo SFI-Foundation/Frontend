@@ -1,8 +1,8 @@
 ---
-layout: home 
-title: Blogs
-heading: OpenCS Blogs
-subheading: Read these articles to explore our site
-search_exclude: true
+layout: sfi-redirect
+title: SFI Foundation
 permalink: /home
+sfi_redirect: "/"
+search_exclude: true
+sitemap: false
 ---

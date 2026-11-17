@@ -309,7 +309,7 @@ microblog: true
   import { javaURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
   import { pythonURI } from '{{ site.baseurl }}/assets/js/api/config.js';
 
-  const API_KEY = 'AIzaSyAwUorzifmPEIX6M74Kd_as-C-7Ih6UyLs';
+  const API_KEY = '';
 
   async function getCredentials() {
         try {

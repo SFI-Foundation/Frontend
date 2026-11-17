@@ -1,9 +1,53 @@
 <footer class="sfi-footer">
-  <div class="sfi-footer-brand">SFI FOUNDATION</div>
-  <p>Setting the Standard for Motorsports Safety Since 1978</p>
-  <p>
-    Built by <a href="https://github.com/TheGreppers" target="_blank">The Greppers</a>
-    &bull; <a href="https://greppers-be.opencodingsociety.com" target="_blank">Backend API</a>
-    &bull; <a href="/sfi-specs/">Spec Search</a>
-  </p>
+  <div class="sfi-footer-inner">
+    <div class="sfi-footer-brand">
+      <p class="sfi-footer-title">SFI Foundation</p>
+      <p>Setting the standard for<br>motorsports safety since 1978.</p>
+      <span id="navAuth"><a href="{{ '/login/' | relative_url }}">Sign In</a></span>
+    </div>
+    <nav aria-label="Foundation navigation">
+      <h2>Foundation</h2>
+      <a href="{{ '/about/' | relative_url }}">About SFI</a>
+      <a href="{{ '/history/' | relative_url }}">Our history</a>
+      <a href="{{ '/news-events/' | relative_url }}">News &amp; events</a>
+    </nav>
+    <nav aria-label="Resource navigation">
+      <h2>Resources</h2>
+      <a href="{{ '/sfi-specs/' | relative_url }}">Find specifications</a>
+      <a href="{{ '/services/' | relative_url }}">Programs &amp; services</a>
+      <a href="{{ '/contact/' | relative_url }}">Contact SFI</a>
+    </nav>
+    <div class="sfi-footer-contact">
+      <h2>Get in touch</h2>
+      <a href="mailto:sfi@sfifoundation.com">sfi@sfifoundation.com</a>
+      <a href="tel:+18584518868">(858) 451-8868</a>
+      <address>15708 Pomerado Road, Suite N208<br>Poway, CA 92064</address>
+    </div>
+  </div>
+  <div class="sfi-footer-bottom">
+    <p>SFI Foundation, Inc. &middot; Motorsports equipment standards</p>
+    <a href="{{ '/photo-credits/' | relative_url }}">Photography credits &amp; licenses</a>
+  </div>
 </footer>
+<script type="module">
+import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | relative_url }}';
+(function() {
+  var navAuth = document.getElementById('navAuth');
+
+  function setNavUser(user) {
+    while (navAuth.firstChild) navAuth.removeChild(navAuth.firstChild);
+    var a = document.createElement('a');
+    a.href = baseurl + (user ? '/sfi-profile/' : '/login/');
+    a.textContent = user ? 'My profile' : 'Sign In';
+    if (user) a.setAttribute('aria-label', 'My profile');
+    navAuth.appendChild(a);
+  }
+
+  fetch(AUTH_API + '/api/id', { credentials: 'include', cache: 'no-store' })
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function(data) { setNavUser(data); })
+    .catch(function() { setNavUser(null); });
+
+  window.addEventListener('sfi-auth', function(e) { setNavUser(e.detail); });
+})();
+</script>
