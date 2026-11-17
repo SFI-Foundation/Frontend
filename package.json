@@ -2,7 +2,7 @@
   "name": "sfi-frontend-checks",
   "private": true,
   "scripts": {
-    "test": "node --test scripts/test-sfi-profile.mjs scripts/test-sfi-gear.mjs",
+    "test": "node --test scripts/test-sfi-profile.mjs scripts/test-sfi-onboarding.mjs scripts/test-sfi-gear.mjs",
     "test:styles": "node scripts/test-sfi-gear-sass.mjs",
     "test:redesign": "node scripts/test-sfi-redesign.mjs",
     "test:phase1": "node --test scripts/test-sfi-spec-search.mjs scripts/test-sfi-manufacturer-demo.mjs scripts/test-sfi-public-cleanup.mjs",

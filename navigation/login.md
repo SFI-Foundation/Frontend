@@ -60,7 +60,8 @@ permalink: /login/
     <h3 id="profileName"></h3>
     <p class="auth-profile-uid" id="profileUid"></p>
     <div class="auth-profile-role" id="profileRole"></div>
-    <p><a href="{{ '/sfi-profile/' | relative_url }}">View profile and optional interest quiz</a></p>
+    <p><a href="{{ '/sfi-profile/' | relative_url }}">Edit Preferences and Profile</a></p>
+    <p><a href="{{ "/sfi-profile/?onboarding=1" | relative_url }}">Tell Us About Yourself</a> — optional motorsports preferences. <a href="{{ "/" | relative_url }}">Skip for Now</a></p>
     <p id="logoutMessage" role="status"></p>
     <button class="auth-logout" onclick="doLogout()">Sign Out</button>
   </div>
@@ -185,6 +186,7 @@ import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_
         .then(function(user) {
           document.getElementById('regPass').value = '';
           showProfile(user);
+          window.location.assign('{{ "/sfi-profile/?onboarding=1" | relative_url }}');
         });
       } else {
         showMsg(res.data.message || 'Registration failed.', 'error');
