@@ -1,9 +1,11 @@
 import { pythonURI } from '../api/config.js';
+import { createOnboarding } from './onboarding.js';
 
 const element = id => document.getElementById(id);
 const emptyInterests = () => ({ causes: [], participation: [], skills: '', volunteering: null, availability: '' });
 let busy = false;
 let editingName = false;
+const onboarding = createOnboarding(request);
 
 async function request(path, options = {}) {
     const response = await fetch(`${pythonURI}/api/sfi/profile${path}`, {
@@ -17,7 +19,9 @@ async function request(path, options = {}) {
             element('profileStatus').textContent = 'Please sign in to continue.';
             window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
         }
-        throw new Error(response.status === 401 ? 'Please sign in to continue.' : data.message || 'Your profile could not be updated. Please try again.');
+        const error = new Error(response.status === 401 ? 'Please sign in to continue.' : data.message || 'Your profile could not be updated. Please try again.');
+        error.fields = data.errors || {};
+        throw error;
     }
     return data;
 }
@@ -48,6 +52,7 @@ function render(profile, form = 'all') {
     element('profileContent').hidden = false;
     element('profileSignIn').hidden = true;
     element('profileStatus').textContent = '';
+    onboarding.render(profile, form);
     window.dispatchEvent(new CustomEvent('sfi-auth', { detail: profile }));
 }
 

@@ -44,11 +44,14 @@ function documentFor(html) {
 
 function execute(source, document, fetch) {
     const events = [];
-    const window = { dispatchEvent: event => events.push(event) };
-    vm.runInNewContext(source.replace(/^import .*;\s*$/m, ''), {
+    const window = { dispatchEvent: event => events.push(event), location: { assign() {} } };
+    vm.runInNewContext(source.replace(/^import .*;\s*$/gm, ''), {
         document, fetch, window, pythonURI: 'http://localhost:8605', API_BASE: 'http://localhost:8605',
         CustomEvent: class { constructor(type, options) { this.type = type; this.detail = options.detail; } },
         console,
+        // This legacy harness covers the retained community quiz and account UI.
+        // The real onboarding controller is tested with jsdom and Chromium.
+        createOnboarding: () => ({ render() {} }),
     });
     return { window, events };
 }
