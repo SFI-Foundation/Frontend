@@ -14,7 +14,6 @@ permalink: /
     <p>Explore the specifications, certification programs, and resources that help keep motorsports safe.</p>
     <div class="sfi-home-hero-actions">
       <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find Specifications <span aria-hidden="true">&rarr;</span></a>
-      <a class="sfi-btn sfi-btn-secondary" href="{{ '/about/' | relative_url }}">About SFI</a>
     </div>
   </div>
 </header>
