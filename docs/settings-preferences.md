@@ -310,6 +310,7 @@ Full frontend file inventory for this feature:
 - `scripts/test-sfi-gear-sass.mjs`
 - `scripts/test-sfi-redesign.mjs`
 - `scripts/test-sfi-settings-browser.mjs`
+- `scripts/test-sfi-theme-contrast-browser.mjs`
 - `scripts/test-sfi-settings.mjs`
 - `scripts/test-sfi-spec-search.mjs`
 - `scripts/vendor-sfi-i18next.mjs`
@@ -360,3 +361,108 @@ serialization of the known `--sfi-font: Inter, Arial, sans-serif` declaration:
 Jekyll's embedded Sass emits single quotes and npm Sass emits double quotes.
 All other CSS remains compared exactly. `scripts/test-sfi-redesign.mjs` records
 that narrow compiler-compatibility normalization; it does not ignore style changes.
+
+## PR #35 finalization review — 2026-11-17
+
+The complete PR diff was reviewed against the latest fetched `origin/main` and
+Foundation `main` (`fd301b6ed` at review). A merge-tree simulation found no
+conflicts. The review preserves the original implementation and adds only the
+contrast fixes and browser regression below; no backend changes are required.
+
+### Defects found and fixed
+
+A real Chromium/axe check of markup emitted by the existing gear renderer found
+rejected-card metadata at 3.86:1 contrast. Its inherited opacity reduced text and
+badge contrast in light mode; pending/rejected cards also retained light-tinted
+backgrounds with light text in dark mode. The detector CTA paired its white
+button background with a pale dark-theme link color. These were accessibility
+regressions to fix before changing PR status, not limitations to waive.
+
+- Rejected equipment cards no longer reduce the opacity of their text/badges.
+- Pending and rejected cards use the shared dark surface in dark mode.
+- The detector CTA button uses the shared surface token for both fill and border.
+- `scripts/test-sfi-theme-contrast-browser.mjs` renders actual gear UI markup and
+  the actual detector CTA with generated CSS. It checks both themes, all seven
+  accents, high contrast on/off, and desktop/phone widths: 56 axe contrast scans.
+  The original CSS fails this test; the corrected candidate passes all 56 scans.
+
+The new test uses external browser QA tooling, matching the existing browser
+scripts; it does not add a production dependency or change preference values,
+review statuses, authentication, catalog ranking or PDF authorization.
+
+```sh
+PLAYWRIGHT_MODULE=/path/to/playwright \
+SFI_AXE_CORE=/path/to/axe-core/axe.min.js \
+node scripts/test-sfi-theme-contrast-browser.mjs /path/to/built-site
+```
+
+### Limitation assessment and merge decision
+
+The historical `test-sfi-sass.rb` failure remains nonblocking for this scoped PR:
+it flags the deliberately disconnected chatbot partial, which is unchanged and
+not imported or loaded by the public SFI shell. The current public stylesheet
+compilation/scope and generated-output checks remain the applicable runtime
+checks. The historical audit was not weakened to hide its failure.
+
+Manual assistive-technology review remains outstanding. Automated label,
+keyboard/focus, responsive and contrast checks are useful evidence but do not
+establish full WCAG 2.2 conformance. Ten additional axe WCAG A/AA scans of Settings
+and keyboard-help dialog states passed across English/Spanish, light/dark, and
+desktop/phone views. A full manual screen-reader review is a release follow-up;
+there is no known unresolved accessibility defect to keep this PR in Draft once
+the fixes pass final production-output verification.
+
+Professional translation review also remains a release follow-up. English and
+Spanish key coverage and switching/fallback tests pass. Four other languages
+remain explicitly partial previews; editorial/account/official technical text is
+not represented as fully translated. This limitation does not prevent review of
+the clearly scoped core UI and fallback behavior.
+
+The dependency audit reports zero production vulnerabilities. Two pre-existing
+high-severity development-only advisories (picomatch/@parcel/watcher) remain
+outside this feature. Vendor bundle/license bytes match the locked dependency;
+no credential signatures, database files, generated website output, unrelated
+source files, specification data or brand-image changes were found in the PR.
+Backend tracked/untracked work was checked against initial content fingerprints
+and is unchanged. Its 84 tests (three MySQL-only skips) and 19 isolated profile
+tests passed. Frontend source regressions ran 70 checks: 68 passed, with two
+build-output cases reserved for the completed production build.
+
+Marking Ready for Review is appropriate after final checks. This is not an
+approval to merge: a teammate review is still outstanding, as required by the
+repository PR checklist. No merge, deployment or auto-merge is authorized by
+this review. Final generated-output and browser results are recorded below.
+
+The latest main branch also removes a duplicate homepage About button. The
+existing photographic-design test still required that removed hero button.
+Its assertion now checks the primary navigation's real About link instead,
+retaining destination coverage without restoring the obsolete button or changing
+homepage content in this PR. The known main homepage change is additionally
+checked against a temporary generated-site fixture with that button removed.
+
+### Final generated-output verification
+
+The fresh full production Jekyll build passed in **893.259 seconds**, using the
+configured remote theme with incremental mode disabled. Its generated CSS matches
+the reviewed final Sass, and preference/search JavaScript matches source exactly.
+All checks below passed on that output:
+
+- Shared Sass scope/compilation, full photographic-design checks, internal paths,
+  API configuration, and the latest-main homepage compatibility fixture.
+- Seven public-build safety/search-index checks; the two source-invocation skips
+  are covered by these generated-output checks.
+- All 56 axe gear/CTA contrast scans, and ten Settings/help WCAG A/AA scans with
+  zero violations and no incomplete rules reported.
+- Real Chromium → isolated Flask → disposable SQLite Settings flows at 1440,
+  1024, 768, 390 and 320 pixels: guest/member/admin, theme/accessibility/language
+  persistence, safe imports/exports, keyboard/help focus, session-preserving
+  reset, canonical search and unavailable-PDF protection; no JavaScript errors.
+- Existing onboarding browser suite at the same five widths: registration,
+  save/reload/edit, role restrictions and preserved administrator login/access.
+
+No PR-triggered GitHub checks were configured/run for the reviewed head; the
+checked-in deployment workflow targets main. Local verification is explicit here
+rather than being represented as a green GitHub CI run. Logs and detailed JSON
+results for this finalization are under `/tmp/sfi35-review/` and are not committed.
+The existing PR is to be marked Ready for Review; approval remains outstanding,
+and no merge, deployment or auto-merge was performed.

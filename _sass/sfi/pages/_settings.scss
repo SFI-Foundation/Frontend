@@ -29,6 +29,7 @@ html[data-sfi-theme="dark"] & {
   --sfi-link: var(--sfi-accent-link-dark, #ffb4b0);
   --sfi-link-strong: var(--sfi-accent-link-dark, #ffb4b0);
   .sfi__badge { background: var(--sfi-surface2); color: var(--sfi-text); }
+  .sfi__gear-item.is-pending, .sfi__gear-item.is-rejected { background: var(--sfi-surface2); }
   .sfi__document-status.verified { color: #99ddb4; }
   .sfi__btn.danger { color: var(--sfi-red); &:hover:not(:disabled) { color: #fff; } }
   .sfi__notice.good, .sfi__notice.warn, .sfi__notice.bad,

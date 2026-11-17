@@ -80,7 +80,7 @@
   &.is-warn     { border-left-color: $warn; }
   &.is-expired  { border-left-color: $bad; }
   &.is-pending  { border-left-color: $warn; background: $warn-tint; }
-  &.is-rejected { border-left-color: $bad;  background: $bad-tint; opacity: 0.85; }
+  &.is-rejected { border-left-color: $bad; background: $bad-tint; }
 
   &-info { min-width: 0; overflow-wrap: anywhere; }
   &-name { font-weight: 700; color: var(--sfi-text); font-size: 0.95rem; }

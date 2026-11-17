@@ -190,5 +190,5 @@
 
   h2 { font-family: var(--sfi-font); font-size: 1.4rem; font-weight: 600; margin: 0 0 $space-2; }
   p { margin: 0 0 $space-4; color: rgba(#fff, 0.8); }
-  .sfi__btn { background: #fff; border-color: #fff; color: var(--sfi-link-strong); &:hover { background: var(--sfi-surface2); color: var(--sfi-link-strong); } }
+  .sfi__btn { background: var(--sfi-surface); border-color: var(--sfi-surface); color: var(--sfi-link-strong); &:hover { background: var(--sfi-surface2); color: var(--sfi-link-strong); } }
 }

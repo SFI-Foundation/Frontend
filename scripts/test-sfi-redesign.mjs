@@ -29,7 +29,8 @@ assert.equal(hero.getAttribute('fetchpriority'), 'high');
 assert.equal(hero.getAttribute('loading'), 'eager');
 assert.equal(hero.alt, '');
 assert.ok(home.querySelector('.sfi-home-hero a[href="/sfi-specs/"]'));
-assert.ok(home.querySelector('.sfi-home-hero a[href="/about/"]'));
+// main removed the duplicate hero About button; the primary nav owns this link.
+assert.ok(home.querySelector('.opencs-nav a[href="/about/"]'));
 assert.ok(!home.querySelector('.sfi-role-grid'), 'Detailed program information lives off the homepage');
 assert.ok(documentAt('about').getElementById('manufacturers-role'));
 assert.ok(documentAt('services').getElementById('testing'));
