@@ -10,11 +10,11 @@
     width: 100%;
     height: auto;
     border-radius: $radius-photo;
-    background: $surface-alt;
+    background: var(--sfi-surface2);
   }
   figcaption {
     margin-top: $space-2;
-    color: $text-muted;
+    color: var(--sfi-muted);
     font-size: 0.75rem;
     line-height: 1.5;
   }
@@ -74,7 +74,7 @@
   max-width: $site-width;
   article {
     padding-block: $space-5;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid var(--sfi-border);
   }
   article h2 {
     font-size: 1.25rem;

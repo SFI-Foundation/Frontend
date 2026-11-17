@@ -19,7 +19,7 @@ for (const line of result.css.split('\n')) {
   if (!line.trim().endsWith('{')) continue;
   const selector = line.trim().slice(0, -1).trim();
   if (selector.startsWith('@') || /^(?:from|to|[\d.]+%)(?:,\s*(?:from|to|[\d.]+%))*$/.test(selector)) continue;
-  assert.ok(selector.startsWith('.sfi-site'), `Unscoped selector: ${selector}`);
+  assert.ok(selector.startsWith('.sfi-site') || /^html(?:\[data-sfi-[^\]]+\])+ \.sfi-site(?:$|[ ,.:#>\[])/.test(selector), `Unscoped selector: ${selector}`);
 }
 for (const route of ['quiz', 'admin']) {
   const html = readFileSync(path.join(process.argv[2], route, 'index.html'), 'utf8');

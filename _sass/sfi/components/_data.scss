@@ -19,7 +19,7 @@
   border-bottom: 1px solid var(--sfi-border);
   color: var(--sfi-text-secondary);
 }
-.sfi-table tr:hover td { background: #f0f4fa; }
+.sfi-table tr:hover td { background: var(--sfi-surface2); }
 .sfi-table tr:last-child td { border-bottom: none; }
 
 /* ── Badge / Tag ──────────────────────────────── */
@@ -33,7 +33,7 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
-.sfi-badge-blue { background: rgba(26,95,168,0.1); color: var(--sfi-blue); }
+.sfi-badge-blue { background: rgba(26,95,168,0.1); color: var(--sfi-link); }
 .sfi-badge-gray { background: var(--sfi-surface2); color: var(--sfi-muted); }
 
 /* ── Search box ───────────────────────────────── */

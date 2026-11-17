@@ -5,22 +5,22 @@
   gap: $space-2;
   min-height: 44px;
   padding: 9px 16px;
-  border: 1px solid $border-strong;
-  border-radius: $radius-sm;
-  background: $surface;
-  color: $text;
-  font: 600 0.88rem/1.2 $font-body;
+  border: 1px solid var(--sfi-border-bright);
+  border-radius: var(--sfi-radius-sm);
+  background: var(--sfi-surface);
+  color: var(--sfi-text);
+  font: 600 0.88rem/1.2 var(--sfi-font);
   white-space: nowrap;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
   @include focus-ring;
 
-  &:hover:not(:disabled) { border-color: $blue; color: $blue; }
+  &:hover:not(:disabled) { border-color: var(--sfi-blue); color: var(--sfi-link); }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 
   &.primary {
-    background: $blue; border-color: $blue; color: #fff;
-    &:hover:not(:disabled) { background: $blue-dark; border-color: $blue-dark; color: #fff; }
+    background: var(--sfi-blue); border-color: var(--sfi-blue); color: #fff;
+    &:hover:not(:disabled) { background: var(--sfi-blue-dark); border-color: var(--sfi-blue-dark); color: #fff; }
   }
   &.danger { color: $bad; border-color: $bad;
     &:hover:not(:disabled) { background: $bad; color: #fff; border-color: $bad; } }
@@ -32,23 +32,23 @@
 .sfi__chip {
   min-height: 36px;
   padding: 7px 12px;
-  border: 1px solid $border;
+  border: 1px solid var(--sfi-border);
   border-radius: 999px;
-  background: $surface;
-  color: $text-soft;
-  font: 500 0.875rem/1.3 $font-body;
+  background: var(--sfi-surface);
+  color: var(--sfi-text-secondary);
+  font: 500 0.875rem/1.3 var(--sfi-font);
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
   @include focus-ring;
 
-  &:hover { background: $surface-alt; border-color: $blue; color: $blue; }
-  &.active { background: $blue; border-color: $blue; color: #fff; }
+  &:hover { background: var(--sfi-surface2); border-color: var(--sfi-blue); color: var(--sfi-link); }
+  &.active { background: var(--sfi-blue); border-color: var(--sfi-blue); color: #fff; }
 }
 
 .sfi__tabs {
   display: flex;
   gap: $space-1;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid var(--sfi-border);
   margin-bottom: $space-5;
 }
 .sfi__tab {
@@ -57,11 +57,11 @@
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   background: none;
-  color: $text-muted;
-  font: 600 0.9rem/1.2 $font-body;
+  color: var(--sfi-muted);
+  font: 600 0.9rem/1.2 var(--sfi-font);
   cursor: pointer;
   @include focus-ring;
 
-  &:hover { color: $text; }
-  &.active { color: $blue; border-bottom-color: $blue; }
+  &:hover { color: var(--sfi-text); }
+  &.active { color: var(--sfi-link); border-bottom-color: var(--sfi-blue); }
 }

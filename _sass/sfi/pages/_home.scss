@@ -20,7 +20,7 @@
     content: "";
     display: block;
     height: $space-1;
-    background: linear-gradient(90deg, $gold 0 18%, $blue 18% 100%);
+    background: linear-gradient(90deg, $gold 0 18%, var(--sfi-blue) 18% 100%);
   }
 }
 
@@ -36,13 +36,13 @@
   }
 
   .sfi-btn-secondary {
-    color: $surface;
+    color: #fff;
     background: transparent;
     border-color: rgba($surface, 0.7);
 
     &:hover {
-      color: $charcoal;
-      background: $surface;
+      color: var(--sfi-charcoal);
+      background: #fff;
     }
   }
 }
@@ -58,28 +58,28 @@
 
   h2 {
     margin: 0;
-    color: $text;
+    color: var(--sfi-text);
     font-size: clamp(2rem, 3.4vw, 2.75rem);
     letter-spacing: -0.03em;
   }
 
   .sfi-section-heading > p {
     margin: 0;
-    color: $text-muted;
+    color: var(--sfi-muted);
   }
 }
 
 .sfi-home-purpose {
-  background: $blue-dark;
-  color: $surface;
+  background: var(--sfi-blue-dark);
+  color: #fff;
 
   .sfi-eyebrow,
   a {
-    color: $surface;
+    color: #fff;
   }
 
   :focus-visible {
-    outline-color: $surface;
+    outline-color: #fff;
   }
 }
 
@@ -100,7 +100,7 @@
   p {
     margin-top: 0;
     max-width: 65ch;
-    color: $surface;
+    color: #fff;
   }
 
   a {

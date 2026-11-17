@@ -13,9 +13,9 @@
   min-height: 288px;
   padding: $space-5;
   overflow: hidden;
-  border-radius: $radius;
-  background: $charcoal;
-  color: $surface;
+  border-radius: var(--sfi-radius);
+  background: var(--sfi-charcoal);
+  color: #fff;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
@@ -68,13 +68,13 @@
     }
 
     .sfi-feature-card-arrow {
-      color: $charcoal;
-      background: $surface;
+      color: var(--sfi-charcoal);
+      background: #fff;
     }
   }
 
   &:focus-visible {
-    outline: 3px solid $blue;
+    outline: 3px solid var(--sfi-blue);
     outline-offset: 4px;
   }
 }

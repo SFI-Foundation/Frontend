@@ -37,6 +37,7 @@ Important frontend files and directories:
 | `/quiz/` | "My Gear" tracking page with certification dates and local/backend storage behavior. |
 | `/login/`, `/signup/` | SFI-styled authentication pages connected to the Flask backend. |
 | `/admin/` | Permission-protected administration for users, groups, and gear review. |
+| `/settings/` | Browser-local appearance, language, accessibility, search, privacy and shortcut preferences; accessible from the navbar gear. |
 
 ## Implemented Features
 
@@ -224,3 +225,18 @@ SFI Sass architecture and approved-baseline verification:
 [Sass architecture](docs/sfi-sass-architecture.md).
 Run `bundle exec ruby scripts/test-sfi-sass.rb <built-site> [baseline.css]` to
 verify the actual entry, all imported partials, scoped output and loaded stylesheet.
+
+## Settings & Preferences
+
+Use the header gear or `/settings/` to customize this browser. Settings includes
+light/dark/system themes, seven accents, English/Spanish UI with clearly labeled
+partial language previews, accessibility controls, canonical-search presentation,
+keyboard help, and validated JSON import/export. Account links use existing
+profile and sign-out flows. Preferences do not synchronize across devices, and
+notification delivery is not implemented. Resetting preferences preserves sign-in,
+saved gear and onboarding answers.
+
+See [implementation, limitations, storage/security contract, and verification](docs/settings-preferences.md).
+Run `npm run test:settings` for preference/search tests, or use the browser command
+in that report for disposable Flask/Chromium integration. Node 22+ is required
+for the current localization package; this implementation was checked on Node 24.

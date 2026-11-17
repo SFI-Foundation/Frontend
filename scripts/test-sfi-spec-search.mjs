@@ -7,9 +7,13 @@ const source = readFileSync(new URL('../assets/js/sfi/spec-search.js', import.me
 const page = readFileSync(new URL('../navigation/sfi-specs.md', import.meta.url), 'utf8');
 const item = { id: 1, canonical_id: '16.1', spec_number: '16.1', product_name: 'Driver Restraints', description: 'Demo description', categories: ['Auto Racing', 'Drag Racing'], revision_date: 'March 1, 2026', recertification_rules: [{ product: 'Demo', period: '2 Years' }], document_status: 'verified_current', view_spec_url: 'https://sfifoundation.com/wp-content/pdfs/specs/Spec_16.1.pdf' };
 const settle = () => new Promise(resolve => setTimeout(resolve, 5));
-function setup(handler) {
+function setup(handler, preferences = null) {
   const dom = new JSDOM(page, { url: 'http://localhost:4000/Frontend/sfi-specs/', runScripts: 'outside-only' });
   dom.window.fetch = async () => { throw new Error('Unexpected default fetch'); };
+  if (preferences) {
+    dom.window.eval(readFileSync(new URL('../assets/js/sfi/preferences.js', import.meta.url), 'utf8'));
+    dom.window.SFIPreferences.update(dom.window.JSON.parse(JSON.stringify(preferences)));
+  }
   dom.window.eval(source);
   const calls = [];
   const fetch = async url => {
@@ -184,5 +188,42 @@ test('homepage query initializes canonical search safely and reset clears catego
   assert.equal(calls.at(-1).searchParams.get('category'),'all');
   assert.equal(calls.at(-1).searchParams.has('q'),false);
   assert.equal(dom.window.document.querySelector('#sfiFilters [aria-pressed="true"]').dataset.category,'all');
+  dom.window.close();
+});
+
+
+test('search preferences control page size, safe highlights and metadata without changing ranking or PDF authorization', async () => {
+  const {dom,app,doc,calls}=setup(() => result([item,{...item,canonical_id:'3.2',spec_number:'3.2',document_status:'rejected'}],61),
+    {resultsPerPage:10,showMetadata:false,pdfIndicators:false,highlightMatches:true});
+  doc.getElementById('sfiSearch').value='Driver';
+  await app.load();
+  assert.equal(calls.at(-1).searchParams.get('limit'),'10');
+  assert.equal(calls.at(-1).searchParams.get('sort'),null);
+  assert.equal(doc.querySelectorAll('#sfiResults mark').length,2);
+  assert.equal(doc.querySelector('#sfiResults details').hidden,true);
+  assert.equal(doc.querySelector('#sfiResults .sfi__document-status').hidden,true);
+  assert.equal(doc.querySelectorAll('#sfiResults a').length,1,'Rejected PDF never acquires an action');
+  doc.getElementById('sfiNext').click(); await settle();
+  assert.equal(calls.at(-1).searchParams.get('page'),'2');
+  dom.window.SFIPreferences.update(dom.window.JSON.parse('{"resultsPerPage":50}')); await settle();
+  assert.equal(calls.at(-1).searchParams.get('page'),'1');
+  assert.equal(calls.at(-1).searchParams.get('limit'),'50');
+  doc.getElementById('sfiSearch').value='<img src=x>'; await app.load();
+  assert.equal(doc.querySelector('#sfiResults img'),null);
+  dom.window.close();
+});
+
+test('invalid remembered category is reconciled with the canonical category list', async () => {
+  const {dom,app,doc,calls}=setup(() => result(),{rememberFilters:true});
+  dom.window.SFIPreferences.rememberCategory('Not a real category');
+  await app.setCategory('Not a real category'); await settle();
+  // Re-mount simulates another visit with the invalid category stored.
+  dom.window.SFISpecSearch.mount({api:'http://backend.test/api/sfi',fetch:async url=>{
+    const path=new URL(url); calls.push(path);
+    return {ok:true,json:async()=>path.pathname.endsWith('/categories')?['Auto Racing']:path.pathname.endsWith('/stats')?{by_category:{}}:{items:[item],total:1}};
+  }});
+  await settle();
+  assert.equal(dom.window.SFIPreferences.readCategory(),'all');
+  assert.equal(doc.getElementById('sfiSelectedCategory').textContent,'All categories');
   dom.window.close();
 });

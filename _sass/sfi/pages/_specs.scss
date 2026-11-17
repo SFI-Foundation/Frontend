@@ -45,7 +45,7 @@ th[aria-sort="descending"] .sfi__sort::after {
   &-stage {
     position: relative;
     overflow: hidden;
-    border-radius: $radius;
+    border-radius: var(--sfi-radius);
     background: #0e1117;
     cursor: crosshair;
     canvas {
@@ -70,9 +70,9 @@ th[aria-sort="descending"] .sfi__sort::after {
   &-panel {
     min-height: 260px;
     padding: $space-4;
-    border: 1px solid $border;
-    border-radius: $radius;
-    background: $surface;
+    border: 1px solid var(--sfi-border);
+    border-radius: var(--sfi-radius);
+    background: var(--sfi-surface);
   }
   &-placeholder {
     display: flex;
@@ -80,7 +80,7 @@ th[aria-sort="descending"] .sfi__sort::after {
     justify-content: center;
     min-height: 220px;
     text-align: center;
-    color: $text-muted;
+    color: var(--sfi-muted);
     font-size: 0.86rem;
   }
   &-category {
@@ -89,17 +89,17 @@ th[aria-sort="descending"] .sfi__sort::after {
     margin-bottom: $space-1;
   }
   &-name {
-    font-family: $font-heading;
+    font-family: var(--sfi-font);
     font-size: 1.3rem;
     font-weight: 600;
     text-transform: uppercase;
-    color: $text;
+    color: var(--sfi-text);
     margin: 0 0 $space-2;
   }
   &-desc {
     font-size: 0.84rem;
     line-height: 1.6;
-    color: $text-soft;
+    color: var(--sfi-text-secondary);
     margin: 0 0 $space-3;
   }
   &-pills {
@@ -120,7 +120,7 @@ th[aria-sort="descending"] .sfi__sort::after {
   align-items: center;
   gap: $space-3;
   padding: 6px 0;
-  border-bottom: 1px solid $surface-alt;
+  border-bottom: 1px solid var(--sfi-surface2);
   font-size: 0.8rem;
   &:last-child {
     border-bottom: 0;
@@ -129,11 +129,11 @@ th[aria-sort="descending"] .sfi__sort::after {
   .num {
     min-width: 56px;
     font-weight: 700;
-    color: $text;
+    color: var(--sfi-text);
   }
   .name {
     flex: 1;
-    color: $text-soft;
+    color: var(--sfi-text-secondary);
     line-height: 1.35;
   }
 }
@@ -146,7 +146,7 @@ th[aria-sort="descending"] .sfi__sort::after {
 }
 .sfi__count {
   font-size: 0.85rem;
-  color: $text-muted;
+  color: var(--sfi-muted);
   margin-bottom: $space-3;
 }
 
@@ -154,15 +154,15 @@ th[aria-sort="descending"] .sfi__sort::after {
   display: none;
   margin-bottom: $space-3;
   padding: $space-2 $space-3;
-  border-radius: $radius-sm;
-  background: $blue-tint;
+  border-radius: var(--sfi-radius-sm);
+  background: var(--sfi-surface2);
   font-size: 0.85rem;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
   &.visible {
     display: block;
   }
   strong {
-    color: $blue;
+    color: var(--sfi-link);
     cursor: pointer;
     &:hover {
       text-decoration: underline;
@@ -172,23 +172,23 @@ th[aria-sort="descending"] .sfi__sort::after {
 
 .sfi__category {
   padding: $space-4;
-  border: 1px solid $border;
-  border-radius: $radius;
-  background: $surface;
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  background: var(--sfi-surface);
   cursor: pointer;
   transition: border-color 0.15s;
   &:hover {
-    border-color: $blue;
+    border-color: var(--sfi-blue);
   }
   &-name {
     font-weight: 700;
     font-size: 0.9rem;
-    color: $blue;
+    color: var(--sfi-link);
     margin-bottom: 2px;
   }
   &-count {
     font-size: 0.875rem;
-    color: $text-muted;
+    color: var(--sfi-muted);
   }
 }
 
@@ -199,15 +199,15 @@ th[aria-sort="descending"] .sfi__sort::after {
   align-items: center;
   width: 100%;
   padding: $space-3 $space-4;
-  border: 1px solid $border;
-  border-radius: $radius;
-  background: $surface;
-  color: $text;
-  font: 600 0.95rem/1.2 $font-body;
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  background: var(--sfi-surface);
+  color: var(--sfi-text);
+  font: 600 0.95rem/1.2 var(--sfi-font);
   text-align: left;
   cursor: pointer;
   &:hover {
-    background: $surface-alt;
+    background: var(--sfi-surface2);
   }
 
   &-body {
@@ -222,7 +222,7 @@ th[aria-sort="descending"] .sfi__sort::after {
   display: none;
   margin-bottom: $space-3;
   padding: $space-2 $space-3;
-  border-radius: $radius-sm;
+  border-radius: var(--sfi-radius-sm);
   font-size: 0.88rem;
   &.success {
     display: block;
@@ -236,9 +236,9 @@ th[aria-sort="descending"] .sfi__sort::after {
 .sfi__form-panel {
   padding: $space-4;
   margin-bottom: $space-5;
-  border: 1px solid $border;
-  border-radius: $radius;
-  background: $surface;
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+  background: var(--sfi-surface);
   h3 {
     margin: 0 0 $space-3;
     font-size: 1rem;
@@ -246,7 +246,7 @@ th[aria-sort="descending"] .sfi__sort::after {
 }
 
 .sfi__spec-card {
-  border-left: 1px solid $border;
+  border-left: 1px solid var(--sfi-border);
   align-items: flex-start;
   margin-bottom: $space-3;
   overflow-wrap: anywhere;
@@ -271,7 +271,7 @@ th[aria-sort="descending"] .sfi__sort::after {
   details {
     margin-top: $space-2;
     font-size: 0.875rem;
-    color: $text-soft;
+    color: var(--sfi-text-secondary);
   }
   details p {
     margin: $space-2 0;
@@ -291,7 +291,7 @@ th[aria-sort="descending"] .sfi__sort::after {
   font-size: 0.875rem;
 }
 .sfi__document-status {
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 }
 .sfi__document-status.verified {
   color: $good;
@@ -342,9 +342,9 @@ th[aria-sort="descending"] .sfi__sort::after {
 }
 .sfi-search-help {
   padding: $space-4;
-  background: $surface-alt;
-  border: 1px solid $border;
-  border-radius: $radius;
+  background: var(--sfi-surface2);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
   font-size: 0.875rem;
 }
 .sfi-search-help summary {
@@ -356,7 +356,7 @@ th[aria-sort="descending"] .sfi__sort::after {
   display: flex;
   flex-wrap: wrap;
   gap: $space-3 $space-5;
-  color: $text-muted;
+  color: var(--sfi-muted);
   font-size: 0.8125rem;
 }
 .sfi-catalog-stat {
@@ -481,5 +481,5 @@ th[aria-sort="descending"] .sfi__sort::after {
 }
 .sfi-filter-panel > summary span {
   font-weight: 400;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 }

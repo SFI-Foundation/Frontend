@@ -1,24 +1,24 @@
 .sfi__card {
-  background: $surface;
-  border: 1px solid $border;
-  border-radius: $radius;
+  background: var(--sfi-surface);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
   padding: $space-5;
 
-  p { margin: 0 0 $space-3; line-height: 1.7; color: $text-soft; font-size: 0.92rem; }
+  p { margin: 0 0 $space-3; line-height: 1.7; color: var(--sfi-text-secondary); font-size: 0.92rem; }
   p:last-child { margin-bottom: 0; }
 }
 
 .sfi__notice {
   padding: $space-3 $space-4;
-  border: 1px solid $border;
+  border: 1px solid var(--sfi-border);
   border-left-width: 3px;
-  border-radius: $radius-sm;
-  background: $surface;
+  border-radius: var(--sfi-radius-sm);
+  background: var(--sfi-surface);
   font-size: 0.88rem;
   line-height: 1.55;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 
-  a { color: $blue; font-weight: 600; text-decoration: none; &:hover { text-decoration: underline; } }
+  a { color: var(--sfi-link); font-weight: 600; text-decoration: none; &:hover { text-decoration: underline; } }
 
   &.good { border-left-color: $good; background: $good-tint; }
   &.warn { border-left-color: $warn; background: $warn-tint; }
@@ -28,7 +28,7 @@
 .sfi__empty {
   padding: $space-5 $space-4;
   text-align: center;
-  color: $text-muted;
+  color: var(--sfi-muted);
   font-size: 0.92rem;
 }
 
@@ -39,16 +39,16 @@
   margin-bottom: $space-5;
 }
 .sfi__stat {
-  background: $surface;
-  border: 1px solid $border;
-  border-radius: $radius;
+  background: var(--sfi-surface);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
   padding: $space-4;
 }
 .sfi__stat-value {
-  font-family: $font-heading;
+  font-family: var(--sfi-font);
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.1;
-  color: $blue;
+  color: var(--sfi-link);
 }
 .sfi__stat-label { @include caption; margin-top: $space-1; }

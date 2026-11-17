@@ -4,8 +4,8 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: $charcoal;
-  color: $surface;
+  background: var(--sfi-charcoal);
+  color: #fff;
 
   > .sfi-photograph {
     position: absolute;
@@ -49,14 +49,14 @@
   }
 
   .sfi-eyebrow {
-    color: $surface;
+    color: #fff;
     margin-bottom: $space-4;
     padding-left: $space-3;
     border-left: 3px solid $gold;
   }
 
   :focus-visible {
-    outline-color: $surface;
+    outline-color: #fff;
   }
 }
 
