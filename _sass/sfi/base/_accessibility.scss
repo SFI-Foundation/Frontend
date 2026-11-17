@@ -1,13 +1,13 @@
 // :is contributes attribute-level specificity so this last partial wins over
 // component outline:none rules, including .sfi__field:focus, without !important.
 :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid $blue;
+  outline: 2px solid var(--sfi-link);
   outline-offset: 3px;
 }
 .sfi-hero :focus-visible,
 .sfi-cta-banner :focus-visible,
 .sfi-nav :focus-visible {
-  outline-color: $surface;
+  outline-color: #fff;
 }
 
 .sfi-skip-link {
@@ -30,9 +30,9 @@
     margin: 0;
     padding: $space-2 $space-3;
     clip: auto;
-    color: $blue-dark;
-    background: $surface;
-    border: 2px solid $blue;
+    color: var(--sfi-link-strong);
+    background: var(--sfi-surface);
+    border: 2px solid var(--sfi-blue);
   }
 }
 

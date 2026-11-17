@@ -19,14 +19,14 @@
 
 .sfi-contact-card {
   padding: $space-5;
-  border: 1px solid $border;
-  border-left: 3px solid $blue;
-  border-radius: $radius-sm;
+  border: 1px solid var(--sfi-border);
+  border-left: 3px solid var(--sfi-blue);
+  border-radius: var(--sfi-radius-sm);
   overflow-wrap: anywhere;
 
   h3 {
     margin: 0 0 $space-2;
-    color: $text-muted;
+    color: var(--sfi-muted);
     font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -34,7 +34,7 @@
 
   p {
     margin: $space-2 0 0;
-    color: $text-soft;
+    color: var(--sfi-text-secondary);
   }
 
   > a {
@@ -46,15 +46,15 @@
   }
 
   address {
-    color: $text;
+    color: var(--sfi-text);
     font-style: normal;
   }
 }
 
 .sfi-contact-guidance {
   padding: $space-6;
-  border-radius: $radius;
-  background: $surface-alt;
+  border-radius: var(--sfi-radius);
+  background: var(--sfi-surface2);
 
   h2 {
     max-width: 19ch;
@@ -63,7 +63,7 @@
 
   section {
     padding-block: $space-4;
-    border-top: 1px solid $border;
+    border-top: 1px solid var(--sfi-border);
   }
 
   h3 {
@@ -73,7 +73,7 @@
 
   p {
     margin: 0 0 $space-4;
-    color: $text-soft;
+    color: var(--sfi-text-secondary);
   }
 
   section p {

@@ -14,15 +14,15 @@
     width: 140px; height: 140px;
     flex-shrink: 0;
     svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-    .track { fill: none; stroke: $surface-alt; stroke-width: 10; }
-    .value { fill: none; stroke: $blue; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.8s, stroke 0.3s;
+    .track { fill: none; stroke: var(--sfi-surface2); stroke-width: 10; }
+    .value { fill: none; stroke: var(--sfi-blue); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.8s, stroke 0.3s;
       &.good { stroke: $good; } &.warn { stroke: $warn; } &.bad { stroke: $bad; } }
   }
   &-number {
     position: absolute; inset: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-family: $font-heading; font-size: 2.4rem; font-weight: 600; line-height: 1; color: $text;
-    small { @include caption; font-family: $font-body; font-size: 0.65rem; margin-top: 4px; }
+    font-family: var(--sfi-font); font-size: 2.4rem; font-weight: 600; line-height: 1; color: var(--sfi-text);
+    small { @include caption; font-family: var(--sfi-font); font-size: 0.65rem; margin-top: 4px; }
   }
   &-info { flex: 1; min-width: 0; }
   &-badges { display: flex; flex-wrap: wrap; gap: $space-2; @include phone { justify-content: center; } }
@@ -44,18 +44,18 @@
     display: none;
     position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
     max-height: 220px; overflow-y: auto;
-    border: 1px solid $border-strong; border-top: 0;
-    border-radius: 0 0 $radius-sm $radius-sm;
-    background: $surface;
+    border: 1px solid var(--sfi-border-bright); border-top: 0;
+    border-radius: 0 0 var(--sfi-radius-sm) var(--sfi-radius-sm);
+    background: var(--sfi-surface);
     &.open { display: block; }
   }
   &-item {
     padding: 9px 12px;
     font-size: 0.86rem;
-    border-bottom: 1px solid $surface-alt;
+    border-bottom: 1px solid var(--sfi-surface2);
     cursor: pointer;
-    small { color: $text-muted; }
-    &:hover { background: $blue-tint; }
+    small { color: var(--sfi-muted); }
+    &:hover { background: var(--sfi-surface2); }
   }
 }
 
@@ -71,10 +71,10 @@
   gap: $space-4;
   padding: $space-4 $space-4 $space-4 $space-5;
   margin-bottom: $space-3;
-  border: 1px solid $border;
-  border-left: 4px solid $border-strong;
-  border-radius: $radius;
-  background: $surface;
+  border: 1px solid var(--sfi-border);
+  border-left: 4px solid var(--sfi-border-bright);
+  border-radius: var(--sfi-radius);
+  background: var(--sfi-surface);
 
   &.is-good     { border-left-color: $good; }
   &.is-warn     { border-left-color: $warn; }
@@ -83,15 +83,15 @@
   &.is-rejected { border-left-color: $bad;  background: $bad-tint; opacity: 0.85; }
 
   &-info { min-width: 0; overflow-wrap: anywhere; }
-  &-name { font-weight: 700; color: $text; font-size: 0.95rem; }
-  &-spec { font-size: 0.82rem; font-weight: 600; color: $blue; }
-  &-meta { display: flex; flex-wrap: wrap; gap: $space-3; margin-top: $space-1; font-size: 0.76rem; color: $text-muted; }
+  &-name { font-weight: 700; color: var(--sfi-text); font-size: 0.95rem; }
+  &-spec { font-size: 0.82rem; font-weight: 600; color: var(--sfi-link); }
+  &-meta { display: flex; flex-wrap: wrap; gap: $space-3; margin-top: $space-1; font-size: 0.76rem; color: var(--sfi-muted); }
   &-status { display: flex; flex-direction: column; align-items: flex-end; gap: $space-2; text-align: right; }
-  &-note { margin-top: $space-1; font-size: 0.76rem; font-style: italic; color: $text-muted; white-space: pre-wrap; }
-  &-days { margin-top: $space-1; font-size: 0.76rem; color: $text-muted; }
+  &-note { margin-top: $space-1; font-size: 0.76rem; font-style: italic; color: var(--sfi-muted); white-space: pre-wrap; }
+  &-days { margin-top: $space-1; font-size: 0.76rem; color: var(--sfi-muted); }
   &-remove {
     border: 0; background: none; padding: 4px 8px;
-    color: $text-muted; font-size: 1.2rem; line-height: 1; cursor: pointer; border-radius: $radius-sm;
+    color: var(--sfi-muted); font-size: 1.2rem; line-height: 1; cursor: pointer; border-radius: var(--sfi-radius-sm);
     &:hover { color: $bad; background: $bad-tint; }
     &:disabled { cursor: wait; opacity: 0.6; }
   }

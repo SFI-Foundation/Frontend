@@ -2,7 +2,7 @@
 @mixin tablet { @media (max-width: $bp-tablet) { @content; } }
 
 @mixin focus-ring {
-  &:focus-visible { outline: 2px solid $blue; outline-offset: 2px; }
+  &:focus-visible { outline: 2px solid var(--sfi-link); outline-offset: 2px; }
 }
 
 // Small uppercase label used for table heads, stat captions, etc.
@@ -11,7 +11,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: $text-muted;
+  color: var(--sfi-muted);
 }
 
 @mixin tint($fg, $bg) {
@@ -29,8 +29,8 @@
 }
 
 @mixin surface-card {
-  background: $surface;
-  border: 1px solid $border;
-  border-radius: $radius;
+  background: var(--sfi-surface);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
   box-shadow: 0 1px 4px rgba($text, 0.08);
 }

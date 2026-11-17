@@ -1,6 +1,6 @@
 /* ── Buttons ──────────────────────────────────── */
 .sfi-btn {
-  font-family: $font-body;
+  font-family: var(--sfi-font);
   padding: 10px 16px;
   min-height: 44px;
   justify-content: center;
@@ -27,12 +27,12 @@
 }
 .sfi-btn-secondary,
 .sfi-btn-outline {
-  background: $surface;
-  color: $blue;
-  border-color: $border;
+  background: var(--sfi-surface);
+  color: var(--sfi-link);
+  border-color: var(--sfi-border);
   &:hover {
-    background: $surface-alt;
-    border-color: $blue;
-    color: $blue-dark;
+    background: var(--sfi-surface2);
+    border-color: var(--sfi-blue);
+    color: var(--sfi-link-strong);
   }
 }

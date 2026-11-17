@@ -11,11 +11,11 @@
 }
 
 .sfi__title {
-  font-family: $font-heading;
+  font-family: var(--sfi-font);
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: $text;
+  color: var(--sfi-text);
   margin: 0 0 $space-2;
 }
 
@@ -24,20 +24,20 @@
   margin: 0 0 $space-5;
   font-size: 0.95rem;
   line-height: 1.65;
-  color: $text-muted;
+  color: var(--sfi-muted);
 }
 
 .sfi__subtitle {
   font-size: 1rem;
   font-weight: 600;
-  color: $text;
+  color: var(--sfi-text);
   margin: 0 0 $space-3;
 }
 
-.sfi__muted { color: $text-muted; }
+.sfi__muted { color: var(--sfi-muted); }
 
 .sfi__link {
-  color: $blue;
+  color: var(--sfi-link);
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }

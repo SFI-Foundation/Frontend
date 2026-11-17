@@ -8,9 +8,10 @@
     button.setAttribute("aria-expanded", String(open));
     button.setAttribute(
       "aria-label",
-      open ? "Close navigation" : "Open navigation",
+      window.SFII18n?.t(open ? "Close navigation" : "Open navigation") || (open ? "Close navigation" : "Open navigation"),
     );
   };
+  window.addEventListener('sfi-language', () => setOpen(button.getAttribute('aria-expanded') === 'true'));
   button.hidden = false;
   header.classList.add("opencs-bar--enhanced");
   button.addEventListener("click", () =>

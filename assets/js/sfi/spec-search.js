@@ -30,7 +30,7 @@
       return null;
     }
   }
-  function card(item) {
+  function card(item, preferences = {}) {
     const url = verifiedUrl(item);
     const status =
       {
@@ -49,9 +49,9 @@
     return `<article class="sfi__result sfi__spec-card" aria-label="SFI ${escape(item.spec_number)}">
       <div class="sfi__result-body"><h3 class="sfi__result-title">SFI ${escape(item.spec_number)} — ${escape(item.product_name)}</h3>
       <p class="sfi__result-categories">${(item.categories || [item.category]).map((c) => `<span class="sfi__badge info">${escape(c)}</span>`).join(" ")}</p>
-      <div class="sfi__document-action"><span class="sfi__document-status ${url ? "verified" : ""}">PDF status: <strong>${escape(status)}</strong></span>
+      <div class="sfi__document-action"><span class="sfi__document-status ${url ? "verified" : ""}"${preferences.pdfIndicators === false ? " hidden" : ""}>PDF status: <strong>${escape(status)}</strong></span>
       ${url ? `<a class="sfi__link" href="${escape(url)}" target="_blank" rel="noopener noreferrer">View specification (PDF, opens in new tab)</a>` : '<span class="sfi__muted">Current PDF unavailable for review.</span>'}</div>
-      <details><summary>Revision &amp; recertification details</summary>
+      <details${preferences.showMetadata === false ? " hidden" : ""}><summary>Revision &amp; recertification details</summary>
         <p>Current revision: ${escape(item.revision_date || "Not verified")}</p>
         ${item.description && item.description !== item.product_name ? `<p>${escape(item.description)}</p>` : ""}
         ${rules ? `<ul>${rules}</ul><p>Manufacturer retesting is a separate requirement. Confirm product-specific rules with the manufacturer.</p>` : "<p>Recertification information not provided.</p>"}
@@ -71,13 +71,50 @@
       total = 0,
       requestId = 0,
       timer;
-    const limit = 20;
+    const prefs = () => root.SFIPreferences?.get() || { resultsPerPage: 20, showMetadata: true, pdfIndicators: true, highlightMatches: false };
+    const t = (key, values) => root.SFII18n?.t(key, values) || key.replace(/{{(\w+)}}/g, (_, name) => values?.[name] ?? '');
+    const number = value => root.SFII18n?.number(value) || String(value);
+    let limit = prefs().resultsPerPage, lastItems = [], lastQuery = '', lastPage = 1, hasResults = false;
+    function render() {
+      el('sfiResults').innerHTML = lastItems.map(item => card(item, prefs())).join('');
+      el('sfiCount').textContent = total ? t('Showing {{start}}–{{end}} of {{total}} specifications', {
+        start: number((lastPage - 1) * limit + 1), end: number((lastPage - 1) * limit + lastItems.length), total: number(total)
+      }) : t('0 specifications');
+      if (prefs().highlightMatches && lastQuery) {
+        const tokens = [...new Set(lastQuery.toLocaleLowerCase().split(/\s+/))].filter(Boolean).slice(0, 10).sort((a, b) => b.length - a.length);
+        for (const title of el('sfiResults').querySelectorAll('.sfi__result-title')) {
+          const text = title.textContent, folded = text.toLocaleLowerCase();
+          const fragment = doc.createDocumentFragment(); let offset = 0;
+          while (offset < text.length) {
+            let start = text.length, match = '';
+            for (const token of tokens) { const index = folded.indexOf(token, offset); if (index !== -1 && index < start) { start = index; match = token; } }
+            fragment.append(doc.createTextNode(text.slice(offset, start)));
+            if (!match) break;
+            const mark = doc.createElement('mark'); mark.textContent = text.slice(start, start + match.length); fragment.append(mark);
+            offset = start + match.length;
+          }
+          title.replaceChildren(fragment);
+        }
+      }
+    }
+    root.addEventListener?.('sfi-preferences', () => {
+      if (limit !== prefs().resultsPerPage) { limit = prefs().resultsPerPage; page = 1; load(); }
+      else if (hasResults && el('sfiResults').getAttribute('aria-busy') !== 'true') render();
+    });
+    root.addEventListener?.('sfi-language', () => {
+      if (el('sfiSelectedCategory')) el('sfiSelectedCategory').textContent = category === 'all' ? t('All categories') : category;
+      const all = el('sfiFilters').querySelector('[data-category="all"]');
+      if (all) all.textContent = t('All');
+      el('catGrid').querySelectorAll('[data-count]').forEach(meta => { meta.textContent = t('{{count}} specifications', { count: number(Number(meta.dataset.count)) }); });
+      if (hasResults && el('sfiResults').getAttribute('aria-busy') !== 'true') render();
+    });
     function setCategory(next) {
       clearTimeout(timer);
       category = next;
+      root.SFIPreferences?.rememberCategory(next);
       if (el("sfiSelectedCategory"))
         el("sfiSelectedCategory").textContent =
-          next === "all" ? "All categories" : next;
+          next === "all" ? t("All categories") : next;
       page = 1;
       for (const b of el("sfiFilters").querySelectorAll("button")) {
         const active = b.dataset.category === category;
@@ -90,7 +127,7 @@
       const response = await get(`${api}${path}`);
       if (!response.ok)
         throw new Error(
-          `Catalog request failed (${response.status}). Please retry.`,
+          t("Catalog request failed ({{status}}). Please retry.", { status: response.status }),
         );
       return response.json();
     }
@@ -100,13 +137,18 @@
           json("/categories"),
           json("/stats"),
         ]);
+        if (category !== 'all' && !cats.includes(category)) {
+          category = 'all'; page = 1; root.SFIPreferences?.rememberCategory('all');
+          if (el('sfiSelectedCategory')) el('sfiSelectedCategory').textContent = t('All categories');
+          load();
+        }
         el("sfiFilters").replaceChildren();
         for (const c of ["all", ...cats]) {
           const button = doc.createElement("button");
           button.type = "button";
           button.className = "sfi__chip";
           button.dataset.category = c;
-          button.textContent = c === "all" ? "All" : c;
+          button.textContent = c === "all" ? t("All") : c;
           button.setAttribute("aria-pressed", String(c === category));
           button.classList.toggle("active", c === category);
           el("sfiFilters").append(button);
@@ -121,7 +163,8 @@
           name.textContent = cat;
           const meta = doc.createElement("span");
           meta.className = "sfi__category-count";
-          meta.textContent = `${count} specifications`;
+          meta.dataset.count = count;
+          meta.textContent = t("{{count}} specifications", { count: number(count) });
           b.append(name, meta);
           b.addEventListener("click", () => {
             setCategory(cat);
@@ -140,7 +183,8 @@
       const query = el("sfiSearch").value.trim().replace(/\s+/g, " ");
       el("sfiPrevious").disabled = true;
       el("sfiNext").disabled = true;
-      el("sfiCount").textContent = "Loading specifications…";
+      hasResults = false;
+      el("sfiCount").textContent = t("Loading specifications…");
       el("sfiResults").setAttribute("aria-busy", "true");
       el("sfiResults").replaceChildren();
       el("sfiNoResults").hidden = true;
@@ -156,7 +200,7 @@
         const data = await json(`/specs${query ? "/search" : ""}?${params}`);
         if (id !== requestId) return;
         if (!Array.isArray(data.items) || !Number.isInteger(data.total))
-          throw new Error("Unexpected catalog response.");
+          throw new Error(t("Unexpected catalog response."));
         // Defensive identity check, while server owns category and revision aggregation.
         const items = [
           ...new Map(
@@ -168,17 +212,16 @@
         ];
         total = data.total;
         onCatalog(items);
-        el("sfiResults").innerHTML = items.map(card).join("");
-        el("sfiCount").textContent = total
-          ? `Showing ${(requestedPage - 1) * limit + 1}–${(requestedPage - 1) * limit + items.length} of ${total} specifications`
-          : "0 specifications";
+        lastItems = items; lastQuery = query; lastPage = requestedPage; hasResults = true;
+        root.SFIPreferences?.rememberCategory(category);
+        render();
         el("sfiNoResults").textContent =
-          "No specifications match. Try a number or product name, or select All.";
+          t("No specifications match. Try a number or product name, or select All.");
         el("sfiNoResults").hidden = !!items.length;
       } catch (error) {
         if (id !== requestId) return;
         total = 0;
-        el("sfiCount").textContent = "Specifications could not be loaded.";
+        el("sfiCount").textContent = t("Specifications could not be loaded.");
         el("sfiNoResults").textContent = error.message;
         el("sfiNoResults").hidden = false;
         el("sfiRetry").hidden = false;
@@ -205,7 +248,7 @@
       el("sfiNext").disabled = true;
       el("sfiResults").replaceChildren();
       el("sfiResults").setAttribute("aria-busy", "true");
-      el("sfiCount").textContent = "Waiting for search…";
+      el("sfiCount").textContent = t("Waiting for search…");
       el("sfiNoResults").hidden = true;
       el("sfiRetry").hidden = true;
       timer = setTimeout(load, 250);
@@ -245,6 +288,7 @@
       root.localStorage?.removeItem("sfiCat");
     } catch {}
     if (saved) category = saved;
+    else category = root.SFIPreferences?.readCategory() || 'all';
     // A GET form on the homepage delegates to this canonical search implementation.
     const query = new URLSearchParams(root.location?.search || "").get("q");
     if (query !== null) el("sfiSearch").value = query.slice(0, 200);
@@ -255,7 +299,7 @@
       el("sfiCategoryPanel").open = false;
     if (el("sfiSelectedCategory"))
       el("sfiSelectedCategory").textContent =
-        category === "all" ? "All categories" : category;
+        category === "all" ? t("All categories") : category;
     filters();
     return { load, setCategory };
   }

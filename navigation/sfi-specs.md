@@ -26,31 +26,31 @@ body_class: sfi-spec-search
 <script src="{{ "/assets/js/sfi/api-base.js" | relative_url }}"></script>
 
   <section class="sfi__section" id="search">
-    <h2 class="sfi-visually-hidden">Search the catalog</h2>
+    <h2 class="sfi-visually-hidden" data-i18n="Search the catalog">Search the catalog</h2>
     <form id="sfiSearchForm" class="sfi__form-row" role="search">
-      <label for="sfiSearch">Specification number or product name</label>
-      <input type="search" class="sfi__field" id="sfiSearch" maxlength="200" placeholder="e.g. 3.2A, 16.1, driver suit">
-      <button type="submit" class="sfi__btn primary">Search</button>
-      <button type="button" class="sfi__btn" id="sfiClear">Clear search</button>
+      <label for="sfiSearch" data-i18n="Specification number or product name">Specification number or product name</label>
+      <input type="search" class="sfi__field" id="sfiSearch" maxlength="200" placeholder="e.g. 3.2A, 16.1, driver suit" data-i18n-placeholder="e.g. 3.2A, 16.1, driver suit">
+      <button type="submit" class="sfi__btn primary" data-i18n="Search">Search</button>
+      <button type="button" class="sfi__btn" id="sfiClear" data-i18n="Clear search">Clear search</button>
     </form>
     <details class="sfi-filter-panel" id="sfiCategoryPanel" open>
-    <summary>Filter by category: <span id="sfiSelectedCategory">All categories</span></summary>
-    <div class="sfi__filters" id="sfiFilters" role="group" aria-label="Specification category">
+    <summary><span data-i18n="Filter by category">Filter by category</span>: <span id="sfiSelectedCategory">All categories</span></summary>
+    <div class="sfi__filters" id="sfiFilters" role="group" aria-label="Specification category" data-i18n-label="Specification category">
       <button type="button" class="sfi__chip active" data-category="all" aria-pressed="true">All</button>
     </div>
     </details>
     <p class="sfi__count" id="sfiCount" role="status" aria-live="polite" tabindex="-1"></p>
     <div id="sfiResults" aria-busy="false"></div>
     <p class="sfi__empty" id="sfiNoResults" hidden></p>
-    <button type="button" class="sfi__btn" id="sfiRetry" hidden>Retry loading specifications</button>
-    <nav class="sfi__row" aria-label="Specification result pages">
-      <button type="button" class="sfi__btn" id="sfiPrevious" disabled>Previous page</button>
-      <button type="button" class="sfi__btn" id="sfiNext" disabled>Next page</button>
+    <button type="button" class="sfi__btn" id="sfiRetry" hidden data-i18n="Retry loading specifications">Retry loading specifications</button>
+    <nav class="sfi__row" aria-label="Specification result pages" data-i18n-label="Specification result pages">
+      <button type="button" class="sfi__btn" id="sfiPrevious" disabled data-i18n="Previous page">Previous page</button>
+      <button type="button" class="sfi__btn" id="sfiNext" disabled data-i18n="Next page">Next page</button>
     </nav>
   </section>
 
   <section class="sfi__section" id="categories">
-    <h2 class="sfi__title">Browse by category</h2>
+    <h2 class="sfi__title" data-i18n="Browse by category">Browse by category</h2>
     <div class="sfi__grid" id="catGrid"></div>
   </section>
 

@@ -76,6 +76,10 @@ const compiled = sass.compileString(entry, { loadPaths: [new URL('../_sass', imp
 for (const partial of ['components/_image-banner.scss', 'components/_feature-grid.scss', 'pages/_home.scss', 'pages/_contact.scss']) {
   assert.ok(compiled.loadedUrls.some(url => url.pathname.endsWith(partial)), `${partial}: connected to real entry`);
 }
-const normalize = css => css.replace(/\/\*# sourceMappingURL=.*?\*\//gs, '').trim();
+// Sass JS and Jekyll's newer embedded Sass serialize this custom-property
+// font name with different quote styles. Both spell the same CSS family.
+// Canonicalize only that known declaration; compare all other output exactly.
+const normalize = css => css.replace(/\/\*# sourceMappingURL=.*?\*\//gs, '')
+  .replace(/(--sfi-font:\s*)["']Inter["'](, Arial, sans-serif;)/g, '$1Inter$2').trim();
 assert.equal(normalize(readFileSync(path.join(site, 'assets/css/sfi.css'), 'utf8')), normalize(compiled.css));
 console.log('PASS: 13 unique photographs across the public site, licensed asset hashes, six accessible linked photo cards, destinations, contact actions, and actual compiled Sass');

@@ -35,7 +35,7 @@
 .sfi-home-card-img-placeholder {
   width: 100%;
   height: 160px;
-  background: $blue;
+  background: var(--sfi-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +48,7 @@
   font-family: "Oswald", sans-serif;
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--sfi-blue);
+  color: var(--sfi-link);
   margin: 0 0 8px;
   letter-spacing: 0.3px;
 }
@@ -120,7 +120,7 @@
 .sfi-cat-tile-name {
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  color: var(--sfi-blue);
+  color: var(--sfi-link);
   font-size: 0.82rem;
   margin-bottom: 4px;
 }
@@ -188,7 +188,7 @@
   font-family: "Oswald", sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--sfi-blue);
+  color: var(--sfi-link);
   margin: 0 0 12px;
   letter-spacing: 0.3px;
   border-bottom: 1px solid var(--sfi-border);
@@ -205,7 +205,7 @@
   margin-bottom: 0;
 }
 .sfi-info-card a {
-  color: var(--sfi-blue);
+  color: var(--sfi-link);
   text-decoration: none;
 }
 .sfi-info-card a:hover {
@@ -247,7 +247,7 @@
   font-family: "Oswald", sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--sfi-blue);
+  color: var(--sfi-link);
   margin-bottom: 4px;
 }
 .sfi-timeline-text {
@@ -259,7 +259,7 @@
 
 /* ── CTA Banner ───────────────────────────────── */
 .sfi-cta-banner {
-  background: $blue-dark;
+  background: var(--sfi-blue-dark);
   border-radius: var(--sfi-radius);
   padding: 48px 40px;
   text-align: center;
@@ -320,7 +320,7 @@
   color: var(--sfi-text);
 }
 .sfi-contact-item-val a {
-  color: var(--sfi-blue);
+  color: var(--sfi-link);
   text-decoration: none;
 }
 .sfi-contact-item-val a:hover {
@@ -350,7 +350,7 @@
 }
 .sfi-home-details > p {
   max-width: 78ch;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
   margin-bottom: $space-5;
 }
 .sfi-role-grid {
@@ -359,44 +359,44 @@
   gap: $space-5;
 }
 .sfi-role-grid > section {
-  border-top: 2px solid $blue;
+  border-top: 2px solid var(--sfi-blue);
   padding-top: $space-4;
   min-width: 0;
 }
 .sfi-role-grid h3 {
   margin: 0 0 $space-2;
   font-size: 1.0625rem;
-  color: $blue-dark;
+  color: var(--sfi-link-strong);
 }
 .sfi-role-grid p {
   margin: 0;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 }
 .sfi-blue-note {
   margin-top: $space-6;
   padding: $space-5;
-  background: $surface-alt;
-  border: 1px solid $border;
-  border-radius: $radius-sm;
-  color: $text-soft;
+  background: var(--sfi-surface2);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius-sm);
+  color: var(--sfi-text-secondary);
 }
 .sfi-blue-note h2 {
-  color: $blue-dark;
+  color: var(--sfi-link-strong);
   margin: 0 0 $space-3;
   font-size: 1.375rem;
 }
 .sfi-blue-note p {
   margin: 0 0 $space-3;
   max-width: 90ch;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 }
 .sfi-blue-note a {
-  color: $blue;
+  color: var(--sfi-link);
   display: inline-block;
   padding-block: $space-1;
 }
 .sfi-blue-note :focus-visible {
-  outline-color: $text-soft;
+  outline-color: var(--sfi-text-secondary);
 }
 @media (max-width: $bp-tablet) {
   .sfi-role-grid {
@@ -413,7 +413,7 @@
   margin-bottom: $space-2;
 }
 .sfi-services-list strong {
-  color: $blue-dark;
+  color: var(--sfi-link-strong);
 }
 .sfi-news-grid {
   gap: $space-6;
@@ -424,10 +424,10 @@
 }
 .sfi-event-row {
   padding: $space-4 0;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid var(--sfi-border);
 }
 .sfi-event-row time {
-  color: $text-muted;
+  color: var(--sfi-muted);
   font-size: 0.875rem;
 }
 .sfi-event-row h3 {
@@ -436,5 +436,5 @@
 }
 .sfi-event-row p {
   margin: 0 0 $space-2;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 }

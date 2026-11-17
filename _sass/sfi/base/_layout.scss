@@ -1,15 +1,15 @@
 .sfi-page-header {
-  background: $surface-alt;
-  border-bottom: 1px solid $border;
+  background: var(--sfi-surface2);
+  border-bottom: 1px solid var(--sfi-border);
   padding: $space-7 $space-6;
-  border-top: 3px solid $blue;
+  border-top: 3px solid var(--sfi-blue);
 }
 .sfi-page-header-content {
   max-width: $site-width - 2 * $space-6;
   margin: auto;
 }
 .sfi-page-header h1 {
-  color: $blue-dark;
+  color: var(--sfi-link-strong);
   font-size: clamp(1.875rem, 3vw, 2.75rem);
   margin: 0 0 $space-2;
   letter-spacing: -0.02em;
@@ -19,7 +19,7 @@
 }
 .sfi-page-header p {
   margin: 0;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
   max-width: 68ch;
 }
 .sfi-page-header .sfi-eyebrow {
@@ -30,7 +30,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: $blue;
+  color: var(--sfi-link);
   margin: 0 0 $space-2;
 }
 .sfi-main-wrap,
@@ -46,12 +46,12 @@
 .sfi-sect-label {
   font-size: 0.8rem;
   font-weight: 700;
-  color: $blue;
+  color: var(--sfi-link);
   margin-bottom: $space-2;
 }
 .sfi-sect-desc {
   max-width: 75ch;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
   margin: 0 0 $space-5;
 }
 .sfi-section-heading {
@@ -69,9 +69,9 @@
   font-size: 1.375rem;
 }
 .sfi-panel {
-  background: $surface;
-  border: 1px solid $border;
-  border-radius: $radius;
+  background: var(--sfi-surface);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
   padding: $space-5;
   min-width: 0;
 }
@@ -84,7 +84,7 @@
 }
 .sfi-panel p {
   margin: 0 0 $space-4;
-  color: $text-soft;
+  color: var(--sfi-text-secondary);
 }
 .sfi-panel p:last-child {
   margin-bottom: 0;
@@ -114,10 +114,10 @@
   grid-template-columns: 64px minmax(0, 1fr);
   gap: $space-4;
   padding: $space-3 0;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid var(--sfi-border);
 }
 .sfi-history-list dt {
-  color: $blue;
+  color: var(--sfi-link);
   font-weight: 700;
 }
 .sfi-history-list dd {
@@ -131,8 +131,8 @@
   gap: $space-4;
   margin-top: $space-5;
   padding: $space-5;
-  background: $blue-tint;
-  border-radius: $radius;
+  background: var(--sfi-surface2);
+  border-radius: var(--sfi-radius);
 }
 .sfi-inline-callout h2,
 .sfi-inline-callout p {
@@ -145,7 +145,7 @@
 }
 .sfi-news-list li {
   padding: $space-4 0;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid var(--sfi-border);
 }
 .sfi-news-list h3 {
   font-size: 1rem;
@@ -153,10 +153,10 @@
 }
 .sfi-news-list time {
   font-size: 0.875rem;
-  color: $text-muted;
+  color: var(--sfi-muted);
 }
 .sfi-contact-panel {
-  border-top: 2px solid $blue;
+  border-top: 2px solid var(--sfi-blue);
   scroll-margin-top: $space-4;
   overflow-wrap: anywhere;
 }
