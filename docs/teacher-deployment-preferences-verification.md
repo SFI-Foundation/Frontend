@@ -124,4 +124,4 @@ WebKit are not installed and are not counted as verified browsers.
 
 ## Review branches
 
-Backend draft: [SFI-Foundation/Backend #47](https://github.com/SFI-Foundation/Backend/pull/47), commit `b5da4b4a7cb3cc2d89fd60cc822bf509ddaa4570`. Frontend branch: `feature/sfi-preferences-localization-sync`. Both target main; no merge or deployment is authorized by this report.
+Backend draft: [SFI-Foundation/Backend #47](https://github.com/SFI-Foundation/Backend/pull/47), implementation commit `b5da4b4a7cb3cc2d89fd60cc822bf509ddaa4570`. Frontend draft: [SFI-Foundation/Frontend #39](https://github.com/SFI-Foundation/Frontend/pull/39), verified implementation commit `b9364f1ee780ff03a82d5526baae2d10c45c2396`. Later documentation commits add cross-links only. Both target main; auto-merge remains disabled. No merge or deployment was performed.
