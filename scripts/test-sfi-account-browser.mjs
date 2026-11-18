@@ -11,7 +11,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const { AxeBuilder } = require(process.env.AXE_MODULE || '@axe-core/playwright');
+const axe = require(require.resolve('axe-core', { paths: [path.dirname(require.resolve(process.env.AXE_MODULE || '@axe-core/playwright'))] }));
 const [python, backend, site, output] = process.argv.slice(2);
 assert.ok(python && backend && site && output, 'Supply Python, backend, built site, and screenshot directory');
 await mkdir(output, { recursive: true });
@@ -151,6 +151,9 @@ try {
     });
     assert.equal(await page.locator('#accountAdmin').evaluate(el => el.hidden), true);
     await page.goto('http://localhost:4000/'); await signedIn(name); await nav();
+    // Inject once per document; the same engine checks each subsequent live
+    // theme/language/accent change without repeatedly rebuilding its context.
+    await page.addScriptTag({ content: axe.source });
     for (const theme of ['light', 'dark']) for (const language of ['en', 'es']) {
       for (const accent of ['red', 'blue', 'green', 'purple', 'orange', 'teal', 'monochrome']) {
         if (process.env.SFI_ACCOUNT_SMOKE && accent !== 'red') continue;
@@ -160,7 +163,9 @@ try {
         assert.equal(await page.locator('#accountMenu a').first().textContent(), language === 'es' ? 'Mi perfil' : 'My Profile');
         assert.equal(await page.locator('#accountName').textContent(), name);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${width}/${theme}/${language}/${accent} overflow`);
-        const audit = await new AxeBuilder({ page }).include('.opencs-bar').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+        const audit = await page.evaluate(() => window.axe.run(document.querySelector('.opencs-bar'), {
+          runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] },
+        }));
         audits.push({ width, theme, language, accent, violations: audit.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => n.target) })) });
         assert.deepEqual(audits.at(-1).violations, [], 'Header WCAG accessibility');
         if (accent === 'purple') await capture(`dropdown-${theme}-${language}`);
@@ -219,4 +224,5 @@ try {
   bridge.stdin.end();
   await Promise.race([once(bridge, 'exit'), new Promise(resolve => setTimeout(resolve, 3000))]);
   if (bridge.exitCode === null) bridge.kill('SIGTERM');
+  bridge.stdout.destroy(); bridge.stderr.destroy(); bridge.stdin.destroy(); bridge.unref();
 }
