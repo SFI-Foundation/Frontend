@@ -6,6 +6,8 @@ BASEURL ?=
 PREVIEW_DESTINATION ?= _site_preview/$(PORT)
 LOG_FILE = /tmp/jekyll$(PORT).log
 PYTHON := venv/bin/python3
+DOCX_FLAGS ?=
+DOCX_VERBOSE = $(if $(filter convert convert-docx,$(MAKECMDGOALS)),--verbose,)
 
 SHELL = /bin/bash -c
 .SHELLFLAGS = -e
@@ -219,7 +221,7 @@ convert-single:
 # DOCX conversion
 convert-docx:
 	@if [ -d "_docx" ] && [ "$(shell ls -A _docx 2>/dev/null)" ]; then \
-		$(PYTHON) scripts/convert_docx.py; \
+		$(PYTHON) scripts/convert_docx.py $(DOCX_VERBOSE) $(DOCX_FLAGS); \
 	else \
 		echo "No DOCX files found in _docx directory"; \
 	fi
@@ -229,9 +231,9 @@ convert-docx-config:
 	@if [ -d "_docx" ] && [ "$(shell ls -A _docx 2>/dev/null)" ]; then \
 		if [ -n "$(CONFIG_FILE)" ]; then \
 			echo "🔧 Config file changed: $(CONFIG_FILE)"; \
-			$(PYTHON) scripts/convert_docx.py --config-changed "$(CONFIG_FILE)"; \
+			$(PYTHON) scripts/convert_docx.py $(DOCX_VERBOSE) $(DOCX_FLAGS) --config-changed "$(CONFIG_FILE)"; \
 		else \
-			$(PYTHON) scripts/convert_docx.py; \
+			$(PYTHON) scripts/convert_docx.py $(DOCX_VERBOSE) $(DOCX_FLAGS); \
 		fi; \
 	else \
 		echo "No DOCX files found in _docx directory"; \
