@@ -28,7 +28,7 @@ const QuizApp = (() => {
     const dateEl = document.getElementById('gearDate');
 
     const name = nameEl.value.trim();
-    if (!name) { alert('Enter an equipment name.'); return; }
+    if (!name) { alert(window.SFII18n?.t('Enter an equipment name.') || 'Enter an equipment name.'); return; }
 
     adding = true;
     const button = document.getElementById('gearAddBtn');

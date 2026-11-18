@@ -1,0 +1,1364 @@
+[
+  {
+    "file": "_sass/sfi/_mixins.scss",
+    "line": 35,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "box-shadow: 0 1px 4px rgba($text, 0.08);"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 3,
+    "category": "central theme palettes",
+    "source": "$bg: #fff;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 4,
+    "category": "central theme palettes",
+    "source": "$surface: #fff;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 5,
+    "category": "central theme palettes",
+    "source": "$surface-alt: #f7f9fc;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 6,
+    "category": "central theme palettes",
+    "source": "$charcoal: #141c24;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 7,
+    "category": "central theme palettes",
+    "source": "$border: #dfe5ec;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 8,
+    "category": "central theme palettes",
+    "source": "$border-strong: #7b8797;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 10,
+    "category": "central theme palettes",
+    "source": "$text: #273444;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 11,
+    "category": "central theme palettes",
+    "source": "$text-soft: #37485b;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 12,
+    "category": "central theme palettes",
+    "source": "$text-muted: #536174;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 14,
+    "category": "central theme palettes",
+    "source": "$blue: #24639b;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 15,
+    "category": "central theme palettes",
+    "source": "$blue-dark: #153f70;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 16,
+    "category": "central theme palettes",
+    "source": "$blue-tint: #f7f9fc;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 18,
+    "category": "central theme palettes",
+    "source": "$good: #1B6C3D;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 19,
+    "category": "central theme palettes",
+    "source": "$good-tint: #e6f4ec;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 20,
+    "category": "central theme palettes",
+    "source": "$warn: #9a5b00;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 21,
+    "category": "central theme palettes",
+    "source": "$warn-tint: #fdf1dc;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 22,
+    "category": "central theme palettes",
+    "source": "$bad: #b3321f;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 23,
+    "category": "central theme palettes",
+    "source": "$bad-tint: #fbe9e6;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 45,
+    "category": "central theme palettes",
+    "source": "$gold: #d5a23a;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 46,
+    "category": "central theme palettes",
+    "source": "$gold-text: #d5a23a;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 47,
+    "category": "central theme palettes",
+    "source": "$gold-dim: #d5a23a;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 51,
+    "category": "central theme palettes",
+    "source": "$hero-start: #153f70;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 52,
+    "category": "central theme palettes",
+    "source": "$hero-end: #153f70;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 53,
+    "category": "central theme palettes",
+    "source": "$hero-accent: #24639b;"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 55,
+    "category": "central theme palettes",
+    "source": "$shadow: 0 1px 3px rgba($blue-dark, 0.06);"
+  },
+  {
+    "file": "_sass/sfi/_tokens.scss",
+    "line": 56,
+    "category": "central theme palettes",
+    "source": "$shadow-md: 0 2px 8px rgba($blue-dark, 0.08);"
+  },
+  {
+    "file": "_sass/sfi/base/_accessibility.scss",
+    "line": 10,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "outline-color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_buttons.scss",
+    "line": 20,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_buttons.scss",
+    "line": 26,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 14,
+    "category": "disconnected legacy/reference",
+    "source": "background: #ffd16b;"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 32,
+    "category": "disconnected legacy/reference",
+    "source": "outline-color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 39,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(#fff, 0.5);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 41,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 60,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 12px 48px rgba($blue-dark, 0.2);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 83,
+    "category": "disconnected legacy/reference",
+    "source": "border-bottom: 1px solid rgba(240, 165, 0, 0.15);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 93,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, #f0a500, #d49400);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 104,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 121,
+    "category": "disconnected legacy/reference",
+    "source": "scrollbar-color: rgba(240, 165, 0, 0.2) transparent;"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 127,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240, 165, 0, 0.2);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 156,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240, 165, 0, 0.1);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 182,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240, 165, 0, 0.5);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 237,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, #f0a500, #d49400);"
+  },
+  {
+    "file": "_sass/sfi/components/_chatbot.scss",
+    "line": 259,
+    "category": "disconnected legacy/reference",
+    "source": "fill: #0d1117;"
+  },
+  {
+    "file": "_sass/sfi/components/_data.scss",
+    "line": 10,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_data.scss",
+    "line": 36,
+    "category": "fixed status tint or inverted control foreground",
+    "source": ".sfi-badge-blue { background: rgba(26,95,168,0.1); color: var(--sfi-link); }"
+  },
+  {
+    "file": "_sass/sfi/components/_data.scss",
+    "line": 61,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_feature-grid.scss",
+    "line": 18,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_feature-grid.scss",
+    "line": 46,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: linear-gradient(180deg, rgba($charcoal, 0.03) 20%, rgba($charcoal, 0.2) 38%, rgba($charcoal, 0.88) 72%, rgba($charcoal, 0.96));"
+  },
+  {
+    "file": "_sass/sfi/components/_feature-grid.scss",
+    "line": 65,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "box-shadow: 0 8px 20px rgba($charcoal, 0.16);"
+  },
+  {
+    "file": "_sass/sfi/components/_feature-grid.scss",
+    "line": 72,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_feature-grid.scss",
+    "line": 94,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "border: 1px solid rgba($surface, 0.6);"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 4,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 8,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 17,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: rgba($surface, 0.8);"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 28,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 40,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 47,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "outline-color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_footer.scss",
+    "line": 71,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "border-top: 1px solid rgba($surface, 0.18);"
+  },
+  {
+    "file": "_sass/sfi/components/_image-banner.scss",
+    "line": 8,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_image-banner.scss",
+    "line": 33,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: linear-gradient(90deg, rgba($charcoal, 0.97), rgba($charcoal, 0.8) 45%, rgba($charcoal, 0.3));"
+  },
+  {
+    "file": "_sass/sfi/components/_image-banner.scss",
+    "line": 52,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_image-banner.scss",
+    "line": 59,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "outline-color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/components/_image-banner.scss",
+    "line": 70,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: linear-gradient(90deg, rgba($charcoal, 0.94), rgba($charcoal, 0.72));"
+  },
+  {
+    "file": "_sass/sfi/elements/_button.scss",
+    "line": 24,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "background: var(--sfi-blue); border-color: var(--sfi-blue); color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/elements/_button.scss",
+    "line": 25,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "&:hover:not(:disabled) { background: var(--sfi-blue-dark); border-color: var(--sfi-blue-dark); color: #fff; }"
+  },
+  {
+    "file": "_sass/sfi/elements/_button.scss",
+    "line": 28,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "&:hover:not(:disabled) { background: $bad; color: #fff; border-color: $bad; } }"
+  },
+  {
+    "file": "_sass/sfi/elements/_button.scss",
+    "line": 47,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "&.active { background: var(--sfi-blue); border-color: var(--sfi-blue); color: #fff; }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 5,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-dark: #0d1117;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 6,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-surface: #161b27;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 7,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-surface2: #1e2535;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 8,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-surface3: #252d3f;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 9,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-border: rgba(240,165,0,0.15);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 10,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-gold: #F0A500;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 11,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-gold-dim: rgba(240,165,0,0.6);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 12,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-cyan: #00d4ff;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 13,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-purple: #7c3aed;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 14,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-text: #e6edf3;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 15,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-muted: #8b949e;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 16,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-green: #3fb950;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 17,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-red: #f85149;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 46,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, #0d1117 0%, #1a1025 40%, #0d1117 100%);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 71,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 0 12px rgba(240,165,0,0.4);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 81,
+    "category": "disconnected legacy/reference",
+    "source": "filter: drop-shadow(0 4px 18px rgba(240,165,0,0.25)) brightness(1.05);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 82,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(255,255,255,0.96);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 85,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(240,165,0,0.25);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 95,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 140,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, var(--sfi-gold), #d49400);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 141,
+    "category": "disconnected legacy/reference",
+    "source": "color: #000;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 142,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 4px 15px rgba(240,165,0,0.3);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 146,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 8px 30px rgba(240,165,0,0.5);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 154,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(0,212,255,0.1);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 156,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 8px 25px rgba(0,212,255,0.2);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 186,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.9);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 197,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 8px 25px rgba(240,165,0,0.15);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 235,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 259,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 275,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(0,212,255,0.06);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 276,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(0,212,255,0.15);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 293,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 314,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240,165,0,0.1);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 345,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 368,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 12px 30px rgba(0,0,0,0.3), 0 0 20px rgba(240,165,0,0.08);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 378,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240,165,0,0.08);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 379,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(240,165,0,0.18);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 410,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 424,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 8px 25px rgba(0,0,0,0.3);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 462,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 515,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, rgba(240,165,0,0.08), rgba(0,212,255,0.06));"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 533,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 564,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 581,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240,165,0,0.1);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 611,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(22,27,39,0.7);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 629,
+    "category": "disconnected legacy/reference",
+    "source": "border: 2px solid rgba(240,165,0,0.15);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 638,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-form-field::placeholder { color: #555; }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 648,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-form-msg.success { display: block; background: rgba(63,185,80,0.12); color: var(--sfi-green); border: 1px solid rgba(63,185,80,0.25); }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 649,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-form-msg.error { display: block; background: rgba(248,81,73,0.12); color: var(--sfi-red); border: 1px solid rgba(248,81,73,0.25); }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 661,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, var(--sfi-gold), #d49400);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 668,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 4px 20px rgba(240,165,0,0.4);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 674,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 6px 30px rgba(240,165,0,0.6);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 676,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-chat-toggle svg { width: 28px; height: 28px; fill: #000; }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 678,
+    "category": "disconnected legacy/reference",
+    "source": "0%, 100% { box-shadow: 0 4px 20px rgba(240,165,0,0.4); }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 679,
+    "category": "disconnected legacy/reference",
+    "source": "50% { box-shadow: 0 4px 30px rgba(240,165,0,0.7); }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 695,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 12px 40px rgba(0,0,0,0.5);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 702,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240,165,0,0.08);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 746,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(240,165,0,0.1);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 747,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(240,165,0,0.15);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 752,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(0,212,255,0.12);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 753,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(0,212,255,0.2);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 787,
+    "category": "disconnected legacy/reference",
+    "source": "border: 1px solid rgba(240,165,0,0.15);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 793,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-chat-input::placeholder { color: #555; }"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 796,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, var(--sfi-gold), #d49400);"
+  },
+  {
+    "file": "_sass/sfi/legacy/_prototype.scss",
+    "line": 797,
+    "category": "disconnected legacy/reference",
+    "source": "color: #000;"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 128,
+    "category": "fixed status tints",
+    "source": ".adm-chip.ok { color: var(--sfi-green); border-color: rgba(63,185,80,0.35); background: rgba(63,185,80,0.08); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 130,
+    "category": "fixed status tints",
+    "source": ".adm-chip.bad { color: var(--sfi-red); border-color: rgba(248,81,73,0.35); background: rgba(248,81,73,0.08); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 147,
+    "category": "fixed status tints",
+    "source": ".adm-btn.approve { color: var(--sfi-green); border-color: rgba(63,185,80,0.35); background: rgba(63,185,80,0.06); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 148,
+    "category": "fixed status tints",
+    "source": ".adm-btn.approve:hover { background: rgba(63,185,80,0.15); border-color: var(--sfi-green); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 149,
+    "category": "fixed status tints",
+    "source": ".adm-btn.reject { color: var(--sfi-red); border-color: rgba(248,81,73,0.35); background: rgba(248,81,73,0.06); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 150,
+    "category": "fixed status tints",
+    "source": ".adm-btn.reject:hover { background: rgba(248,81,73,0.15); border-color: var(--sfi-red); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 157,
+    "category": "fixed status tints",
+    "source": ".adm-btn.danger { color: var(--sfi-red); border-color: rgba(248,81,73,0.35); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 228,
+    "category": "fixed status tints",
+    "source": ".adm-msg.success { display: inline-block; background: rgba(63,185,80,0.1); color: var(--sfi-green); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_admin.scss",
+    "line": 229,
+    "category": "fixed status tints",
+    "source": ".adm-msg.error { display: inline-block; background: rgba(248,81,73,0.1); color: var(--sfi-red); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_auth.scss",
+    "line": 101,
+    "category": "accent focus token or fixed white button foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_auth.scss",
+    "line": 105,
+    "category": "accent focus token or fixed white button foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_auth.scss",
+    "line": 147,
+    "category": "accent focus token or fixed white button foreground",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_content.scss",
+    "line": 143,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "border-right: 1px solid rgba(255, 255, 255, 0.1);"
+  },
+  {
+    "file": "_sass/sfi/pages/_content.scss",
+    "line": 152,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_content.scss",
+    "line": 158,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_content.scss",
+    "line": 271,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_content.scss",
+    "line": 277,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: rgba(255, 255, 255, 0.8);"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 59,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: #000;"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 86,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: #000;"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 101,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: rgba(#000, 0.65);"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 102,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 106,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": ".sfi__spinner { width: 36px; height: 36px; border-color: rgba(#fff, 0.3); border-top-color: #fff; }"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 188,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_detect.scss",
+    "line": 192,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "p { margin: 0 0 $space-4; color: rgba(#fff, 0.8); }"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 39,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 41,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "border-color: rgba($surface, 0.7);"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 45,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 74,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 78,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 82,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "outline-color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_home.scss",
+    "line": 103,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_profile.scss",
+    "line": 11,
+    "category": "fixed status tint or inverted control foreground",
+    "source": ".sfi-profile button { min-height: 44px; padding: 10px 18px; margin: 6px 8px 0 0; border: 1px solid var(--sfi-blue); border-radius: var(--sfi-radius-sm); cursor: pointer; background: var(--sfi-blue); color: #fff; font-weight: 600; }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 3,
+    "category": "central theme palettes",
+    "source": "--sfi-blue: var(--sfi-accent, #ad2828);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 4,
+    "category": "central theme palettes",
+    "source": "--sfi-blue-dark: var(--sfi-accent-strong, #861e1e);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 5,
+    "category": "central theme palettes",
+    "source": "--sfi-blue-light: var(--sfi-accent, #ad2828);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 6,
+    "category": "central theme palettes",
+    "source": "--sfi-blue-accent: var(--sfi-accent, #ad2828);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 7,
+    "category": "central theme palettes",
+    "source": "--sfi-link: var(--sfi-accent, #ad2828);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 8,
+    "category": "central theme palettes",
+    "source": "--sfi-link-strong: var(--sfi-accent-strong, #861e1e);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 9,
+    "category": "central theme palettes",
+    "source": "--sfi-charcoal: #141c24;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 17,
+    "category": "central theme palettes",
+    "source": "--sfi-bg: #101820;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 18,
+    "category": "central theme palettes",
+    "source": "--sfi-white: #19232e;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 19,
+    "category": "central theme palettes",
+    "source": "--sfi-surface: #19232e;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 20,
+    "category": "central theme palettes",
+    "source": "--sfi-surface2: #23313f;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 21,
+    "category": "central theme palettes",
+    "source": "--sfi-surface3: #405369;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 22,
+    "category": "central theme palettes",
+    "source": "--sfi-border: #54657a;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 23,
+    "category": "central theme palettes",
+    "source": "--sfi-border-bright: #899bb0;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 24,
+    "category": "central theme palettes",
+    "source": "--sfi-text: #edf2f7;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 25,
+    "category": "central theme palettes",
+    "source": "--sfi-text-secondary: #d2dce8;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 26,
+    "category": "central theme palettes",
+    "source": "--sfi-muted: #b5c4d6;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 27,
+    "category": "central theme palettes",
+    "source": "--sfi-red: #ffb4b0;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 28,
+    "category": "central theme palettes",
+    "source": "--sfi-green: #99ddb4;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 29,
+    "category": "central theme palettes",
+    "source": "--sfi-link: var(--sfi-accent-link-dark, #ffb4b0);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 30,
+    "category": "central theme palettes",
+    "source": "--sfi-link-strong: var(--sfi-accent-link-dark, #ffb4b0);"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 33,
+    "category": "central theme palettes",
+    "source": ".sfi__document-status.verified { color: #99ddb4; }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 34,
+    "category": "central theme palettes",
+    "source": ".sfi__btn.danger { color: var(--sfi-red); &:hover:not(:disabled) { color: #fff; } }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 39,
+    "category": "central theme palettes",
+    "source": "--sfi-border: #606c7c;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 40,
+    "category": "central theme palettes",
+    "source": "--sfi-border-bright: #344256;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 41,
+    "category": "central theme palettes",
+    "source": "--sfi-text: #101820;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 42,
+    "category": "central theme palettes",
+    "source": "--sfi-text-secondary: #101820;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 43,
+    "category": "central theme palettes",
+    "source": "--sfi-muted: #273444;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 46,
+    "category": "central theme palettes",
+    "source": "--sfi-border: #b5c4d6;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 47,
+    "category": "central theme palettes",
+    "source": "--sfi-border-bright: #edf2f7;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 48,
+    "category": "central theme palettes",
+    "source": "--sfi-text: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 49,
+    "category": "central theme palettes",
+    "source": "--sfi-text-secondary: #fff;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 50,
+    "category": "central theme palettes",
+    "source": "--sfi-muted: #edf2f7;"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 83,
+    "category": "central theme palettes",
+    "source": ".sfi-footer :focus-visible { outline-color: #fff; }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 86,
+    "category": "central theme palettes",
+    "source": ".sfi-btn-primary, .sfi__btn.primary, .sfi__chip.active { color: #fff; }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 141,
+    "category": "central theme palettes",
+    "source": ".sfi-shortcut-dialog { max-width: min(36rem, calc(100% - 2rem)); border: 1px solid var(--sfi-border); background: var(--sfi-surface); color: var(--sfi-text); border-radius: var(--sfi-radius); padding: 1.5rem; &::backdrop { background: rgba(0, 0, 0, .55); } }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 143,
+    "category": "central theme palettes",
+    "source": "#sfiResults mark { background: #ffe28a; color: #222; }"
+  },
+  {
+    "file": "_sass/sfi/pages/_settings.scss",
+    "line": 162,
+    "category": "central theme palettes",
+    "source": ".opencs-bar__brand img { background: #fff; border-radius: 4px; } // Preserve logo contrast in dark mode."
+  },
+  {
+    "file": "_sass/sfi/pages/_specs.scss",
+    "line": 49,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: #0e1117;"
+  },
+  {
+    "file": "_sass/sfi/pages/_specs.scss",
+    "line": 64,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "background: rgba(#000, 0.6);"
+  },
+  {
+    "file": "_sass/sfi/pages/_specs.scss",
+    "line": 65,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "color: rgba(#fff, 0.6);"
+  },
+  {
+    "file": "assets/js/sfi/detect-renderer.js",
+    "line": 138,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "ctx.fillStyle = '#000';"
+  },
+  {
+    "file": "assets/js/sfi/detect-renderer.js",
+    "line": 157,
+    "category": "inverted imagery, camera, status or shadow",
+    "source": "ctx.fillStyle = '#000';"
+  },
+  {
+    "file": "assets/js/sfi/preferences.js",
+    "line": 29,
+    "category": "central theme palettes",
+    "source": "const ACCENTS = Object.freeze({ red: ['#ad2828', '#861e1e', '#ffb4b0'],"
+  },
+  {
+    "file": "assets/js/sfi/preferences.js",
+    "line": 30,
+    "category": "central theme palettes",
+    "source": "blue: ['#235f9a', '#16446f', '#a6cfff'], green: ['#21633f', '#174a2e', '#99ddb4'],"
+  },
+  {
+    "file": "assets/js/sfi/preferences.js",
+    "line": 31,
+    "category": "central theme palettes",
+    "source": "purple: ['#7540a3', '#542b79', '#d8b7ff'], orange: ['#954900', '#713700', '#ffc493'],"
+  },
+  {
+    "file": "assets/js/sfi/preferences.js",
+    "line": 32,
+    "category": "central theme palettes",
+    "source": "teal: ['#08666c', '#064b50', '#92dce2'], monochrome: ['#414955', '#252c35', '#d8e0eb'] });"
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 10,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#F0A500\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 22,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#00d4ff\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 35,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#ff6b6b\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 50,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#a855f7\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 65,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#22d3ee\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 83,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#f97316\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 101,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#ec4899\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 120,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#84cc16\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 136,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#eab308\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 151,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#14b8a6\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 167,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#ef4444\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 181,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#06b6d4\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 197,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#8b5cf6\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 209,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#10b981\","
+  },
+  {
+    "file": "assets/js/sfi/sfi-categories.js",
+    "line": 224,
+    "category": "fixed status tint or inverted control foreground",
+    "source": "color: \"#f59e0b\","
+  }
+]

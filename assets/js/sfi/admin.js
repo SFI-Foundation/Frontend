@@ -169,7 +169,7 @@
       'SFI ' + (g.spec || '—'),
       g.category || '—',
       g.source || 'manual',
-    ].forEach(v => { const td = document.createElement('td'); td.textContent = v; row.appendChild(td); });
+    ].forEach(v => { const td = document.createElement('td'); td.textContent = v; td.setAttribute('data-no-translate', ''); row.appendChild(td); });
 
     const statusTd = document.createElement('td');
     const chip = document.createElement('span');
@@ -180,7 +180,7 @@
     if (g.status === 'rejected' && notes) {
       const note = document.createElement('p');
       note.className = 'adm-review-note';
-      note.textContent = notes;
+      note.textContent = notes; note.setAttribute('data-no-translate', '');
       statusTd.appendChild(note);
     }
     row.appendChild(statusTd);
@@ -251,7 +251,7 @@
       lastTd.append(actions, form, message);
     } else {
       const createdAt = g.created_at ?? g.createdAt;
-      lastTd.textContent = createdAt ? new Date(createdAt).toLocaleDateString() : '—';
+      lastTd.textContent = createdAt ? window.SFII18n?.date(createdAt) || new Date(createdAt).toLocaleDateString() : '—';
     }
     row.appendChild(lastTd);
     return row;
@@ -345,7 +345,7 @@
     const tbody = document.createElement('tbody');
     state.users.forEach(u => {
       const tr = document.createElement('tr');
-      [u.name, u.uid, u.role].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      [u.name, u.uid, u.role].forEach(v => { const td = document.createElement('td'); td.textContent = v; td.setAttribute('data-no-translate', ''); tr.appendChild(td); });
       const gtd = document.createElement('td');
       const stack = document.createElement('div');
       stack.className = 'chip-stack';
@@ -394,7 +394,7 @@
     card.className = 'adm-group-card';
 
     const h = document.createElement('h4');
-    h.textContent = g.name;
+    h.textContent = g.name; h.setAttribute('data-no-translate', '');
     card.appendChild(h);
 
     const meta = document.createElement('div');
@@ -521,7 +521,7 @@
   }
 
   async function removeMember(groupId, userId) {
-    if (!confirm('Remove this user from the group?')) return;
+    if (!confirm(window.SFII18n?.t('Remove this user from the group?') || 'Remove this user from the group?')) return;
     try {
       await api('/api/sfi/groups/' + groupId + '/members/' + userId, { method: 'DELETE' });
       await loadGroups();
@@ -531,7 +531,7 @@
   }
 
   async function deleteGroup(groupId, name) {
-    if (!confirm('Delete the group "' + name + '"? Members will lose its permissions.')) return;
+    if (!confirm(window.SFII18n?.t('Delete the group "{{name}}"? Members will lose its permissions.', {name}) || 'Delete group?')) return;
     try {
       await api('/api/sfi/groups/' + groupId, { method: 'DELETE' });
       await loadGroups();

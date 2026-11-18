@@ -39,8 +39,8 @@ permalink: /detect/
       <div class="sfi__dropzone" id="uploadZone" tabindex="0" role="button" aria-label="Upload an image: drag and drop a file here, or activate to browse">
         <div class="sfi__dropzone-title">Drag and drop an image, or click to browse</div>
         <div class="sfi__dropzone-hint">JPG, PNG or WebP, up to 20 MB</div>
-        <input type="file" id="fileInput" accept="image/*">
       </div>
+      <input type="file" id="fileInput" accept="image/*" hidden aria-label="Upload image">
     </div>
 
     <div id="cameraPanel" class="sfi__hidden" role="tabpanel" aria-labelledby="tab-camera">

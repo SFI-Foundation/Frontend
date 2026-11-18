@@ -1,0 +1,2090 @@
+{
+  "workflows": [
+    "English -> Spanish homepage/login/profile/settings; reload persistence; real profile DB update; two independent browser contexts retrieve DB preferences; reverse device update; account data excluded from guest storage",
+    "stale device conflicts prevent overwrites; failed save retains interaction, shows error and retries successfully",
+    "admin and member profile persistence; admin-only API authorization; canonical search, Spanish results, page size, pagination, filtering and unapproved-PDF protection",
+    "five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets; system dark and OS reduced motion; keyboard dialog; switch back to English"
+  ],
+  "responsive": [
+    {
+      "width": 1440,
+      "routes": 13
+    },
+    {
+      "width": 1024,
+      "routes": 13
+    },
+    {
+      "width": 768,
+      "routes": 13
+    },
+    {
+      "width": 390,
+      "routes": 13
+    },
+    {
+      "width": 320,
+      "routes": 13
+    }
+  ],
+  "themes": [
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "light",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "red",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "blue",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "green",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "orange",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "teal",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1440,
+      "theme": "dark",
+      "accent": "monochrome",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1024,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 1024,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 768,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 768,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 390,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 390,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/about/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/history/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/services/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/news-events/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/contact/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-specs/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/login/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/sfi-profile/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/settings/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/admin/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/quiz/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 320,
+      "theme": "light",
+      "accent": "purple",
+      "overflow": false
+    },
+    {
+      "route": "/detect/",
+      "width": 320,
+      "theme": "dark",
+      "accent": "purple",
+      "overflow": false
+    }
+  ],
+  "accessibility": [
+    {
+      "route": "/",
+      "violations": []
+    },
+    {
+      "route": "/about/",
+      "violations": []
+    },
+    {
+      "route": "/history/",
+      "violations": []
+    },
+    {
+      "route": "/services/",
+      "violations": []
+    },
+    {
+      "route": "/news-events/",
+      "violations": []
+    },
+    {
+      "route": "/contact/",
+      "violations": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "violations": []
+    },
+    {
+      "route": "/login/",
+      "violations": []
+    },
+    {
+      "route": "/sfi-profile/",
+      "violations": []
+    },
+    {
+      "route": "/settings/",
+      "violations": []
+    },
+    {
+      "route": "/admin/",
+      "violations": []
+    },
+    {
+      "route": "/quiz/",
+      "violations": []
+    },
+    {
+      "route": "/detect/",
+      "violations": []
+    }
+  ],
+  "untranslated": [],
+  "errors": []
+}

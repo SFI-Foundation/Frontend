@@ -52,9 +52,9 @@
       <div class="sfi__document-action"><span class="sfi__document-status ${url ? "verified" : ""}"${preferences.pdfIndicators === false ? " hidden" : ""}>PDF status: <strong>${escape(status)}</strong></span>
       ${url ? `<a class="sfi__link" href="${escape(url)}" target="_blank" rel="noopener noreferrer">View specification (PDF, opens in new tab)</a>` : '<span class="sfi__muted">Current PDF unavailable for review.</span>'}</div>
       <details${preferences.showMetadata === false ? " hidden" : ""}><summary>Revision &amp; recertification details</summary>
-        <p>Current revision: ${escape(item.revision_date || "Not verified")}</p>
-        ${item.description && item.description !== item.product_name ? `<p>${escape(item.description)}</p>` : ""}
-        ${rules ? `<ul>${rules}</ul><p>Manufacturer retesting is a separate requirement. Confirm product-specific rules with the manufacturer.</p>` : "<p>Recertification information not provided.</p>"}
+        <p><span data-i18n="Current revision">Current revision</span>: ${escape(item.revision_date || "Not verified")}</p>
+        ${item.description && item.description !== item.product_name ? `<p data-no-translate>${escape(item.description)}</p>` : ""}
+        ${rules ? `<ul data-no-translate>${rules}</ul><p>Manufacturer retesting is a separate requirement. Confirm product-specific rules with the manufacturer.</p>` : "<p>Recertification information not provided.</p>"}
         ${(item.warnings || []).length ? "<p>Source review pending. Consult the official specification before use.</p>" : ""}
       </details>
       </div></article>`;

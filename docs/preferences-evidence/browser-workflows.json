@@ -1,0 +1,14 @@
+{
+  "workflows": [
+    "English -> Spanish homepage/login/profile/settings; reload persistence; real profile DB update; two independent browser contexts retrieve DB preferences; reverse device update; account data excluded from guest storage",
+    "stale device conflicts prevent overwrites; failed save retains interaction, shows error and retries successfully",
+    "admin and member profile persistence; admin-only API authorization; canonical search, Spanish results, page size, pagination, filtering and unapproved-PDF protection",
+    "guest settings persist through an account-service outage and retry without requiring an account",
+    "OS system dark/reduced motion; keyboard dialog and gear navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged"
+  ],
+  "responsive": [],
+  "themes": [],
+  "accessibility": [],
+  "untranslated": [],
+  "errors": []
+}

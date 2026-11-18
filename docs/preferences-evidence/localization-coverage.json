@@ -1,0 +1,105 @@
+{
+  "languages": {
+    "en": {
+      "keys": 770,
+      "designation": "application UI"
+    },
+    "es": {
+      "keys": 770,
+      "designation": "application UI"
+    },
+    "fr": {
+      "keys": 8,
+      "designation": "partial preview"
+    },
+    "de": {
+      "keys": 8,
+      "designation": "partial preview"
+    },
+    "zh-CN": {
+      "keys": 8,
+      "designation": "partial preview"
+    },
+    "ja": {
+      "keys": 8,
+      "designation": "partial preview"
+    }
+  },
+  "routes": [
+    {
+      "route": "/",
+      "translatedStaticStrings": 39,
+      "untranslated": []
+    },
+    {
+      "route": "/about/",
+      "translatedStaticStrings": 41,
+      "untranslated": []
+    },
+    {
+      "route": "/history/",
+      "translatedStaticStrings": 34,
+      "untranslated": []
+    },
+    {
+      "route": "/services/",
+      "translatedStaticStrings": 35,
+      "untranslated": []
+    },
+    {
+      "route": "/news-events/",
+      "translatedStaticStrings": 30,
+      "untranslated": []
+    },
+    {
+      "route": "/contact/",
+      "translatedStaticStrings": 42,
+      "untranslated": []
+    },
+    {
+      "route": "/sfi-specs/",
+      "translatedStaticStrings": 51,
+      "untranslated": []
+    },
+    {
+      "route": "/login/",
+      "translatedStaticStrings": 32,
+      "untranslated": []
+    },
+    {
+      "route": "/sfi-profile/",
+      "translatedStaticStrings": 143,
+      "untranslated": []
+    },
+    {
+      "route": "/settings/",
+      "translatedStaticStrings": 75,
+      "untranslated": []
+    },
+    {
+      "route": "/admin/",
+      "translatedStaticStrings": 45,
+      "untranslated": []
+    },
+    {
+      "route": "/quiz/",
+      "translatedStaticStrings": 27,
+      "untranslated": []
+    },
+    {
+      "route": "/detect/",
+      "translatedStaticStrings": 38,
+      "untranslated": []
+    },
+    {
+      "route": "/photo-credits/",
+      "translatedStaticStrings": 21,
+      "untranslated": []
+    }
+  ],
+  "limitations": [
+    "Official specifications, document text, news source titles, manufacturer identities, attribution/legal text and user content intentionally remain unchanged.",
+    "Coverage counts static rendered UI; browser and unit tests separately verify dynamic account/search messages.",
+    "Archived classroom and vendor projects use separate layouts and are outside the SFI application interface."
+  ]
+}

@@ -1,3 +1,5 @@
+> Historical PR #35 report. Account synchronization and broader localization supersede the browser-only limitations below. See [current verification](teacher-deployment-preferences-verification.md).
+
 # Settings & Preferences implementation
 
 ## Inspection and design (before implementation, 2026-11-17)

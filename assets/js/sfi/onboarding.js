@@ -127,7 +127,7 @@ export function createOnboarding(request) {
     });
     el('preferencesSkip').addEventListener('click', () => {
         if (saving) return;
-        if (dirty() && !window.confirm('Discard unsaved preferences? Your saved answers will be kept.')) return;
+        if (dirty() && !window.confirm(window.SFII18n?.t('Discard unsaved preferences? Your saved answers will be kept.') || 'Discard unsaved preferences? Your saved answers will be kept.')) return;
         fill(saved);
         clearErrors();
         el('preferencesStatus').textContent = '';
