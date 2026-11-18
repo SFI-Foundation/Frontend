@@ -21,7 +21,7 @@ permalink: /news-events/
       {% for news in site.data.sfi_updates.news limit:3 %}
       <li>
         <time datetime="{{ news.published | date_to_xmlschema }}">{{ news.published | date: '%B %-d, %Y' }}</time>
-        <h3><a href="{{ news.url | escape }}">{{ news.title | escape }}</a></h3>
+        <h3 data-no-translate><a href="{{ news.url | escape }}">{{ news.title | escape }}</a></h3>
       </li>
       {% endfor %}
     </ul>
@@ -38,7 +38,7 @@ permalink: /news-events/
         {% assign meeting_count = meeting_count | plus: 1 %}
         <article class="sfi-event-row">
           <time datetime="{{ event.start | escape }}">{{ event.date_label | escape }}</time>
-          <h3>{{ event.title | escape }}</h3>
+          <h3 data-no-translate>{{ event.title | escape }}</h3>
           <p>{{ event.location | escape }}</p>
           <a href="{{ event.url | escape }}">Confirm sessions and location &rarr;</a>
         </article>

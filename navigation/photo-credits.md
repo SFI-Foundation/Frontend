@@ -13,7 +13,7 @@ search_exclude: true
   <p>These photographs illustrate motorsports and protective equipment. They do not establish SFI certification, endorsement, or participation in the pictured activities. Event photographs are independent of the news announcements on this site.</p>
   {% for entry in site.data.sfi_photography %}
   {% assign photo = entry[1] %}
-  <article id="{{ photo.id }}">
+  <article data-no-translate id="{{ photo.id }}">
     <h2>{{ photo.title | escape }}</h2>
     <p>Photograph by <strong>{{ photo.photographer | escape }}</strong>.{% if photo.original_title %} Original title: {{ photo.original_title | escape }}.{% endif %} <a href="{{ photo.source | escape }}">Original source and attribution</a> · <a href="{{ photo.license_url | escape }}">{{ photo.license | escape }}</a>.</p>
     <p>{{ photo.caption | escape }} {% if photo.date_note %}{{ photo.date_note | escape }}{% endif %}</p>

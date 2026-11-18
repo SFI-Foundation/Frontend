@@ -15,14 +15,14 @@ permalink: /sfi-profile/
     <button id="profileRetry" type="button" hidden>Try again</button>
     <div id="profileContent" hidden>
       <dl>
-        <dt>Name</dt><dd id="sfiProfileName"></dd>
-        <dt>Username</dt><dd id="sfiProfileUid"></dd>
+        <dt>Name</dt><dd id="sfiProfileName" data-no-translate></dd>
+        <dt>Username</dt><dd id="sfiProfileUid" data-no-translate></dd>
         <dt>Role</dt><dd id="sfiProfileRole"></dd>
       </dl>
       <details><summary>Previously saved community interests</summary><dl>
         <dt>Nonprofit causes</dt><dd id="sfiProfileCauses"></dd>
         <dt>Participation preferences</dt><dd id="sfiProfileParticipation"></dd>
-        <dt>Skills and experience</dt><dd id="sfiProfileSkills"></dd>
+        <dt>Skills and experience</dt><dd id="sfiProfileSkills" data-no-translate></dd>
         <dt>Volunteering opportunities</dt><dd id="sfiProfileVolunteering"></dd>
         <dt>Availability</dt><dd id="sfiProfileAvailability"></dd>
       </dl>
@@ -73,7 +73,7 @@ permalink: /sfi-profile/
 <label class="sfi-choice"><input type="checkbox" name="disciplines" value="motorcycle"><span>Motorcycle Racing</span></label>
 <label class="sfi-choice"><input type="checkbox" name="disciplines" value="other"><span>Other Motorsports</span></label>
 <label class="sfi-choice"><input type="checkbox" name="disciplines" value="not_applicable"><span>Not Applicable</span></label></div><p id="error-disciplines" class="sfi-pref-error"></p></fieldset>
-<fieldset><legend>4. Are you affiliated with an organization?</legend><p class="sfi-pref-hint">Optional, self-reported details. This does not link your account to an official SFI record or grant organization access.</p><label for="pref-organization_name">Organization / Company Name</label><input id="pref-organization_name" name="organization_name" type="text" maxlength="200" autocomplete="organization" aria-describedby="error-organization_name"><p id="error-organization_name" class="sfi-pref-error"></p><label for="pref-organization_website">Organization Website</label><input id="pref-organization_website" name="organization_website" type="url" maxlength="500" autocomplete="url" aria-describedby="error-organization_website"><p id="error-organization_website" class="sfi-pref-error"></p><label for="pref-job_title">Job Title / Position</label><input id="pref-job_title" name="job_title" type="text" maxlength="120" autocomplete="organization-title" aria-describedby="error-job_title"><p id="error-job_title" class="sfi-pref-error"></p></fieldset>
+<fieldset><legend>4. Are you affiliated with an organization?</legend><p class="sfi-pref-hint">Optional, self-reported details. This does not link your account to an official SFI record or grant organization access.</p><label for="pref-organization_name">Organization / Company Name</label><input id="pref-organization_name" data-no-translate name="organization_name" type="text" maxlength="200" autocomplete="organization" aria-describedby="error-organization_name"><p id="error-organization_name" class="sfi-pref-error"></p><label for="pref-organization_website">Organization Website</label><input id="pref-organization_website" data-no-translate name="organization_website" type="url" maxlength="500" autocomplete="url" aria-describedby="error-organization_website"><p id="error-organization_website" class="sfi-pref-error"></p><label for="pref-job_title">Job Title / Position</label><input id="pref-job_title" data-no-translate name="job_title" type="text" maxlength="120" autocomplete="organization-title" aria-describedby="error-job_title"><p id="error-job_title" class="sfi-pref-error"></p></fieldset>
 <fieldset id="pref-resources" aria-describedby="hint-resources error-resources"><legend>5. Which SFI resources interest you?</legend><p id="hint-resources" class="sfi-pref-hint">Tell us what interests you. Some resources may not be available online.</p><div class="sfi-choice-grid"><label class="sfi-choice"><input type="checkbox" name="resources" value="specification_search"><span>Specification Search</span></label>
 <label class="sfi-choice"><input type="checkbox" name="resources" value="specification_documents"><span>Specification PDF Documents</span></label>
 <label class="sfi-choice"><input type="checkbox" name="resources" value="manufacturer_directory"><span>Manufacturer Directory</span></label>
@@ -98,7 +98,7 @@ permalink: /sfi-profile/
 <label class="sfi-choice"><input type="checkbox" name="update_interests" value="foundation_news"><span>SFI Foundation News</span></label>
 <label class="sfi-choice"><input type="checkbox" name="update_interests" value="volunteering_events"><span>Volunteering and Event Opportunities</span></label></div><p id="error-update_interests" class="sfi-pref-error"></p></fieldset><fieldset><legend>8. Is there anything else you'd like SFI to know?</legend>
 <label for="pref-additional_notes">Additional information (optional)</label><p id="notesHint" class="sfi-pref-hint">Up to 500 characters. Please do not include sensitive personal information.</p>
-<textarea id="pref-additional_notes" name="additional_notes" rows="4" maxlength="500" aria-describedby="notesHint error-additional_notes"></textarea><p id="error-additional_notes" class="sfi-pref-error"></p></fieldset>
+<textarea id="pref-additional_notes" data-no-translate name="additional_notes" rows="4" maxlength="500" aria-describedby="notesHint error-additional_notes"></textarea><p id="error-additional_notes" class="sfi-pref-error"></p></fieldset>
 <p id="preferencesStatus" role="status" aria-live="polite" tabindex="-1"></p>
 <div class="sfi-pref-actions"><button id="preferencesSave" type="submit">Save Preferences</button><button id="preferencesSkip" type="button" class="sfi-pref-secondary">Skip for Now</button></div>
 </form></details>
@@ -131,7 +131,7 @@ permalink: /sfi-profile/
           </select>
           <label for="interestAvailability">How often might you be available? (optional)</label>
           <select id="interestAvailability">
-            <option value="">Prefer not to answer</option><option>Occasionally</option><option>Monthly</option><option>Weekly</option>
+            <option value="">Prefer not to answer</option><option value="Occasionally">Occasionally</option><option value="Monthly">Monthly</option><option value="Weekly">Weekly</option>
           </select>
           <p id="interestStatus" role="status" aria-live="polite"></p>
           <button id="interestSave" type="submit">Save answers</button>

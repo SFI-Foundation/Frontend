@@ -87,7 +87,7 @@
 }
 .auth-field input:focus {
   border-color: var(--sfi-blue);
-  box-shadow: 0 0 0 3px rgba($blue, 0.12);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sfi-blue) 12%, transparent);
 }
 .auth-field input::placeholder {
   color: var(--sfi-muted);

@@ -28,7 +28,7 @@ const QuizApp = (() => {
     const dateEl = document.getElementById('gearDate');
 
     const name = nameEl.value.trim();
-    if (!name) { alert('Enter an equipment name.'); return; }
+    if (!name) { alert(window.SFII18n?.t('Enter an equipment name.') || 'Enter an equipment name.'); return; }
 
     adding = true;
     const button = document.getElementById('gearAddBtn');
@@ -39,13 +39,13 @@ const QuizApp = (() => {
       specEl.value = '';
       dateEl.value = '';
       QuizUI.clearSelectedSpec();
-    } catch (error) { alert(error.message || 'Unable to add gear. Please retry.'); }
+    } catch (error) { const message = error.message || 'Unable to add gear. Please retry.'; alert(window.SFII18n?.t(message) || message); }
     finally { adding = false; button.disabled = false; render(); }
   }
 
   async function removeGearAction(id) {
     try { await QuizData.removeItem(id); }
-    catch (error) { alert(error.message || 'Unable to remove gear. Please retry.'); }
+    catch (error) { const message = error.message || 'Unable to remove gear. Please retry.'; alert(window.SFII18n?.t(message) || message); }
     finally { render(); }
   }
 

@@ -10,7 +10,9 @@
   background: var(--sfi-surface);
   color: var(--sfi-text);
   font: 600 0.88rem/1.2 var(--sfi-font);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
   @include focus-ring;

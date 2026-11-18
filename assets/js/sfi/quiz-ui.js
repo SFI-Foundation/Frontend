@@ -154,7 +154,7 @@ const QuizUI = (() => {
       const tagTone = s.color === 'expired' ? 'bad' : s.color;
 
       const reviewNote = (review?.status === 'rejected' && g.reviewNote)
-        ? `<div class="sfi__gear-item-note">Reviewer: ${escapeHtml(g.reviewNote)}</div>`
+        ? `<div class="sfi__gear-item-note"><span data-i18n="Reviewer">Reviewer</span>: <span data-no-translate>${escapeHtml(g.reviewNote)}</span></div>`
         : '';
 
       const sourceTag = ['ai-detection', 'detector'].includes(g.source)
@@ -168,7 +168,7 @@ const QuizUI = (() => {
             <div class="sfi__gear-item-spec">SFI ${escapeHtml(g.spec)}</div>
             <div class="sfi__gear-item-meta">
               ${g.category ? `<span>${escapeHtml(g.category)}</span>` : ''}
-              ${g.certDate ? `<span>Cert: ${escapeHtml(g.certDate)}</span>` : '<span>No cert date</span>'}
+              ${g.certDate ? `<span><span data-i18n="Certification date">Certification date</span>: <time datetime="${escapeHtml(g.certDate)}">${escapeHtml(g.certDate)}</time></span>` : '<span>No cert date</span>'}
               ${sourceTag}
             </div>
             ${reviewNote}

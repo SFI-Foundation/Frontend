@@ -10,7 +10,7 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 
   &::placeholder { color: var(--sfi-muted); opacity: 1; }
-  &:focus { outline: none; border-color: var(--sfi-blue); box-shadow: 0 0 0 3px rgba($blue, 0.15); }
+  &:focus { outline: none; border-color: var(--sfi-blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sfi-blue) 15%, transparent); }
 }
 
 // Input + button on one line (search and classify bars).
@@ -19,7 +19,7 @@
   gap: $space-3;
   @include phone { flex-direction: column; }
 
-  .sfi__field { flex: 1; }
+  .sfi__field { flex: 1; min-width: 0; }
 }
 
 .sfi__form-grid {

@@ -1,0 +1,14 @@
+{
+  "workflows": [
+    "English -> Spanish homepage/login/profile/settings; reload persistence; real profile DB update; two independent browser contexts retrieve DB preferences; reverse device update; account data excluded from guest storage",
+    "stale device conflicts prevent overwrites; failed save retains interaction, shows error and retries successfully",
+    "admin and member profile persistence; admin-only API authorization; canonical search, Spanish results, page size, pagination, filtering and unapproved-PDF protection",
+    "canonical archive confirmation is Spanish and cancellation preserves catalog records",
+    "five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets",
+    "Spanish legacy interest/profile saving retains canonical option values and persists successfully",
+    "guest settings persist through an account-service outage and retry without requiring an account",
+    "OS system dark/reduced motion; keyboard dialog and gear navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged"
+  ],
+  "errors": [],
+  "matrixEvidence": "browser-matrix.json"
+}

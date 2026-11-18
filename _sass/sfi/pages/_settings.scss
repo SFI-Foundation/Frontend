@@ -154,3 +154,16 @@ html[data-sfi-result-density="compact"] & .sfi__spec-card { padding: .75rem; mar
   .sfi-setting-row { gap: .75rem; flex-wrap: wrap; select { max-width: 100%; width: 100%; } }
   .sfi-settings input[type="file"] { width: 100%; }
 }
+
+// Shared status and input/focus tokens apply on every SFI page.
+& { --sfi-focus: var(--sfi-link); --sfi-input-bg: var(--sfi-surface); --sfi-disabled: var(--sfi-muted); }
+.sfi-sync-status { max-width: 1200px; margin: .5rem auto; padding: .5rem 1.5rem; color: var(--sfi-muted); font-size: .875rem; overflow-wrap: anywhere; }
+.sfi-sync-status button { color: var(--sfi-link); background: var(--sfi-surface); border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius-sm); padding: .5rem; min-height: 44px; font: inherit; }
+.opencs-bar__brand img { background: #fff; border-radius: 4px; } // Preserve logo contrast in dark mode.
+.sfi-badge-blue { background: var(--sfi-surface2); }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--sfi-focus); outline-offset: 3px; }
+button:disabled { cursor: not-allowed; }
+html[data-sfi-density="compact"] & { .adm-card, .sfi-setting-row { padding-block: .75rem; } }
+html[data-sfi-density="comfortable"] & { .adm-card, .sfi-setting-row { padding-block: 1.25rem; } }
+
+.sfi__badge.info { background: var(--sfi-surface2); color: var(--sfi-link); border: 1px solid var(--sfi-border); }

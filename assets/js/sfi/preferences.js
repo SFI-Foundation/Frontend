@@ -1,4 +1,4 @@
-/* Non-sensitive, browser-local preferences. Loaded before CSS to avoid theme flash. */
+/* Non-sensitive preference state. Guest storage loads before CSS; account hydration is separate. */
 (function (root) {
   'use strict';
   /** @typedef {'light'|'dark'|'system'} Theme */
@@ -49,7 +49,7 @@
         data.version !== 1 || !Object.hasOwn(data, 'preferences')) throw new Error('Unsupported preference version');
     return { ...DEFAULTS, ...validate(data.preferences) };
   }
-  let current = { ...DEFAULTS }, storageOK = true, recovered = false;
+  let current = { ...DEFAULTS }, storageOK = true, recovered = false, accountMode = false;
   try { const raw = root.localStorage.getItem(KEY); if (raw) current = parse(raw); }
   catch (error) { recovered = error instanceof SyntaxError || error.message?.startsWith('Invalid') || error.message?.startsWith('Unsupported'); storageOK = recovered; }
   const system = root.matchMedia?.('(prefers-color-scheme: dark)');
@@ -73,6 +73,7 @@
   }
   function announce() { apply(); root.dispatchEvent(new root.CustomEvent('sfi-preferences', { detail: { ...current } })); }
   function persist() {
+    if (accountMode) return;
     try { root.localStorage.setItem(KEY, JSON.stringify({ version: 1, preferences: current })); storageOK = true; recovered = false; }
     catch { storageOK = false; }
   }
@@ -89,7 +90,7 @@
   }
   function clear() {
     current = { ...DEFAULTS };
-    try { root.localStorage.removeItem(KEY); root.localStorage.removeItem(FILTER_KEY); storageOK = true; recovered = false; }
+    try { if (!accountMode) root.localStorage.removeItem(KEY); root.localStorage.removeItem(FILTER_KEY); storageOK = true; recovered = false; }
     catch { storageOK = false; }
     announce();
   }
@@ -105,11 +106,24 @@
   root.SFIPreferences = Object.freeze({ DEFAULTS, ENUMS, ACCENTS, KEY, FILTER_KEY, validate, parse,
     get: () => ({ ...current }), status: () => ({ storageOK, recovered }), update, reset, clear,
     clearFilters, readCategory, rememberCategory,
+    clearGuest: () => {
+      try { root.localStorage.removeItem(KEY); root.localStorage.removeItem(FILTER_KEY); storageOK = true; recovered = false; }
+      catch { storageOK = false; }
+      if (!accountMode) { current = { ...DEFAULTS }; announce(); }
+    },
+    accountMode: value => { accountMode = value; },
+    replace: values => { current = { ...DEFAULTS, ...validate(values) }; announce(); },
+    restoreGuest: () => {
+      accountMode = false;
+      try { const raw = root.localStorage.getItem(KEY); current = raw ? parse(raw) : { ...DEFAULTS }; }
+      catch { current = { ...DEFAULTS }; }
+      announce();
+    },
     exportJSON: () => JSON.stringify({ version: 1, preferences: current }, null, 2),
     importJSON: raw => { const next = parse(raw); return update(next); } });
   system?.addEventListener('change', announce); motion?.addEventListener('change', announce);
   root.addEventListener('storage', event => {
-    if (event.key !== KEY && event.key !== null) return;
+    if (accountMode || (event.key !== KEY && event.key !== null)) return;
     try { current = event.newValue ? parse(event.newValue) : { ...DEFAULTS }; recovered = false; announce(); }
     catch { /* Another tab's invalid data cannot replace this tab's valid state. */ }
   });

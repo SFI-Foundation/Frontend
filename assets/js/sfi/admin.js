@@ -1,5 +1,6 @@
 (function () {
   const API_BASE = window.SFI_API_BASE;
+  const t = (key, values = {}) => window.SFII18n?.t(key, values) || key.replace(/{{(\w+)}}/g, (_, name) => values[name] ?? '');
 
   const gate = document.getElementById('admGate');
   const gateMsg = document.getElementById('admGateMsg');
@@ -169,7 +170,7 @@
       'SFI ' + (g.spec || '—'),
       g.category || '—',
       g.source || 'manual',
-    ].forEach(v => { const td = document.createElement('td'); td.textContent = v; row.appendChild(td); });
+    ].forEach(v => { const td = document.createElement('td'); td.textContent = v; td.setAttribute('data-no-translate', ''); row.appendChild(td); });
 
     const statusTd = document.createElement('td');
     const chip = document.createElement('span');
@@ -180,7 +181,7 @@
     if (g.status === 'rejected' && notes) {
       const note = document.createElement('p');
       note.className = 'adm-review-note';
-      note.textContent = notes;
+      note.textContent = notes; note.setAttribute('data-no-translate', '');
       statusTd.appendChild(note);
     }
     row.appendChild(statusTd);
@@ -251,7 +252,12 @@
       lastTd.append(actions, form, message);
     } else {
       const createdAt = g.created_at ?? g.createdAt;
-      lastTd.textContent = createdAt ? new Date(createdAt).toLocaleDateString() : '—';
+      if (createdAt) {
+        const time = document.createElement('time');
+        time.dateTime = createdAt;
+        time.textContent = new Date(createdAt).toLocaleDateString();
+        lastTd.appendChild(time);
+      } else lastTd.textContent = '—';
     }
     row.appendChild(lastTd);
     return row;
@@ -274,8 +280,9 @@
       const refreshed = await Promise.all([loadPending(), loadAllGear()]);
       feedback.className = 'adm-msg success';
       const decision = status === 'approved' ? 'Gear approved.' : 'Gear rejected with your notes.';
-      feedback.textContent = decision + (refreshed.every(Boolean) ? ' Lists refreshed.'
-        : ' Review saved; use Try again to reload any failed sections.');
+      feedback.replaceChildren(document.createTextNode(decision), document.createTextNode(' '),
+        document.createTextNode(refreshed.every(Boolean) ? 'Lists refreshed.'
+          : 'Review saved; use Try again to reload any failed sections.'));
     } catch (err) {
       controls.message.textContent = 'Review was not saved. Your notes are still here; try again.';
       if (err.status === 400) {
@@ -345,7 +352,7 @@
     const tbody = document.createElement('tbody');
     state.users.forEach(u => {
       const tr = document.createElement('tr');
-      [u.name, u.uid, u.role].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      [u.name, u.uid, u.role].forEach(v => { const td = document.createElement('td'); td.textContent = v; td.setAttribute('data-no-translate', ''); tr.appendChild(td); });
       const gtd = document.createElement('td');
       const stack = document.createElement('div');
       stack.className = 'chip-stack';
@@ -394,12 +401,16 @@
     card.className = 'adm-group-card';
 
     const h = document.createElement('h4');
-    h.textContent = g.name;
+    h.textContent = g.name; h.setAttribute('data-no-translate', '');
     card.appendChild(h);
 
     const meta = document.createElement('div');
     meta.className = 'meta';
-    meta.textContent = (g.description || '—') + ' · ' + (g.memberCount || (g.members ? g.members.length : 0)) + ' member(s)';
+    const description = document.createElement('span');
+    description.setAttribute('data-no-translate', '');
+    description.textContent = g.description || '—';
+    meta.append(description, document.createTextNode(' · '),
+      document.createTextNode((g.memberCount ?? g.members?.length ?? 0) + ' member(s)'));
     card.appendChild(meta);
 
     const perms = document.createElement('div');
@@ -516,27 +527,27 @@
       });
       await loadGroups();
     } catch (err) {
-      alert('Add member failed: ' + (err.body || err.message));
+      alert(t('Add member failed: {{message}}', { message: t(err.body || err.message) }));
     }
   }
 
   async function removeMember(groupId, userId) {
-    if (!confirm('Remove this user from the group?')) return;
+    if (!confirm(window.SFII18n?.t('Remove this user from the group?') || 'Remove this user from the group?')) return;
     try {
       await api('/api/sfi/groups/' + groupId + '/members/' + userId, { method: 'DELETE' });
       await loadGroups();
     } catch (err) {
-      alert('Remove failed: ' + (err.body || err.message));
+      alert(t('Remove failed: {{message}}', { message: t(err.body || err.message) }));
     }
   }
 
   async function deleteGroup(groupId, name) {
-    if (!confirm('Delete the group "' + name + '"? Members will lose its permissions.')) return;
+    if (!confirm(window.SFII18n?.t('Delete the group "{{name}}"? Members will lose its permissions.', {name}) || 'Delete group?')) return;
     try {
       await api('/api/sfi/groups/' + groupId, { method: 'DELETE' });
       await loadGroups();
     } catch (err) {
-      alert('Delete failed: ' + (err.body || err.message));
+      alert(t('Delete failed: {{message}}', { message: t(err.body || err.message) }));
     }
   }
 

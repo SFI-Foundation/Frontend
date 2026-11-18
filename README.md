@@ -37,7 +37,7 @@ Important frontend files and directories:
 | `/quiz/` | "My Gear" tracking page with certification dates and local/backend storage behavior. |
 | `/login/`, `/signup/` | SFI-styled authentication pages connected to the Flask backend. |
 | `/admin/` | Permission-protected administration for users, groups, and gear review. |
-| `/settings/` | Browser-local appearance, language, accessibility, search, privacy and shortcut preferences; accessible from the navbar gear. |
+| `/settings/` | Guest-local and account-synchronized appearance, language, accessibility and search preferences; accessible from the navbar gear. |
 
 ## Implemented Features
 
@@ -116,7 +116,7 @@ cd Backend
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
+test -e .env || cp .env.example .env
 # Replace placeholder secrets and passwords before initialization.
 python scripts/db_init.py
 python main.py
@@ -212,7 +212,8 @@ Before continuing development:
 - Test `/sfi-specs/` search, classifier, PDF links, and CRUD accordion.
 - Test `/quiz/` while signed out and signed in.
 - Test the chatbot with and without `GEMINI_API_KEY` configured on the backend.
-- Treat `/admin/` as unfinished until the backend admin/group/gear-review endpoints are added.
+- Verify `/admin/` with a synthetic authorized administrator; ordinary members
+  and manufacturer interests must remain unable to use protected operations.
 
 ## Public visual theme
 
@@ -228,15 +229,56 @@ verify the actual entry, all imported partials, scoped output and loaded stylesh
 
 ## Settings & Preferences
 
-Use the header gear or `/settings/` to customize this browser. Settings includes
-light/dark/system themes, seven accents, English/Spanish UI with clearly labeled
-partial language previews, accessibility controls, canonical-search presentation,
-keyboard help, and validated JSON import/export. Account links use existing
-profile and sign-out flows. Preferences do not synchronize across devices, and
-notification delivery is not implemented. Resetting preferences preserves sign-in,
-saved gear and onboarding answers.
+Open the navigation gear or `/settings/`. Guests retain browser-local settings.
+Authenticated users load and save validated preferences through the companion
+Backend's `/api/sfi/settings`, including theme, seven accents, language,
+accessibility and supported search presentation settings. Server settings take
+precedence on login; signing out restores guest settings. Wait for account-save
+feedback before closing the page. Failures show Retry; concurrent changes require
+reloading server settings. Account preferences never enter persistent browser
+storage. Official PDFs and technical source content remain unchanged.
 
-See [implementation, limitations, storage/security contract, and verification](docs/settings-preferences.md).
-Run `npm run test:settings` for preference/search tests, or use the browser command
-in that report for disposable Flask/Chromium integration. Node 22+ is required
-for the current localization package; this implementation was checked on Node 24.
+English and Spanish application UI share centralized i18next dictionaries and a
+single DOM adapter for static and asynchronously rendered content. French,
+German, Chinese and Japanese remain labeled partial previews with English fallback.
+Alternative catalog sorting/layouts and notification delivery are not implemented.
+
+Use the paired Backend branch, then follow its additive settings migration and
+`.env` instructions. Existing `.env` files must not be overwritten. A frontend-only
+deployment cannot provide account synchronization without that backend endpoint.
+The local API origin is `http://localhost:8605`; `sfi_api_base` in `_config.yml`
+can override it. Rebuild after changing API configuration. Use one hostname
+consistently for frontend and backend cookies.
+
+```bash
+npm install
+npm test
+npm run test:settings
+npm run test:phase1
+bundle exec jekyll build --baseurl "" --destination /tmp/sfi-local --disable-disk-cache
+node scripts/audit-sfi-preferences.mjs /tmp/sfi-local docs/preferences-evidence
+```
+
+Browser verification additionally needs Playwright, Chromium and
+`@axe-core/playwright` in an external test-tools directory (the runtime site gains
+no new dependency):
+
+```bash
+npm install --prefix /tmp/sfi-browser-tools playwright @axe-core/playwright
+/tmp/sfi-browser-tools/node_modules/.bin/playwright install chromium
+PLAYWRIGHT_MODULE=/tmp/sfi-browser-tools/node_modules/playwright \
+AXE_MODULE=/tmp/sfi-browser-tools/node_modules/@axe-core/playwright \
+node scripts/test-sfi-integrated-browser.mjs \
+  ../Backend/venv/bin/python ../Backend /tmp/sfi-local /tmp/sfi-preferences-evidence
+```
+
+Replace sibling names if your clones are named `SFI-Backend`/`SFI-Frontend`.
+Browser sandbox libraries must be installed for Chromium. `CHROME_PATH` optionally
+selects an existing executable. Run where local sockets and Chromium are permitted.
+The test uses real Flask HTTP and browser cookies with a disposable source copy;
+it never loads the working backend's `.env` or databases. Do not expose its private
+fixture protocol or use it as a production service.
+
+- [Initial audit](docs/preferences-initial-audit.md)
+- [Customer demonstration and isolated API startup](docs/customer-preferences-demo.md)
+- [Teacher verification, evidence and limitations](docs/teacher-deployment-preferences-verification.md)

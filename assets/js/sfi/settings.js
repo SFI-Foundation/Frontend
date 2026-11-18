@@ -52,7 +52,7 @@
     if (hint) { const help = text('p', hint); help.id = 'hint-' + key; copy.append(help); control.setAttribute('aria-describedby', help.id); }
     control.addEventListener('change', () => {
       const value = control.type === 'checkbox' ? control.checked : key === 'resultsPerPage' ? Number(control.value) : control.value;
-      store.update({ [key]: value }); status('Changes saved.');
+      store.update({ [key]: value }); status(root.SFIPreferenceSync?.status().message || 'Changes saved.');
     });
     row.append(copy, control); el('settings-' + category + '-fields').append(row);
   }
@@ -65,26 +65,30 @@
   function sync() {
     const prefs = store.get();
     doc.querySelectorAll('[data-preference]').forEach(input => {
+      input.disabled = root.SFIPreferenceSync?.status().canEdit === false;
       if (input.type === 'checkbox') input.checked = prefs[input.dataset.preference];
       else input.value = prefs[input.dataset.preference];
     });
-    const state = store.status();
-    message(el('settingsStorage'), !state.storageOK ? 'Storage is unavailable. Changes apply for this page only.' : state.recovered ? 'Stored preferences were invalid. Safe defaults were restored.' : 'Saved on this browser');
+    const state = store.status(), remote = root.SFIPreferenceSync?.status();
+    message(el('settingsStorage'), remote && !['guest', 'offlineGuest'].includes(remote.state) ? remote.message : !state.storageOK ? 'Storage is unavailable. Changes apply for this page only.' : state.recovered ? 'Stored preferences were invalid. Safe defaults were restored.' : (root.SFIPreferenceSync?.status().message || 'Saved on this browser'));
     i18n.translate(mount);
   }
   function status(message) {
     const node = el('settingsStatus');
-    node.textContent = t(store.status().storageOK ? message : 'Storage is unavailable. Changes apply for this page only.');
+    const remote = root.SFIPreferenceSync?.status();
+    if (remote && !['guest', 'offlineGuest'].includes(remote.state) && ['Changes saved.', 'Preferences imported.'].includes(message)) message = remote.message;
+    node.textContent = t((remote && !['guest', 'offlineGuest'].includes(remote.state)) || store.status().storageOK ? message : 'Storage is unavailable. Changes apply for this page only.');
     node.lang = ['en', 'es'].includes(store.get().language) ? store.get().language : 'en';
   }
   root.addEventListener('sfi-preferences', sync);
+  root.addEventListener('sfi-preference-sync', sync);
   root.addEventListener('sfi-language', () => { sync(); filter(); el('settingsStatus').textContent = ''; });
   for (const [id, keys] of [['resetAppearance', appearance], ['resetAccessibility', accessibility], ['resetSearch', search]]) {
     el(id).addEventListener('click', () => { store.reset(keys); status('Changes saved.'); });
   }
   el('clearFilters').addEventListener('click', () => status(store.clearFilters() ? 'Search filters cleared.' : 'Filters could not be cleared because storage is unavailable.'));
   el('clearPreferences').addEventListener('click', () => {
-    if (root.confirm(t('Restore all preferences to defaults? Your account and saved gear will be preserved.'))) { store.clear(); status('Local preferences cleared.'); }
+    if (root.confirm(t('Clear guest preferences on this browser? Your account settings and saved gear will be preserved.'))) { store.clearGuest(); status('Local preferences cleared.'); }
   });
   el('restoreDefaults').addEventListener('click', () => {
     if (root.confirm(t('Restore all preferences to defaults? Your account and saved gear will be preserved.'))) { store.reset(); status('Changes saved.'); }
@@ -118,7 +122,7 @@
   doc.querySelectorAll('[data-settings-link]').forEach(link => link.addEventListener('click', () => {
     const heading = el(link.dataset.settingsLink).querySelector('h2'); heading.focus();
   }));
-  // Lazy, read-only account lookup. No authentication or personal data enters the store.
+  // One read-only account lookup per Settings page. No authentication or personal data enters the store.
   let accountRequested = false;
   async function loadAccount() {
     message(el('accountStatus'), 'Loading account…'); el('accountRetry').hidden = true;
@@ -141,9 +145,6 @@
   root.addEventListener('hashchange', () => { if (root.location.hash === '#account') requestAccount(); });
   doc.querySelector('[data-settings-link="account"]').addEventListener('click', requestAccount);
   if (root.location.hash === '#account') requestAccount();
-  if ('IntersectionObserver' in root) {
-    const observer = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { requestAccount(); observer.disconnect(); } });
-    observer.observe(el('account'));
-  } else requestAccount();
+  requestAccount();
   sync(); filter();
 })(window);
