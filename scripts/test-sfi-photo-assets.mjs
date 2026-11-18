@@ -75,7 +75,8 @@ test('all public photographs and every rendered responsive candidate exist in Je
       assert.equal(cards.length, 6);
       assert.equal(new Set(cards.map(card => card.querySelector('figure').dataset.photograph)).size, 6);
     }
-    const nav = [...document.querySelectorAll('#navLinks a')];
+    // Account-menu and noscript destinations are separate from primary page links.
+    const nav = [...document.querySelectorAll('#navLinks > .opencs-nav__link')];
     const base = document.querySelector('.opencs-bar__brand').getAttribute('href');
     const active = nav.filter(a => a.hasAttribute('aria-current'));
     const target = `${base}${route}${route ? '/' : ''}`;

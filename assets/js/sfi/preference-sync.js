@@ -79,11 +79,16 @@
     pending = { ...pending, ...patch };
     if (state === 'ready' || state === 'saving') { signal('saving'); clearTimeout(timer); timer = setTimeout(save, 300); }
   });
-  root.addEventListener('sfi-auth', event => {
-    const identity = event.detail?.uid || event.detail?.id || null;
+  function authenticated(event) {
+    const profile = event.type === 'sfi-session' ? event.detail.user : event.detail;
+    // Temporary failures and initial checks never reset a known account.
+    if (event.type === 'sfi-session' && !['guest', 'authenticated'].includes(event.detail.state)) return;
+    const identity = profile?.uid || profile?.id || null;
     if (!identity) { guest(); return; }
     if (user !== identity) { user = identity; load(); }
-  });
+  }
+  root.addEventListener('sfi-session', authenticated);
+  root.addEventListener('sfi-auth', event => { if (!root.SFIAuth) authenticated(event); });
   root.addEventListener('sfi-language', () => signal(state));
   root.addEventListener('pagehide', () => { clearTimeout(timer); save(); });
   root.SFIPreferenceSync = { status, reload: load, retry: () => state === 'conflict' || !loaded ? load() : save(), logout: guest };

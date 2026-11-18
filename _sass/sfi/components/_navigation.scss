@@ -81,7 +81,54 @@
   display: none;
 }
 
+.sfi-account {
+  position: relative;
+  flex: 0 0 11rem;
+  width: 11rem;
+  min-width: 0;
+  min-height: 44px;
+  [hidden] { display: none !important; }
+  .opencs-nav__link--account { margin-left: 0; width: 100%; }
+  button { font-family: inherit; cursor: pointer; }
+  :is(a, button):focus-visible { outline: 3px solid var(--sfi-link); outline-offset: 3px; }
+}
+.sfi-account__toggle {
+  gap: .6rem;
+  background: var(--sfi-surface);
+  #accountName { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  svg { width: 22px; height: 22px; flex: 0 0 22px; }
+  &[aria-expanded="true"] { border-color: var(--sfi-link); }
+}
+.sfi-account__pending, .sfi-account__retry {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; width: 100%; padding: .5rem; font-size: .8rem;
+  color: var(--sfi-muted);
+}
+.sfi-account__retry { border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius-sm); background: var(--sfi-surface); color: var(--sfi-link); }
+.sfi-account__menu {
+  position: absolute; inset-inline-end: 0; top: calc(100% + .5rem); z-index: 30;
+  width: 15rem; max-width: calc(100vw - 2rem); padding: .4rem;
+  background: var(--sfi-surface); color: var(--sfi-text);
+  border: 1px solid var(--sfi-border-bright); border-radius: var(--sfi-radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+  [role="menuitem"] {
+    display: flex; align-items: center; width: 100%; min-height: 44px; padding: .65rem .8rem;
+    font-size: .875rem; font-weight: 600; line-height: 1.4; text-align: start;
+    text-decoration: none; border: 0; border-radius: 4px;
+    background: transparent; color: var(--sfi-text);
+    &:hover, &:focus-visible { background: var(--sfi-surface2); color: var(--sfi-link-strong); }
+  }
+  #accountMessage { font-size: .875rem; margin: .5rem; }
+  #accountMessage:empty { display: none; }
+}
+
+@media (min-width: 1200px) {
+  .sfi-account { flex-basis: 17rem; width: 17rem; }
+}
+
 @include tablet {
+  .sfi-account { flex: 1 1 100%; width: 100%; }
+  .sfi-account__menu { position: static; width: 100%; max-width: 100%; margin-top: .5rem; box-shadow: none; }
   .opencs-bar__inner {
     flex-wrap: wrap;
     gap: 0;

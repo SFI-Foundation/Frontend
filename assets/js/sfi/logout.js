@@ -6,10 +6,10 @@ async function signOut() {
     retry.hidden = true;
     status.textContent = 'Signing out of SFI Foundation…';
     try {
-        const response = await fetch(pythonURI + '/api/authenticate', {
+        const response = await (window.SFIAuth ? window.SFIAuth.signOut() : fetch(pythonURI + '/api/authenticate', {
             method: 'DELETE', credentials: 'include',
-        });
-        if (!response.ok && response.status !== 401) throw new Error('Sign out failed. Please try again.');
+        }));
+        if (response && !response.ok && response.status !== 401) throw new Error('Sign out failed. Please try again.');
         window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
         window.location.replace(new URL('../login/', window.location.href).href);
     } catch (error) {

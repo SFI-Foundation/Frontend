@@ -8,10 +8,18 @@ let editingName = false;
 const onboarding = createOnboarding(request);
 
 async function request(path, options = {}) {
+    const epoch = window.SFIAuth?.snapshot().epoch;
     const response = await fetch(`${pythonURI}/api/sfi/profile${path}`, {
         credentials: 'include', cache: 'no-store', ...options,
     });
     const data = await response.json().catch(() => ({}));
+    if (window.SFIAuth && epoch !== window.SFIAuth.snapshot().epoch) {
+        if (window.SFIAuth.snapshot().state === 'guest') {
+            element('profileContent').hidden = true;
+            element('profileSignIn').hidden = false;
+        }
+        throw new Error('Please sign in to continue.');
+    }
     if (!response.ok) {
         if (response.status === 401) {
             element('profileContent').hidden = true;
@@ -54,6 +62,7 @@ function render(profile, form = 'all') {
     element('profileStatus').textContent = '';
     onboarding.render(profile, form);
     window.dispatchEvent(new CustomEvent('sfi-auth', { detail: profile }));
+    if (form !== 'all') window.SFIAuth?.notifyChange();
 }
 
 async function load() {
