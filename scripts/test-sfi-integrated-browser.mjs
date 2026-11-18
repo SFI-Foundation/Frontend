@@ -26,7 +26,7 @@ createInterface({input:bridge.stdout}).on('line',line=>{
 });
 bridge.on('exit', code=>fixtureReject(new Error('Fixture exited '+code)));
 const proof=fields=>new Promise(resolve=>{const id=++sequence;pending.set(id,resolve);bridge.stdin.write(JSON.stringify({id,...fields})+'\n');});
-const results={workflows:[],responsive:[],themes:[],accessibility:[],untranslated:[],errors:[]};
+const results={workflows:[],responsive:[],themes:[],accessibility:[],localization:[],untranslated:[],errors:[]};
 let browser;
 const types={'.html':'text/html','.css':'text/css','.js':'application/javascript','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.json':'application/json'};
 try {
@@ -105,6 +105,11 @@ try {
  assert.equal(await pa.locator('#sfiResults article').count(),10);assert.match(await pa.locator('#sfiCount').innerText(),/especificaciones/);assert.equal(await pa.locator('#sfiResults a').count(),0);assert.match(await pa.locator('#sfiResults').innerText(),/vigente no está disponible/);
  await pa.locator('#sfiNext').click();await pa.waitForFunction(()=>document.getElementById('sfiCount').textContent.includes('11'));await pa.locator('#sfiSearch').fill('99.23');await pa.waitForFunction(()=>document.querySelectorAll('#sfiResults article').length===1);
  results.workflows.push('admin and member profile persistence; admin-only API authorization; canonical search, Spanish results, page size, pagination, filtering and unapproved-PDF protection');
+ await pa.locator('#backToAdminBtn').click();
+ let archiveDialog='';pa.once('dialog',async dialog=>{archiveDialog=dialog.message();await dialog.dismiss();});
+ await pa.locator('#adminTable tbody button.danger').first().click();
+ assert.match(archiveDialog,/¿Archivar el registro canónico/);assert.match(archiveDialog,/se conservan el historial/);
+ results.workflows.push('canonical archive confirmation is Spanish and cancellation preserves catalog records');
  const routes=['/','/about/','/history/','/services/','/news-events/','/contact/','/sfi-specs/','/login/','/sfi-profile/','/settings/','/admin/','/quiz/','/detect/'];
  const accents=['red','blue','green','purple','orange','teal','monochrome'];
  for(const width of (process.env.SFI_SKIP_MATRIX ? [] : [1440,1024,768,390,320])){
@@ -112,6 +117,21 @@ try {
   for(const route of routes){
    console.log('Matrix',width,route); await goto(pa,route);
    if(route==='/sfi-specs/'&&await pa.locator('#viewPublicBtn').isVisible())await pa.locator('#viewPublicBtn').click();
+   if(width===1440){
+    // Assert real rendered text and accessible labels, including nested/dynamic UI.
+    const untranslated=await pa.evaluate(()=>{
+     const {en,es}=SFILocales,remaining=new Set();
+     const excluded='script,style,code,pre,textarea,[data-no-translate],[translate="no"],.sfi__result-title,.sfi__technical-text,.sfi__gear-item-name,.sfi__autocomplete-item,#roleUser,#settingsAccountName,#profileName,#profileUid,#profileAvatar,#sfiProfileName,#sfiProfileUid,#sfiProfileSkills';
+     const inspect=value=>{value=value.replace(/\s+/g,' ').trim();if(Object.hasOwn(en.translation,value)&&es.translation[value]!==en.translation[value])remaining.add(value);};
+     const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;
+     while((node=walker.nextNode()))if(!node.parentElement.closest(excluded))inspect(node.nodeValue);
+     document.body.querySelectorAll('[aria-label],[placeholder],[title],[alt]').forEach(el=>{if(!el.closest(excluded))for(const attr of ['aria-label','placeholder','title','alt'])if(el.hasAttribute(attr))inspect(el.getAttribute(attr));});
+     return [...remaining];
+    });
+    results.untranslated.push(...untranslated.map(text=>({route,text})));
+    assert.deepEqual(untranslated,[],route+' must render Spanish application UI');
+    results.localization.push({route,language:await pa.locator('html').getAttribute('lang'),untranslatedKnownStrings:0});
+   }
    for(const theme of ['light','dark'])for(const accent of (width===1440?accents:['purple'])){
     await pa.evaluate(({theme,accent})=>SFIPreferences.update({theme,accent,textSize:'extra-large',largeTargets:true,enhancedFocus:true,highContrast:true,underlineLinks:true,lineSpacing:true,reducedMotion:true}),{theme,accent});
     const visual=await pa.evaluate(()=>({background:getComputedStyle(document.body).backgroundColor,accent:getComputedStyle(document.body).getPropertyValue('--sfi-blue').trim(),size:getComputedStyle(document.documentElement).fontSize,motion:document.documentElement.dataset.sfiMotion}));
@@ -124,12 +144,13 @@ try {
    if(width===1440){
     const axe=await new AxeBuilder({page:pa}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     results.accessibility.push({route,violations:axe.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))});
+    assert.equal(axe.violations.length,0,route+' must pass the tested axe rules');
    }
   }
   if(width<=768){await goto(pa,'/');await pa.locator('#navToggle').click();assert.equal(await pa.locator('#navToggle').getAttribute('aria-expanded'),'true');await pa.keyboard.press('Escape');assert.equal(await pa.locator('#navToggle').getAttribute('aria-expanded'),'false');}
   results.responsive.push({width,routes:routes.length});
  }
- await goto(pa,'/settings/');await pa.evaluate(()=>SFIPreferences.update({theme:'system',highContrast:false,textSize:'large',accent:'purple'}));await settled(pa);await pa.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});assert.equal(await pa.locator('html').getAttribute('data-sfi-theme'),'dark');assert.equal(await pa.locator('html').getAttribute('data-sfi-motion'),'reduced');
+ await goto(pa,'/settings/');await pa.evaluate(()=>SFIPreferences.update({theme:'system',highContrast:false,textSize:'large',accent:'purple'}));await settled(pa);await pa.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});await pa.waitForFunction(()=>document.documentElement.dataset.sfiTheme==='dark'&&document.documentElement.dataset.sfiMotion==='reduced');
  if(process.env.SFI_SKIP_MATRIX){await pa.setViewportSize({width:320,height:1000});await overflow(pa,'final updated Settings at 320px');}
  await pa.locator('#settingsAccountDetails').waitFor({state:'visible'});await pa.screenshot({path:path.join(output,'spanish-dark-settings.png'),fullPage:true});await goto(pa,'/');await pa.screenshot({path:path.join(output,'spanish-home-mobile.png'),fullPage:true});
  await pa.locator('#sfi-main').focus();await pa.keyboard.press('?');await pa.locator('.sfi-shortcut-dialog').waitFor({state:'visible'});await pa.keyboard.press('Escape');assert.equal(await pa.locator('.sfi-shortcut-dialog').isVisible(),false);
@@ -146,6 +167,11 @@ try {
  await pc.locator('input[name="involvement"][value="manufacturer"]').check();await pc.locator('#preferencesSave').click();await pc.waitForFunction(()=>document.getElementById('preferencesStatus').textContent.includes('saved'));
  assert.equal((await api(pc,'/api/sfi/profile/roles')).status,403);assert.equal(await pc.locator('#roleManagement').isVisible(),false);
  assert.equal((await proof({proof_uid:'synthetic_registered_user'})).data.role,'User');
+ await pc.evaluate(()=>SFIPreferences.update({language:'es'}));await settled(pc);
+ await pc.locator('#interestForm').evaluate(form=>{const details=form.closest('details');if(details)details.open=true;});
+ await pc.locator('#interestAvailability').selectOption('Monthly');await pc.locator('#interestSave').click();await pc.waitForFunction(()=>document.getElementById('interestStatus').textContent.includes('guardado'));
+ assert.equal((await api(pc,'/api/sfi/profile')).data.interests.availability,'Monthly');
+ results.workflows.push('Spanish legacy interest/profile saving retains canonical option values and persists successfully');
  await c.close();
  const offline=await context(),po=await page(offline);
  await po.route('**/api/sfi/settings',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));

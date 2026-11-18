@@ -36,7 +36,8 @@
     "internalTargets": 489,
     "pathPages": 15,
     "scopedSassImports": 30,
-    "redesignPhotographyChecks": "passed"
+    "redesignPhotographyChecks": "passed",
+    "legacyRubySassAudit": "FAIL: pre-existing disconnected components/_chatbot.scss is unused; scoped active Sass checker passes 30 imports"
   },
   "browser": {
     "matrixChecks": 286,
@@ -54,19 +55,23 @@
       "English -> Spanish homepage/login/profile/settings; reload persistence; real profile DB update; two independent browser contexts retrieve DB preferences; reverse device update; account data excluded from guest storage",
       "stale device conflicts prevent overwrites; failed save retains interaction, shows error and retries successfully",
       "admin and member profile persistence; admin-only API authorization; canonical search, Spanish results, page size, pagination, filtering and unapproved-PDF protection",
+      "canonical archive confirmation is Spanish and cancellation preserves catalog records",
+      "five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets",
+      "Spanish legacy interest/profile saving retains canonical option values and persists successfully",
       "guest settings persist through an account-service outage and retry without requiring an account",
       "OS system dark/reduced motion; keyboard dialog and gear navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged"
     ],
     "physicalPhone": false,
-    "otherBrowserEngines": false
+    "otherBrowserEngines": false,
+    "localizedRoutes": 13
   },
   "colors": {
-    "findings": 227,
+    "findings": 306,
     "categories": {
       "inverted imagery, camera, status or shadow": 43,
       "central theme palettes": 68,
       "fixed status tint or inverted control foreground": 25,
-      "disconnected legacy/reference": 79,
+      "disconnected legacy/reference": 158,
       "fixed status tints": 9,
       "accent focus token or fixed white button foreground": 3
     }
@@ -76,6 +81,14 @@
     "Axe scans are the documented dark/high-contrast state, not a claim of all-state WCAG compliance.",
     "Matrix covers seven accents light/dark at desktop and purple light/dark at four additional widths.",
     "Four extra locales remain partial previews; official technical/source/user/license content is preserved.",
-    "Production was not modified or deployed; physical phones, screen readers and other browser engines remain manual checks."
-  ]
+    "Production was not modified or deployed; physical phones, screen readers and other browser engines remain manual checks.",
+    "Legacy Ruby Sass audit fails for the pre-existing unused chatbot partial; active-site styles and redesign checks pass."
+  ],
+  "localization": {
+    "englishKeys": 778,
+    "spanishKeys": 778,
+    "staticRoutes": 14,
+    "unmatchedStaticStringsOrAttributes": 0,
+    "runtimeRoutes": 13
+  }
 }

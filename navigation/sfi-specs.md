@@ -453,7 +453,12 @@ async function deleteSpec(id) {
   const spec = adminSpecs.find(x => x.id === id);
   const label = spec ? `SFI ${spec.spec_number} \u2013 ${spec.product_name}` : 'this spec';
   const restoring = !!spec?.archived;
-  if (!confirm(`${restoring ? 'Restore' : 'Archive'} canonical ${label}? This affects all ${spec?.legacy_ids?.length || 1} associated rows; history and related records are retained.`)) return;
+  const action = restoring ? 'Restore' : 'Archive';
+  const count = spec?.legacy_ids?.length || 1;
+  const confirmation = window.SFII18n?.t('catalog.canonicalConfirmation', {
+    action: window.SFII18n.t(action), label, count: window.SFII18n.number(count),
+  }) || `${action} canonical ${label}? This affects all ${count} associated rows; history and related records are retained.`;
+  if (!confirm(confirmation)) return;
   try {
     const res = await fetch(`${API}/specs/${id}${restoring ? '/restore' : ''}`, { method: restoring ? 'POST' : 'DELETE', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ confirm_canonical_id: spec.canonical_id }) });
     if (res.ok) { showMsg(restoring ? 'Canonical specification restored' : 'Canonical specification archived', 'success'); loadAdminTable(); loadAdminStats(); loadSpecs(); }

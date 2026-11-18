@@ -1360,5 +1360,479 @@
     "line": 224,
     "category": "fixed status tint or inverted control foreground",
     "source": "color: \"#f59e0b\","
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 4,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-bg: #f4f5f7;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 5,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-white: #ffffff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 6,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-surface: #ffffff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 7,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-surface2: #f0f2f5;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 8,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-surface3: #e8ebef;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 9,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-border: #d1d5db;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 10,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-border-bright: #9ca3af;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 11,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-blue: #1a5fa8;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 12,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-blue-dark: #124080;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 13,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-blue-light: #2e7fd4;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 14,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-blue-accent: #3b9ede;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 15,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-text: #1a1d23;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 16,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-text-secondary: #374151;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 17,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-muted: #6b7280;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 18,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-red: #c0392b;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 19,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-green: #27ae60;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 22,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-shadow: 0 1px 4px rgba(0,0,0,0.10);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 23,
+    "category": "disconnected legacy/reference",
+    "source": "--sfi-shadow-md: 0 4px 16px rgba(0,0,0,0.10);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 65,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.75);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 74,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.75);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 78,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-topbar a:hover { color: #fff; }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 108,
+    "category": "disconnected legacy/reference",
+    "source": "background: #1a1a1a;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 109,
+    "category": "disconnected legacy/reference",
+    "source": "border: 3px solid #1a1a1a;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 115,
+    "category": "disconnected legacy/reference",
+    "source": "box-shadow: 0 2px 8px rgba(0,0,0,0.3);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 118,
+    "category": "disconnected legacy/reference",
+    "source": "background: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 131,
+    "category": "disconnected legacy/reference",
+    "source": "color: #1a1a1a;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 138,
+    "category": "disconnected legacy/reference",
+    "source": "color: #1a1a1a;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 188,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.9);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 196,
+    "category": "disconnected legacy/reference",
+    "source": "border-right: 1px solid rgba(255,255,255,0.08);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 200,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(255,255,255,0.12);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 201,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 204,
+    "category": "disconnected legacy/reference",
+    "source": "background: #e8a020;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 205,
+    "category": "disconnected legacy/reference",
+    "source": "color: #000;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 213,
+    "category": "disconnected legacy/reference",
+    "source": "background: #f0b030;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 214,
+    "category": "disconnected legacy/reference",
+    "source": "color: #000;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 217,
+    "category": "disconnected legacy/reference",
+    "source": "color: #7dd3fa;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 220,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.9) !important;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 227,
+    "category": "disconnected legacy/reference",
+    "source": "color: #7dd3fa !important;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 232,
+    "category": "disconnected legacy/reference",
+    "source": "background: #4ade80;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 239,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 264,
+    "category": "disconnected legacy/reference",
+    "source": "border-bottom: 1px solid rgba(255,255,255,0.05);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 271,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(105deg, #0d2e5c 0%, #1a5fa8 40%, #1e7bc4 70%, #0f3d6e 100%);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 297,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 300,
+    "category": "disconnected legacy/reference",
+    "source": "text-shadow: 0 2px 8px rgba(0,0,0,0.4);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 305,
+    "category": "disconnected legacy/reference",
+    "source": "color: #7dd3fa;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 311,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.85);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 314,
+    "category": "disconnected legacy/reference",
+    "source": "text-shadow: 0 1px 4px rgba(0,0,0,0.3);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 341,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 347,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 351,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 352,
+    "category": "disconnected legacy/reference",
+    "source": "border-color: rgba(255,255,255,0.6);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 355,
+    "category": "disconnected legacy/reference",
+    "source": "background: rgba(255,255,255,0.12);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 356,
+    "category": "disconnected legacy/reference",
+    "source": "border-color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 365,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 370,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(105deg, #0d2e5c 0%, #1a5fa8 60%, #1e7bc4 100%);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 382,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 387,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-page-header h1 .gold { color: #f0c040; }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 392,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.8);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 398,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.6);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 402,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 403,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-breadcrumb a:hover { color: #fff; }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 481,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(135deg, #1a5fa8 0%, #3b9ede 100%);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 625,
+    "category": "disconnected legacy/reference",
+    "source": "border-right: 1px solid rgba(255,255,255,0.1);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 632,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 638,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.6);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 726,
+    "category": "disconnected legacy/reference",
+    "source": "background: linear-gradient(105deg, #0d2e5c, #1a5fa8);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 735,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 742,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.8);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 797,
+    "category": "disconnected legacy/reference",
+    "source": "background: #1a1d23;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 798,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.7);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 811,
+    "category": "disconnected legacy/reference",
+    "source": "border-bottom: 1px solid rgba(255,255,255,0.08);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 817,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 824,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.5);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 828,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-footer a { color: #7dd3fa; text-decoration: none; }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 835,
+    "category": "disconnected legacy/reference",
+    "source": "color: rgba(255,255,255,0.35);"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 848,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 860,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-table tr:hover td { background: #f0f4fa; }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 874,
+    "category": "disconnected legacy/reference",
+    "source": ".sfi-badge-blue { background: rgba(26,95,168,0.1); color: var(--sfi-blue); }"
+  },
+  {
+    "file": "_includes/sfi/styles.html",
+    "line": 899,
+    "category": "disconnected legacy/reference",
+    "source": "color: #fff;"
   }
 ]

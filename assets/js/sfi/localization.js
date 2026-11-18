@@ -35,6 +35,7 @@
     const translated = t(saved.key, saved.values);
     const output = saved.source.replace(saved.source.trim(), translated);
     if (value !== output) {
+      if (property === 'text' && node.parentElement?.tagName === 'OPTION' && !node.parentElement.hasAttribute('value')) node.parentElement.setAttribute('value', node.parentElement.value);
       if (property === 'text') node.nodeValue = output;
       else node.setAttribute(property, output);
     }
@@ -66,9 +67,9 @@
       if (!node.parentElement || node.parentElement.closest(excluded + ',[data-i18n]')) continue;
       bind(node, 'text', node.nodeValue);
     }
-    scope.querySelectorAll('[aria-label],[placeholder],[title],[data-i18n-label],[data-i18n-placeholder],[data-i18n-title]').forEach(el => {
+    scope.querySelectorAll('[aria-label],[placeholder],[title],[alt],[data-i18n-label],[data-i18n-placeholder],[data-i18n-title]').forEach(el => {
       if (el.closest(excluded)) return;
-      for (const [attr, data] of [['aria-label', 'i18nLabel'], ['placeholder', 'i18nPlaceholder'], ['title', 'i18nTitle']]) {
+      for (const [attr, data] of [['aria-label', 'i18nLabel'], ['placeholder', 'i18nPlaceholder'], ['title', 'i18nTitle'], ['alt', 'i18nAlt']]) {
         if (el.dataset[data]) { const value = t(el.dataset[data]); if (el.getAttribute(attr) !== value) el.setAttribute(attr, value); }
         else if (el.hasAttribute(attr)) bind(el, attr, el.getAttribute(attr));
       }
@@ -95,7 +96,7 @@
       if (queued) return; queued = true;
       queueMicrotask(() => { queued = false; observer.disconnect(); if (!root.document?.body) return; translate(); observe(); });
     });
-    function observe() { observer.observe(root.document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['placeholder', 'aria-label', 'title'] }); }
+    function observe() { observer.observe(root.document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['placeholder', 'aria-label', 'title', 'alt'] }); }
     observe();
   }
   if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', start); else start();

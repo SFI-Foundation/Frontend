@@ -50,13 +50,18 @@ test('late account responses cannot reapply settings after logout',async()=>{
 test('shared localization updates nested and dynamic UI while protecting user content',async()=>{
  const h=fixture(async()=>response(401,{}));
  try{
-  await tick();h.w.document.querySelector('main').innerHTML='<h1>Safety Standards That Drive <span>Motorsports Forward</span></h1><p data-no-translate>Home</p><div id="status"></div><time datetime="2026-11-18">November 18, 2026</time>';
+  await tick();h.w.document.querySelector('main').innerHTML='<h1>Safety Standards That Drive <span>Motorsports Forward</span></h1><p data-no-translate>Home</p><div id="status"></div><select><option>Monthly</option></select><time datetime="2026-11-18">November 18, 2026</time><img alt="Analysis result">';
   h.w.eval(readFileSync(new URL('../assets/js/vendor/i18next.min.js',import.meta.url),'utf8'));
   h.w.eval(source('locales.js'));h.w.eval(source('localization.js'));
   h.patch({language:'es'});await tick();assert.match(h.w.document.querySelector('h1').textContent,/Normas de seguridad/);assert.equal(h.w.document.querySelector('[data-no-translate]').textContent,'Home');
   h.w.document.querySelector('#status').textContent='Your name has been saved.';await tick();assert.equal(h.w.document.querySelector('#status').textContent,'Tu nombre se ha guardado.');
+  assert.equal(h.w.document.querySelector('option').textContent,'Mensualmente');assert.equal(h.w.document.querySelector('select').value,'Monthly');
+  assert.equal(h.w.document.querySelector('img').alt,'Resultado del análisis');
   assert.match(h.w.document.querySelector('time').textContent,/noviembre/);assert.equal(h.w.document.documentElement.lang,'es');
   h.patch({language:'en'});await tick();assert.match(h.w.document.querySelector('h1').textContent,/Safety Standards/);assert.equal(h.w.document.querySelector('#status').textContent,'Your name has been saved.');
+  assert.equal(h.w.document.querySelector('img').alt,'Analysis result');
+  assert.equal(h.w.SFII18n.t('Synthetic missing interface key'),'Synthetic missing interface key');
+  assert.ok(h.w.SFII18n.missing().includes('Synthetic missing interface key'));
  }finally{h.dom.window.close();}
 });
 test('a previous account save cannot block the next account saving',async()=>{

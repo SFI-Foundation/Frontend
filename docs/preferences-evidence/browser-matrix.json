@@ -3,7 +3,11 @@
     "English -> Spanish homepage/login/profile/settings; reload persistence; real profile DB update; two independent browser contexts retrieve DB preferences; reverse device update; account data excluded from guest storage",
     "stale device conflicts prevent overwrites; failed save retains interaction, shows error and retries successfully",
     "admin and member profile persistence; admin-only API authorization; canonical search, Spanish results, page size, pagination, filtering and unapproved-PDF protection",
-    "five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets; system dark and OS reduced motion; keyboard dialog; switch back to English"
+    "canonical archive confirmation is Spanish and cancellation preserves catalog records",
+    "five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets",
+    "Spanish legacy interest/profile saving retains canonical option values and persists successfully",
+    "guest settings persist through an account-service outage and retry without requiring an account",
+    "OS system dark/reduced motion; keyboard dialog and gear navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged"
   ],
   "responsive": [
     {
@@ -2083,6 +2087,73 @@
     {
       "route": "/detect/",
       "violations": []
+    }
+  ],
+  "localization": [
+    {
+      "route": "/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/about/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/history/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/services/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/news-events/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/contact/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/sfi-specs/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/login/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/sfi-profile/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/settings/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/admin/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/quiz/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
+    },
+    {
+      "route": "/detect/",
+      "language": "es",
+      "untranslatedKnownStrings": 0
     }
   ],
   "untranslated": [],

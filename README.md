@@ -116,7 +116,7 @@ cd Backend
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
+test -e .env || cp .env.example .env
 # Replace placeholder secrets and passwords before initialization.
 python scripts/db_init.py
 python main.py
@@ -212,7 +212,8 @@ Before continuing development:
 - Test `/sfi-specs/` search, classifier, PDF links, and CRUD accordion.
 - Test `/quiz/` while signed out and signed in.
 - Test the chatbot with and without `GEMINI_API_KEY` configured on the backend.
-- Treat `/admin/` as unfinished until the backend admin/group/gear-review endpoints are added.
+- Verify `/admin/` with a synthetic authorized administrator; ordinary members
+  and manufacturer interests must remain unable to use protected operations.
 
 ## Public visual theme
 

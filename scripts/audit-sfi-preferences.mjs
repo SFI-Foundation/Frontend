@@ -10,11 +10,12 @@ const scope={window:{}};vm.runInNewContext(fs.readFileSync('assets/js/sfi/locale
 const locales=scope.window.SFILocales,keys=locales.en.translation;
 function files(root){return fs.readdirSync(root,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?files(path.join(root,entry.name)):[path.join(root,entry.name)]);}
 const colors=[];
-for(const file of [...files('_sass/sfi'),...files('assets/js/sfi')]){
+const pages=files('navigation').filter(file=>/^---[\s\S]*?layout:\s*sfi\b/.test(fs.readFileSync(file,'utf8')));
+for(const file of [...files('_sass/sfi'),...files('assets/js/sfi'),...files('_includes/sfi'),'_layouts/sfi.html',...pages]){
  if(file.endsWith('/locales.js'))continue;
  fs.readFileSync(file,'utf8').split('\n').forEach((text,index)=>{
   if(!/#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{3})\b|rgba?\(|hsla?\(/i.test(text))return;
-  const category=/legacy|chatbot/.test(file)?'disconnected legacy/reference':/tokens|properties|settings|preferences\.js/.test(file)?'central theme palettes':/admin/.test(file)?'fixed status tints':/feature-grid|image-banner|footer|home|content|detect|specs|mixins|accessibility/.test(file)?'inverted imagery, camera, status or shadow':/form|auth/.test(file)?'accent focus token or fixed white button foreground':'fixed status tint or inverted control foreground';
+  const category=/legacy|chatbot|_includes\/sfi\/styles.html/.test(file)?'disconnected legacy/reference':/tokens|properties|settings|preferences\.js/.test(file)?'central theme palettes':/admin/.test(file)?'fixed status tints':/feature-grid|image-banner|footer|home|content|detect|specs|mixins|accessibility/.test(file)?'inverted imagery, camera, status or shadow':/form|auth/.test(file)?'accent focus token or fixed white button foreground':'fixed status tint or inverted control foreground';
   colors.push({file,line:index+1,category,source:text.trim()});
  });
 }
@@ -33,10 +34,22 @@ for(const route of routes){
   if(/^(SFI Foundation|SFI$|PDF$|Esc$|https?:|\d|sfi@|Fax:|Suite N208$|Poway, CA 92064$)/.test(value))continue;
   untranslated.add(value);
  }
- coverage.push({route:'/'+(route?route+'/':''),translatedStaticStrings:found.size,untranslated:[...untranslated]});dom.window.close();
+ let translatedAttributes=0;
+ dom.window.document.body.querySelectorAll('[aria-label],[placeholder],[title],[alt]').forEach(el=>{
+  if(el.closest('[data-no-translate],[translate="no"]'))return;
+  for(const attr of ['aria-label','placeholder','title','alt']){
+   const value=(el.getAttribute(attr)||'').replace(/\s+/g,' ').trim();if(!value)continue;
+   if(Object.hasOwn(keys,value))translatedAttributes++;
+   else untranslated.add(attr+': '+value);
+  }
+ });
+ coverage.push({route:'/'+(route?route+'/':''),translatedStaticStrings:found.size,translatedAttributes,untranslated:[...untranslated]});dom.window.close();
 }
 const report={languages:Object.fromEntries(Object.entries(locales).map(([lang,value])=>[lang,{keys:Object.keys(value.translation).length,designation:['en','es'].includes(lang)?'application UI':'partial preview'}])),routes:coverage,limitations:['Official specifications, document text, news source titles, manufacturer identities, attribution/legal text and user content intentionally remain unchanged.','Coverage counts static rendered UI; browser and unit tests separately verify dynamic account/search messages.','Archived classroom and vendor projects use separate layouts and are outside the SFI application interface.']};
 fs.writeFileSync(path.join(output,'localization-coverage.json'),JSON.stringify(report,null,2)+'\n');
 const missing=coverage.flatMap(item=>item.untranslated.map(text=>({route:item.route,text})));
 console.log(JSON.stringify({colorFindings:colors.length,languageKeys:report.languages,untranslated:missing},null,2));
 if(missing.length)process.exitCode=1;
+const spanish=locales.es.translation;
+const missingSpanish=Object.keys(keys).filter(key=>!Object.hasOwn(spanish,key));
+if(missingSpanish.length){console.error('Missing Spanish dictionary keys:',missingSpanish);process.exitCode=1;}

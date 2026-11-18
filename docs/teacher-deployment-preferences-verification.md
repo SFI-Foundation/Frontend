@@ -38,14 +38,17 @@ physical phone verification was performed.
 - Configuration suite: **2 passed**, including real `.env` loading and invalid setup.
 - Frontend `npm test`: **5 test files passed**; `npm run test:settings`: **36 tests passed**; `npm run test:phase1`: **3 test files passed**. The dedicated synchronization tests include offline guest persistence, failed first saves at revision zero, late responses after logout and switching accounts while a save is in flight.
 - Chromium: **286 theme/responsive checks**, all 13 active routes at 1440/1024/768/390/320 pixels; all seven accents in light/dark at desktop, purple light/dark at the other widths. Computed page backgrounds, accents, enlarged font size and reduced motion are checked, alongside overflow. **13 axe scans, zero violations**, in the dark/high-contrast tested configuration. This is not a declaration of complete WCAG compliance across all possible states.
-- Localization coverage: **770 English/Spanish keys each**, 14 rendered SFI routes, **zero unmatched static application strings** after explicit exclusions for official/source/identity/attribution content. Each partial-preview language has 8 keys and English fallback. Browser-native controls and validation follow the browser’s locale.
+- Localization coverage: **778 English/Spanish keys each**, 14 rendered SFI routes, **zero unmatched static application strings or accessible attributes** after explicit exclusions for official/source/identity/attribution content. Each partial-preview language has 8 keys and English fallback. Browser-native controls and validation follow the browser’s locale.
 - Built paths: **15 pages, 489 internal navigation/asset targets passed**. Scoped Sass: **30 imports passed**, one generated stylesheet and no inline quiz/admin presentation. Photography/redesign checks passed; the public-build suite passed **7 tests**.
+- The separate older Ruby Sass audit **fails** on the pre-existing unused `_sass/sfi/components/_chatbot.scss`. The retained widget is disconnected from the public shell; this check is not counted as a passing test.
+- Color inventory: **306 findings**, including SFI Sass, JavaScript, navigation pages, layout and includes; disconnected legacy styles and fixed brand/status/photo colors are classified.
 - Jekyll full build: succeeds with pre-existing upstream Sass/post warnings. Static
   build success is separate from browser behavior; the browser uses generated HTML.
 - The isolated demo API starts on **8865**, returns 23 synthetic canonical entries,
   and is stopped after testing. The existing development API on 8605 is untouched.
 
 Machine-readable results are in [preferences-evidence/README.md](preferences-evidence/README.md). Screenshots: [Spanish Settings](preferences-evidence/spanish-dark-settings.png) and [Spanish mobile homepage](preferences-evidence/spanish-home-mobile.png). The final focused smoke also verifies normal public registration, optional manufacturer onboarding without privilege escalation, keyboard access to the persistent gear, failed profile updates and offline guest recovery.
+The final runtime audit checks visible text, accessible labels, placeholders, tooltips and alt text on all 13 matrix routes. Spanish native archive confirmation and cancellation, canonical form values, protected reviewer notes and localized gear dates are covered. All 20 non-templated SFI JavaScript assets in the tested build match source hashes.
 The initial report is [preferences-initial-audit.md](preferences-initial-audit.md).
 Use [customer-preferences-demo.md](customer-preferences-demo.md) for the exact
 customer sequence and a disposable live API.

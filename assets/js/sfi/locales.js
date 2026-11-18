@@ -740,7 +740,7 @@ window.SFILocales = {
       "Remove failed: {{message}}": "Remove failed: {{message}}",
       "Delete failed: {{message}}": "Delete failed: {{message}}",
       "Delete the group \"{{name}}\"? Members will lose its permissions.": "Delete the group \"{{name}}\"? Members will lose its permissions.",
-      "{{action}} canonical {{label}}? This affects all {{count}} associated rows; history and related records are retained.": "{{action}} canonical {{label}}? This affects all {{count}} associated rows; history and related records are retained.",
+      "catalog.canonicalConfirmation": "{{action}} canonical {{label}}? This affects all {{count}} associated rows; history and related records are retained.",
       "Restore": "Restore",
       "Image": "Image",
       "Manual": "Manual",
@@ -771,7 +771,15 @@ window.SFILocales = {
       "Password is missing": "Password is missing",
       "Account service unavailable. Using browser preferences. Retry to load account settings.": "Account service unavailable. Using browser preferences. Retry to load account settings.",
       "Clear guest preferences on this browser? Your account settings and saved gear will be preserved.": "Clear guest preferences on this browser? Your account settings and saved gear will be preserved.",
-      "Guest preferences stay on this browser. Signed-in presentation preferences are stored with your account. Authentication, saved gear and onboarding answers are separate and are never cleared here.": "Guest preferences stay on this browser. Signed-in presentation preferences are stored with your account. Authentication, saved gear and onboarding answers are separate and are never cleared here."
+      "Guest preferences stay on this browser. Signed-in presentation preferences are stored with your account. Authentication, saved gear and onboarding answers are separate and are never cleared here.": "Guest preferences stay on this browser. Signed-in presentation preferences are stored with your account. Authentication, saved gear and onboarding answers are separate and are never cleared here.",
+      "Reviewer": "Reviewer",
+      "{{count}} member(s)": "{{count}} member(s)",
+      "Lists refreshed.": "Lists refreshed.",
+      "Review saved; use Try again to reload any failed sections.": "Review saved; use Try again to reload any failed sections.",
+      "An archival black-and-white photograph of a drag-racing car and spectators at a track.": "An archival black-and-white photograph of a drag-racing car and spectators at a track.",
+      "Racing cars and crews gathered in the paddock at a motorsports event.": "Racing cars and crews gathered in the paddock at a motorsports event.",
+      "A full-face racing helmet and head-and-neck restraint resting on a race car.": "A full-face racing helmet and head-and-neck restraint resting on a race car.",
+      "Analysis result": "Analysis result"
     }
   },
   "es": {
@@ -1514,7 +1522,7 @@ window.SFILocales = {
       "Remove failed: {{message}}": "No se pudo quitar: {{message}}",
       "Delete failed: {{message}}": "No se pudo eliminar: {{message}}",
       "Delete the group \"{{name}}\"? Members will lose its permissions.": "¿Eliminar el grupo «{{name}}»? Los miembros perderán sus permisos.",
-      "{{action}} canonical {{label}}? This affects all {{count}} associated rows; history and related records are retained.": "¿{{action}} el registro canónico {{label}}? Afecta a las {{count}} filas asociadas; se conservan el historial y los registros relacionados.",
+      "catalog.canonicalConfirmation": "¿{{action}} el registro canónico {{label}}? Afecta a las {{count}} filas asociadas; se conservan el historial y los registros relacionados.",
       "Restore": "Restaurar",
       "Image": "Imagen",
       "Manual": "Manual",
@@ -1545,7 +1553,15 @@ window.SFILocales = {
       "Password is missing": "Falta la contraseña",
       "Account service unavailable. Using browser preferences. Retry to load account settings.": "El servicio de cuentas no está disponible. Se usan las preferencias del navegador. Reintenta para cargar la configuración de tu cuenta.",
       "Clear guest preferences on this browser? Your account settings and saved gear will be preserved.": "¿Eliminar las preferencias de visitante de este navegador? Se conservarán la configuración de tu cuenta y los equipos guardados.",
-      "Guest preferences stay on this browser. Signed-in presentation preferences are stored with your account. Authentication, saved gear and onboarding answers are separate and are never cleared here.": "Las preferencias de visitante quedan en este navegador. Las preferencias de presentación de una sesión iniciada se guardan en tu cuenta. La autenticación, los equipos guardados y las respuestas de incorporación son independientes y nunca se borran aquí."
+      "Guest preferences stay on this browser. Signed-in presentation preferences are stored with your account. Authentication, saved gear and onboarding answers are separate and are never cleared here.": "Las preferencias de visitante quedan en este navegador. Las preferencias de presentación de una sesión iniciada se guardan en tu cuenta. La autenticación, los equipos guardados y las respuestas de incorporación son independientes y nunca se borran aquí.",
+      "Reviewer": "Revisor",
+      "{{count}} member(s)": "Miembros: {{count}}",
+      "Lists refreshed.": "Listas actualizadas.",
+      "Review saved; use Try again to reload any failed sections.": "Revisión guardada; usa Intentar de nuevo para recargar las secciones que fallaron.",
+      "An archival black-and-white photograph of a drag-racing car and spectators at a track.": "Fotografía histórica en blanco y negro de un coche de carreras de aceleración y espectadores en una pista.",
+      "Racing cars and crews gathered in the paddock at a motorsports event.": "Coches de carreras y equipos reunidos en el paddock durante un evento de automovilismo.",
+      "A full-face racing helmet and head-and-neck restraint resting on a race car.": "Un casco integral de competición y un dispositivo de sujeción de cabeza y cuello sobre un coche de carreras.",
+      "Analysis result": "Resultado del análisis"
     }
   },
   "fr": {

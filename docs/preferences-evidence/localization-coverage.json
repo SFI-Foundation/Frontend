@@ -1,11 +1,11 @@
 {
   "languages": {
     "en": {
-      "keys": 770,
+      "keys": 778,
       "designation": "application UI"
     },
     "es": {
-      "keys": 770,
+      "keys": 778,
       "designation": "application UI"
     },
     "fr": {
@@ -29,71 +29,85 @@
     {
       "route": "/",
       "translatedStaticStrings": 39,
+      "translatedAttributes": 7,
       "untranslated": []
     },
     {
       "route": "/about/",
       "translatedStaticStrings": 41,
+      "translatedAttributes": 7,
       "untranslated": []
     },
     {
       "route": "/history/",
       "translatedStaticStrings": 34,
+      "translatedAttributes": 9,
       "untranslated": []
     },
     {
       "route": "/services/",
       "translatedStaticStrings": 35,
+      "translatedAttributes": 7,
       "untranslated": []
     },
     {
       "route": "/news-events/",
       "translatedStaticStrings": 30,
+      "translatedAttributes": 8,
       "untranslated": []
     },
     {
       "route": "/contact/",
       "translatedStaticStrings": 42,
+      "translatedAttributes": 7,
       "untranslated": []
     },
     {
       "route": "/sfi-specs/",
       "translatedStaticStrings": 51,
+      "translatedAttributes": 30,
       "untranslated": []
     },
     {
       "route": "/login/",
       "translatedStaticStrings": 32,
+      "translatedAttributes": 12,
       "untranslated": []
     },
     {
       "route": "/sfi-profile/",
       "translatedStaticStrings": 143,
+      "translatedAttributes": 8,
       "untranslated": []
     },
     {
       "route": "/settings/",
       "translatedStaticStrings": 75,
+      "translatedAttributes": 9,
       "untranslated": []
     },
     {
       "route": "/admin/",
       "translatedStaticStrings": 45,
+      "translatedAttributes": 13,
       "untranslated": []
     },
     {
       "route": "/quiz/",
       "translatedStaticStrings": 27,
+      "translatedAttributes": 13,
       "untranslated": []
     },
     {
       "route": "/detect/",
       "translatedStaticStrings": 38,
+      "translatedAttributes": 11,
       "untranslated": []
     },
     {
       "route": "/photo-credits/",
       "translatedStaticStrings": 21,
+      "translatedAttributes": 8,
       "untranslated": []
     }
   ],
