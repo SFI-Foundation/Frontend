@@ -59,7 +59,10 @@
   // Compatibility with existing profile/authentication modules. Only the
   // authenticated profile response has the server's verified permission flag.
   root.addEventListener('sfi-auth', event => {
-    if (!event.detail) { clear(); return; }
+    // A view switching to its sign-in form is not evidence that the cookie
+    // expired. Revalidate legacy notifications instead of clearing a verified
+    // account (or cancelling a newer successful sign-in) from presentation UI.
+    if (!event.detail) { refresh(true).catch(() => {}); return; }
     if (typeof event.detail.can_manage_roles === 'boolean') {
       generation++; controller?.abort(); pending = null; setProfile(event.detail);
     } else refresh(true).catch(() => {});

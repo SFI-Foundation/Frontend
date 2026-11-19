@@ -15,7 +15,7 @@ const axe = require(require.resolve('axe-core', { paths: [path.dirname(require.r
 const [python, backend, site, output] = process.argv.slice(2);
 assert.ok(python && backend && site && output, 'Supply Python, backend, built site, and screenshot directory');
 await mkdir(output, { recursive: true });
-const bridge = spawn(python, [path.resolve('scripts/sfi-settings-fixture.py'), path.resolve(backend)], { stdio: ['pipe', 'pipe', 'pipe'] });
+const bridge = spawn(python, [path.resolve('scripts/sfi-settings-fixture.py'), path.resolve(backend), '--account-navigation'], { stdio: ['pipe', 'pipe', 'pipe'] });
 let fixtureResolve, fixtureReject;
 const fixturePromise = new Promise((resolve, reject) => { fixtureResolve = resolve; fixtureReject = reject; });
 const startupTimer = setTimeout(() => fixtureReject(new Error('Isolated Flask startup timed out')), 30000);
@@ -42,7 +42,9 @@ try {
   browser = await chromium.launch({ args: ['--no-sandbox'],
     ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}) });
   const audits = [];
-  for (const width of process.env.SFI_ACCOUNT_SMOKE ? [1440] : [1440, 1024, 768, 375, 320]) {
+  const widths = process.env.SFI_ACCOUNT_SMOKE === 'responsive' ? [1440, 375] : process.env.SFI_ACCOUNT_SMOKE ? [1440] : [1440, 1024, 768, 375, 320];
+  let previousMemberName = 'Integration Member';
+  for (const width of widths) {
     const context = await browser.newContext({ viewport: { width, height: 1000 }, reducedMotion: 'reduce', hasTouch: width <= 768, isMobile: width <= 375 });
     const page = await context.newPage(), errors = [];
     page.setDefaultTimeout(15000);
@@ -98,12 +100,23 @@ try {
       console.log(`AUTHENTICATED ${width}px`);
       assert.equal(new URL(page.url()).pathname, '/login/', 'Successful login updates navigation without a reload');
     }
+    async function visitPublicPages(expected) {
+      for (const route of ['/', '/sfi-specs/', '/about/', '/news-events/', '/contact/', '/settings/', '/sfi-profile/']) {
+        await page.goto('http://localhost:4000' + route); await signedIn(expected); await nav();
+        assert.equal(await page.locator('#accountToggle').isVisible(), true, `${route}: visible account control`);
+        await page.reload(); await signedIn(expected); await nav();
+        if (route === '/sfi-profile/') {
+          await page.locator('#profileContent').waitFor();
+          assert.equal(await page.locator('#sfiProfileName').textContent(), expected, 'Profile and header agree after refresh');
+        }
+      }
+    }
     await page.goto('http://localhost:4000/'); await nav();
     console.log(`GUEST ${width}px`);
     await page.locator('#accountSignIn').waitFor();
     await capture('signed-out');
     assert.equal(await page.locator('#accountToggle').isVisible(), false);
-    await login(fixture.uid, width === 1440 ? 'Integration Member' : `Integration Member ${[1440,1024,768,375,320][[1440,1024,768,375,320].indexOf(width)-1]}`);
+    await login(fixture.uid, previousMemberName);
     await page.goto('http://localhost:4000/'); await signedIn(await page.locator('#accountName').textContent());
     profileDelay = 300;
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -115,7 +128,7 @@ try {
     assert.match(await page.evaluate(() => document.activeElement.textContent), /My Profile/);
     await page.keyboard.press('End'); assert.equal(await page.evaluate(() => document.activeElement.id), 'accountSignOut');
     await page.keyboard.press('Home'); await page.keyboard.press('ArrowDown');
-    assert.match(await page.evaluate(() => document.activeElement.textContent), /Account Settings/);
+    assert.match(await page.evaluate(() => document.activeElement.textContent), /Edit Preferences/);
     assert.notEqual(await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle), 'none');
     await page.keyboard.press('Escape'); assert.equal(await page.locator('#accountMenu').isVisible(), false);
     assert.equal(await page.evaluate(() => document.activeElement.id), 'accountToggle');
@@ -136,7 +149,11 @@ try {
     await page.locator('#accountMenu a').first().click();
     await page.locator('#profileNameInput').waitFor();
     const name = `Integration Member ${width}`;
+    previousMemberName = name;
     await page.locator('#profileNameInput').fill(name); await page.locator('#profileNameSave').click(); await signedIn(name);
+    assert.equal(await page.locator('#sfiProfileName').textContent(), name);
+    assert.equal(await page.locator('#sfiProfileUid').textContent(), fixture.uid);
+    await nav(); await capture('member-profile');
     console.log(`PROFILE ${width}px`);
     if (peer) await signedIn(name, peer);
     await nav(); await page.locator('#accountToggle').click();
@@ -150,6 +167,7 @@ try {
       await window.SFIAuth.refresh(true);
     });
     assert.equal(await page.locator('#accountAdmin').evaluate(el => el.hidden), true);
+    await visitPublicPages(name);
     await page.goto('http://localhost:4000/'); await signedIn(name); await nav();
     // Inject once per document; the same engine checks each subsequent live
     // theme/language/accent change without repeatedly rebuilding its context.
@@ -195,15 +213,46 @@ try {
       await peer.locator('#profileSignIn').waitFor(); assert.equal(await peer.locator('#profileContent').isVisible(), false);
     }
     // Switch identities using only the normal sign-in UI and actual browser cookies.
-    await login(fixture.admin_uid, 'Integration Admin');
-    await page.goto('http://localhost:4000/'); await signedIn('Integration Admin'); await nav();
+    await login(fixture.admin_uid, 'Admin');
+    await page.locator('#profileCard').waitFor();
+    assert.equal(await page.locator('#profileName').textContent(), 'Admin');
+    assert.equal(await page.locator('#profileUid').textContent(), '@admin');
+    await nav(); await capture('admin-account');
+    await page.goto('http://localhost:4000/sfi-profile/');
+    await page.locator('#profileContent').waitFor();
+    assert.equal(await page.locator('#sfiProfileName').textContent(), 'Admin');
+    assert.equal(await page.locator('#sfiProfileUid').textContent(), 'admin');
+    await signedIn('Admin'); await nav(); await capture('admin-profile');
     await page.locator('#accountToggle').click(); await page.locator('#accountAdmin').waitFor();
+    await capture('admin-profile-menu');
     const adminAllowed = await page.evaluate(async () => (await fetch(window.SFI_API_BASE + '/api/sfi/profile/roles', { credentials: 'include' })).status);
     assert.equal(adminAllowed, 200);
     await page.locator('#accountAdmin').click(); await page.locator('#admMain').waitFor();
-    await page.goto('http://localhost:4000/'); await signedIn('Integration Admin'); await nav();
+    await visitPublicPages('Admin');
+    // Recheck an old form's signed-out notification against the real cookie.
+    await page.evaluate(() => window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null })));
+    assert.equal(await page.locator('#accountSignIn').evaluate(el => el.hidden), true);
+    await signedIn('Admin');
+    assert.equal(await page.locator('#sfiProfileName').textContent(), 'Admin');
+    await page.addScriptTag({ content: axe.source });
+    for (const theme of ['light', 'dark']) for (const language of ['en', 'es']) for (const accent of ['red', 'blue', 'green', 'purple', 'orange', 'teal', 'monochrome']) {
+      if (process.env.SFI_ACCOUNT_SMOKE && accent !== 'red') continue;
+      await page.evaluate(values => window.SFIPreferences.update(values), { theme, language, accent });
+      await page.locator('#accountToggle').click();
+      assert.equal(await page.locator('#accountAdmin').isVisible(), true);
+      assert.equal(await page.locator('#accountMenu a').nth(1).textContent(), language === 'es' ? 'Editar preferencias' : 'Edit Preferences');
+      assert.equal(await page.locator('#accountName').textContent(), 'Admin');
+      assert.equal(await page.locator('#sfiProfileName').textContent(), 'Admin');
+      const audit = await page.evaluate(() => window.axe.run(document.querySelector('.opencs-bar'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
+      audits.push({ width, theme, language, accent, administrator: true, violations: audit.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => n.target) })) });
+      assert.deepEqual(audits.at(-1).violations, [], 'Administrator header WCAG accessibility');
+      if (accent === 'purple') await capture(`admin-profile-menu-${theme}-${language}`);
+      await page.keyboard.press('Escape');
+    }
+    await page.evaluate(() => window.SFIPreferences.update({ theme: 'light', language: 'en', accent: 'red' }));
+    await page.waitForFunction(() => window.SFIPreferenceSync.status().state === 'ready');
     if (peer) {
-      await signedIn('Integration Admin', peer); await peer.close();
+      await signedIn('Admin', peer); await peer.close();
     }
     // Expire the browser's actual HTTP-only cookie; Flask must reject the next lookup.
     const cookies = await context.cookies('http://localhost:8605');
@@ -212,6 +261,18 @@ try {
     await page.evaluate(() => window.SFIAuth.refresh(true));
     assert.equal(await page.locator('#accountSignIn').evaluate(el => el.hidden), false);
     assert.equal(await page.locator('#accountName').textContent(), '');
+    // A profile can never keep claiming Admin after the verified session expires.
+    try { await page.locator('#profileSignIn').waitFor(); }
+    catch (failure) { await capture('expired-profile-mismatch'); throw failure; }
+    assert.equal(await page.locator('#profileContent').isVisible(), false);
+    await login(fixture.admin_uid, 'Admin');
+    await page.goto('http://localhost:4000/sfi-profile/'); await page.locator('#profileContent').waitFor();
+    await signedIn('Admin'); await nav();
+    await page.locator('#accountToggle').click(); await page.locator('#accountSignOut').click();
+    await page.waitForURL('**/login/'); await nav(); await page.locator('#accountSignIn').waitFor();
+    assert.equal(await page.locator('#accountName').textContent(), '');
+    assert.equal(await page.locator('#profileCard').isVisible(), false);
+    await capture('admin-signed-out');
     await context.clearCookies();
     assert.deepEqual(errors, [], 'No browser JavaScript errors');
     results.push({ width, passed: true });

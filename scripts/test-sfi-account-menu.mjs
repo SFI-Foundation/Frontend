@@ -7,10 +7,11 @@ const tick = () => new Promise(resolve => setTimeout(resolve, 15));
 const profile = (values = {}) => ({ uid: 'test-member', name: 'Alex Rivera', can_manage_roles: false, ...values });
 const response = (status, body) => ({ status, ok: status >= 200 && status < 300, json: async () => body });
 const channels = new Set();
-function fixture(handler) {
+function fixture(handler, profilePage = false) {
   const markup = read('_includes/sfi/nav.html').replace(/{%[\s\S]*?%}/g, '').replace(/{{[\s\S]*?}}/g, '/');
   const footer = read('_includes/sfi/footer.html');
-  const dom = new JSDOM(markup + '<main><button id="outside">Outside</button></main>' + footer.replace(/<script>[\s\S]*?<\/script>/, ''), { url: 'http://localhost:4000/', runScripts: 'outside-only' });
+  const content = profilePage ? read('navigation/sfi-profile.html') : '<button id="outside">Outside</button>';
+  const dom = new JSDOM(markup + '<main>' + content + '</main>' + footer.replace(/<script>[\s\S]*?<\/script>/, ''), { url: 'http://localhost:4000/', runScripts: 'outside-only' });
   const w = dom.window;
   w.SFI_API_BASE = 'http://localhost:8605';
   w.AbortController = AbortController;
@@ -22,6 +23,11 @@ function fixture(handler) {
   w.eval(read('assets/js/sfi/auth.js'));
   w.eval(read('assets/js/sfi/account-menu.js'));
   w.eval(footer.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/{{[\s\S]*?}}/g, '"/"'));
+  if (profilePage) {
+    w.pythonURI = w.SFI_API_BASE;
+    w.createOnboarding = () => ({ render() {} });
+    w.eval(read('assets/js/sfi/profile.js').replace(/^import .*;\s*$/gm, ''));
+  }
   return { w, dom, el: id => w.document.getElementById(id), close() { channels.clear(); dom.window.close(); } };
 }
 test('initial neutral state never flashes Sign In; only 401 establishes signed out', async () => {
@@ -99,6 +105,48 @@ test('profile edits update the name immediately and backend permission controls 
     h.w.SFIAuth.clear();
     assert.equal(h.el('accountAdmin').hidden, true);
     assert.equal(h.el('accountName').textContent, '');
+  } finally { h.close(); }
+});
+const completeProfile = (values = {}) => profile({ interests: { causes: [], participation: [], skills: '', volunteering: null, availability: '' }, ...values });
+test('profile and header share one verified Admin lookup; background expiry clears both and reauthentication restores both', async () => {
+  let status = 200, lookups = 0;
+  let account = completeProfile({ uid: 'admin', name: 'Admin', role: 'Admin', can_manage_roles: true });
+  const h = fixture(async () => { lookups++; return response(status, account); }, true);
+  try {
+    await tick();
+    assert.equal(lookups, 1, 'Profile must reuse the header session request');
+    assert.equal(h.el('accountName').textContent, 'Admin');
+    assert.equal(h.el('sfiProfileName').textContent, 'Admin');
+    assert.equal(h.el('sfiProfileUid').textContent, 'admin');
+    assert.equal(h.el('profileContent').hidden, false);
+    status = 401; await h.w.SFIAuth.refresh(true);
+    assert.equal(h.el('accountSignIn').hidden, false);
+    assert.equal(h.el('profileContent').hidden, true);
+    assert.equal(h.el('sfiProfileName').textContent, '');
+    assert.equal(h.el('profileSignIn').hidden, false);
+    status = 200; account = completeProfile({ uid: 'member', name: 'A Different Member' });
+    await h.w.SFIAuth.refresh(true);
+    assert.equal(h.el('accountName').textContent, 'A Different Member');
+    assert.equal(h.el('sfiProfileName').textContent, 'A Different Member');
+    assert.equal(h.el('profileContent').hidden, false);
+    assert.equal(h.el('accountAdmin').hidden, true);
+    assert.equal(h.el('roleManagement').hidden, true);
+  } finally { h.close(); }
+});
+test('a legacy signed-out UI event cannot erase a verified Admin or a newer successful login', async () => {
+  let offline = false;
+  const h = fixture(async () => { if (offline) throw new Error('Temporary network failure'); return response(200, completeProfile({ uid: 'admin', name: 'Admin', can_manage_roles: true })); }, true);
+  try {
+    await tick();
+    for (const failure of [false, true]) {
+      offline = failure;
+      h.w.dispatchEvent(new h.w.CustomEvent('sfi-auth', { detail: null }));
+      assert.equal(h.el('accountSignIn').hidden, true, 'Do not declare logout from a presentation event');
+      await tick();
+      assert.equal(h.el('accountName').textContent, 'Admin');
+      assert.equal(h.el('sfiProfileName').textContent, 'Admin');
+      assert.equal(h.el('profileContent').hidden, false);
+    }
   } finally { h.close(); }
 });
 test('temporary errors retain verified identity; failed logout retains it; successful logout clears it', async () => {

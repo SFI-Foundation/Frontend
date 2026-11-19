@@ -5,7 +5,33 @@ const element = id => document.getElementById(id);
 const emptyInterests = () => ({ causes: [], participation: [], skills: '', volunteering: null, availability: '' });
 let busy = false;
 let editingName = false;
+let renderedUid = null, renderedName = '';
 const onboarding = createOnboarding(request);
+
+function hideProfile(guest = true) {
+    renderedUid = null; renderedName = '';
+    element('profileContent').hidden = true;
+    element('profileSignIn').hidden = !guest;
+    for (const id of ['sfiProfileName', 'sfiProfileUid', 'sfiProfileRole']) element(id).textContent = '';
+    element('profileNameInput').value = '';
+    element('roleManagement').hidden = true;
+    element('profileStatus').textContent = guest ? 'Please sign in to continue.' : 'Loading your profile…';
+}
+
+// Profile content and the header consume the same verified session. In
+// particular, a background 401 must not leave a stale Admin profile visible.
+window.addEventListener?.('sfi-session', event => {
+    const { state, user } = event.detail;
+    if (state === 'guest') { hideProfile(); return; }
+    if (!user) { hideProfile(false); return; }
+    if (!renderedUid || user.uid !== renderedUid) { render(user); return; }
+    if (!editingName && element('profileNameInput').value === renderedName) element('profileNameInput').value = user.name;
+    renderedName = user.name;
+    element('sfiProfileName').textContent = user.name;
+    element('sfiProfileUid').textContent = user.uid;
+    element('sfiProfileRole').textContent = user.role_label || user.role;
+    element('roleManagement').hidden = !user.can_manage_roles;
+});
 
 async function request(path, options = {}) {
     const epoch = window.SFIAuth?.snapshot().epoch;
@@ -22,10 +48,9 @@ async function request(path, options = {}) {
     }
     if (!response.ok) {
         if (response.status === 401) {
-            element('profileContent').hidden = true;
-            element('profileSignIn').hidden = false;
-            element('profileStatus').textContent = 'Please sign in to continue.';
-            window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
+            hideProfile();
+            if (window.SFIAuth) window.SFIAuth.clear();
+            else window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
         }
         const error = new Error(response.status === 401 ? 'Please sign in to continue.' : data.message || 'Your profile could not be updated. Please try again.');
         error.fields = data.errors || {};
@@ -35,6 +60,7 @@ async function request(path, options = {}) {
 }
 
 function render(profile, form = 'all') {
+    renderedUid = profile.uid; renderedName = profile.name;
     const interests = profile.interests;
     const values = {
         sfiProfileName: profile.name, sfiProfileUid: profile.uid, sfiProfileRole: profile.role_label || profile.role,
@@ -61,13 +87,17 @@ function render(profile, form = 'all') {
     element('profileSignIn').hidden = true;
     element('profileStatus').textContent = '';
     onboarding.render(profile, form);
-    window.dispatchEvent(new CustomEvent('sfi-auth', { detail: profile }));
+    if (!window.SFIAuth || form !== 'all') window.dispatchEvent(new CustomEvent('sfi-auth', { detail: profile }));
     if (form !== 'all') window.SFIAuth?.notifyChange();
 }
 
 async function load() {
     element('profileRetry').hidden = true;
-    try { render(await request('')); }
+    try {
+        const profile = window.SFIAuth ? await window.SFIAuth.refresh() : await request('');
+        if (profile) render(profile);
+        else hideProfile();
+    }
     catch (error) {
         element('profileStatus').textContent = error.message || 'Could not connect to server.';
         element('profileRetry').hidden = false;

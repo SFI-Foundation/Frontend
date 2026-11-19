@@ -1,5 +1,7 @@
 # Authenticated SFI account navigation
 
+The [Admin/profile consistency follow-up](sfi-account-navigation-follow-up.md) documents the reproduced mismatch, its fix, and screenshots showing Admin in the account/profile page and header together.
+
 ## Investigation
 
 The SFI header rendered `/login/` as an unconditional link in `_includes/sfi/nav.html`. Its `navigation.js` only controlled the mobile navigation. Login and profile controllers already emitted `sfi-auth`, but only the footer subscribed; the SFI header did not validate or follow the session. The footer also performed its own independent lookup. The retained OCS login module targets `#loginArea` in legacy classroom layouts, rather than this header. In addition, the login page treated every initial lookup failure as logout, including temporary server/network failures.
@@ -23,7 +25,7 @@ The control shows first/last name when present, then SFI's full `name`, username
 | Menu item | Existing destination / authorization |
 | --- | --- |
 | My Profile / Mi perfil | `/sfi-profile/` |
-| Account Settings / Configuración de la cuenta | `/settings/#account` |
+| Edit Preferences / Editar preferencias | `/settings/` |
 | Admin Dashboard / Panel de administración | `/admin/`, only when the authenticated profile returns `can_manage_roles: true` |
 | Sign Out / Cerrar sesión | Existing credentialed `DELETE /api/authenticate` |
 
@@ -49,6 +51,7 @@ The menu uses the existing theme/accent tokens, an in-flow mobile layout, an acc
 | `package.json` | Include account-menu tests in npm test |
 | `scripts/test-sfi-account-menu.mjs` | DOM/session failure, race, localization, authorization and interaction tests |
 | `scripts/test-sfi-account-browser.mjs` | Real Chromium → isolated Flask → disposable SQLite integration and axe checks |
+| `scripts/sfi-settings-fixture.py` | Optional, disposable Admin/@admin and member accounts for the exact profile/header regression |
 | `scripts/test-sfi-photo-assets.mjs` | Check primary links separately from nested account-menu/noscript destinations |
 | `docs/sfi-account-navigation.md` | Investigation, verification and limitations |
 | `docs/account-navigation/` | Synthetic-account screenshots and browser results |
@@ -57,9 +60,9 @@ The menu uses the existing theme/accent tokens, an in-flow mobile layout, an acc
 
 Backend: the existing isolated profile/settings/authentication suite passes **22 tests on SQLite and 22 on MySQL 8.4**, including registration, role escalation rejection, administrator access, account isolation, expired/invalid authentication, profile edits, logout, preference persistence and rollback. Only disposable databases were used. No backend change is required.
 
-Frontend: `npm test` passes. Running its suites together with existing account-route and specification-search tests without subprocess isolation passes **77 tests**. The production Jekyll build, generated API configuration checks, scoped Sass checks, photographic redesign checks, and **7 production-artifact/search/photo tests** pass. The existing registration/onboarding Chromium suite passes at 320, 390, 768, 1024 and 1440px.
+Frontend: `npm test` passes. Running its suites together with existing account-route and specification-search tests without subprocess isolation passes **79 tests**. The production Jekyll build, generated API configuration checks, scoped Sass checks, photographic redesign checks, and **7 production-artifact/search/photo tests** pass. The existing registration/onboarding Chromium suite passes at 320, 390, 768, 1024 and 1440px.
 
-The account browser suite passes at **320, 375, 768, 1024 and 1440px**, using real browser cookies and the existing isolated Flask HTTP fixture with disposable accounts. It covers login without a manual refresh, neutral refresh loading, profile edits, settings links, keyboard and touch-sized menus, logout, cross-tab name/logout/account changes, member 403/admin 200 permissions, onboarding staff claims, HTTP-only cookie expiry, 503/network failures and identity isolation. Both themes, both languages and all seven accents pass **140 axe WCAG A/AA header audits with zero violations**. `results.json` records the completed runs and audit results.
+The account browser suite passes at **320, 375, 768, 1024 and 1440px**, using real browser cookies and the existing isolated Flask HTTP fixture with disposable accounts. It covers login without a manual refresh, neutral refresh loading, profile edits, settings links, keyboard and touch-sized menus, logout, cross-tab name/logout/account changes, member 403/admin 200 permissions, onboarding staff claims, HTTP-only cookie expiry, 503/network failures and identity isolation. Admin and member headers, both themes, both languages and all seven accents pass **280 axe WCAG A/AA header audits with zero violations**. `results.json` records the completed runs and audit results.
 
 To reproduce the browser suite, supply installed Playwright and axe-core/playwright modules, Chromium and any required system libraries, then run:
 
@@ -69,7 +72,7 @@ PLAYWRIGHT_MODULE=/path/to/playwright AXE_MODULE=/path/to/@axe-core/playwright \
   /path/to/backend /path/to/production-site /path/to/evidence
 ```
 
-`SFI_ACCOUNT_SMOKE=1` restricts the test to 1440px and the default accent for a faster diagnostic. It does not replace the default full matrix.
+`SFI_ACCOUNT_SMOKE=1` restricts the test to 1440px and the default accent for a faster diagnostic. `SFI_ACCOUNT_SMOKE=responsive` tests 1440px and 375px, including the full Admin sign-out path. These focused runs do not replace the default full matrix.
 
 ## Screenshots
 
