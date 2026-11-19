@@ -15,9 +15,25 @@
   function signal(next) {
     state = next;
     root.dispatchEvent(new CustomEvent('sfi-preference-sync', { detail: status() }));
-    const message = root.document.getElementById('preferenceSyncMessage');
+    renderStatus();
+  }
+  function renderStatus() {
+    let bar = root.document.getElementById('preferenceSyncStatus');
+    // Successful background sync needs no persistent notice or layout space.
+    // Recreate feedback when loading, saving or a recoverable failure needs it.
+    if (state === 'ready') { bar?.remove(); return; }
+    if (!bar) {
+      const main = root.document.querySelector('main');
+      if (!main) return;
+      bar = root.document.createElement('div');
+      bar.id = 'preferenceSyncStatus'; bar.className = 'sfi-sync-status';
+      bar.innerHTML = '<span id="preferenceSyncMessage" role="status"></span> <button id="preferenceSyncRetry" type="button" hidden></button>';
+      bar.querySelector('#preferenceSyncRetry').addEventListener('click', () => root.SFIPreferenceSync.retry());
+      main.prepend(bar);
+    }
+    const message = bar.querySelector('#preferenceSyncMessage');
     if (message) message.textContent = root.SFII18n?.t(labels[state]) || labels[state];
-    const retry = root.document.getElementById('preferenceSyncRetry');
+    const retry = bar.querySelector('#preferenceSyncRetry');
     if (retry) { retry.hidden = !['error', 'conflict', 'offlineGuest'].includes(state); retry.textContent = root.SFII18n?.t(state === 'conflict' ? 'Reload account settings' : 'Retry') || 'Retry'; }
   }
   function status() { return { state, message: labels[state], revision, canEdit: ['guest', 'offlineGuest'].includes(state) || (loaded && state !== 'conflict') }; }
@@ -93,10 +109,6 @@
   root.addEventListener('pagehide', () => { clearTimeout(timer); save(); });
   root.SFIPreferenceSync = { status, reload: load, retry: () => state === 'conflict' || !loaded ? load() : save(), logout: guest };
   function start() {
-    const bar = root.document.createElement('div'); bar.className = 'sfi-sync-status';
-    bar.innerHTML = '<span id="preferenceSyncMessage" role="status"></span> <button id="preferenceSyncRetry" type="button" hidden></button>';
-    root.document.querySelector('main')?.prepend(bar);
-    root.document.getElementById('preferenceSyncRetry').addEventListener('click', root.SFIPreferenceSync.retry);
     load();
   }
   if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', start); else start();

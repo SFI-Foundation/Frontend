@@ -162,6 +162,23 @@ test('authenticated account values are rendered as text and read via credentiale
 });
 
 
+test('saved account status is absent while explicit confirmations and errors remain', async () => {
+  const h=setup({page:true}); try {
+    let state='ready';
+    h.w.SFIPreferenceSync={status:()=>({state,canEdit:true,message:state==='ready'?'Saved to your account':'Account preferences unavailable. Changes have not been saved. Retry.'})};
+    h.locale();h.load('assets/js/sfi/settings.js');await new Promise(r=>setImmediate(r));
+    const storage=h.w.document.getElementById('settingsStorage');
+    assert.equal(storage.hidden,true);assert.equal(storage.textContent,'');
+    h.w.document.getElementById('resetAppearance').click();
+    assert.equal(h.w.document.getElementById('settingsStatus').textContent,'Changes saved.');
+    state='error';h.w.dispatchEvent(new h.w.CustomEvent('sfi-preference-sync'));
+    assert.equal(storage.hidden,false);assert.match(storage.textContent,/Changes have not been saved/);
+    state='ready';h.w.dispatchEvent(new h.w.CustomEvent('sfi-preference-sync'));
+    assert.equal(storage.hidden,true);assert.equal(storage.textContent,'');
+    h.update({language:'es'});assert.equal(storage.textContent,'');
+  } finally { h.dom.window.close(); }
+});
+
 test('blocked-storage warning and authenticated status survive live translation', async () => {
   const h=setup({page:true,blocked:true}); try {
     h.w.fetch=async()=>({ok:true,status:200,json:async()=>({name:'Test member',role_label:'Member'})});
