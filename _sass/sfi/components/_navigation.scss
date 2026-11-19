@@ -49,7 +49,6 @@
   .opencs-bar__brand img { width: 126px; height: 48px; }
   .sfi-session { margin-inline-start: auto; order: 2; }
   .opencs-toggle { order: 3; margin-inline-start: auto; }
-  .sfi-session:not(:has(> :not([hidden], noscript))) + .opencs-toggle { margin-inline-start: auto; }
   .opencs-primary { order: 4; width: 100%; }
   .opencs-nav { display: grid; grid-template-columns: 1fr 1fr; gap: .25rem; padding-block: .5rem; }
   .opencs-nav__link { justify-content: start; min-height: 48px; }
