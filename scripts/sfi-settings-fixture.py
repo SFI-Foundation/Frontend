@@ -21,7 +21,7 @@ def account_navigation_bridge(context, target):
     app, db, User = context['app'], context['db'], context['User']
     password = secrets.token_urlsafe(24)
     with app.app_context():
-        for uid, name, role in [('admin', 'Admin', 'Admin'), ('member', 'Integration Member', 'User')]:
+        for uid, name, role in [('admin', 'Admin', 'Admin'), ('member', 'John Smith', 'User')]:
             user = User.query.filter_by(_uid=uid).first()
             if user is None:
                 user = User(name=name, uid=uid, password=password, role=role)

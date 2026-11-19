@@ -1,0 +1,22 @@
+{
+  "observed_at_utc": "2026-11-19T01:36:46Z",
+  "pr": 41,
+  "pr_state": "open draft, unmerged",
+  "branch": "fix/sfi-authenticated-account-navigation",
+  "pages_source": "main (GitHub Actions)",
+  "production_commit": "4b546b0b3d9cd155a33264351ffea7fbf57ed2e2",
+  "main_commit": "b6151edbb4900871b339eb9aea0d4fee74c81805",
+  "production_behind_main_commits": 14,
+  "last_successful_deployment_id": 7840903623,
+  "last_successful_run": 43991729032,
+  "failed_main_run": 44393771957,
+  "failed_step": "Execute notebook conversion script",
+  "error": "ModuleNotFoundError: No module named 'progress_bar'",
+  "jekyll_step": "skipped",
+  "deploy_job": "skipped",
+  "public_profile_static_sign_in": true,
+  "public_profile_account_control": false,
+  "public_auth_script_status": 404,
+  "cache_bypass": "unique query and Cache-Control: no-cache",
+  "production_was_modified": false
+}

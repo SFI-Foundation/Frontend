@@ -1,5 +1,7 @@
 # Authenticated SFI account navigation
 
+The current [OCS-style navigation and deployment report](sfi-account-navigation-ocs.md) verifies the visible account name, including when mobile navigation is collapsed, and identifies the failed Pages build that keeps the public site on older code.
+
 The [Admin/profile consistency follow-up](sfi-account-navigation-follow-up.md) documents the reproduced mismatch, its fix, and screenshots showing Admin in the account/profile page and header together.
 
 ## Investigation
@@ -31,7 +33,7 @@ The control shows first/last name when present, then SFI's full `name`, username
 
 The general OCS classroom dashboard is not an SFI account dashboard, so no unrelated Dashboard link is added. Existing backend authorization still protects administrator APIs independently of menu visibility.
 
-The menu uses the existing theme/accent tokens, an in-flow mobile layout, an account SVG icon, menu/menuitem semantics, visible focus, arrow keys, Home/End, Tab exit, Escape, and outside-click dismissal. A real-browser regression check covers restoring window focus while clicking an item; a null focus target must not cause the menu to disappear before the click arrives.
+The authenticated name uses the same text-link styling as the other navigation destinations, with native menu-button semantics and no Sign In button border. It remains visible when the mobile public-links panel is collapsed. The menu uses existing theme/accent tokens, an in-flow mobile layout, an account SVG icon, menu/menuitem semantics, visible focus, arrow keys, Home/End, Tab exit, Escape, and outside-click dismissal. A real-browser regression check covers restoring window focus while clicking an item; a null focus target must not cause the menu to disappear before the click arrives.
 
 ## Changed files
 

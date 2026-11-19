@@ -43,7 +43,7 @@ try {
     ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}) });
   const audits = [];
   const widths = process.env.SFI_ACCOUNT_SMOKE === 'responsive' ? [1440, 375] : process.env.SFI_ACCOUNT_SMOKE ? [1440] : [1440, 1024, 768, 375, 320];
-  let previousMemberName = 'Integration Member';
+  let previousMemberName = 'John Smith';
   for (const width of widths) {
     const context = await browser.newContext({ viewport: { width, height: 1000 }, reducedMotion: 'reduce', hasTouch: width <= 768, isMobile: width <= 375 });
     const page = await context.newPage(), errors = [];
@@ -83,7 +83,14 @@ try {
     }
     async function signedIn(name, target = page) {
       await target.waitForFunction(expected => document.getElementById('accountName').textContent === expected, name);
-      assert.equal(await target.locator('#accountSignIn').evaluate(el => el.hidden), true);
+      await target.locator('#accountToggle').waitFor({ state: 'visible' });
+      assert.equal(await target.locator('#accountName').innerText(), name, 'Rendered navbar contains the actual display name');
+      assert.equal(await target.locator('.opencs-primary').getByRole('button', { name, exact: true }).isVisible(), true, 'Screen-reader account name matches the visible name');
+      assert.equal(await target.locator('#accountSignIn').isVisible(), false, 'Rendered navbar must not show Sign In while authenticated');
+      const visibleNavText = (await target.locator('.opencs-primary').innerText()).split('\n').map(text => text.trim());
+      assert.equal(visibleNavText.some(text => ['Sign In', 'Iniciar sesión'].includes(text)), false, 'No visible signed-out label anywhere in the primary navigation');
+      assert.equal(await target.locator('#accountToggle').evaluate(el => el.classList.contains('opencs-nav__link--account')), false, 'Authenticated name uses link styling, not the Sign In button');
+      assert.equal(await target.locator('#accountToggle').evaluate(el => getComputedStyle(el).borderTopWidth), '0px');
     }
     async function capture(label) {
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${label}: horizontal overflow at ${width}`);
@@ -117,7 +124,7 @@ try {
     await capture('signed-out');
     assert.equal(await page.locator('#accountToggle').isVisible(), false);
     await login(fixture.uid, previousMemberName);
-    await page.goto('http://localhost:4000/'); await signedIn(await page.locator('#accountName').textContent());
+    await page.goto('http://localhost:4000/'); await signedIn(previousMemberName); await capture('signed-in-collapsed');
     profileDelay = 300;
     await page.reload({ waitUntil: 'domcontentloaded' });
     assert.equal(await page.locator('#accountSignIn').evaluate(el => el.hidden), true, 'No signed-out flash during a valid-session check');
@@ -144,11 +151,11 @@ try {
     assert.equal(memberForbidden, 403);
     let peer;
     if (width === 1440) {
-      peer = await context.newPage(); await peer.goto('http://localhost:4000/'); await signedIn('Integration Member', peer);
+      peer = await context.newPage(); await peer.goto('http://localhost:4000/'); await signedIn('John Smith', peer);
     }
     await page.locator('#accountMenu a').first().click();
     await page.locator('#profileNameInput').waitFor();
-    const name = `Integration Member ${width}`;
+    const name = `John Smith ${width}`;
     previousMemberName = name;
     await page.locator('#profileNameInput').fill(name); await page.locator('#profileNameSave').click(); await signedIn(name);
     assert.equal(await page.locator('#sfiProfileName').textContent(), name);
@@ -217,6 +224,7 @@ try {
     await page.locator('#profileCard').waitFor();
     assert.equal(await page.locator('#profileName').textContent(), 'Admin');
     assert.equal(await page.locator('#profileUid').textContent(), '@admin');
+    await capture('admin-account-collapsed');
     await nav(); await capture('admin-account');
     await page.goto('http://localhost:4000/sfi-profile/');
     await page.locator('#profileContent').waitFor();
@@ -273,6 +281,11 @@ try {
     assert.equal(await page.locator('#accountName').textContent(), '');
     assert.equal(await page.locator('#profileCard').isVisible(), false);
     await capture('admin-signed-out');
+    await page.reload();
+    await page.locator('#accountSignIn').waitFor({ state: 'visible' });
+    assert.equal(await page.locator('#accountName').innerText(), '');
+    assert.equal(await page.locator('#accountToggle').isVisible(), false, 'Refreshing after logout must stay signed out');
+    assert.equal(await page.locator('#profileCard').isVisible(), false);
     await context.clearCookies();
     assert.deepEqual(errors, [], 'No browser JavaScript errors');
     results.push({ width, passed: true });
