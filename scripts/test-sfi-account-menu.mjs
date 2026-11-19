@@ -39,7 +39,7 @@ test('initial neutral state never flashes Sign In; only 401 establishes signed o
     assert.equal(h.el('navAuth').textContent, 'Checking account…');
     release(response(401, {})); await tick();
     assert.equal(h.el('accountSignIn').hidden, false);
-    assert.equal(h.el('accountToggle').hidden, true);
+    assert.equal(h.el('sfiAccount').hidden, true);
     assert.equal(h.el('accountName').textContent, '');
     assert.equal(h.el('navAuth').textContent, 'Sign In');
   } finally { h.close(); }
@@ -71,27 +71,19 @@ test('server profile replaces Sign In, name precedence is safe, and onboarding n
     }
   } finally { h.close(); }
 });
-test('dropdown supports keyboard, Escape, focus leaving, and outside clicks', async () => {
+test('persistent account navigation exposes ordinary links in tab order without a dropdown', async () => {
   const h = fixture(async () => response(200, profile()));
-  const key = (node, value) => node.dispatchEvent(new h.w.KeyboardEvent('keydown', { key: value, bubbles: true, cancelable: true }));
   try {
-    await tick(); h.el('accountToggle').click();
-    assert.equal(h.el('accountMenu').hidden, false);
-    assert.equal(h.w.document.activeElement.textContent, 'My Profile');
-    key(h.w.document.activeElement, 'End');
-    assert.equal(h.w.document.activeElement.id, 'accountSignOut');
-    key(h.w.document.activeElement, 'ArrowDown');
-    assert.equal(h.w.document.activeElement.textContent, 'My Profile');
-    key(h.w.document.activeElement, 'Escape');
-    assert.equal(h.el('accountMenu').hidden, true);
-    assert.equal(h.w.document.activeElement.id, 'accountToggle');
-    key(h.el('accountToggle'), 'ArrowUp');
-    assert.equal(h.w.document.activeElement.id, 'accountSignOut');
-    h.el('accountSignOut').dispatchEvent(new h.w.FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
-    await tick(); assert.equal(h.el('accountMenu').hidden, false, 'Window focus restoration must not swallow a menu click');
-    h.el('outside').click(); assert.equal(h.el('accountMenu').hidden, true);
-    h.el('accountToggle').click(); h.el('outside').focus(); await tick();
-    assert.equal(h.el('accountMenu').hidden, true);
+    await tick();
+    assert.equal(h.el('sfiAccount').hidden, false);
+    assert.equal(h.el('accountLinks').tagName, 'NAV');
+    assert.equal(h.el('accountToggle'), null);
+    assert.equal(h.el('accountMenu'), null);
+    const items = [...h.el('accountLinks').querySelectorAll('a, button')].filter(node => !node.hidden);
+    assert.deepEqual(items.map(node => node.textContent), ['My Profile', 'Preferences', 'Sign Out']);
+    for (const node of items) { assert.notEqual(node.getAttribute('tabindex'), '-1'); node.focus(); assert.equal(h.w.document.activeElement, node); }
+    h.el('outside').click();
+    assert.equal(h.el('sfiAccount').hidden, false, 'The secondary navigation remains available');
   } finally { h.close(); }
 });
 test('profile edits update the name immediately and backend permission controls the admin item', async () => {
@@ -174,8 +166,8 @@ test('initial network failure remains unknown and has a retry; expiry clears ide
   let status = 503;
   const h = fixture(async () => response(status, profile()));
   try {
-    await tick(); assert.equal(h.el('accountSignIn').hidden, true); assert.equal(h.el('accountRetry').hidden, false);
-    status = 200; h.el('accountRetry').click(); await tick();
+    await tick(); assert.equal(h.el('accountSignIn').hidden, true); assert.equal(h.el('accountSessionRetry').hidden, false);
+    status = 200; h.el('accountSessionRetry').click(); await tick();
     assert.equal(h.el('accountName').textContent, 'Alex Rivera');
     status = 401; await h.w.SFIAuth.refresh();
     assert.equal(h.el('accountSignIn').hidden, false); assert.equal(h.el('accountName').textContent, '');
@@ -212,9 +204,9 @@ test('English/Spanish labels change while user content is excluded from translat
     for (const file of ['assets/js/sfi/preferences.js', 'assets/js/vendor/i18next.min.js', 'assets/js/sfi/locales.js', 'assets/js/sfi/localization.js']) h.w.eval(read(file));
     h.w.SFIPreferences.update(h.w.JSON.parse('{"language":"es"}')); await tick();
     assert.equal(h.el('accountName').textContent, 'Home');
-    assert.equal(h.el('accountMenu').querySelector('a').textContent, 'Mi perfil');
+    assert.equal(h.el('accountLinks').querySelector('[data-i18n="My Profile"]').textContent, 'Mi perfil');
     assert.equal(h.el('accountSignOut').textContent, 'Cerrar sesión');
     h.w.SFIPreferences.update(h.w.JSON.parse('{"language":"en"}')); await tick();
-    assert.equal(h.el('accountMenu').querySelector('a').textContent, 'My Profile');
+    assert.equal(h.el('accountLinks').querySelector('[data-i18n="My Profile"]').textContent, 'My Profile');
   } finally { h.close(); }
 });

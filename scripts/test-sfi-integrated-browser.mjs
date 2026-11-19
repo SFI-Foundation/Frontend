@@ -7,6 +7,18 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import http from 'node:http';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+
+// Select a visible settings section through its real navigation before editing.
+async function setting(page, key) {
+  const field = page.locator('#pref-' + key);
+  if (!await field.isVisible()) {
+    const id = await field.evaluate(node => node.closest('[data-settings-section]').id);
+    const chooser = page.locator('.sfi-settings-sections');
+    if (!await chooser.evaluate(node => node.open)) await chooser.locator('summary').click();
+    await page.locator('[data-settings-link="' + id + '"]').click();
+  }
+  return field;
+}
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const AxeBuilder = require(process.env.AXE_MODULE || '@axe-core/playwright').default;
@@ -60,7 +72,7 @@ try {
  const a=await context(),pa=await page(a);
  await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Safety Standards/);
  assert.equal(await pa.locator('.sfi-settings-gear').count(),0);
- await goto(pa,'/settings/');await pa.locator('#pref-language').selectOption('es');
+ await goto(pa,'/settings/');await (await setting(pa, 'language')).selectOption('es');
  await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Normas de seguridad/);assert.equal(await pa.locator('html').getAttribute('lang'),'es');
  await goto(pa,'/login/');assert.equal(await pa.locator('label[for="loginUid"]').innerText(),'Nombre de usuario');
  await pa.locator('#loginBtn').click();assert.match(await pa.locator('#msgBox').innerText(),/Completa/);
@@ -77,7 +89,7 @@ try {
  assert.equal((await api(pa,'/api/sfi/profile/roles')).status,403);
  assert.equal((await api(pa,'/api/sfi/profile','PUT',{name:'x'})).status,400);
  await goto(pa,'/settings/');
- for(const [key,value]of Object.entries({theme:'dark',accent:'purple',language:'es',textSize:'large'}))await pa.locator('#pref-'+key).selectOption(value);
+ for(const [key,value]of Object.entries({theme:'dark',accent:'purple',language:'es',textSize:'large'}))await (await setting(pa,key)).selectOption(value);
  await settled(pa);
  const dbA=(await proof({proof_uid:fixture.uid})).data;assert.equal(dbA.preferences.language,'es');assert.equal(dbA.preferences.accent,'purple');
  // No account settings persist into the guest localStorage key.
@@ -85,14 +97,14 @@ try {
  const b=await context(390),pb=await page(b);await login(pb,fixture.uid);
  assert.equal(await pb.evaluate(()=>SFIPreferences.get().language),'es');assert.equal(await pb.locator('html').getAttribute('data-sfi-theme'),'dark');
  await goto(pb,'/settings/');assert.equal(await pb.locator('#pref-accent').inputValue(),'purple');assert.equal(await pb.locator('#pref-textSize').inputValue(),'large');
- await pb.locator('#pref-accent').selectOption('teal');await settled(pb);await pa.reload();await settled(pa);assert.equal(await pa.locator('#pref-accent').inputValue(),'teal');
+ await (await setting(pb, 'accent')).selectOption('teal');await settled(pb);await pa.reload();await settled(pa);assert.equal(await pa.locator('#pref-accent').inputValue(),'teal');
  await goto(pa,'/sfi-profile/');assert.equal(await pa.locator('#profileNameSave').innerText(),'Guardar nombre');await pa.reload();assert.equal(await pa.locator('#profileNameSave').innerText(),'Guardar nombre');
  results.workflows.push('English -> Spanish homepage/login/profile/settings; reload persistence; real profile DB update; two independent browser contexts retrieve DB preferences; reverse device update; account data excluded from guest storage');
  // Optimistic conflict and failed saves must remain visible and recoverable.
- await goto(pa,'/settings/');await goto(pb,'/settings/');await pa.locator('#pref-accent').selectOption('blue');await settled(pa);await pb.locator('#pref-accent').selectOption('orange');await pb.waitForFunction(()=>SFIPreferenceSync.status().state==='conflict');
+ await goto(pa,'/settings/');await goto(pb,'/settings/');await (await setting(pa, 'accent')).selectOption('blue');await settled(pa);await (await setting(pb, 'accent')).selectOption('orange');await pb.waitForFunction(()=>SFIPreferenceSync.status().state==='conflict');
  await pb.locator('#preferenceSyncRetry').click();await settled(pb);assert.equal(await pb.locator('#pref-accent').inputValue(),'blue');
  await pb.route('**/api/sfi/settings',route=>route.request().method()==='PATCH'?route.fulfill({status:503,contentType:'application/json',body:'{}'}):route.fallback());
- await pb.locator('#pref-accent').selectOption('green');await pb.waitForFunction(()=>SFIPreferenceSync.status().state==='error');assert.equal(await pb.locator('#pref-accent').inputValue(),'green');
+ await (await setting(pb, 'accent')).selectOption('green');await pb.waitForFunction(()=>SFIPreferenceSync.status().state==='error');assert.equal(await pb.locator('#pref-accent').inputValue(),'green');
  await pb.unroute('**/api/sfi/settings');await pb.locator('#preferenceSyncRetry').click();await settled(pb);assert.equal((await proof({proof_uid:fixture.uid})).data.preferences.accent,'green');
  results.workflows.push('stale device conflicts prevent overwrites; failed save retains interaction, shows error and retries successfully');
  await goto(pa,'/logout/');await pa.waitForURL('**/login/');await pa.waitForFunction(()=>SFIPreferenceSync.status().state==='guest');assert.equal(await pa.evaluate(()=>SFIPreferences.get().language),'es');
@@ -101,7 +113,7 @@ try {
  await goto(pa,'/sfi-profile/');await pa.locator('#profileNameInput').fill('Synthetic Admin Profile');await pa.locator('#profileNameSave').click();await pa.waitForFunction(()=>document.getElementById('profileNameStatus').textContent.includes('saved'));assert.equal((await proof({proof_uid:fixture.admin_uid})).data.name,'Synthetic Admin Profile');
  // Catalog seed through the real authorized API; technical source names remain unchanged.
  for(let i=0;i<23;i++)assert.equal((await api(pa,'/api/sfi/specs','POST',{spec_number:'99.'+(i+1),product_name:'Synthetic Equipment '+i,category:'Testing'})).status,201);
- await goto(pa,'/settings/');await pa.locator('#pref-language').selectOption('es');await pa.locator('#pref-resultsPerPage').selectOption('10');await settled(pa);
+ await goto(pa,'/settings/');await (await setting(pa, 'language')).selectOption('es');await (await setting(pa, 'resultsPerPage')).selectOption('10');await settled(pa);
  await goto(pa,'/sfi-specs/');await pa.locator('#viewPublicBtn').click();await pa.locator('#sfiResults article').first().waitFor();
  assert.equal(await pa.locator('#sfiResults article').count(),10);assert.match(await pa.locator('#sfiCount').innerText(),/especificaciones/);assert.equal(await pa.locator('#sfiResults a').count(),0);assert.match(await pa.locator('#sfiResults').innerText(),/vigente no está disponible/);
  await pa.locator('#sfiNext').click();await pa.waitForFunction(()=>document.getElementById('sfiCount').textContent.includes('11'));await pa.locator('#sfiSearch').fill('99.23');await pa.waitForFunction(()=>document.querySelectorAll('#sfiResults article').length===1);
@@ -136,7 +148,7 @@ try {
    for(const theme of ['light','dark'])for(const accent of (width===1440?accents:['purple'])){
     await pa.evaluate(({theme,accent})=>SFIPreferences.update({theme,accent,textSize:'extra-large',largeTargets:true,enhancedFocus:true,highContrast:true,underlineLinks:true,lineSpacing:true,reducedMotion:true}),{theme,accent});
     const visual=await pa.evaluate(()=>({background:getComputedStyle(document.body).backgroundColor,accent:getComputedStyle(document.body).getPropertyValue('--sfi-blue').trim(),size:getComputedStyle(document.documentElement).fontSize,motion:document.documentElement.dataset.sfiMotion}));
-    assert.equal(visual.background,theme==='dark'?'rgb(16, 24, 32)':'rgb(255, 255, 255)');
+    assert.equal(visual.background,theme==='dark'?'rgb(21, 24, 29)':'rgb(246, 247, 249)');
     assert.equal(visual.accent,await pa.evaluate(value=>SFIPreferences.ACCENTS[value][0],accent));
     assert.equal(visual.size,'20px');assert.equal(visual.motion,'reduced');
     await overflow(pa,`${route} ${width} ${theme} ${accent}`);
@@ -153,17 +165,16 @@ try {
  }
  await goto(pa,'/settings/');await pa.evaluate(()=>SFIPreferences.update({theme:'system',highContrast:false,textSize:'large',accent:'purple'}));await settled(pa);await pa.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});await pa.waitForFunction(()=>document.documentElement.dataset.sfiTheme==='dark'&&document.documentElement.dataset.sfiMotion==='reduced');
  if(process.env.SFI_SKIP_MATRIX){await pa.setViewportSize({width:320,height:1000});await overflow(pa,'final updated Settings at 320px');}
- await pa.locator('#settingsAccountDetails').waitFor({state:'visible'});await pa.screenshot({path:path.join(output,'spanish-dark-settings.png'),fullPage:true});await goto(pa,'/');await pa.screenshot({path:path.join(output,'spanish-home-mobile.png'),fullPage:true});
+ await pa.locator('.sfi-settings-sections summary').click();await pa.locator('[data-settings-link="account"]').click();await pa.locator('#settingsAccountDetails').waitFor({state:'visible'});await pa.screenshot({path:path.join(output,'spanish-dark-settings.png'),fullPage:true});await goto(pa,'/');await pa.screenshot({path:path.join(output,'spanish-home-mobile.png'),fullPage:true});
  await pa.locator('#sfi-main').focus();await pa.keyboard.press('?');await pa.locator('.sfi-shortcut-dialog').waitFor({state:'visible'});await pa.keyboard.press('Escape');assert.equal(await pa.locator('.sfi-shortcut-dialog').isVisible(),false);
- await goto(pa,'/settings/');await pa.locator('#pref-language').selectOption('en');await settled(pa);await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Safety Standards/);
+ await goto(pa,'/settings/');await (await setting(pa, 'language')).selectOption('en');await settled(pa);await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Safety Standards/);
  if(!process.env.SFI_SKIP_MATRIX)results.workflows.push('five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets');
  // Keyboard access to account preferences and normal public registration flow.
  await pa.evaluate(()=>{document.body.tabIndex=-1;document.body.focus();});
  await pa.keyboard.press('Tab');assert.equal(await pa.locator('.sfi-skip-link').evaluate(el=>el===document.activeElement),true);
- for(let step=0;step<12 && !await pa.locator('#accountToggle').evaluate(el=>el===document.activeElement);step++)await pa.keyboard.press('Tab');
- assert.equal(await pa.locator('#accountToggle').evaluate(el=>el===document.activeElement),true);
- await pa.keyboard.press('Enter');await pa.keyboard.press('ArrowDown');
- assert.equal(await pa.locator('#accountMenu [href="/settings/"]').evaluate(el=>el===document.activeElement),true);
+ if(await pa.locator('#navToggle').isVisible()) {await pa.locator('#navToggle').click();await pa.locator('#sfi-main').focus();}
+ for(let step=0;step<16 && !await pa.locator('#accountLinks a[href="/settings/"]').evaluate(el=>el===document.activeElement);step++)await pa.keyboard.press('Tab');
+ assert.equal(await pa.locator('#accountLinks a[href="/settings/"]').evaluate(el=>el===document.activeElement),true);
  await pa.keyboard.press('Enter');await pa.locator('#pref-theme').waitFor();
  const c=await context(),pc=await page(c);await goto(pc,'/login/#register');
  await pc.locator('#regName').fill('Synthetic Registered User');await pc.locator('#regUid').fill('synthetic_registered_user');await pc.locator('#regPass').fill(fixture.password);await pc.locator('#regBtn').click();
@@ -182,10 +193,10 @@ try {
  // establishes a guest even when the settings service is down.
  await po.route('**/api/sfi/profile',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
  await po.route('**/api/sfi/settings',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
- await goto(po,'/settings/');assert.equal(await po.evaluate(()=>SFIPreferenceSync.status().state),'offlineGuest');await po.locator('#pref-theme').selectOption('dark');await po.reload();await po.waitForFunction(()=>SFIPreferenceSync.status().state==='offlineGuest');assert.equal(await po.locator('#pref-theme').inputValue(),'dark');
+ await goto(po,'/settings/');assert.equal(await po.evaluate(()=>SFIPreferenceSync.status().state),'offlineGuest');await (await setting(po, 'theme')).selectOption('dark');await po.reload();await po.waitForFunction(()=>SFIPreferenceSync.status().state==='offlineGuest');assert.equal(await po.locator('#pref-theme').inputValue(),'dark');
  await po.unroute('**/api/sfi/profile');await po.unroute('**/api/sfi/settings');await po.locator('#preferenceSyncRetry').click();await po.waitForFunction(()=>SFIPreferenceSync.status().state==='guest');await offline.close();
  results.workflows.push('guest settings persist through an account-service outage and retry without requiring an account');
- results.workflows.push('OS system dark/reduced motion; keyboard dialog and account-menu preferences navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged');
+ results.workflows.push('OS system dark/reduced motion; keyboard dialog and secondary account preferences navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged');
  assert.deepEqual(results.errors,[],'No JavaScript errors');
  await a.close();await b.close();
 } finally {

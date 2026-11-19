@@ -5,6 +5,7 @@
   const header = button?.closest(".opencs-bar");
   if (!button || !nav || !header) return;
   const setOpen = (open) => {
+    header.classList.toggle('opencs-bar--open', open);
     button.setAttribute("aria-expanded", String(open));
     button.setAttribute(
       "aria-label",
@@ -31,6 +32,9 @@
   });
   nav.addEventListener("click", (event) => {
     if (event.target.closest("a")) setOpen(false);
+  });
+  document.getElementById('accountLinks')?.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
   });
   // Use the Sass breakpoint exposed by the shared public tokens.
   const breakpoint = getComputedStyle(header)

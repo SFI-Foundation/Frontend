@@ -13,7 +13,7 @@ permalink: /
     <h1>Safety Standards That Drive <span>Motorsports Forward</span></h1>
     <p>Explore the specifications, certification programs, and resources that help keep motorsports safe.</p>
     <div class="sfi-home-hero-actions">
-      <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find Specifications <span aria-hidden="true">&rarr;</span></a>
+      <a class="sfi-btn sfi-btn-primary" href="{{ '/sfi-specs/' | relative_url }}">Find Specifications</a>
     </div>
   </div>
 </header>
@@ -35,7 +35,7 @@ permalink: /
     </div>
     <div>
       <p>SFI Foundation is a nonprofit organization that issues and administers standards for specialty performance and racing equipment. We bring manufacturers, racers, and sanctioning bodies together around a common standard for quality assurance.</p>
-      <a href="{{ '/about/' | relative_url }}">Learn about SFI Foundation &rarr;</a>
+      <a href="{{ '/about/' | relative_url }}">Learn about SFI Foundation</a>
     </div>
   </div>
 </section>

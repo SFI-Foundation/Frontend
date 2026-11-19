@@ -204,3 +204,10 @@
 .auth-initially-hidden {
   display: none;
 }
+.auth-container { max-width: 480px; margin-block: var(--sfi-space-section); }
+.auth-card { padding: clamp(1.25rem, 3vw, 2rem); box-shadow: var(--sfi-shadow-md); }
+.auth-card h2 { color: var(--sfi-text); font-size: 1.75rem; }
+.auth-tabs { background: var(--sfi-surface2); border: 1px solid var(--sfi-border); }
+.auth-tab.active { background: var(--sfi-surface); box-shadow: var(--sfi-shadow); }
+.auth-field input { background: var(--sfi-surface2); font-size: 1rem; }
+.auth-field label { color: var(--sfi-text); }

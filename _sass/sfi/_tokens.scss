@@ -1,18 +1,18 @@
-// SFI public design tokens. Gold is a brand accent, never a text/control color.
+// SFI design primitives. Runtime appearance and accent preferences live in base/appearance.
 
-$bg: #fff;
+$bg: #f6f7f9;
 $surface: #fff;
-$surface-alt: #f7f9fc;
+$surface-alt: #f1f3f5;
 $charcoal: #141c24;
-$border: #dfe5ec;
+$border: #dce0e5;
 $border-strong: #7b8797;
 
 $text: #273444;
 $text-soft: #37485b;
 $text-muted: #536174;
 
-$blue: #24639b;
-$blue-dark: #153f70;
+$blue: #ad2828;
+$blue-dark: #861e1e;
 $blue-tint: #f7f9fc;
 
 $good: #1B6C3D;
@@ -25,8 +25,8 @@ $bad-tint: #fbe9e6;
 $font-body: "Inter", Arial, sans-serif;
 $font-heading: "Inter", Arial, sans-serif;
 
-$radius: 6px;
-$radius-sm: 4px;
+$radius: 10px;
+$radius-sm: 6px;
 $radius-photo: 6px;
 
 $space-1: 4px;
@@ -52,5 +52,5 @@ $hero-start: #153f70;
 $hero-end: #153f70;
 $hero-accent: #24639b;
 
-$shadow: 0 1px 3px rgba($blue-dark, 0.06);
-$shadow-md: 0 2px 8px rgba($blue-dark, 0.08);
+$shadow: 0 1px 3px rgba($charcoal, 0.04);
+$shadow-md: 0 2px 8px rgba($charcoal, 0.07);

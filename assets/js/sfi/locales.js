@@ -784,7 +784,12 @@ window.SFILocales = {
       "An archival black-and-white photograph of a drag-racing car and spectators at a track.": "An archival black-and-white photograph of a drag-racing car and spectators at a track.",
       "Racing cars and crews gathered in the paddock at a motorsports event.": "Racing cars and crews gathered in the paddock at a motorsports event.",
       "A full-face racing helmet and head-and-neck restraint resting on a race car.": "A full-face racing helmet and head-and-neck restraint resting on a race car.",
-      "Analysis result": "Analysis result"
+      "Analysis result": "Analysis result",
+      "Preferences": "Preferences",
+      "Account navigation": "Account navigation",
+      "Browse settings": "Browse settings",
+      "{{count}} settings sections found": "{{count}} settings sections found",
+      "Choose Preferences in the account navigation to open settings on every device. Browser preference shortcuts remain reserved.": "Choose Preferences in the account navigation to open settings on every device. Browser preference shortcuts remain reserved."
     }
   },
   "es": {
@@ -1396,7 +1401,7 @@ window.SFILocales = {
       "Initializing models…": "Inicializando modelos…",
       "Detectable categories": "Categorías detectables",
       "Detections are mapped to these 15 SFI equipment categories, including clutches, helmets, roll cages, fuel cells and supercharger devices.": "Las detecciones se asocian con estas 15 categorías SFI, incluidos embragues, cascos, jaulas de seguridad, depósitos de combustible y dispositivos de sobrealimentación.",
-      "Settings categories": "Categorías de configuración",
+      "Settings categories": "Categorías de ajustes",
       "Settings requires JavaScript. All standard website links remain available.": "La configuración requiere JavaScript. Los enlaces habituales del sitio siguen disponibles.",
       "Motorsports Safety Standards": "Normas de seguridad del automovilismo",
       "Safety standards for motorsports": "Normas de seguridad para el automovilismo",
@@ -1571,7 +1576,12 @@ window.SFILocales = {
       "An archival black-and-white photograph of a drag-racing car and spectators at a track.": "Fotografía histórica en blanco y negro de un coche de carreras de aceleración y espectadores en una pista.",
       "Racing cars and crews gathered in the paddock at a motorsports event.": "Coches de carreras y equipos reunidos en el paddock durante un evento de automovilismo.",
       "A full-face racing helmet and head-and-neck restraint resting on a race car.": "Un casco integral de competición y un dispositivo de sujeción de cabeza y cuello sobre un coche de carreras.",
-      "Analysis result": "Resultado del análisis"
+      "Analysis result": "Resultado del análisis",
+      "Preferences": "Preferencias",
+      "Account navigation": "Navegación de cuenta",
+      "Browse settings": "Explorar ajustes",
+      "{{count}} settings sections found": "{{count}} secciones de ajustes encontradas",
+      "Choose Preferences in the account navigation to open settings on every device. Browser preference shortcuts remain reserved.": "Elige Preferencias en la navegación de cuenta para abrir los ajustes en cualquier dispositivo. Los atajos de preferencias del navegador siguen reservados."
     }
   },
   "fr": {

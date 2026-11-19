@@ -21,7 +21,7 @@
     let bar = root.document.getElementById('preferenceSyncStatus');
     // Successful background sync needs no persistent notice or layout space.
     // Recreate feedback when loading, saving or a recoverable failure needs it.
-    if (state === 'ready') { bar?.remove(); return; }
+    if (state === 'ready' || state === 'guest') { bar?.remove(); return; }
     if (!bar) {
       const main = root.document.querySelector('main');
       if (!main) return;

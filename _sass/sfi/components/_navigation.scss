@@ -1,210 +1,64 @@
-// Public header. navigation.js adds an in-flow mobile menu; without JavaScript
-// all configured destinations remain available.
-.opencs-bar {
-  background: var(--sfi-surface);
-  border-bottom: 1px solid var(--sfi-border);
-  color: var(--sfi-text);
-  font-family: var(--sfi-font);
-}
-
+// Two semantic landmarks; mobile navigation expands in document flow.
+.opencs-bar { background: var(--sfi-surface); border-bottom: 1px solid var(--sfi-border); }
 .opencs-bar__inner {
   @include site-container;
-  min-height: 88px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: $space-5;
+  display: flex; align-items: center; gap: clamp(.75rem, 2vw, 2rem); min-height: 80px;
 }
-
 .opencs-bar__brand {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  min-height: 44px;
-
-  img {
-    display: block;
-    width: 158px;
-    height: 60px;
-    object-fit: contain;
-  }
+  display: flex; align-items: center; flex-shrink: 0; min-height: 44px;
+  img { width: 142px; height: 54px; object-fit: contain; background: #fff; border-radius: 4px; }
 }
-
-.opencs-primary {
-  display: flex;
-  align-items: center;
-  gap: $space-2;
-  min-width: 0;
-}
-
-.opencs-nav {
-  display: flex;
-  align-items: center;
-  gap: $space-2;
-}
-
+.opencs-primary { margin-inline-start: auto; min-width: 0; }
+.opencs-nav { display: flex; align-items: center; gap: .25rem; }
 .opencs-nav__link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: $space-2 $space-3;
-  border-bottom: 2px solid transparent;
-  color: var(--sfi-text);
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.3;
-  text-decoration: none;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
-
-  &:hover {
-    background: var(--sfi-surface2);
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: .65rem .8rem; border-radius: var(--sfi-radius-sm);
+  color: var(--sfi-text-secondary); font-size: .875rem; font-weight: 600;
+  line-height: 1.4; text-decoration: none; transition: color .15s, background .15s;
+  &:hover { background: var(--sfi-surface2); color: var(--sfi-link-strong); }
+  &[aria-current="page"] { background: var(--sfi-accent-tint); color: var(--sfi-link-strong); box-shadow: inset 0 -2px var(--sfi-link); }
+}
+.opencs-nav__link--account { border: 1px solid var(--sfi-border-bright); padding-inline: 1.1rem; }
+.sfi-session { flex-shrink: 0; &:not(:has(> :not([hidden], noscript))) { display: none; } }
+.sfi-account__pending, .sfi-account__retry { font: inherit; font-size: .875rem; color: var(--sfi-muted); }
+.sfi-account__retry { min-height: 44px; padding: .5rem; border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius-sm); background: var(--sfi-surface); color: var(--sfi-link); cursor: pointer; }
+.sfi-account { background: var(--sfi-surface2); border-top: 1px solid var(--sfi-border); }
+.sfi-account__inner { @include site-container; }
+.sfi-account__links {
+  display: flex; align-items: center; gap: .25rem; min-width: 0; padding-block: .25rem;
+  > a, > button {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: .55rem .85rem; border: 0; border-radius: var(--sfi-radius-sm);
+    background: transparent; color: var(--sfi-text-secondary); font: 600 .875rem/1.4 var(--sfi-font);
+    text-decoration: none; cursor: pointer;
+    &:hover { background: var(--sfi-surface); color: var(--sfi-link-strong); }
+    &[aria-current="page"] { background: var(--sfi-surface); color: var(--sfi-link-strong); box-shadow: inset 0 -2px var(--sfi-link); }
   }
-
-  &[aria-current="page"] {
-    color: var(--sfi-link-strong);
-    border-bottom-color: var(--sfi-blue);
-  }
-
+  #accountSignOut { margin-inline-start: auto; font-weight: 500; }
 }
-
-.opencs-nav__link--account {
-  border: 1px solid var(--sfi-border-bright);
-  border-radius: var(--sfi-radius-sm);
-  margin-left: $space-2;
-
-  &:hover,
-  &[aria-current="page"] {
-    border-color: var(--sfi-blue);
-    background: var(--sfi-surface2);
-  }
-
-  &[aria-current="page"] {
-    text-decoration: underline;
-  }
+.sfi-account__identity {
+  display: flex; align-items: center; gap: .6rem; margin-inline-end: auto;
+  padding: .5rem .85rem .5rem 0; max-width: 32%; color: var(--sfi-muted); font-size: .875rem;
+  svg { width: 20px; height: 20px; flex-shrink: 0; }
+  #accountName { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
-
-.opencs-toggle {
-  display: none;
-}
-
-.sfi-account {
-  position: relative;
-  flex: 0 0 11rem;
-  width: 11rem;
-  min-width: 0;
-  min-height: 44px;
-  [hidden] { display: none !important; }
-  .opencs-nav__link--account { margin-left: 0; width: 100%; }
-  button { font-family: inherit; cursor: pointer; }
-  :is(a, button):focus-visible { outline: 3px solid var(--sfi-link); outline-offset: 3px; }
-}
-.sfi-account__toggle {
-  width: 100%;
-  gap: .6rem;
-  justify-content: start;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  border-radius: 0;
-  background: transparent;
-  #accountName { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  svg { width: 22px; height: 22px; flex: 0 0 22px; }
-  &[aria-expanded="true"] { border-bottom-color: var(--sfi-link); }
-}
-.sfi-account__pending, .sfi-account__retry {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 44px; width: 100%; padding: .5rem; font-size: .8rem;
-  color: var(--sfi-muted);
-}
-.sfi-account__retry { border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius-sm); background: var(--sfi-surface); color: var(--sfi-link); }
-.sfi-account__menu {
-  position: absolute; inset-inline-end: 0; top: calc(100% + .5rem); z-index: 30;
-  width: 15rem; max-width: calc(100vw - 2rem); padding: .4rem;
-  background: var(--sfi-surface); color: var(--sfi-text);
-  border: 1px solid var(--sfi-border-bright); border-radius: var(--sfi-radius-sm);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
-  [role="menuitem"] {
-    display: flex; align-items: center; width: 100%; min-height: 44px; padding: .65rem .8rem;
-    font-size: .875rem; font-weight: 600; line-height: 1.4; text-align: start;
-    text-decoration: none; border: 0; border-radius: 4px;
-    background: transparent; color: var(--sfi-text);
-    &:hover, &:focus-visible { background: var(--sfi-surface2); color: var(--sfi-link-strong); }
-  }
-  #accountMessage { font-size: .875rem; margin: .5rem; }
-  #accountMessage:empty { display: none; }
-}
-
-@media (min-width: 1200px) {
-  .sfi-account { flex-basis: 17rem; width: 17rem; }
-}
-
+#accountMessage { font-size: .875rem; margin: 0; padding-bottom: .5rem; &:empty { display: none; } }
+.opencs-toggle { display: none; }
 @include tablet {
-  .opencs-primary {
-    order: 4;
-    flex-basis: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    padding-top: $space-3;
-  }
-  .sfi-account { flex: 1 1 100%; width: 100%; }
-  .sfi-account__menu { position: static; width: 100%; max-width: 100%; margin-top: .5rem; box-shadow: none; }
-  .opencs-bar__inner {
-    flex-wrap: wrap;
-    gap: 0;
-    padding-block: $space-3;
-    min-height: 76px;
-  }
-
-  .opencs-bar__brand img {
-    width: 132px;
-    height: 50px;
-  }
-
-  .opencs-nav {
-    flex-basis: 100%;
-    flex-wrap: wrap;
-    padding-top: $space-3;
-  }
-
-  .opencs-nav__link {
-    flex: 1 1 40%;
-    justify-content: start;
-    min-height: 48px;
-  }
-
-  .opencs-nav__link--account {
-    margin-left: 0;
-  }
-
+  .opencs-bar__inner { flex-wrap: wrap; gap: .5rem; min-height: 72px; padding-block: .5rem; }
+  .opencs-bar__brand img { width: 126px; height: 48px; }
+  .sfi-session { margin-inline-start: auto; order: 2; }
+  .opencs-toggle { order: 3; margin-inline-start: auto; }
+  .sfi-session:not(:has(> :not([hidden], noscript))) + .opencs-toggle { margin-inline-start: auto; }
+  .opencs-primary { order: 4; width: 100%; }
+  .opencs-nav { display: grid; grid-template-columns: 1fr 1fr; gap: .25rem; padding-block: .5rem; }
+  .opencs-nav__link { justify-content: start; min-height: 48px; }
+  .sfi-account__links { display: grid; grid-template-columns: 1fr 1fr; padding-block: .75rem; gap: .4rem; }
+  .sfi-account__identity { max-width: 100%; grid-column: 1 / -1; padding-bottom: .65rem; }
+  .sfi-account__links > a, .sfi-account__links > button { justify-content: start; min-height: 48px; margin: 0; }
+  .sfi-account__links #accountSignOut { margin-inline-start: 0; }
   .opencs-bar--enhanced {
-    .opencs-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      min-height: 44px;
-      padding: $space-2;
-      background: var(--sfi-surface);
-      color: var(--sfi-text);
-      border: 1px solid var(--sfi-border-bright);
-      border-radius: var(--sfi-radius-sm);
-      cursor: pointer;
-
-      svg {
-        width: 22px;
-        height: 22px;
-      }
-    }
-
-    .opencs-nav {
-      display: none;
-      margin-top: $space-3;
-      border-top: 1px solid var(--sfi-border);
-    }
-
-    .opencs-toggle[aria-expanded="true"] + .opencs-primary .opencs-nav {
-      display: flex;
-    }
+    .opencs-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; border: 1px solid var(--sfi-border-bright); border-radius: var(--sfi-radius-sm); color: var(--sfi-text); background: var(--sfi-surface); cursor: pointer; svg { width: 22px; height: 22px; } }
+    &:not(.opencs-bar--open) { .opencs-primary, #accountLinks { display: none; } .sfi-account { border: 0; } }
   }
 }

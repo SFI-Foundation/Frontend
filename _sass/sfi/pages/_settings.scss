@@ -56,3 +56,46 @@ html[data-sfi-result-density="compact"] & .sfi__spec-card { padding: .75rem; mar
   .sfi-setting-row { gap: .75rem; flex-wrap: wrap; select { max-width: 100%; width: 100%; } }
   .sfi-settings input[type="file"] { width: 100%; }
 }
+// Compact workspace: a clear section rail, unified control tiles and quiet status.
+.sfi-settings { padding-top: var(--sfi-space-section); }
+.sfi-settings-heading h1 { font-size: clamp(1.875rem, 3vw, 2.4rem); }
+.sfi-settings-heading p { margin-bottom: 1.25rem; }
+.sfi-settings-search { max-width: none; padding: 1rem 1.25rem; background: var(--sfi-surface); border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius); }
+.sfi-settings-search input { background: var(--sfi-surface2); }
+.sfi-settings-status:empty { min-height: 0; margin-block: .75rem; }
+.sfi-settings-search-results { font-size: .875rem; color: var(--sfi-muted); margin-block: .75rem; }
+.sfi-settings-layout { grid-template-columns: 216px minmax(0, 1fr); gap: 1.5rem; }
+.sfi-settings-sections { position: sticky; top: 1rem; border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius); padding: .5rem; background: var(--sfi-surface); }
+.sfi-settings-sections > summary { display: none; font-weight: 600; cursor: pointer; padding: .65rem; min-height: 44px; }
+.sfi-settings-nav {
+  position: static; gap: .15rem;
+  a { font-size: .875rem; font-weight: 500; padding: .55rem .7rem; border-inline-start: 3px solid transparent; }
+  a[aria-current="location"] { color: var(--sfi-link-strong); background: var(--sfi-accent-tint); border-inline-start-color: var(--sfi-link); font-weight: 700; }
+}
+.sfi-settings-card { padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--sfi-shadow); }
+.sfi-settings-card h2 { padding-bottom: .65rem; border-bottom: 1px solid var(--sfi-border); font-size: 1.25rem; letter-spacing: -.02em; }
+.sfi-settings-card > p { font-size: .9375rem; margin-block: .65rem; }
+.sfi-settings-card > p:last-child { margin-bottom: 0; }
+#general { background: var(--sfi-surface2); box-shadow: none; padding: 1rem 1.25rem; h2 { font-size: 1rem; border: 0; padding: 0; margin-bottom: .4rem; } p { margin-block: .35rem; font-size: .875rem; } #settingsStorage { font-size: .875rem; color: var(--sfi-link-strong); } }
+#settings-appearance-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; margin-block: 1.25rem; }
+#settings-appearance-fields .sfi-setting-row {
+  display: flex; flex-direction: column; align-items: stretch; gap: .75rem;
+  padding: 1rem; border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius-sm); background: var(--sfi-surface2);
+  select { width: 100%; max-width: 100%; margin-top: auto; background-color: var(--sfi-surface); }
+}
+.sfi-setting-row label { font-size: .9375rem; }
+.sfi-setting-row select { min-width: min(11rem, 100%); }
+.sfi-settings-preview { padding: 1rem 1.25rem; margin-bottom: 1rem; h3 { margin-block: 0 .35rem; } p { font-size: .875rem; margin-top: 0; } }
+#settingsEmpty { padding: 1.5rem; border: 1px dashed var(--sfi-border-bright); border-radius: var(--sfi-radius); background: var(--sfi-surface); }
+@include tablet {
+  .sfi-settings-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .sfi-settings-sections { position: static; }
+  .sfi-settings-sections > summary { display: list-item; margin-inline-start: 1rem; }
+  .sfi-settings-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: .5rem; }
+}
+@include phone {
+  .sfi-settings-card { padding: 1.15rem; }
+  .sfi-settings-search { padding: 1rem; }
+  #settings-appearance-fields { grid-template-columns: 1fr; }
+  #settings-appearance-fields .sfi-setting-row { gap: .5rem; padding: .85rem; }
+}

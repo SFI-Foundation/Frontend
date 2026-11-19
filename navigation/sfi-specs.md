@@ -29,10 +29,11 @@ body_class: sfi-spec-search
     <h2 class="sfi-visually-hidden" data-i18n="Search the catalog">Search the catalog</h2>
     <form id="sfiSearchForm" class="sfi__form-row" role="search">
       <label for="sfiSearch" data-i18n="Specification number or product name">Specification number or product name</label>
-      <input type="search" class="sfi__field" id="sfiSearch" maxlength="200" placeholder="e.g. 3.2A, 16.1, driver suit" data-i18n-placeholder="e.g. 3.2A, 16.1, driver suit">
+      <input type="search" class="sfi__field" id="sfiSearch" aria-describedby="sfiSearchHint" maxlength="200" placeholder="e.g. 3.2A, 16.1, driver suit" data-i18n-placeholder="e.g. 3.2A, 16.1, driver suit">
       <button type="submit" class="sfi__btn primary" data-i18n="Search">Search</button>
       <button type="button" class="sfi__btn" id="sfiClear" data-i18n="Clear search">Clear search</button>
     </form>
+    <p id="sfiSearchHint" class="sfi-search-hint" data-i18n="Search by specification number, equipment name, or category.">Search by specification number, equipment name, or category.</p>
     <details class="sfi-filter-panel" id="sfiCategoryPanel" open>
     <summary><span data-i18n="Filter by category">Filter by category</span>: <span id="sfiSelectedCategory">All categories</span></summary>
     <div class="sfi__filters" id="sfiFilters" role="group" aria-label="Specification category" data-i18n-label="Specification category">

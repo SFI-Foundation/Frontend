@@ -9,6 +9,18 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import http from 'node:http';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+
+// Select a visible settings section through its real navigation before editing.
+async function setting(page, key) {
+  const field = page.locator('#pref-' + key);
+  if (!await field.isVisible()) {
+    const id = await field.evaluate(node => node.closest('[data-settings-section]').id);
+    const chooser = page.locator('.sfi-settings-sections');
+    if (!await chooser.evaluate(node => node.open)) await chooser.locator('summary').click();
+    await page.locator('[data-settings-link="' + id + '"]').click();
+  }
+  return field;
+}
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const [python, backend, site, output] = process.argv.slice(2);
@@ -101,46 +113,46 @@ try {
     await page.waitForFunction(()=>document.getElementById('accountStatus').textContent.includes('Sign in'));
     assert.equal(await page.locator('#settingsAccountDetails').isVisible(),false);
     for (const theme of ['light','dark']) {
-      await page.locator('#pref-theme').selectOption(theme);
+      await (await setting(page, 'theme')).selectOption(theme);
       assert.equal(await page.locator('html').getAttribute('data-sfi-theme'),theme);
       await page.evaluate(async () => { await new Promise(resolve => requestAnimationFrame(resolve)); await Promise.all(document.getAnimations().map(animation => animation.finished.catch(() => {}))); });
       for (const accent of ['red','blue','green','purple','orange','teal','monochrome']) {
-        await page.locator('#pref-accent').selectOption(accent);
+        await (await setting(page, 'accent')).selectOption(accent);
         await page.evaluate(async () => { await new Promise(resolve => requestAnimationFrame(resolve)); await Promise.all(document.getAnimations().map(animation => animation.finished.catch(() => {}))); });
         assert.deepEqual(await contrast(),[],`AA text contrast for ${theme}/${accent}/${width}`);
       }
-      await page.locator('#pref-accent').selectOption('red');
+      await (await setting(page, 'accent')).selectOption('red');
       await page.locator('#appearance').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(output,`settings-${theme}-${width}.png`)});
     }
-    await page.locator('#pref-theme').selectOption('system');
+    await (await setting(page, 'theme')).selectOption('system');
     await page.emulateMedia({colorScheme:'dark'}); await page.waitForFunction(()=>document.documentElement.dataset.sfiTheme==='dark');
     await page.emulateMedia({colorScheme:'light'}); await page.waitForFunction(()=>document.documentElement.dataset.sfiTheme==='light');
-    await page.locator('#pref-theme').selectOption('dark');
-    await page.locator('#pref-textSize').selectOption('extra-large');
-    await page.locator('#pref-enhancedFocus').check(); await page.locator('#pref-lineSpacing').check();
-    await page.locator('#pref-letterSpacing').check(); await page.locator('#pref-largeTargets').check();
-    await page.locator('#pref-readingFont').check(); await page.locator('#pref-highContrast').check();
-    await page.locator('#pref-noTransitions').check();
+    await (await setting(page, 'theme')).selectOption('dark');
+    await (await setting(page, 'textSize')).selectOption('extra-large');
+    await (await setting(page, 'enhancedFocus')).check(); await (await setting(page, 'lineSpacing')).check();
+    await (await setting(page, 'letterSpacing')).check(); await (await setting(page, 'largeTargets')).check();
+    await (await setting(page, 'readingFont')).check(); await (await setting(page, 'highContrast')).check();
+    await (await setting(page, 'noTransitions')).check();
     await noOverflow('large accessibility settings');
     assert.deepEqual(await contrast(),[],'High-contrast text');
     await page.reload(); assert.equal(await page.locator('#pref-theme').inputValue(),'dark');
     assert.equal(await page.locator('#pref-textSize').inputValue(),'extra-large');
     assert.equal(await page.locator('#pref-enhancedFocus').isChecked(),true);
-    await page.locator('#pref-theme').focus(); await page.keyboard.press('Tab');
+    await (await setting(page, 'theme')).focus(); await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(()=>getComputedStyle(document.activeElement).outlineStyle),'solid');
     await page.locator('#resetAccessibility').click();
-    await page.locator('#pref-language').selectOption('es');
+    await (await setting(page, 'language')).selectOption('es');
     assert.equal(await page.locator('.sfi-settings-heading h1').textContent(),'Configuración');
     await page.locator('#settingsSearch').fill('tamaño');
     assert.equal(await page.locator('#accessibility').isVisible(),true);
     await page.locator('#settingsSearch').fill('nonsense-no-result');
     assert.equal(await page.locator('#settingsEmpty').isVisible(),true);
     await page.locator('#settingsSearch').fill('');
-    await page.locator('#pref-language').selectOption('ja');
+    await (await setting(page, 'language')).selectOption('ja');
     assert.equal(await page.locator('.sfi-settings-heading h1').textContent(),'設定');
     assert.equal(await page.locator('#restoreDefaults').textContent(),'Restore all defaults');
-    await page.locator('#pref-language').selectOption('en');
+    await (await setting(page, 'language')).selectOption('en');
     await page.emulateMedia({reducedMotion:'reduce'});
     await page.waitForFunction(()=>document.documentElement.dataset.sfiMotion==='reduced');
     await page.emulateMedia({reducedMotion:'no-preference'});
@@ -161,7 +173,7 @@ try {
     await page.locator('#settingsSearch').click(); await page.keyboard.type('?');
     assert.equal(await page.locator('.sfi-shortcut-dialog').isVisible(),false); await page.locator('#settingsSearch').fill('');
     // Real HttpOnly cookies and Flask profile, with no client-side role controls.
-    await page.locator('#pref-theme').selectOption('dark');
+    await (await setting(page, 'theme')).selectOption('dark');
     await page.goto('http://localhost:4000/login/');
     await page.locator('#loginUid').fill('nonexistent_settings_test_user'); await page.locator('#loginPass').fill(fixture.password); await page.locator('#loginBtn').click();
     await page.locator('.auth-msg.error').waitFor({state:'visible'});
@@ -186,7 +198,7 @@ try {
     // Seed a synthetic canonical item through the existing authorized API only.
     const created=await api('/api/sfi/specs','POST',{spec_number:`99.${[1440,1024,768,390,320].indexOf(width)+1}`,product_name:'Settings browser harness',category:'Testing'});
     assert.equal(created.status,201,JSON.stringify(created.data));
-    await page.locator('#pref-resultsPerPage').selectOption('10'); await page.locator('#pref-showMetadata').uncheck(); await page.locator('#pref-pdfIndicators').uncheck();
+    await (await setting(page, 'resultsPerPage')).selectOption('10'); await (await setting(page, 'showMetadata')).uncheck(); await (await setting(page, 'pdfIndicators')).uncheck();
     await page.waitForFunction(()=>SFIPreferenceSync.status().state==='ready');
     await page.goto('http://localhost:4000/sfi-specs/?q=Settings');
     await page.waitForFunction(()=>SFIPreferenceSync.status().state==='ready');

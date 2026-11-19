@@ -47,7 +47,7 @@
       )
       .join("");
     return `<article class="sfi__result sfi__spec-card" aria-label="SFI ${escape(item.spec_number)}">
-      <div class="sfi__result-body"><h3 class="sfi__result-title">SFI ${escape(item.spec_number)} — ${escape(item.product_name)}</h3>
+      <div class="sfi__result-body"><h3 class="sfi__result-title"><span class="sfi__spec-number">SFI ${escape(item.spec_number)}</span><span>${escape(item.product_name)}</span></h3>
       <p class="sfi__result-categories">${(item.categories || [item.category]).map((c) => `<span class="sfi__badge info">${escape(c)}</span>`).join(" ")}</p>
       <div class="sfi__document-action"><span class="sfi__document-status ${url ? "verified" : ""}"${preferences.pdfIndicators === false ? " hidden" : ""}>PDF status: <strong>${escape(status)}</strong></span>
       ${url ? `<a class="sfi__link" href="${escape(url)}" target="_blank" rel="noopener noreferrer">View specification (PDF, opens in new tab)</a>` : '<span class="sfi__muted">Current PDF unavailable for review.</span>'}</div>
@@ -82,7 +82,7 @@
       }) : t('0 specifications');
       if (prefs().highlightMatches && lastQuery) {
         const tokens = [...new Set(lastQuery.toLocaleLowerCase().split(/\s+/))].filter(Boolean).slice(0, 10).sort((a, b) => b.length - a.length);
-        for (const title of el('sfiResults').querySelectorAll('.sfi__result-title')) {
+        for (const title of el('sfiResults').querySelectorAll('.sfi__result-title > span')) {
           const text = title.textContent, folded = text.toLocaleLowerCase();
           const fragment = doc.createDocumentFragment(); let offset = 0;
           while (offset < text.length) {

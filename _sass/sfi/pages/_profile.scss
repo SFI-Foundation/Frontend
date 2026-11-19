@@ -31,3 +31,12 @@
   .sfi-profile fieldset { padding: 12px; min-width: 0; }
   .sfi-profile .sfi-pref-actions button { width: 100%; margin-right: 0; }
 }
+.sfi-profile { max-width: 1100px; margin-block: var(--sfi-space-section); }
+.sfi-profile-card { box-shadow: var(--sfi-shadow); padding: clamp(1.25rem, 3vw, 2rem); }
+.sfi-profile h1 { color: var(--sfi-text); font-size: clamp(1.875rem, 3vw, 2.4rem); margin-top: 0; letter-spacing: -.03em; }
+.sfi-profile h2 { font-size: 1.35rem; letter-spacing: -.02em; }
+.sfi-profile fieldset { background: var(--sfi-surface); padding: 1.25rem; }
+.sfi-profile .sfi-choice { background: var(--sfi-surface2); border-color: var(--sfi-border); font-size: .9375rem; transition: border-color .15s; }
+.sfi-profile .sfi-choice:hover { border-color: var(--sfi-link); }
+.sfi-profile .sfi-choice:has(input:checked) { background: var(--sfi-accent-tint); }
+.sfi-quick-access { border: 1px solid var(--sfi-border); border-inline-start: 3px solid var(--sfi-link); border-radius: var(--sfi-radius); padding: 1rem 1.25rem; }

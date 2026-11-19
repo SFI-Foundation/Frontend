@@ -108,6 +108,7 @@
     } catch { el('settingsStatus').textContent = t('Invalid preference file. Choose a version 1 SFI preferences JSON file with supported values only.'); }
     event.target.value = '';
   });
+  let selectedSection = 'appearance';
   function filter() {
     const query = el('settingsSearch').value.trim().toLocaleLowerCase(store.get().language);
     let visible = 0;
@@ -115,15 +116,45 @@
       const searchable = [...section.querySelectorAll('[data-i18n]')].map(node => node.textContent + ' ' + node.dataset.i18n).join(' ');
       const aliases = section.dataset.settingsKeywords || '';
       const match = !query || (searchable + ' ' + aliases).toLocaleLowerCase(store.get().language).includes(query);
-      section.hidden = !match; if (match) visible++;
+      section.hidden = query ? !match : section.id !== selectedSection; if (match) visible++;
       doc.querySelector(`[data-settings-link="${section.id}"]`).hidden = !match;
     });
     el('settingsEmpty').hidden = visible !== 0;
+    const results = el('settingsSearchResults');
+    results.hidden = !query;
+    results.textContent = query ? t('{{count}} settings sections found', { count: i18n.number(visible) }) : '';
+
   }
   el('settingsSearch').addEventListener('input', filter);
-  doc.querySelectorAll('[data-settings-link]').forEach(link => link.addEventListener('click', () => {
-    const heading = el(link.dataset.settingsLink).querySelector('h2'); heading.focus();
+  const links = [...doc.querySelectorAll('[data-settings-link]')];
+  const sections = [...doc.querySelectorAll('[data-settings-section]')];
+  const sectionMenu = doc.querySelector('.sfi-settings-sections');
+  const narrow = root.matchMedia('(max-width: 800px)');
+  function active(id) {
+    if (!sections.some(section => section.id === id)) id = 'appearance';
+    selectedSection = id;
+    for (const link of links) {
+      if (link.dataset.settingsLink === id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    }
+  }
+  function resizeSections() { sectionMenu.open = !narrow.matches; }
+  resizeSections(); narrow.addEventListener('change', resizeSections);
+  links.forEach(link => link.addEventListener('click', () => {
+    el('settingsSearch').value = '';
+    active(link.dataset.settingsLink); filter();
+    if (narrow.matches) sectionMenu.open = false;
+    el(link.dataset.settingsLink).querySelector('h2').focus();
   }));
+  root.addEventListener('hashchange', () => { active(root.location.hash.slice(1)); filter(); });
+  active(root.location.hash.slice(1) || 'appearance');
+  el('settingsSearch').addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); event.target.value = ''; filter(); }
+    if (event.key === 'Enter') {
+      event.preventDefault(); const first = sections.find(section => !section.hidden);
+      if (first) { active(first.id); first.querySelector('h2').focus(); }
+    }
+  });
   // One read-only account lookup per Settings page. No authentication or personal data enters the store.
   let accountRequested = false;
   async function loadAccount() {
