@@ -18,7 +18,11 @@ function documentFor(html) {
         const result = {
             id, value: '', textContent: '', checked: false, disabled: false, hidden: false,
             style: {}, classList: { toggle() {} }, events: {},
-            children: [],
+            children: [], attributes: {}, focused: false,
+            setAttribute(key, value) { this.attributes[key] = value; },
+            getAttribute(key) { return this.attributes[key] ?? null; },
+            removeAttribute(key) { delete this.attributes[key]; },
+            focus() { this.focused = true; },
             replaceChildren() { this.children = []; this.value = ''; },
             appendChild(child) { this.children.push(child); if (!this.value) this.value = child.value || ''; },
             addEventListener(type, callback) { this.events[type] = callback; },
@@ -193,6 +197,10 @@ test('login requires a working authentication cookie and signup requires eight c
     h.document.getElementById('regPass').value = 'short';
     h.window.doRegister();
     assert.match(h.document.getElementById('msgBox').textContent, /8 characters/);
+    assert.equal(h.document.getElementById('regPass').getAttribute('aria-invalid'), 'true');
+    assert.equal(h.document.getElementById('regPass').focused, true);
+    h.document.getElementById('regPass').events.input({target: h.document.getElementById('regPass')});
+    assert.equal(h.document.getElementById('regPass').getAttribute('aria-invalid'), null);
 });
 
 test('signup reports failed automatic login; failed logout leaves profile visible', async () => {
