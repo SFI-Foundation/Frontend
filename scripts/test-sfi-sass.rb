@@ -50,7 +50,7 @@ result.css.each_line do |line|
   next unless line.include?("{")
   selector = line.strip.sub(/\s*\{\s*$/, "")
   next if selector.start_with?("@") || selector.match?(/\A(?:from|to|\d+(?:\.\d+)?%)(?:,\s*\d+(?:\.\d+)?%)*\z/)
-  abort "FAIL: Unscoped CSS selector: #{selector}" unless selector.start_with?(".sfi-site")
+  abort "FAIL: Unscoped CSS selector: #{selector}" unless selector.start_with?(".sfi-site") || selector.match?(/\Ahtml(?:\[data-sfi-[^\]]+\])+ \.sfi-site(?:$|[ ,.:#>\[])/)
 end
 
 # Verify every generated SFI document, including extensionless account aliases.

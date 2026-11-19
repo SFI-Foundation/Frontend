@@ -83,14 +83,13 @@ try {
     }
     async function signedIn(name, target = page) {
       await target.waitForFunction(expected => document.getElementById('accountName').textContent === expected, name);
-      await target.locator('#accountToggle').waitFor({ state: 'visible' });
-      assert.equal(await target.locator('#accountName').innerText(), name, 'Rendered navbar contains the actual display name');
-      assert.equal(await target.locator('.opencs-primary').getByRole('button', { name, exact: true }).isVisible(), true, 'Screen-reader account name matches the visible name');
-      assert.equal(await target.locator('#accountSignIn').isVisible(), false, 'Rendered navbar must not show Sign In while authenticated');
-      const visibleNavText = (await target.locator('.opencs-primary').innerText()).split('\n').map(text => text.trim());
-      assert.equal(visibleNavText.some(text => ['Sign In', 'Iniciar sesión'].includes(text)), false, 'No visible signed-out label anywhere in the primary navigation');
-      assert.equal(await target.locator('#accountToggle').evaluate(el => el.classList.contains('opencs-nav__link--account')), false, 'Authenticated name uses link styling, not the Sign In button');
-      assert.equal(await target.locator('#accountToggle').evaluate(el => getComputedStyle(el).borderTopWidth), '0px');
+      await nav(target);
+      await target.locator('#accountLinks').waitFor({state:'visible'});
+      assert.equal(await target.locator('#accountName').innerText(), name, 'Rendered account row contains the verified display name');
+      assert.equal(await target.locator('#accountSignIn').isVisible(), false);
+      assert.equal(await target.locator('#accountToggle').count(), 0, 'No account dropdown trigger');
+      assert.equal(await target.locator('#accountLinks [role="menuitem"]').count(), 0, 'Account destinations are ordinary links');
+
     }
     async function capture(label) {
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${label}: horizontal overflow at ${width}`);
@@ -110,7 +109,7 @@ try {
     async function visitPublicPages(expected) {
       for (const route of ['/', '/sfi-specs/', '/about/', '/news-events/', '/contact/', '/settings/', '/sfi-profile/']) {
         await page.goto('http://localhost:4000' + route); await signedIn(expected); await nav();
-        assert.equal(await page.locator('#accountToggle').isVisible(), true, `${route}: visible account control`);
+        assert.equal(await page.locator('#sfiAccount').isVisible(), true, `${route}: visible account control`);
         await page.reload(); await signedIn(expected); await nav();
         if (route === '/sfi-profile/') {
           await page.locator('#profileContent').waitFor();
@@ -122,7 +121,7 @@ try {
     console.log(`GUEST ${width}px`);
     await page.locator('#accountSignIn').waitFor();
     await capture('signed-out');
-    assert.equal(await page.locator('#accountToggle').isVisible(), false);
+    assert.equal(await page.locator('#sfiAccount').isVisible(), false);
     await login(fixture.uid, previousMemberName);
     await page.goto('http://localhost:4000/'); await signedIn(previousMemberName); await capture('signed-in-collapsed');
     profileDelay = 300;
@@ -131,20 +130,15 @@ try {
     await page.waitForFunction(() => window.SFIAuth.snapshot().state === 'authenticated'); profileDelay = 0;
     console.log(`REFRESH ${width}px`);
     await nav(); await capture('signed-in');
-    await page.locator('#accountToggle').focus(); await page.keyboard.press('ArrowDown');
-    assert.match(await page.evaluate(() => document.activeElement.textContent), /My Profile/);
-    await page.keyboard.press('End'); assert.equal(await page.evaluate(() => document.activeElement.id), 'accountSignOut');
-    await page.keyboard.press('Home'); await page.keyboard.press('ArrowDown');
-    assert.match(await page.evaluate(() => document.activeElement.textContent), /Edit Preferences/);
+    await page.locator('#accountLinks a[href="/sfi-profile/"]').focus();
+    await page.keyboard.press('Tab');
+    assert.match(await page.evaluate(() => document.activeElement.textContent), /Preferences/);
     assert.notEqual(await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle), 'none');
-    await page.keyboard.press('Escape'); assert.equal(await page.locator('#accountMenu').isVisible(), false);
-    assert.equal(await page.evaluate(() => document.activeElement.id), 'accountToggle');
-    await page.locator('#accountToggle').click(); await page.locator('h1').click();
-    assert.equal(await page.locator('#accountMenu').isVisible(), false);
+    await page.keyboard.press('Tab');assert.equal(await page.evaluate(() => document.activeElement.id), 'accountSignOut');
+    await page.keyboard.press('Escape');
+    if(await page.locator('#navToggle').isVisible())assert.equal(await page.locator('#navToggle').getAttribute('aria-expanded'),'false');
+    else assert.equal(await page.locator('#accountLinks').isVisible(),true,'Desktop account row stays available');
     await nav();
-    await page.locator('#accountToggle').click(); await page.keyboard.press('Tab');
-    assert.equal(await page.locator('#accountMenu').isVisible(), false, 'Tab leaves and closes the menu');
-    await page.locator('#accountToggle').click();
     assert.equal(await page.locator('#accountAdmin').isVisible(), false);
     await capture('dropdown');
     const memberForbidden = await page.evaluate(async () => (await fetch(window.SFI_API_BASE + '/api/sfi/profile/roles', { credentials: 'include' })).status);
@@ -153,7 +147,7 @@ try {
     if (width === 1440) {
       peer = await context.newPage(); await peer.goto('http://localhost:4000/'); await signedIn('John Smith', peer);
     }
-    await page.locator('#accountMenu a').first().click();
+    await page.locator('#accountLinks a[href="/sfi-profile/"]').click();
     await page.locator('#profileNameInput').waitFor();
     const name = `John Smith ${width}`;
     previousMemberName = name;
@@ -163,8 +157,9 @@ try {
     await nav(); await capture('member-profile');
     console.log(`PROFILE ${width}px`);
     if (peer) await signedIn(name, peer);
-    await nav(); await page.locator('#accountToggle').click();
-    await page.locator('#accountMenu a').nth(1).click();
+    await nav(); await nav();
+    await page.locator('#accountLinks a[href="/settings/"]').click();
+    const chooser=page.locator('.sfi-settings-sections');if(!await chooser.evaluate(n=>n.open))await chooser.locator('summary').click();await page.locator('[data-settings-link="account"]').click();
     await page.locator('#settingsAccountDetails').waitFor();
     assert.equal(await page.locator('#settingsAccountName').textContent(), name);
     // Self-reported staff classification is retained as onboarding data only.
@@ -183,9 +178,9 @@ try {
       for (const accent of ['red', 'blue', 'green', 'purple', 'orange', 'teal', 'monochrome']) {
         if (process.env.SFI_ACCOUNT_SMOKE && accent !== 'red') continue;
         await page.evaluate(values => window.SFIPreferences.update(values), { theme, language, accent });
-        await page.locator('#accountToggle').click();
-        assert.equal(await page.locator('#accountMenu').isVisible(), true);
-        assert.equal(await page.locator('#accountMenu a').first().textContent(), language === 'es' ? 'Mi perfil' : 'My Profile');
+        await nav();
+        assert.equal(await page.locator('#accountLinks').isVisible(), true);
+        assert.equal(await page.locator('#accountLinks a[href="/sfi-profile/"]').textContent(), language === 'es' ? 'Mi perfil' : 'My Profile');
         assert.equal(await page.locator('#accountName').textContent(), name);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${width}/${theme}/${language}/${accent} overflow`);
         const audit = await page.evaluate(() => window.axe.run(document.querySelector('.opencs-bar'), {
@@ -207,7 +202,7 @@ try {
     if (peer) {
       await peer.goto('http://localhost:4000/sfi-profile/'); await peer.locator('#profileContent').waitFor();
     }
-    await page.locator('#accountToggle').click(); await page.locator('#accountSignOut').click();
+    await nav(); await page.locator('#accountSignOut').click();
     try { await page.locator('#accountSignIn').waitFor(); }
     catch (failure) {
       console.log('LOGOUT UI', await page.evaluate(() => ({ state: window.SFIAuth.snapshot().state, message: document.getElementById('accountMessage').textContent, disabled: document.getElementById('accountSignOut').disabled })));
@@ -231,7 +226,7 @@ try {
     assert.equal(await page.locator('#sfiProfileName').textContent(), 'Admin');
     assert.equal(await page.locator('#sfiProfileUid').textContent(), 'admin');
     await signedIn('Admin'); await nav(); await capture('admin-profile');
-    await page.locator('#accountToggle').click(); await page.locator('#accountAdmin').waitFor();
+    await nav(); await page.locator('#accountAdmin').waitFor();
     await capture('admin-profile-menu');
     const adminAllowed = await page.evaluate(async () => (await fetch(window.SFI_API_BASE + '/api/sfi/profile/roles', { credentials: 'include' })).status);
     assert.equal(adminAllowed, 200);
@@ -246,9 +241,9 @@ try {
     for (const theme of ['light', 'dark']) for (const language of ['en', 'es']) for (const accent of ['red', 'blue', 'green', 'purple', 'orange', 'teal', 'monochrome']) {
       if (process.env.SFI_ACCOUNT_SMOKE && accent !== 'red') continue;
       await page.evaluate(values => window.SFIPreferences.update(values), { theme, language, accent });
-      await page.locator('#accountToggle').click();
+      await nav();
       assert.equal(await page.locator('#accountAdmin').isVisible(), true);
-      assert.equal(await page.locator('#accountMenu a').nth(1).textContent(), language === 'es' ? 'Editar preferencias' : 'Edit Preferences');
+      assert.equal(await page.locator('#accountLinks a[href="/settings/"]').textContent(), language === 'es' ? 'Preferencias' : 'Preferences');
       assert.equal(await page.locator('#accountName').textContent(), 'Admin');
       assert.equal(await page.locator('#sfiProfileName').textContent(), 'Admin');
       const audit = await page.evaluate(() => window.axe.run(document.querySelector('.opencs-bar'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
@@ -276,7 +271,7 @@ try {
     await login(fixture.admin_uid, 'Admin');
     await page.goto('http://localhost:4000/sfi-profile/'); await page.locator('#profileContent').waitFor();
     await signedIn('Admin'); await nav();
-    await page.locator('#accountToggle').click(); await page.locator('#accountSignOut').click();
+    await nav(); await page.locator('#accountSignOut').click();
     await page.waitForURL('**/login/'); await nav(); await page.locator('#accountSignIn').waitFor();
     assert.equal(await page.locator('#accountName').textContent(), '');
     assert.equal(await page.locator('#profileCard').isVisible(), false);
@@ -284,13 +279,13 @@ try {
     await page.reload();
     await page.locator('#accountSignIn').waitFor({ state: 'visible' });
     assert.equal(await page.locator('#accountName').innerText(), '');
-    assert.equal(await page.locator('#accountToggle').isVisible(), false, 'Refreshing after logout must stay signed out');
+    assert.equal(await page.locator('#sfiAccount').isVisible(), false, 'Refreshing after logout must stay signed out');
     assert.equal(await page.locator('#profileCard').isVisible(), false);
     await context.clearCookies();
     assert.deepEqual(errors, [], 'No browser JavaScript errors');
     results.push({ width, passed: true });
     await context.close();
-    console.log(`PASS ${width}px: login, refresh, profile, dropdown, authorization, themes/languages, failures, logout and expiry`);
+    console.log(`PASS ${width}px: login, refresh, profile, account row, authorization, themes/languages, failures, logout and expiry`);
   }
   await writeFile(path.join(output, 'results.json'), JSON.stringify({ results, audits }, null, 2));
 } finally {

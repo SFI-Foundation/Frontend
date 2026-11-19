@@ -59,6 +59,13 @@ try {
  async function overflow(p,label){const bad=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);if(bad){await p.screenshot({path:path.join(output,'overflow.png'),fullPage:true}); const nodes=await p.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>el.checkVisibility()&&el.getBoundingClientRect().right>innerWidth+1).slice(0,10).map(el=>({tag:el.tagName,id:el.id,cls:el.className,text:el.textContent.slice(0,55),right:el.getBoundingClientRect().right}))); throw new Error(label+' overflow '+JSON.stringify(nodes));}}
 
  const baseline=process.argv.includes('--baseline');
+ // Explicitly synthetic canonical rows, created only through the protected API
+ // in the fixture's disposable database. Never seed real/client databases.
+ const seedContext=await context(), seedPage=await page(seedContext);
+ await login(seedPage,fixture.admin_uid);
+ for(let i=1;i<=23;i++)assert.equal((await api(seedPage,'/api/sfi/specs','POST',{spec_number:'99.'+i,product_name:'Synthetic QA equipment '+i,category:i%2?'QA restraints':'QA protection'})).status,201);
+ await seedContext.close();
+
  const routes=['/','/sfi-specs/','/settings/','/sfi-profile/','/admin/','/login/','/about/','/news-events/','/contact/','/services/','/history/','/detect/','/quiz/','/photo-credits/'];
  for(const role of ['guest','member','admin']) {
   const ctx=await context(), p=await page(ctx); p.setDefaultTimeout(20000);
@@ -69,6 +76,7 @@ try {
     // Gear's canonical route is detected below by the built artifact audit.
     
     await goto(p,route);
+    if(route==='/sfi-specs/'&&await p.locator('#viewPublicBtn').isVisible())await p.locator('#viewPublicBtn').click();
     await p.waitForTimeout(100);
     await overflow(p,role+' '+route+' '+width);
     if(!baseline) {
@@ -103,11 +111,23 @@ try {
    for(const route of routes) {
     await goto(p,route);await p.evaluate(()=>SFIPreferences.update({theme:'dark',language:'es'}));
     if(role!=='guest')await settled(p);
+    if(route==='/sfi-specs/'&&await p.locator('#viewPublicBtn').isVisible())await p.locator('#viewPublicBtn').click();
     await p.waitForTimeout(100);await overflow(p,role+' dark Spanish '+route);
     const axe=await new AxeBuilder({page:p}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     results.accessibility.push({role,route,theme:'dark',language:'es',violations:axe.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))});
     if(['/settings/','/sfi-specs/'].includes(route))await p.screenshot({path:path.join(output,role+'-'+route.split('/')[1]+'-dark-es.png'),fullPage:true});
    }
+   await goto(p,'/sfi-specs/');
+   if(await p.locator('#viewPublicBtn').isVisible())await p.locator('#viewPublicBtn').click();
+   await p.locator('#sfiSearch').fill('no synthetic matches');await p.locator('#sfiNoResults').waitFor({state:'visible'});
+   await p.locator('#sfiClear').click();await p.locator('#sfiResults article').first().waitFor();
+   assert.equal(await p.locator('#sfiResults a').count(),0,'Unapproved QA documents have no actions');
+   await p.locator('#sfiSearch').fill('99.23');await p.waitForFunction(()=>document.querySelectorAll('#sfiResults article').length===1);
+   await p.locator('#sfiClear').click();
+   await p.route('**/api/sfi/specs**',route=>route.request().method()==='GET'?route.fulfill({status:503,contentType:'application/json',body:'{}'}):route.fallback());
+   await p.locator('#sfiSearchForm button[type="submit"]').click();await p.locator('#sfiRetry').waitFor({state:'visible'});
+   await p.unroute('**/api/sfi/specs**');await p.locator('#sfiRetry').click();await p.locator('#sfiResults article').first().waitFor();
+   results.workflows.push(role+': canonical search, clear, no results, unapproved PDF, error and retry');
    await goto(p,'/settings/');await p.evaluate(()=>SFIPreferences.update({language:'en',theme:'light'}));
    if(role!=='guest')await settled(p);
    await p.locator('#settingsSearch').fill('zzzz unmatched');await p.locator('#settingsEmpty').waitFor({state:'visible'});

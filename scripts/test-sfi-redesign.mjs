@@ -81,6 +81,6 @@ for (const partial of ['components/_image-banner.scss', 'components/_feature-gri
 // font name with different quote styles. Both spell the same CSS family.
 // Canonicalize only that known declaration; compare all other output exactly.
 const normalize = css => css.replace(/\/\*# sourceMappingURL=.*?\*\//gs, '')
-  .replace(/(--sfi-font:\s*)["']Inter["'](, Arial, sans-serif;)/g, '$1Inter$2').trim();
+  .replace(/(--sfi-font:\s*)([^;]+);/g, (_, prefix, value) => prefix + value.replace(/["']/g, '') + ';').trim();
 assert.equal(normalize(readFileSync(path.join(site, 'assets/css/sfi.css'), 'utf8')), normalize(compiled.css));
 console.log('PASS: 13 unique photographs across the public site, licensed asset hashes, six accessible linked photo cards, destinations, contact actions, and actual compiled Sass');

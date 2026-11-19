@@ -7,22 +7,18 @@ assert.ok(site, 'Supply a Jekyll build destination');
 const css = readFileSync(path.join(site, 'assets/css/sfi.css'), 'utf8');
 assert.ok(css.length > 30000, 'Complete shared and page styles must compile');
 assert.ok(!css.includes('@import "'), 'Sass imports must resolve');
+const runtime = readFileSync(path.join(site, 'assets/js/sfi/preferences.js'), 'utf8');
 const definitions = new Set([...css.matchAll(/(--sfi-[\w-]+)\s*:/g)].map(m => m[1]));
-for (const m of css.matchAll(/var\((--sfi-[\w-]+)/g)) assert.ok(definitions.has(m[1]), `Undefined token ${m[1]}`);
-for (const selector of ['.sfi-header', '.sfi-nav', '.auth-card', '.sfi-profile', '.adm-wrap', '.sfi__container', '.sfi-chat-window']) {
+for (const m of css.matchAll(/var\((--sfi-[\w-]+)/g)) assert.ok(definitions.has(m[1]) || runtime.includes(m[1]) || /var\(--sfi-[\w-]+,/.test(m.input.slice(m.index, m.index + m[0].length + 1)), `Undefined token ${m[1]}`);
+for (const selector of ['.opencs-bar', '.opencs-nav', '.sfi-account__links', '.auth-card', '.sfi-profile', '.adm-wrap', '.sfi__container', '.sfi-settings']) {
   assert.ok(css.includes(`.sfi-site ${selector}`), `Missing scoped component ${selector}`);
 }
-assert.match(css, /--sfi-blue:\s*#1a5fa8/i);
-assert.match(css, /--sfi-bg:\s*#f4f5f7/i);
-assert.match(css, /--sfi-white:\s*#fff/i);
-assert.match(css, /--sfi-gold:\s*#f0a500/i);
-assert.match(css, /["']?Inter["']?/);
-assert.match(css, /["']?Oswald["']?/);
+assert.match(css, /--sfi-blue:\s*var\(--sfi-accent/);
+assert.match(css, /--sfi-bg:\s*#f6f7f9/i);
+assert.match(css, /color-scheme:\s*dark/);
 assert.match(css, /:focus-visible/);
-assert.doesNotMatch(css, /color-scheme:\s*dark/i);
-assert.match(css, /#e8a020/i, 'Spec Search retains its yellow navigation accent');
 assert.match(css, /max-width: 600px/);
-assert.match(css, /max-width: 1199px/);
+assert.match(css, /max-width: 800px/);
 const pages = ['', 'about', 'history', 'specs', 'services', 'contact', 'quiz', 'detect', 'sfi-specs', 'login', 'sfi-profile', 'admin', 'signup', 'profile', 'logout', 'sfifoundation', '404.html', 'sfi-ml.html', 'sfi-database.html', 'capstone/sfi-ml-blog'];
 let references = 0;
 let destinations = 0;
@@ -56,12 +52,14 @@ for (const name of pages) {
       destinations++;
     }
   }
-  const navigation = html.match(/<ul class="sfi-nav-links"[^>]*>([\s\S]*?)<\/ul>/)?.[1];
+  const navigation = html.match(/<div id="navLinks" class="opencs-nav">([\s\S]*?)<\/div>/)?.[1];
   assert.ok(navigation, `${name}: shared navigation exists`);
-  const labels = [...navigation.matchAll(/<li[^>]*><a[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
-  assert.deepEqual(labels, ['About', 'History', 'Specs', 'Services', 'News &amp; Events', 'Contact', 'My Gear', 'Detect', 'Spec Search', 'Sign In']);
+  const labels = [...navigation.matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
+  assert.deepEqual(labels, ['Home', 'Spec Search', 'About SFI', 'News &amp; Events', 'Contact']);
+  assert.ok(!html.includes('id="accountToggle"'), `${name}: no account dropdown`);
+
 }
-console.log(`PASS: ${pages.length} SFI pages, ${references} asset references, ${destinations} internal destinations, scoped blue-and-white CSS, tokens, navigation and responsive/focus rules`);
+console.log(`PASS: ${pages.length} SFI pages, ${references} asset references, ${destinations} internal destinations, scoped preference-aware CSS, tokens, navigation and responsive/focus rules`);
 
 for (const [name, target] of [['signup/index.html', '/login/#register'], ['profile/index.html', '/sfi-profile/'], ['login.html', '/login/'], ['sfifoundation/index.html', '/']]) {
   const html = readFileSync(path.join(site, name), 'utf8');

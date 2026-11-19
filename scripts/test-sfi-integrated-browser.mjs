@@ -172,7 +172,7 @@ try {
  // Keyboard access to account preferences and normal public registration flow.
  await pa.evaluate(()=>{document.body.tabIndex=-1;document.body.focus();});
  await pa.keyboard.press('Tab');assert.equal(await pa.locator('.sfi-skip-link').evaluate(el=>el===document.activeElement),true);
- if(await pa.locator('#navToggle').isVisible()) {await pa.locator('#navToggle').click();await pa.locator('#sfi-main').focus();}
+ if(await pa.locator('#navToggle').isVisible()) {await pa.locator('#navToggle').click();}
  for(let step=0;step<16 && !await pa.locator('#accountLinks a[href="/settings/"]').evaluate(el=>el===document.activeElement);step++)await pa.keyboard.press('Tab');
  assert.equal(await pa.locator('#accountLinks a[href="/settings/"]').evaluate(el=>el===document.activeElement),true);
  await pa.keyboard.press('Enter');await pa.locator('#pref-theme').waitFor();

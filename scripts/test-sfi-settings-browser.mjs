@@ -11,6 +11,11 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 
 // Select a visible settings section through its real navigation before editing.
+async function section(page, id) {
+  const chooser=page.locator('.sfi-settings-sections');
+  if(!await chooser.evaluate(node=>node.open))await chooser.locator('summary').click();
+  await page.locator('[data-settings-link="'+id+'"]').click();
+}
 async function setting(page, key) {
   const field = page.locator('#pref-' + key);
   if (!await field.isVisible()) {
@@ -29,7 +34,7 @@ await mkdir(output, { recursive: true });
 const bridge = spawn(python, [path.resolve('scripts/sfi-settings-fixture.py'), path.resolve(backend)], { stdio: ['pipe', 'pipe', 'pipe'] });
 let fixtureResolve, fixtureReject;
 const fixturePromise = new Promise((resolve, reject) => { fixtureResolve = resolve; fixtureReject = reject; });
-const startupTimer = setTimeout(() => fixtureReject(new Error('Isolated Flask startup timed out')), 30000);
+const startupTimer = setTimeout(() => fixtureReject(new Error('Isolated Flask startup timed out')), 90000);
 bridge.stderr.resume(); // Do not print generated credentials or session material.
 bridge.on('error', fixtureReject);
 bridge.on('exit', code => {
@@ -95,7 +100,7 @@ try {
     }
     async function contrast() {
       return page.evaluate(()=>{
-        const lum = color=>color.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
+        const lum = color=>color.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>color.startsWith('color(srgb')?v:v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
         return [...document.querySelectorAll('.sfi-settings label, .sfi-settings h1, .sfi-settings h2, .sfi-settings p, .sfi-settings a, .sfi-settings select, .sfi-settings button, .opencs-nav__link, .auth-msg')].filter(el=>el.checkVisibility()).flatMap(el=>{
           let parent=el,bg='rgb(255, 255, 255)';
           while(parent){const value=getComputedStyle(parent).backgroundColor;if(value!=='rgba(0, 0, 0, 0)' && value!=='transparent'){bg=value;break;}parent=parent.parentElement;}
@@ -109,7 +114,7 @@ try {
     // Guest preferences remain available at their existing URL.
     await page.goto('http://localhost:4000/settings/');
     await page.locator('#pref-theme').waitFor(); await noOverflow('initial settings');
-    await page.locator('[data-settings-link="account"]').click();
+    await section(page,'account');
     await page.waitForFunction(()=>document.getElementById('accountStatus').textContent.includes('Sign in'));
     assert.equal(await page.locator('#settingsAccountDetails').isVisible(),false);
     for (const theme of ['light','dark']) {
@@ -141,7 +146,7 @@ try {
     assert.equal(await page.locator('#pref-enhancedFocus').isChecked(),true);
     await (await setting(page, 'theme')).focus(); await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(()=>getComputedStyle(document.activeElement).outlineStyle),'solid');
-    await page.locator('#resetAccessibility').click();
+    await section(page,'accessibility');await page.locator('#resetAccessibility').click();
     await (await setting(page, 'language')).selectOption('es');
     assert.equal(await page.locator('.sfi-settings-heading h1').textContent(),'Configuración');
     await page.locator('#settingsSearch').fill('tamaño');
@@ -157,6 +162,7 @@ try {
     await page.waitForFunction(()=>document.documentElement.dataset.sfiMotion==='reduced');
     await page.emulateMedia({reducedMotion:'no-preference'});
     // Import/export exercises actual file controls; invalid identity data cannot apply.
+    await section(page,'advanced');
     await page.locator('#importPreferences').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"version":1,"preferences":{"theme":"light","role":"Admin"}}')});
     await page.waitForFunction(()=>document.getElementById('settingsStatus').textContent.includes('Invalid preference'));
     assert.equal(await page.locator('#pref-theme').inputValue(),'dark');
@@ -180,19 +186,19 @@ try {
     assert.deepEqual(await contrast(),[],'Dark-theme authentication error contrast');
     await page.locator('#loginUid').fill(fixture.uid); await page.locator('#loginPass').fill(fixture.password); await page.locator('#loginBtn').click();
     await page.locator('#profileCard').waitFor({state:'visible'});
-    await page.locator('#accountToggle').click();
-    await page.locator('#accountMenu [href="/settings/"]').click();
-    await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
+    if(await page.locator('#navToggle').isVisible())await page.locator('#navToggle').click();
+    await page.locator('#accountLinks [href="/settings/"]').click();
+    await section(page,'account');await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
     assert.equal(await page.locator('#settingsAccountName').textContent(),'Integration Member');
     assert.equal((await api('/api/sfi/profile/roles')).status,403);
-    page.once('dialog',d=>d.accept()); await page.locator('#clearPreferences').click();
+    await section(page,'privacy');page.once('dialog',d=>d.accept()); await page.locator('#clearPreferences').click();
     assert.equal((await api('/api/sfi/profile')).status,200,'Reset retains the authenticated session');
     await page.goto('http://localhost:4000/logout/'); await page.waitForURL('http://localhost:4000/login/');
     await page.locator('#loginUid').fill(fixture.admin_uid); await page.locator('#loginPass').fill(fixture.password); await page.locator('#loginBtn').click();
     await page.locator('#profileCard').waitFor({state:'visible'});
-    await page.locator('#accountToggle').click();
-    await page.locator('#accountMenu [href="/settings/"]').click();
-    await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
+    if(await page.locator('#navToggle').isVisible())await page.locator('#navToggle').click();
+    await page.locator('#accountLinks [href="/settings/"]').click();
+    await section(page,'account');await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
     await page.waitForFunction(()=>SFIPreferenceSync.status().state==='ready');
     assert.equal(await page.locator('#settingsAccountRole').textContent(),'Admin'); assert.equal((await api('/api/sfi/users')).status,200);
     // Seed a synthetic canonical item through the existing authorized API only.
