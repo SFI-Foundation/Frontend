@@ -74,7 +74,7 @@ try {
    await p.setViewportSize({width,height:1000});
    for(const route of routes) {
     // Gear's canonical route is detected below by the built artifact audit.
-    
+
     await goto(p,route);
     if(route==='/sfi-specs/'&&await p.locator('#viewPublicBtn').isVisible())await p.locator('#viewPublicBtn').click();
     await p.waitForTimeout(100);

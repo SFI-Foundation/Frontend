@@ -86,7 +86,7 @@ Port 4500 was inspected and serves `worktrees/account-navigation/Frontend`, not 
 
 ## 13. Branches, commits and draft PRs
 
-Frontend branch: `feature/sfi-full-site-modernization`, based on current SFI main. Backend branch: `feature/sfi-repository-hygiene-backend`, based on current backend main. Visual changes, refactoring and removal decisions are separate commits. The final publication receipt records the pushed heads and draft PR links. No auto-merge, merge or deployment is enabled.
+Frontend branch: `feature/sfi-full-site-modernization`, based on current SFI main. Backend branch: `feature/sfi-repository-hygiene-backend`, based on current backend main. Visual changes, refactoring and removal decisions are separate commits. [Publication receipt](publication.md) records the commits, preservation state and draft PR links: [Frontend #42](https://github.com/SFI-Foundation/Frontend/pull/42) and [Backend #49](https://github.com/SFI-Foundation/Backend/pull/49). No auto-merge, merge or deployment is enabled.
 
 ## 14. Remaining risks and client decisions
 
