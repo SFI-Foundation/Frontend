@@ -35,6 +35,16 @@ ruby scripts/test-sfi-demo-gates.rb
 | Development demo gates | Default-off, boolean validation and production rejection pass |
 | Notebook/DOCX | Six tests pass using the existing frontend Python environment |
 
+## Open the isolated preview
+
+The existing `localhost:4500` server still points to the older account-navigation checkout. From `worktrees/full-modernization/Frontend`, start this branch explicitly:
+
+```bash
+python3 scripts/sfi-local-preview.py --source "$PWD" --host localhost --port 4600 --destination /tmp/sfi-modern-local-preview start
+```
+
+Open `http://localhost:4600/`. This uses the normal configured API; the automated account/catalog demonstrations described below use disposable fixtures. Stop the manually started preview with the same command ending in `stop`.
+
 ## Backend checks
 
 ```bash
