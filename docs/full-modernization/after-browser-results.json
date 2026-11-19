@@ -1,0 +1,1779 @@
+{
+  "workflows": [
+    "guest: canonical search, clear, no results, unapproved PDF, error and retry",
+    "member: canonical search, clear, no results, unapproved PDF, error and retry",
+    "admin: canonical search, clear, no results, unapproved PDF, error and retry"
+  ],
+  "responsive": [
+    {
+      "role": "guest",
+      "route": "/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "width": 1920,
+      "overflow": false
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "width": 1920,
+      "overflow": false
+    }
+  ],
+  "themes": [],
+  "accessibility": [
+    {
+      "role": "guest",
+      "route": "/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/settings/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/admin/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/login/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/about/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/contact/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/services/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/history/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/detect/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/settings/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/admin/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/login/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/about/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/news-events/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/contact/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/services/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/history/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/detect/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/quiz/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/settings/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/admin/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/login/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/about/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/contact/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/services/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/history/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/detect/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/",
+      "theme": "dark",
+      "language": "es",
+      "violations": []
+    }
+  ],
+  "localization": [],
+  "untranslated": [],
+  "errors": []
+}

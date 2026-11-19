@@ -1,0 +1,20 @@
+# OCS patterns studied and SFI decisions
+
+Read-only upstream inspection. No upstream merge or branding import.
+
+- Pages tip: `e7abf040240106b50e49c518ce3144f4450343d1`.
+- Flask tip: `e09d1e7dfc9620a8e70578fffd44ce66cdfc1f05`.
+- SFI frontend base: `24d4fc5bcfa23d55c6510cd8f6032738e1a2406c` (PR #41 already merged).
+- SFI backend base: `75d0306e7a04c3121463816b8ff36b7b3319da91` (PR #48 already merged).
+
+| Upstream source | Studied pattern | SFI adaptation / decision |
+|---|---|---|
+| [Shared header](https://github.com/Open-Coding-Society/pages/blob/e7abf040240106b50e49c518ce3144f4450343d1/_includes/themes/minima/header.html) | Liquid header include, configured navigation paths, mobile expansion, authenticated identity | Keep SFI's shared `sfi/nav.html` and ordered `minima.nav_pages`; separate public navigation and a persistent account landmark. Use a button-controlled in-flow mobile panel with Escape/focus behavior rather than upstream's checkbox toggle. |
+| [Navigation items](https://github.com/Open-Coding-Society/pages/blob/e7abf040240106b50e49c518ce3144f4450343d1/_includes/themes/minima/nav-items.html) | Resolve configured page objects rather than duplicate destinations | Retained route-derived primary links and Liquid `relative_url`; secondary links target verified SFI profile/settings/admin routes. Active links use `aria-current`. |
+| [Navbar session controller](https://github.com/Open-Coding-Society/pages/blob/e7abf040240106b50e49c518ce3144f4450343d1/_projects/systems/login/js/navbar-login.js) | Keep session logic separate from shared markup; show verified display name | Retain SFIAuth as the single session authority. Render names with `textContent`; keep retry, expiry, logout and cross-tab identity behavior. Reject the dropdown, HTML interpolation of identity, inline styles, debug logging, Spring warnings and classroom course changes. The project source is distributed into `assets/js/login` by OCS build tooling; do not delete that registry/tooling as unused. |
+| [Dashboard preference module](https://github.com/Open-Coding-Society/pages/blob/e7abf040240106b50e49c518ce3144f4450343d1/assets/js/pages/dashboard/preferences.js) | Separate preference configuration/store/rendering and section-oriented forms | Retain SFI's existing validated store/sync/controller separation. Adapt a compact section rail and grouped controls; centralize appearance CSS outside Settings. Reject arbitrary custom colors, unrelated TTS/translation cookies, Spring data format and replacing revision-protected SFI persistence. |
+| [Sass import hub](https://github.com/Open-Coding-Society/pages/blob/e7abf040240106b50e49c518ce3144f4450343d1/_sass/open-coding/_main.scss) | Organize shared foundations and feature partials through one entry | Keep SFI's single scoped Sass entry with token/foundation/appearance/component/page layers. No classroom/global bundle is loaded by the SFI layout. No framework or dependency additions. |
+| [Aesthetihawk shared header](https://github.com/Open-Coding-Society/pages/blob/e7abf040240106b50e49c518ce3144f4450343d1/_includes/aesthetihawk/header-shared.html) | Shared composition rather than duplicated page headers | Retain SFI's single header include. Reject project-tooltip and unsolicited toast behavior; these do not serve nonprofit visitors or specification search. |
+| [Flask authorization](https://github.com/Open-Coding-Society/flask/blob/e09d1e7dfc9620a8e70578fffd44ce66cdfc1f05/api/authorize.py) | Guard APIs independently of navigation; resolve authenticated caller | Preserve the stronger existing SFI session/Bearer/cookie guards, group permissions and tests. No OCS school/guest/mentor roles, account schema, throttling policy or onboarding privileges imported. |
+
+The two-level account row is a deliberate SFI design choice informed by the shared-layout/session patterns above. Upstream still uses a dropdown; that behavior was explicitly rejected to satisfy the requested navigation model. Existing SFI route/content/data and licensed photos remain authoritative.

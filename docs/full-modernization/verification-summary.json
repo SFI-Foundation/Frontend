@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-19",
+  "frontend_base": "24d4fc5bcfa23d55c6510cd8f6032738e1a2406c",
+  "backend_base": "75d0306e7a04c3121463816b8ff36b7b3319da91",
+  "frontend_units": {
+    "passed": 63,
+    "failed": 0
+  },
+  "public_artifact_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "backend_sqlite": {
+    "run": 84,
+    "skipped": 3,
+    "failed": 0
+  },
+  "backend_config_pdf": {
+    "run": 18,
+    "skipped": 1,
+    "failed": 0
+  },
+  "account_sqlite": {
+    "passed": 22
+  },
+  "account_mysql": {
+    "passed": 22
+  },
+  "catalog_mysql": {
+    "passed": 3
+  },
+  "notebook_docx": {
+    "passed": 6
+  },
+  "responsive": {
+    "checks": 210,
+    "widths": [
+      375,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "roles": [
+      "guest",
+      "User",
+      "Admin"
+    ],
+    "overflow": 0
+  },
+  "axe": {
+    "main_scans": 84,
+    "integration_scans": 13,
+    "contrast_scans": 56,
+    "violations": 0
+  },
+  "integration": {
+    "theme_cases": 286,
+    "localization_routes": 13,
+    "untranslated_known_strings": 0,
+    "workflows": 8
+  },
+  "account_details": {
+    "widths": [
+      1440,
+      375
+    ],
+    "passed": true
+  },
+  "settings_details": {
+    "widths": [
+      1440,
+      320
+    ],
+    "passed": true
+  },
+  "console": {
+    "pages": 42,
+    "unexpected": 0,
+    "uncaught": 0,
+    "expected_resource_authorization_model_diagnostics": 66
+  },
+  "links": {
+    "theme_asset_references": 328,
+    "theme_internal_destinations": 410,
+    "public_targets": 446,
+    "errors": 0
+  },
+  "production_data_modified": false,
+  "deployed": false,
+  "merged": false
+}

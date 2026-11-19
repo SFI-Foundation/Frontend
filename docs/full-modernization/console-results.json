@@ -1,0 +1,506 @@
+{
+  "checked": [
+    {
+      "role": "guest",
+      "route": "/"
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-specs/"
+    },
+    {
+      "role": "guest",
+      "route": "/settings/"
+    },
+    {
+      "role": "guest",
+      "route": "/sfi-profile/"
+    },
+    {
+      "role": "guest",
+      "route": "/admin/"
+    },
+    {
+      "role": "guest",
+      "route": "/login/"
+    },
+    {
+      "role": "guest",
+      "route": "/about/"
+    },
+    {
+      "role": "guest",
+      "route": "/news-events/"
+    },
+    {
+      "role": "guest",
+      "route": "/contact/"
+    },
+    {
+      "role": "guest",
+      "route": "/services/"
+    },
+    {
+      "role": "guest",
+      "route": "/history/"
+    },
+    {
+      "role": "guest",
+      "route": "/detect/"
+    },
+    {
+      "role": "guest",
+      "route": "/quiz/"
+    },
+    {
+      "role": "guest",
+      "route": "/photo-credits/"
+    },
+    {
+      "role": "member",
+      "route": "/"
+    },
+    {
+      "role": "member",
+      "route": "/sfi-specs/"
+    },
+    {
+      "role": "member",
+      "route": "/settings/"
+    },
+    {
+      "role": "member",
+      "route": "/sfi-profile/"
+    },
+    {
+      "role": "member",
+      "route": "/admin/"
+    },
+    {
+      "role": "member",
+      "route": "/login/"
+    },
+    {
+      "role": "member",
+      "route": "/about/"
+    },
+    {
+      "role": "member",
+      "route": "/news-events/"
+    },
+    {
+      "role": "member",
+      "route": "/contact/"
+    },
+    {
+      "role": "member",
+      "route": "/services/"
+    },
+    {
+      "role": "member",
+      "route": "/history/"
+    },
+    {
+      "role": "member",
+      "route": "/detect/"
+    },
+    {
+      "role": "member",
+      "route": "/quiz/"
+    },
+    {
+      "role": "member",
+      "route": "/photo-credits/"
+    },
+    {
+      "role": "admin",
+      "route": "/"
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-specs/"
+    },
+    {
+      "role": "admin",
+      "route": "/settings/"
+    },
+    {
+      "role": "admin",
+      "route": "/sfi-profile/"
+    },
+    {
+      "role": "admin",
+      "route": "/admin/"
+    },
+    {
+      "role": "admin",
+      "route": "/login/"
+    },
+    {
+      "role": "admin",
+      "route": "/about/"
+    },
+    {
+      "role": "admin",
+      "route": "/news-events/"
+    },
+    {
+      "role": "admin",
+      "route": "/contact/"
+    },
+    {
+      "role": "admin",
+      "route": "/services/"
+    },
+    {
+      "role": "admin",
+      "route": "/history/"
+    },
+    {
+      "role": "admin",
+      "route": "/detect/"
+    },
+    {
+      "role": "admin",
+      "route": "/quiz/"
+    },
+    {
+      "role": "admin",
+      "route": "/photo-credits/"
+    }
+  ],
+  "expectedConsole": [
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/settings/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/settings/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/settings/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-profile/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-profile/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/sfi-profile/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/admin/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/admin/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/admin/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/about/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/about/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/news-events/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/news-events/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/contact/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/contact/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/services/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/services/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/history/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/history/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/detect/",
+      "message": "TensorFlow.js runtime failed to initialize: ReferenceError: tf is not defined\n    at Object.loadModels (http://localhost:4000/assets/js/sfi/detect-engine.js:43:7)\n    at Object.init (http://localhost:4000/assets/js/sfi/detect-app.js:13:18)\n    at HTMLDocument.<anonymous> (http://localhost:4000/assets/js/sfi/detect-app.js:74:63)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/quiz/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/quiz/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/quiz/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/quiz/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/photo-credits/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "guest",
+      "url": "http://localhost:4000/photo-credits/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/detect/",
+      "message": "TensorFlow.js runtime failed to initialize: ReferenceError: tf is not defined\n    at Object.loadModels (http://localhost:4000/assets/js/sfi/detect-engine.js:43:7)\n    at Object.init (http://localhost:4000/assets/js/sfi/detect-app.js:13:18)\n    at HTMLDocument.<anonymous> (http://localhost:4000/assets/js/sfi/detect-app.js:74:63)"
+    },
+    {
+      "role": "member",
+      "url": "http://localhost:4000/quiz/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/login/",
+      "message": "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/sfi-specs/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/detect/",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/detect/",
+      "message": "TensorFlow.js runtime failed to initialize: ReferenceError: tf is not defined\n    at Object.loadModels (http://localhost:4000/assets/js/sfi/detect-engine.js:43:7)\n    at Object.init (http://localhost:4000/assets/js/sfi/detect-app.js:13:18)\n    at HTMLDocument.<anonymous> (http://localhost:4000/assets/js/sfi/detect-app.js:74:63)"
+    },
+    {
+      "role": "admin",
+      "url": "http://localhost:4000/quiz/",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    }
+  ],
+  "unexpectedConsole": [],
+  "pageErrors": []
+}

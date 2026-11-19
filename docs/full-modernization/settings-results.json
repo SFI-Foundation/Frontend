@@ -1,0 +1,32 @@
+[
+  {
+    "width": 1440,
+    "guest": true,
+    "member": true,
+    "admin": true,
+    "themeAndAccents": true,
+    "contrast": true,
+    "keyboard": true,
+    "importExport": true,
+    "persistence": true,
+    "search": true,
+    "pdfGuard": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "width": 320,
+    "guest": true,
+    "member": true,
+    "admin": true,
+    "themeAndAccents": true,
+    "contrast": true,
+    "keyboard": true,
+    "importExport": true,
+    "persistence": true,
+    "search": true,
+    "pdfGuard": true,
+    "overflow": false,
+    "errors": []
+  }
+]
