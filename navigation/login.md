@@ -95,19 +95,35 @@ import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_
     document.getElementById('profileUid').textContent = '@' + user.uid;
     document.getElementById('profileRole').textContent = user.role || 'User';
     // Broadcast login state for nav
-    window.dispatchEvent(new CustomEvent('sfi-auth', { detail: user }));
+    if (!window.SFIAuth) window.dispatchEvent(new CustomEvent('sfi-auth', { detail: user }));
   }
 
   function showForm() {
     document.getElementById('authForm').style.display = 'block';
     document.getElementById('profileCard').style.display = 'none';
-    window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
+    if (!window.SFIAuth) window.dispatchEvent(new CustomEvent('sfi-auth', { detail: null }));
   }
 
-  function authenticatedProfile() {
-    return fetch(API_BASE + '/api/id', { credentials: 'include', cache: 'no-store' })
+  window.addEventListener?.('sfi-session', function(event) {
+    if (event.detail.state === 'authenticated') showProfile(event.detail.user);
+    else if (event.detail.state === 'guest') showForm();
+    else if (!event.detail.user) document.getElementById('profileCard').style.display = 'none';
+  });
+
+  function authenticatedProfile(force = false) {
+    if (window.SFIAuth) return window.SFIAuth.refresh(force).then(function(user) {
+      if (user) return user;
+      var error = new Error('Sign-in could not be verified. Please allow cookies and try again.');
+      error.status = 401;
+      throw error;
+    });
+    return fetch(API_BASE + '/api/sfi/profile', { credentials: 'include', cache: 'no-store' })
       .then(function(r) {
-        if (!r.ok) throw new Error('Sign-in could not be verified. Please allow cookies and try again.');
+        if (!r.ok) {
+          var error = new Error('Sign-in could not be verified. Please allow cookies and try again.');
+          error.status = r.status;
+          throw error;
+        }
         return r.json();
       });
   }
@@ -117,8 +133,13 @@ import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_
 
   // Check if already logged in
   authenticatedProfile()
-    .then(function(data) { showProfile(data); })
-    .catch(function() { showForm(); });
+    .then(function(data) { if (!window.SFIAuth) showProfile(data); })
+    .catch(function(error) {
+      if (error.status === 401) {
+        if (!window.SFIAuth || window.SFIAuth.snapshot().state === 'guest') showForm();
+      }
+      else showMsg('Account information could not be loaded. Try again.', 'error');
+    });
 
   window.doLogin = function() {
     clearMsg();
@@ -137,9 +158,10 @@ import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_
     .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
     .then(function(res) {
       if (res.ok) {
-        return authenticatedProfile().then(function(user) {
+        return authenticatedProfile(true).then(function(user) {
           document.getElementById('loginPass').value = '';
-          showProfile(user);
+          if (!window.SFIAuth) showProfile(user);
+          window.SFIAuth?.notifyChange();
         });
       } else {
         showMsg(res.data.message || 'Invalid credentials.', 'error');
@@ -180,12 +202,13 @@ import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_
         .then(function(r2) {
           return r2.json().then(function(data) {
             if (!r2.ok) throw new Error(data.message || 'Account created. Please sign in.');
-            return authenticatedProfile();
+            return authenticatedProfile(true);
           });
         })
         .then(function(user) {
           document.getElementById('regPass').value = '';
-          showProfile(user);
+          if (!window.SFIAuth) showProfile(user);
+          window.SFIAuth?.notifyChange();
           window.location.assign('{{ "/sfi-profile/?onboarding=1" | relative_url }}');
         });
       } else {
@@ -197,12 +220,12 @@ import { pythonURI as API_BASE } from '{{ "/assets/js/api/config.js" | relative_
   };
 
   window.doLogout = function() {
-    fetch(API_BASE + '/api/authenticate', {
+    (window.SFIAuth ? window.SFIAuth.signOut() : fetch(API_BASE + '/api/authenticate', {
       method: 'DELETE',
       credentials: 'include'
-    })
+    }))
     .then(function(response) {
-      if (!response.ok && response.status !== 401) throw new Error('Sign out failed. Please try again.');
+      if (response && !response.ok && response.status !== 401) throw new Error('Sign out failed. Please try again.');
       showForm();
     })
     .catch(function(error) { document.getElementById('logoutMessage').textContent = error.message || 'Could not connect to server.'; });

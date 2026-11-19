@@ -59,7 +59,8 @@ try {
  async function overflow(p,label){const bad=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);if(bad){await p.screenshot({path:path.join(output,'overflow.png'),fullPage:true}); const nodes=await p.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>el.checkVisibility()&&el.getBoundingClientRect().right>innerWidth+1).slice(0,10).map(el=>({tag:el.tagName,id:el.id,cls:el.className,text:el.textContent.slice(0,55),right:el.getBoundingClientRect().right}))); throw new Error(label+' overflow '+JSON.stringify(nodes));}}
  const a=await context(),pa=await page(a);
  await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Safety Standards/);
- await pa.locator('.sfi-settings-gear').click();await pa.locator('#pref-language').selectOption('es');
+ assert.equal(await pa.locator('.sfi-settings-gear').count(),0);
+ await goto(pa,'/settings/');await pa.locator('#pref-language').selectOption('es');
  await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Normas de seguridad/);assert.equal(await pa.locator('html').getAttribute('lang'),'es');
  await goto(pa,'/login/');assert.equal(await pa.locator('label[for="loginUid"]').innerText(),'Nombre de usuario');
  await pa.locator('#loginBtn').click();assert.match(await pa.locator('#msgBox').innerText(),/Completa/);
@@ -156,10 +157,13 @@ try {
  await pa.locator('#sfi-main').focus();await pa.keyboard.press('?');await pa.locator('.sfi-shortcut-dialog').waitFor({state:'visible'});await pa.keyboard.press('Escape');assert.equal(await pa.locator('.sfi-shortcut-dialog').isVisible(),false);
  await goto(pa,'/settings/');await pa.locator('#pref-language').selectOption('en');await settled(pa);await goto(pa,'/');assert.match(await pa.locator('h1').innerText(),/Safety Standards/);
  if(!process.env.SFI_SKIP_MATRIX)results.workflows.push('five widths; all seven accents light/dark on all 13 active SFI routes at desktop; enlarged text/high contrast/focus/links/motion/targets');
- // Keyboard access to the persistent gear and normal public registration flow.
+ // Keyboard access to account preferences and normal public registration flow.
  await pa.evaluate(()=>{document.body.tabIndex=-1;document.body.focus();});
  await pa.keyboard.press('Tab');assert.equal(await pa.locator('.sfi-skip-link').evaluate(el=>el===document.activeElement),true);
- await pa.keyboard.press('Tab');await pa.keyboard.press('Tab');assert.equal(await pa.locator('.sfi-settings-gear').evaluate(el=>el===document.activeElement),true);
+ for(let step=0;step<12 && !await pa.locator('#accountToggle').evaluate(el=>el===document.activeElement);step++)await pa.keyboard.press('Tab');
+ assert.equal(await pa.locator('#accountToggle').evaluate(el=>el===document.activeElement),true);
+ await pa.keyboard.press('Enter');await pa.keyboard.press('ArrowDown');
+ assert.equal(await pa.locator('#accountMenu [href="/settings/"]').evaluate(el=>el===document.activeElement),true);
  await pa.keyboard.press('Enter');await pa.locator('#pref-theme').waitFor();
  const c=await context(),pc=await page(c);await goto(pc,'/login/#register');
  await pc.locator('#regName').fill('Synthetic Registered User');await pc.locator('#regUid').fill('synthetic_registered_user');await pc.locator('#regPass').fill(fixture.password);await pc.locator('#regBtn').click();
@@ -174,11 +178,14 @@ try {
  results.workflows.push('Spanish legacy interest/profile saving retains canonical option values and persists successfully');
  await c.close();
  const offline=await context(),po=await page(offline);
+ // The shared session lookup must also be unavailable: a real 401 correctly
+ // establishes a guest even when the settings service is down.
+ await po.route('**/api/sfi/profile',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
  await po.route('**/api/sfi/settings',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
  await goto(po,'/settings/');assert.equal(await po.evaluate(()=>SFIPreferenceSync.status().state),'offlineGuest');await po.locator('#pref-theme').selectOption('dark');await po.reload();await po.waitForFunction(()=>SFIPreferenceSync.status().state==='offlineGuest');assert.equal(await po.locator('#pref-theme').inputValue(),'dark');
- await po.unroute('**/api/sfi/settings');await po.locator('#preferenceSyncRetry').click();await po.waitForFunction(()=>SFIPreferenceSync.status().state==='guest');await offline.close();
+ await po.unroute('**/api/sfi/profile');await po.unroute('**/api/sfi/settings');await po.locator('#preferenceSyncRetry').click();await po.waitForFunction(()=>SFIPreferenceSync.status().state==='guest');await offline.close();
  results.workflows.push('guest settings persist through an account-service outage and retry without requiring an account');
- results.workflows.push('OS system dark/reduced motion; keyboard dialog and gear navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged');
+ results.workflows.push('OS system dark/reduced motion; keyboard dialog and account-menu preferences navigation; return to English; public registration and optional manufacturer onboarding remain unprivileged');
  assert.deepEqual(results.errors,[],'No JavaScript errors');
  await a.close();await b.close();
 } finally {

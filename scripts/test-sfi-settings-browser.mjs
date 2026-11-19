@@ -93,9 +93,9 @@ try {
       });
     }
     await page.goto('http://localhost:4000/');
-    await page.locator('.sfi-settings-gear').waitFor({state:'visible'});
-    assert.equal(await page.locator('.sfi-settings-gear').getAttribute('aria-label'),'Settings');
-    await page.locator('.sfi-settings-gear').click();
+    assert.equal(await page.locator('.sfi-settings-gear').count(), 0);
+    // Guest preferences remain available at their existing URL.
+    await page.goto('http://localhost:4000/settings/');
     await page.locator('#pref-theme').waitFor(); await noOverflow('initial settings');
     await page.locator('[data-settings-link="account"]').click();
     await page.waitForFunction(()=>document.getElementById('accountStatus').textContent.includes('Sign in'));
@@ -158,7 +158,7 @@ try {
     await page.locator('.sfi-shortcut-dialog').waitFor({state:'visible'}); await page.keyboard.press('Escape');
     assert.equal(await page.locator('.sfi-shortcut-dialog').isVisible(),false);
     assert.equal(await page.evaluate(()=>document.activeElement.id),'sfi-main');
-    await page.locator('#settingsSearch').focus(); await page.keyboard.type('?');
+    await page.locator('#settingsSearch').click(); await page.keyboard.type('?');
     assert.equal(await page.locator('.sfi-shortcut-dialog').isVisible(),false); await page.locator('#settingsSearch').fill('');
     // Real HttpOnly cookies and Flask profile, with no client-side role controls.
     await page.locator('#pref-theme').selectOption('dark');
@@ -168,7 +168,8 @@ try {
     assert.deepEqual(await contrast(),[],'Dark-theme authentication error contrast');
     await page.locator('#loginUid').fill(fixture.uid); await page.locator('#loginPass').fill(fixture.password); await page.locator('#loginBtn').click();
     await page.locator('#profileCard').waitFor({state:'visible'});
-    await page.goto('http://localhost:4000/settings/#account');
+    await page.locator('#accountToggle').click();
+    await page.locator('#accountMenu [href="/settings/"]').click();
     await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
     assert.equal(await page.locator('#settingsAccountName').textContent(),'Integration Member');
     assert.equal((await api('/api/sfi/profile/roles')).status,403);
@@ -177,13 +178,18 @@ try {
     await page.goto('http://localhost:4000/logout/'); await page.waitForURL('http://localhost:4000/login/');
     await page.locator('#loginUid').fill(fixture.admin_uid); await page.locator('#loginPass').fill(fixture.password); await page.locator('#loginBtn').click();
     await page.locator('#profileCard').waitFor({state:'visible'});
-    await page.goto('http://localhost:4000/settings/#account'); await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
+    await page.locator('#accountToggle').click();
+    await page.locator('#accountMenu [href="/settings/"]').click();
+    await page.locator('#settingsAccountDetails').waitFor({state:'visible'});
+    await page.waitForFunction(()=>SFIPreferenceSync.status().state==='ready');
     assert.equal(await page.locator('#settingsAccountRole').textContent(),'Admin'); assert.equal((await api('/api/sfi/users')).status,200);
     // Seed a synthetic canonical item through the existing authorized API only.
     const created=await api('/api/sfi/specs','POST',{spec_number:`99.${[1440,1024,768,390,320].indexOf(width)+1}`,product_name:'Settings browser harness',category:'Testing'});
     assert.equal(created.status,201,JSON.stringify(created.data));
     await page.locator('#pref-resultsPerPage').selectOption('10'); await page.locator('#pref-showMetadata').uncheck(); await page.locator('#pref-pdfIndicators').uncheck();
+    await page.waitForFunction(()=>SFIPreferenceSync.status().state==='ready');
     await page.goto('http://localhost:4000/sfi-specs/?q=Settings');
+    await page.waitForFunction(()=>SFIPreferenceSync.status().state==='ready');
     await page.waitForFunction(()=>document.querySelector('#sfiResults article'));
     await page.locator('#viewPublicBtn').click();
     await page.locator('#sfiSearch').waitFor({state:'visible'});

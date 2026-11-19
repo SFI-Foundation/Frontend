@@ -1,0 +1,134 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "width": 375,
+      "passed": true
+    }
+  ],
+  "audits": [
+    {
+      "width": 1440,
+      "theme": "light",
+      "language": "en",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "language": "es",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "language": "en",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "language": "es",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "language": "en",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "language": "es",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "language": "en",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "language": "es",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "light",
+      "language": "en",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "light",
+      "language": "es",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "dark",
+      "language": "en",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "dark",
+      "language": "es",
+      "accent": "red",
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "light",
+      "language": "en",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "light",
+      "language": "es",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "dark",
+      "language": "en",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    },
+    {
+      "width": 375,
+      "theme": "dark",
+      "language": "es",
+      "accent": "red",
+      "administrator": true,
+      "violations": []
+    }
+  ]
+}

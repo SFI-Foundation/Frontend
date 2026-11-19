@@ -86,13 +86,6 @@ html[data-sfi-enhanced-focus="true"] & :focus-visible { outline-width: 4px; outl
 .sfi-btn-primary, .sfi__btn.primary, .sfi__chip.active { color: #fff; }
 input, select, textarea { accent-color: var(--sfi-blue); }
 
-.sfi-settings-gear {
-  display: inline-flex; align-items: center; justify-content: center;
-  order: 3; flex: 0 0 44px; min-height: 44px; border-radius: var(--sfi-radius-sm);
-  color: var(--sfi-text); border: 1px solid var(--sfi-border);
-  svg { width: 24px; height: 24px; }
-  &:hover, &[aria-current="page"] { color: var(--sfi-link); background: var(--sfi-surface2); }
-}
 .sfi-settings { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 .sfi-settings-heading {
   h1 { margin: 0; font-size: 2.25rem; letter-spacing: -.03em; }
@@ -146,7 +139,6 @@ html[data-sfi-result-density="compact"] & .sfi__spec-card { padding: .75rem; mar
   .sfi-settings-nav { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem .5rem; }
   .opencs-nav { order: 4; }
   .opencs-toggle { order: 3; margin-left: .5rem; }
-  .sfi-settings-gear { order: 2; margin-left: auto; }
 }
 @include phone {
   .sfi-settings { padding: 1.5rem 1rem 3rem; }

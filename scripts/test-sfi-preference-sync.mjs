@@ -21,8 +21,10 @@ test('server preferences override guests; logout restores guest values without a
  try{
   await tick();h.patch({accent:'blue'});const guest=h.w.localStorage.getItem(h.w.SFIPreferences.KEY);
   loggedIn=true;h.w.dispatchEvent(new h.w.CustomEvent('sfi-auth',{detail:{uid:'synthetic'}}));await tick();
+  assert.equal(h.w.document.getElementById('preferenceSyncStatus'),null,'Successful hydration leaves no status wrapper or spacing');
   assert.equal(h.w.SFIPreferences.get().language,'es');assert.equal(h.w.SFIPreferences.get().accent,'red');
   h.patch({accent:'purple'});await new Promise(r=>setTimeout(r,350));assert.equal(record.accent,'purple');
+  assert.equal(h.w.document.getElementById('preferenceSyncMessage'),null,'Successful saves leave no persistent message');
   assert.equal(h.w.localStorage.getItem(h.w.SFIPreferences.KEY),guest);
   loggedIn=false;h.w.dispatchEvent(new h.w.CustomEvent('sfi-auth',{detail:null}));assert.equal(h.w.SFIPreferences.get().accent,'blue');assert.equal(h.w.SFIPreferences.get().language,'en');
  }finally{h.dom.window.close();}
@@ -36,7 +38,14 @@ test('failed initial account save retries revision zero without losing the edit'
  try{
   await tick();h.patch({theme:'dark'});await new Promise(r=>setTimeout(r,350));
   assert.equal(h.w.SFIPreferenceSync.status().state,'error');assert.equal(h.w.SFIPreferences.get().theme,'dark');
-  failing=false;await h.w.SFIPreferenceSync.retry();assert.equal(record.theme,'dark');assert.equal(h.w.SFIPreferenceSync.status().state,'ready');
+  assert.match(h.w.document.getElementById('preferenceSyncMessage').textContent,/Changes have not been saved/);
+  assert.equal(h.w.document.getElementById('preferenceSyncRetry').hidden,false);
+  failing=false;h.w.document.getElementById('preferenceSyncRetry').click();await tick();
+  assert.equal(record.theme,'dark');assert.equal(h.w.SFIPreferenceSync.status().state,'ready');
+  assert.equal(h.w.document.getElementById('preferenceSyncStatus'),null,'Retry success removes the complete notice');
+  // A later failure must recreate actionable feedback after the row was removed.
+  failing=true;h.patch({accent:'blue'});await new Promise(r=>setTimeout(r,350));
+  assert.equal(h.w.document.getElementById('preferenceSyncRetry').hidden,false);
  }finally{h.dom.window.close();}
 });
 test('late account responses cannot reapply settings after logout',async()=>{

@@ -3,7 +3,8 @@
     <div class="sfi-footer-brand">
       <p class="sfi-footer-title">SFI Foundation</p>
       <p>Setting the standard for<br>motorsports safety since 1978.</p>
-      <span id="navAuth"><a href="{{ '/login/' | relative_url }}">Sign In</a></span>
+      <span id="navAuth"><span data-i18n="Checking account…">Checking account…</span></span>
+      <noscript><a href="{{ '/login/' | relative_url }}">Sign In</a></noscript>
     </div>
     <nav aria-label="Foundation navigation">
       <h2>Foundation</h2>
@@ -29,25 +30,28 @@
     <a href="{{ '/photo-credits/' | relative_url }}">Photography credits &amp; licenses</a>
   </div>
 </footer>
-<script type="module">
-import { pythonURI as AUTH_API, baseurl } from '{{ "/assets/js/api/config.js" | relative_url }}';
+<script>
 (function() {
   var navAuth = document.getElementById('navAuth');
 
-  function setNavUser(user) {
+  function setNavUser() {
+    if (!window.SFIAuth) return;
+    var session = window.SFIAuth.snapshot();
+    var t = function(key) { return window.SFII18n?.t(key) || key; };
     while (navAuth.firstChild) navAuth.removeChild(navAuth.firstChild);
+    if (!['guest', 'authenticated'].includes(session.state)) {
+      navAuth.textContent = t(session.error ? 'Account information could not be loaded. Try again.' : 'Checking account…');
+      return;
+    }
+    var user = session.user;
     var a = document.createElement('a');
-    a.href = baseurl + (user ? '/sfi-profile/' : '/login/');
-    a.textContent = user ? 'My profile' : 'Sign In';
-    if (user) a.setAttribute('aria-label', 'My profile');
+    a.href = user ? {{ '/sfi-profile/' | relative_url | jsonify }} : {{ '/login/' | relative_url | jsonify }};
+    a.textContent = t(user ? 'My Profile' : 'Sign In');
     navAuth.appendChild(a);
   }
 
-  fetch(AUTH_API + '/api/id', { credentials: 'include', cache: 'no-store' })
-    .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
-    .then(function(data) { setNavUser(data); })
-    .catch(function() { setNavUser(null); });
-
-  window.addEventListener('sfi-auth', function(e) { setNavUser(e.detail); });
+  window.addEventListener('sfi-session', setNavUser);
+  window.addEventListener('sfi-language', setNavUser);
+  setNavUser();
 })();
 </script>

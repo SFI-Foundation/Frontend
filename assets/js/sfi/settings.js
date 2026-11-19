@@ -70,13 +70,15 @@
       else input.value = prefs[input.dataset.preference];
     });
     const state = store.status(), remote = root.SFIPreferenceSync?.status();
-    message(el('settingsStorage'), remote && !['guest', 'offlineGuest'].includes(remote.state) ? remote.message : !state.storageOK ? 'Storage is unavailable. Changes apply for this page only.' : state.recovered ? 'Stored preferences were invalid. Safe defaults were restored.' : (root.SFIPreferenceSync?.status().message || 'Saved on this browser'));
+    const storage = el('settingsStorage');
+    storage.hidden = remote?.state === 'ready';
+    message(storage, remote?.state === 'ready' ? null : remote && !['guest', 'offlineGuest'].includes(remote.state) ? remote.message : !state.storageOK ? 'Storage is unavailable. Changes apply for this page only.' : state.recovered ? 'Stored preferences were invalid. Safe defaults were restored.' : (remote?.message || 'Saved on this browser'));
     i18n.translate(mount);
   }
   function status(message) {
     const node = el('settingsStatus');
     const remote = root.SFIPreferenceSync?.status();
-    if (remote && !['guest', 'offlineGuest'].includes(remote.state) && ['Changes saved.', 'Preferences imported.'].includes(message)) message = remote.message;
+    if (remote && !['guest', 'offlineGuest', 'ready'].includes(remote.state) && ['Changes saved.', 'Preferences imported.'].includes(message)) message = remote.message;
     node.textContent = t((remote && !['guest', 'offlineGuest'].includes(remote.state)) || store.status().storageOK ? message : 'Storage is unavailable. Changes apply for this page only.');
     node.lang = ['en', 'es'].includes(store.get().language) ? store.get().language : 'en';
   }

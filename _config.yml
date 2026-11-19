@@ -50,6 +50,7 @@ exclude:
   - package-lock.json
   - vendor
   - Makefile
+  - GNUmakefile
   - _notebooks
   - _docx
   - _projects
