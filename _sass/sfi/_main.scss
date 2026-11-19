@@ -3,7 +3,7 @@
 @import "tokens", "mixins";
 
 .sfi-site {
-  @import "base/properties", "base/foundation";
+  @import "base/properties", "base/foundation", "base/appearance";
   @import "components/navigation";
   @import "components/buttons";
   @import "base/layout", "pages/content", "components/footer", "components/data", "pages/admin";

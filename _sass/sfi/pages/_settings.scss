@@ -1,91 +1,3 @@
-// Runtime tokens extend the existing single compiled SFI stylesheet.
-& {
-  --sfi-blue: var(--sfi-accent, #ad2828);
-  --sfi-blue-dark: var(--sfi-accent-strong, #861e1e);
-  --sfi-blue-light: var(--sfi-accent, #ad2828);
-  --sfi-blue-accent: var(--sfi-accent, #ad2828);
-  --sfi-link: var(--sfi-accent, #ad2828);
-  --sfi-link-strong: var(--sfi-accent-strong, #861e1e);
-  --sfi-charcoal: #141c24;
-  --sfi-font: 'Inter', Arial, sans-serif;
-  --sfi-setting-gap: 1.25rem;
-  color-scheme: light;
-  font-size: 1rem;
-}
-html[data-sfi-theme="dark"] & {
-  color-scheme: dark;
-  --sfi-bg: #101820;
-  --sfi-white: #19232e;
-  --sfi-surface: #19232e;
-  --sfi-surface2: #23313f;
-  --sfi-surface3: #405369;
-  --sfi-border: #54657a;
-  --sfi-border-bright: #899bb0;
-  --sfi-text: #edf2f7;
-  --sfi-text-secondary: #d2dce8;
-  --sfi-muted: #b5c4d6;
-  --sfi-red: #ffb4b0;
-  --sfi-green: #99ddb4;
-  --sfi-link: var(--sfi-accent-link-dark, #ffb4b0);
-  --sfi-link-strong: var(--sfi-accent-link-dark, #ffb4b0);
-  .sfi__badge { background: var(--sfi-surface2); color: var(--sfi-text); }
-  .sfi__gear-item.is-pending, .sfi__gear-item.is-rejected { background: var(--sfi-surface2); }
-  .sfi__document-status.verified { color: #99ddb4; }
-  .sfi__btn.danger { color: var(--sfi-red); &:hover:not(:disabled) { color: #fff; } }
-  .sfi__notice.good, .sfi__notice.warn, .sfi__notice.bad,
-  .auth-msg.error, .auth-msg.success, .sfi__message.success, .sfi__message.error { background: var(--sfi-surface2); color: var(--sfi-text); }
-}
-html[data-sfi-high-contrast="true"] & {
-  --sfi-border: #606c7c;
-  --sfi-border-bright: #344256;
-  --sfi-text: #101820;
-  --sfi-text-secondary: #101820;
-  --sfi-muted: #273444;
-}
-html[data-sfi-high-contrast="true"][data-sfi-theme="dark"] & {
-  --sfi-border: #b5c4d6;
-  --sfi-border-bright: #edf2f7;
-  --sfi-text: #fff;
-  --sfi-text-secondary: #fff;
-  --sfi-muted: #edf2f7;
-}
-html[data-sfi-corners="rounded"] & { --sfi-radius: 16px; --sfi-radius-sm: 12px; }
-html[data-sfi-density="compact"] & {
-  --sfi-setting-gap: .75rem;
-  .sfi__card, .sfi-profile-card { padding: 1rem; }
-}
-html[data-sfi-line-spacing="true"] & {
-  line-height: 1.95;
-  p, li, label, input, select, textarea, dd { line-height: 1.95; }
-}
-html[data-sfi-letter-spacing="true"] & { &, input, button, select, textarea { letter-spacing: .06em; } }
-html[data-sfi-underline-links="true"] & a { text-decoration: underline; }
-html[data-sfi-reading-font="true"] & { --sfi-font: system-ui, sans-serif; &, h1, h2, h3, h4, button, input, select, textarea { font-family: var(--sfi-font); } }
-html[data-sfi-large-targets="true"] & {
-  button, select, input:not([type="checkbox"]):not([type="radio"]), .sfi-btn, summary, nav a { min-height: 48px; }
-  input[type="checkbox"], input[type="radio"] { min-width: 28px; min-height: 28px; }
-}
-html[data-sfi-content-width="reading"] & {
-  .sfi__container, .sfi-sect, .sfi-main-wrap, .sfi-prose, .sfi-section, .sfi-content-section, .sfi-profile, .sfi-settings, .sfi-page-content { max-width: 78ch; margin-inline: auto; }
-  .sfi-content-grid, .sfi-two-grid, .sfi-editorial, .sfi-news-feature { grid-template-columns: minmax(0, 1fr); }
-}
-html[data-sfi-reduced-distractions="true"] & {
-  .sfi-image-banner > .sfi-photograph, .sfi-feature-card > .sfi-photograph, .sfi-spec-intro > .sfi-photograph { visibility: hidden; }
-}
-html[data-sfi-no-transitions="true"] & *, html[data-sfi-motion="reduced"] & * {
-  &, &::before, &::after { transition: none !important; scroll-behavior: auto !important; }
-}
-html[data-sfi-motion="reduced"] & * {
-  &, &::before, &::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-}
-& :focus-visible { outline: 3px solid var(--sfi-link); outline-offset: 3px; }
-html[data-sfi-enhanced-focus="true"] & :focus-visible { outline-width: 4px; outline-offset: 5px; box-shadow: 0 0 0 2px var(--sfi-bg); }
-.sfi-footer :focus-visible { outline-color: #fff; }
-& [hidden] { display: none !important; }
-// Buttons use white on independently contrast-checked accent backgrounds.
-.sfi-btn-primary, .sfi__btn.primary, .sfi__chip.active { color: #fff; }
-input, select, textarea { accent-color: var(--sfi-blue); }
-
 .sfi-settings { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 .sfi-settings-heading {
   h1 { margin: 0; font-size: 2.25rem; letter-spacing: -.03em; }
@@ -137,8 +49,6 @@ html[data-sfi-result-density="compact"] & .sfi__spec-card { padding: .75rem; mar
 @include tablet {
   .sfi-settings-layout { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .sfi-settings-nav { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem .5rem; }
-  .opencs-nav { order: 4; }
-  .opencs-toggle { order: 3; margin-left: .5rem; }
 }
 @include phone {
   .sfi-settings { padding: 1.5rem 1rem 3rem; }
@@ -146,16 +56,3 @@ html[data-sfi-result-density="compact"] & .sfi__spec-card { padding: .75rem; mar
   .sfi-setting-row { gap: .75rem; flex-wrap: wrap; select { max-width: 100%; width: 100%; } }
   .sfi-settings input[type="file"] { width: 100%; }
 }
-
-// Shared status and input/focus tokens apply on every SFI page.
-& { --sfi-focus: var(--sfi-link); --sfi-input-bg: var(--sfi-surface); --sfi-disabled: var(--sfi-muted); }
-.sfi-sync-status { max-width: 1200px; margin: .5rem auto; padding: .5rem 1.5rem; color: var(--sfi-muted); font-size: .875rem; overflow-wrap: anywhere; }
-.sfi-sync-status button { color: var(--sfi-link); background: var(--sfi-surface); border: 1px solid var(--sfi-border); border-radius: var(--sfi-radius-sm); padding: .5rem; min-height: 44px; font: inherit; }
-.opencs-bar__brand img { background: #fff; border-radius: 4px; } // Preserve logo contrast in dark mode.
-.sfi-badge-blue { background: var(--sfi-surface2); }
-input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--sfi-focus); outline-offset: 3px; }
-button:disabled { cursor: not-allowed; }
-html[data-sfi-density="compact"] & { .adm-card, .sfi-setting-row { padding-block: .75rem; } }
-html[data-sfi-density="comfortable"] & { .adm-card, .sfi-setting-row { padding-block: 1.25rem; } }
-
-.sfi__badge.info { background: var(--sfi-surface2); color: var(--sfi-link); border: 1px solid var(--sfi-border); }
