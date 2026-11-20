@@ -1,0 +1,65 @@
+// Scoped to the profile/settings layout; shared header and dropdown are unchanged.
+.sfi-account-content { min-width: 0; }
+.sfi-account-layout--authenticated {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: $space-5;
+  max-width: 1488px;
+  margin: 0 auto;
+  padding: $space-7 $space-5;
+
+  .sfi-profile, .sfi-settings { margin: 0 auto; padding: 0; width: 100%; }
+}
+.sfi-account-sidebar {
+  align-self: start;
+  position: sticky;
+  top: $space-4;
+  max-height: calc(100dvh - #{$space-6});
+  overflow-y: auto;
+  padding: $space-3;
+  background: var(--sfi-surface);
+  border: 1px solid var(--sfi-border);
+  border-radius: var(--sfi-radius);
+
+  section + section { margin-top: $space-5; }
+  h2 { margin: $space-2 $space-3; color: var(--sfi-muted); font: inherit; font-size: .875rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  a {
+    display: flex; align-items: center; min-height: 44px; padding: .65rem .75rem;
+    color: var(--sfi-text); font-weight: 600; text-decoration: none;
+    overflow-wrap: anywhere; border-radius: var(--sfi-radius-sm);
+    border-inline-start: 3px solid transparent;
+    &:hover, &:focus-visible { background: var(--sfi-surface2); color: var(--sfi-link-strong); }
+    &[aria-current="page"] { background: var(--sfi-surface2); color: var(--sfi-link-strong); border-inline-start-color: var(--sfi-link); }
+  }
+}
+.sfi-account-sidebar__toggle { display: none; }
+
+// The existing settings category navigation needs one column in this narrower area.
+@media (min-width: #{$bp-tablet + 1px}) and (max-width: 1200px) {
+  .sfi-account-layout--authenticated {
+    .sfi-settings-layout { grid-template-columns: minmax(0, 1fr); }
+    .sfi-settings-nav { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+}
+@include tablet {
+  .sfi-account-layout--authenticated { grid-template-columns: 200px minmax(0, 1fr); gap: $space-4; padding: $space-6 $space-4; }
+}
+@include phone {
+  .sfi-account-layout--authenticated { grid-template-columns: minmax(0, 1fr); padding: $space-5 $space-3; }
+  .sfi-account-sidebar {
+    position: static; max-height: none; overflow: visible;
+    &--enhanced {
+      .sfi-account-sidebar__toggle {
+        display: flex; align-items: center; justify-content: space-between; gap: $space-3;
+        width: 100%; min-height: 44px; padding: .65rem .75rem;
+        font: inherit; font-weight: 600; text-align: start;
+        color: var(--sfi-link-strong); background: var(--sfi-surface);
+        border: 1px solid var(--sfi-border-bright); border-radius: var(--sfi-radius-sm); cursor: pointer;
+        &::after { content: '+'; }
+        &[aria-expanded="true"]::after { content: '−'; }
+        &[aria-expanded="false"] + nav { display: none; }
+      }
+      nav { margin-top: $space-3; }
+    }
+  }
+}

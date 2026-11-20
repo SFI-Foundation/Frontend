@@ -1,0 +1,18 @@
+<aside class="sfi-account-sidebar" id="accountSidebar" hidden>
+  <button class="sfi-account-sidebar__toggle" id="accountSidebarToggle" type="button" aria-expanded="false" aria-controls="accountSidebarNav" data-i18n="Account navigation" hidden>Account navigation</button>
+  <nav id="accountSidebarNav" aria-label="Account navigation" data-i18n-label="Account navigation">
+    <section aria-labelledby="sidebarAccountHeading">
+      <h2 id="sidebarAccountHeading" data-i18n="Account">Account</h2>
+      <a href="{{ '/sfi-profile/' | relative_url }}" data-i18n="My Profile"{% if page.url == '/sfi-profile/' %} aria-current="page"{% endif %}>My Profile</a>
+      <a href="{{ '/settings/' | relative_url }}" data-i18n="Edit Preferences"{% if page.url == '/settings/' %} aria-current="page"{% endif %}>Edit Preferences</a>
+    </section>
+    <section id="accountSidebarAdmin" aria-labelledby="sidebarAdminHeading" hidden>
+      <h2 id="sidebarAdminHeading" data-i18n="Administration">Administration</h2>
+      <a href="{{ '/admin/' | relative_url }}" data-i18n="Admin Dashboard">Admin Dashboard</a>
+    </section>
+    <section aria-labelledby="sidebarSessionHeading">
+      <h2 id="sidebarSessionHeading" data-i18n="Session">Session</h2>
+      <a href="{{ '/logout/' | relative_url }}" data-i18n="Sign Out">Sign Out</a>
+    </section>
+  </nav>
+</aside>
