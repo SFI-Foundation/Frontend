@@ -51,22 +51,5 @@
       "published": "Thu, 11 Aug 2022 22:03:17 +0000"
     }
   ],
-  "events": [
-    {
-      "title": "SFI Specification Review Meetings",
-      "start": "2026-12-10",
-      "date_label": "December 10, 2026",
-      "location": "See official SFI meeting schedule for location and session times",
-      "url": "https://sfifoundation.com/meeting-schedule/",
-      "source": "SFI Foundation"
-    },
-    {
-      "title": "SFI Specification Review Meetings",
-      "start": "2026-12-11",
-      "date_label": "December 11, 2026",
-      "location": "See official SFI meeting schedule for location and session times",
-      "url": "https://sfifoundation.com/meeting-schedule/",
-      "source": "SFI Foundation"
-    }
-  ]
+  "events": []
 }
