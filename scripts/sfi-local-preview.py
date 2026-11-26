@@ -86,6 +86,8 @@ def main():
     parser.add_argument('--port', type=int, default=4500)
     parser.add_argument('--baseurl', default='')
     parser.add_argument('--destination', default='_site_preview/4500')
+    parser.add_argument('--config', help='Comma-separated Jekyll configuration files')
+    parser.add_argument('--force-polling', action='store_true', help='Reliable WSL file watching')
     args = parser.parse_args()
     source = args.source.resolve()
     if not (source / 'Gemfile').is_file() or not (source / '_config.yml').is_file():
@@ -103,7 +105,10 @@ def main():
         return
     if process:
         owned_jekyll(process, source)
-        if args.action == 'start' and process['cwd'] == source:
+        configured = not args.config or ('--config' in process['command'] and
+                     process['command'][process['command'].index('--config') + 1] == args.config)
+        watching = not args.force_polling or ('--watch' in process['command'] and '--force_polling' in process['command'])
+        if args.action == 'start' and process['cwd'] == source and configured and watching:
             print(f"Already serving {url} with Jekyll PID {process['pid']}.")
             return
         stop(process, source, args.port)
@@ -118,6 +123,10 @@ def main():
     environment.setdefault('JEKYLL_ENV', 'development')
     command = ['bundle', 'exec', 'jekyll', 'serve', '-H', args.host, '-P', str(args.port),
                '--baseurl', args.baseurl, '--destination', str(destination), '--disable-disk-cache']
+    if args.config:
+        command.extend(['--config', args.config])
+    if args.force_polling:
+        command.extend(['--watch', '--force_polling'])
     with log.open('ab') as stream:
         stream.write(f'\nSFI preview starting from {source} [{branch}]\n'.encode())
         child = subprocess.Popen(command, cwd=source, env=environment, stdout=stream,
