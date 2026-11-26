@@ -5,7 +5,24 @@ import vm from 'node:vm';
 import { JSDOM } from 'jsdom';
 const source = readFileSync(new URL('../_internal/manufacturer-demo.js', import.meta.url), 'utf8');
 const context = vm.createContext({ Intl, Date }); vm.runInContext(source, context);
-const { todayInZone, thresholdDate, evaluate, parseDate } = context.SFIManufacturerDemo;
+const { todayInZone, thresholdDate, evaluate, parseDate, sampleRecords, reminderPreviews } = context.SFIManufacturerDemo;
+
+test('selected model previews use fixed expiration, calendar months and individual test statuses', () => {
+  const records = sampleRecords();
+  assert.equal(new Set(records.map(r => r.manufacturer)).size, 1);
+  assert.equal(new Set(records.map(r => r.model)).size, records.length);
+  const record = records[0];
+  assert.equal(record.expires, '2027-03-31');
+  assert.equal(record.tests.length, 3);
+  assert.equal(new Set(record.tests.map(t => t.status)).size, 3);
+  assert.equal(JSON.stringify(reminderPreviews(record).map(n => n.date)), JSON.stringify(['2027-01-31', '2027-03-17', '2027-03-31']));
+  assert.equal(thresholdDate('2027-04-30', { months: 2 }), '2027-02-28');
+  assert.equal(thresholdDate('2028-04-30', { months: 2 }), '2028-02-29');
+  for (const notice of reminderPreviews(record)) {
+    assert.match(notice.message, /Apex Glove G1.*2027-03-31/);
+    assert.match(notice.recipient, /@example\.invalid$/);
+  }
+});
 
 test('timezone day boundaries and DST transitions use calendar dates', () => {
   assert.equal(todayInZone('2026-11-10T01:00:00Z', 'America/Los_Angeles'), '2026-11-09');
@@ -40,30 +57,78 @@ test('threshold inclusive, expiration inclusive, overdue following day, disable 
   assert.equal(evaluate(record, '2026-11-10', intervals).notices.length, 0);
 });
 
-test('demo uses synthetic records only, supports search and changes, never contacts services', () => {
+test('one accessible selection drives details, reminders, filters, edits and reset without services', () => {
   const page = readFileSync(new URL('../_internal/manufacturer-demo.md', import.meta.url), 'utf8');
-  const dom = new JSDOM(page, { url: 'http://localhost:4000/Frontend/sfi-manufacturer-demo/', runScripts: 'outside-only' });
+  const dom = new JSDOM(page, { url: 'http://localhost:4600/sfi-manufacturer-demo/', runScripts: 'outside-only' });
   dom.window.fetch = () => { throw new Error('Demo attempted a network request'); };
   dom.window.eval(source);
   const doc = dom.window.document;
-  assert.equal(doc.querySelectorAll('#demoRows article').length, 5);
-  assert.match(doc.body.textContent, /fictional/);
+  const input = id => doc.getElementById(id).dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  const chosen = () => doc.querySelector('#demoRows button[aria-pressed="true"]');
+  const dates = () => [...doc.querySelectorAll('#demoBoardMessages summary time')].map(t => t.dateTime);
+  assert.equal(doc.querySelectorAll('#demoRows button').length, 5);
+  assert.equal(chosen().dataset.modelId, 'DEMO-001');
+  assert.equal(doc.querySelectorAll('#demoModelDetails tbody tr').length, 3);
+  for (const status of ['Passed', 'Pending', 'Retest required']) assert.ok(doc.getElementById('demoModelDetails').textContent.includes(status));
+  assert.equal(doc.querySelectorAll('#demoBoardMessages details').length, 3);
+  assert.deepEqual(dates(), ['2027-01-31', '2027-03-17', '2027-03-31']);
+  assert.equal(doc.querySelector('#demoBoardMessages details').open, false);
+  assert.equal(doc.getElementById('demoCertification'), null);
+  doc.querySelector('[data-model-id="DEMO-003"]').click();
+  assert.equal(chosen().dataset.modelId, 'DEMO-003');
+  assert.match(doc.getElementById('demoModelHeading').textContent, /Apex Glove G2/);
+  assert.match(doc.getElementById('demoBoardMessages').textContent, /Apex Glove G2/);
+  assert.doesNotMatch(doc.getElementById('demoBoardMessages').textContent, /Apex Glove G1/);
+  assert.equal(dates()[0], '2027-06-30');
+  doc.getElementById('demoSearch').value = 'Apex Glove G2'; input('demoSearch');
+  assert.equal(doc.querySelectorAll('#demoRows button').length, 1);
+  const expiration = doc.getElementById('demoExpiration');
+  expiration.value = '2000-01-01'; expiration.dispatchEvent(new dom.window.Event('change'));
+  assert.match(doc.getElementById('demoRows').textContent, /Overdue/);
+  assert.equal(dates()[2], '2000-01-01');
+  doc.getElementById('demoStatus').value = 'Current sample'; input('demoStatus');
+  assert.equal(doc.querySelectorAll('#demoRows button').length, 0);
+  assert.equal(doc.getElementById('demoDetails').hidden, true);
+  assert.equal(expiration.disabled, true);
+  doc.getElementById('demoReset').click();
+  assert.equal(doc.getElementById('demoSearch').value, '');
+  assert.equal(doc.getElementById('demoStatus').value, '');
+  assert.equal(doc.getElementById('demoInstant').value, '2026-11-25T20:00:00.000Z');
+  assert.equal(doc.getElementById('demoZone').value, 'America/Los_Angeles');
+  assert.equal(expiration.value, '2027-03-31');
+  assert.equal(chosen().dataset.modelId, 'DEMO-001');
+  assert.deepEqual(dates(), ['2027-01-31', '2027-03-17', '2027-03-31']);
+  assert.equal(doc.querySelectorAll('#demoRows button').length, 5);
+  assert.equal(doc.getElementById('demoDetails').hidden, false);
+  chosen().focus();
+  chosen().dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+  assert.equal(chosen().dataset.modelId, 'DEMO-003');
+  assert.equal(doc.activeElement, chosen());
+  doc.getElementById('interval-six').checked = true; input('interval-six');
+  assert.match(doc.getElementById('demoMessages').textContent, /PREVIEW ONLY/);
+  doc.getElementById('demoReset').click();
   assert.equal(doc.querySelectorAll('#demoIntervals input:checked').length, 0);
   assert.match(doc.getElementById('demoMessages').textContent, /disabled/);
-  doc.getElementById('interval-six').checked = true;
-  doc.getElementById('interval-six').dispatchEvent(new dom.window.Event('input', { bubbles: true }));
-  assert.match(doc.getElementById('demoMessages').textContent, /PREVIEW ONLY/);
-  const before = doc.querySelectorAll('#demoMessages li').length;
-  doc.getElementById('interval-six').checked = false;
-  doc.getElementById('interval-six').dispatchEvent(new dom.window.Event('input', { bubbles: true }));
-  assert.ok(doc.querySelectorAll('#demoMessages li').length < before);
-  doc.getElementById('demoSearch').value = 'Imaginary';
-  doc.getElementById('demoSearch').dispatchEvent(new dom.window.Event('input', { bubbles: true }));
-  assert.equal(doc.querySelectorAll('#demoRows article').length, 1);
-  const date = doc.querySelector('[data-demo-id="DEMO-003"]'); date.value = '2000-01-01';
-  date.dispatchEvent(new dom.window.Event('change', { bubbles: true }));
-  assert.match(doc.getElementById('demoRows').textContent, /Overdue/);
   assert.doesNotMatch(source, /fetch\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|\/api\//);
+  dom.window.close();
+});
+
+test('invalid simulated time and expiration report errors without corrupting records', () => {
+  const page = readFileSync(new URL('../_internal/manufacturer-demo.md', import.meta.url), 'utf8');
+  const dom = new JSDOM(page, { runScripts: 'outside-only' }); dom.window.eval(source);
+  const doc = dom.window.document;
+  const date = doc.getElementById('demoExpiration'); date.value = '';
+  date.dispatchEvent(new dom.window.Event('change'));
+  assert.equal(date.getAttribute('aria-invalid'), 'true');
+  assert.match(doc.getElementById('demoError').textContent, /valid/);
+  assert.equal(doc.querySelector('#demoBoardMessages summary time').dateTime, '2027-01-31');
+  const instant = doc.getElementById('demoInstant'); instant.value = 'bad';
+  instant.dispatchEvent(new dom.window.Event('input'));
+  assert.equal(instant.getAttribute('aria-invalid'), 'true');
+  doc.getElementById('demoReset').click();
+  assert.equal(doc.getElementById('demoError').textContent, '');
+  assert.equal(date.getAttribute('aria-invalid'), 'false');
+  assert.equal(instant.getAttribute('aria-invalid'), 'false');
   dom.window.close();
 });
 

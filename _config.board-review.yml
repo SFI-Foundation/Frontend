@@ -1,0 +1,3 @@
+# Local board review only; combine with _config.development.yml and development mode.
+# Keep the existing service on 8605 untouched.
+sfi_api_base: "http://localhost:8606"
